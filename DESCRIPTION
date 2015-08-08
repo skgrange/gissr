@@ -1,0 +1,25 @@
+Package: gissr
+Type: Package
+Title: Functions To Make Working With Spatial Data Easier
+Version: 0.1
+Date: 2015-08-05
+Author: Stuart K. Grange
+Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
+Description: A collection of spatial functions to make R a more effective GIS.
+License: GPL (>= 2)
+Imports: 
+  stringr,
+  lubridate,
+  plyr,
+  dplyr,
+  geojsonio,
+  sp,
+  ggplot2,
+  ggmap,
+  rgdal,
+  maptools,
+  rgeos
+Suggests:
+  leaflet
+LazyData: TRUE
+LazyLoad: yes
