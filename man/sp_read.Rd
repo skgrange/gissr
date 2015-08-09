@@ -4,20 +4,20 @@
 \alias{sp_read}
 \title{Function to read spatial data files in a consistent way.}
 \usage{
-sp_read(file, verbose = FALSE)
+sp_read(file, verbose = TRUE)
 }
 \arguments{
 \item{file}{Spatial data file.}
 
 \item{verbose}{Should information about the data be printed when being
-loaded?}
+loaded? Default is TRUE.}
 }
 \description{
 \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the
 same as the other file readers in R. Unlike \code{rgdal::readOGR},
 \code{sp_read} uses a single file string which does not have to be expanded
-and can handle shape files with or without specified extensions. GPX files
-can also be read with \code{sp_read}.
+and can handle shapefiles with or without specified extensions. GPX files
+containing tracks, routes, or waypoints can also be read with \code{sp_read}.
 }
 \examples{
 \dontrun{
@@ -27,7 +27,7 @@ sp.london <- sp_read("london_borough")
 # Load a shape file with an extension within a home area
 sp.london <- sp_read("~/Desktop/london_borough.shp")
 
-# Load a gpx file
+# Load a gpx file, no need to define layer
 sp.hira <- sp_read("~/Desktop/hira_mtb_park.gpx")
 }
 }

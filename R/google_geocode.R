@@ -5,12 +5,13 @@
 #' conditions for usage conditions 
 #' (\url{https://developers.google.com/maps/terms}). 
 #' 
-#' \code{sp_geocode} is a wrapper for \code{ggmap::geocode} with some simple 
-#' enhancements to clean the output and avoid messages to the console. 
+#' \code{google_geocode} is a wrapper for \code{ggmap::geocode} with some simple 
+#' enhancements to clean the output and avoid messages to the console. Other 
+#' address elements such as postcodes can also be transformed sucessfully. 
 #'
-#' @param string The address string to transform to latitude and longitude pairs
+#' @param string The address string to transform to latitude and longitude pairs.
 #' @param override_limit Should the function attempt to override the 2500 queries
-#' a day limit. Does not always work. 
+#' a day limit? This does not always work. 
 #'
 #' @author Stuart K. Grange
 #' 

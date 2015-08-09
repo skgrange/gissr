@@ -18,7 +18,8 @@ Imports:
   ggmap,
   rgdal,
   maptools,
-  rgeos
+  rgeos,
+  geosphere,
 Suggests:
   leaflet
 LazyData: TRUE

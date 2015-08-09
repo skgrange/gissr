@@ -8,9 +8,11 @@
 #' 
 #' \code{sp_distance} uses \code{rgeos::gDistance} for the distance calculations.
 #' This function returns distances based on the unit of the projection system 
-#' contained within the spatial objects. By default, the Mollweide projection 
-#' is used. The Mollweide projection is applicable in any location on Earth, but
-#' the accuracy of the returned values is dependent on location.
+#' contained within the spatial objects. When spatial objects are used with 
+#' \code{sp_distance} which have projection systems without metre units (such as 
+#' WGS84), the Mollweide projection system is used by default. The Mollweide 
+#' projection is applicable in any location on Earth, but the accuracy of the 
+#' returned values is dependent on location.
 #' 
 #' If the spatial objects are located in a zone which has a more appropriate 
 #' projection system, it is highly recommended that this is used. For example, 
@@ -20,18 +22,15 @@
 #' 
 #' \code{sp_distance} supports parallel processing by forking the 
 #' \code{rgeos::gDistance} function across multiple cores. This can make the 
-#' distance calculations much faster.
+#' distance calculations faster.
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @seealso \code{\link{gDistance}}, \code{\link{spTransform}}, 
+#' @seealso \code{\link{gDistance}}, \code{\link{sp_transform}}, 
 #' \code{\link{mclapply}}
 #' 
-#' @param sp1 Spatial object one. 
-#' @param sp2 Spatial object two. 
-#' @param proj A proj4 string for the distance calculations. Defaults to the 
-#' Mollweide projection, but should be changed to a location-specific projection
-#' if possible. 
+#' @param sp.1 Spatial object one. 
+#' @param sp.2 Spatial object two. 
 #' @param cores Number of cores for the function to use. Not available for 
 #' Windows systems. 
 #' @param unit If \code{"km"}, the returned vector is returned in kilometres 
@@ -50,21 +49,21 @@
 #' # Usage for transforming a data frame
 #' # Load shapefiles
 #' # Coastline, spatial lines
-#' sp.coast.line <- readOGR("coastlines, "coastlines")
+#' sp.coast.line <- sp_transform("coastlines/coastlines")
 #' 
 #' # Places in the UK, spatial points
-#' sp.places <- readOGR("great-britain", "places")
+#' sp.places <- sp_transform("great-britain/places")
 #' 
 #' # Get a data frame from the sp.places object
 #' data.places <- data.frame(sp.places)
 #' 
 #' # Find distances between every place in sp.places and sp.coast.line
-#' # We are in the UK, therefore use British National Grid for the projection
-#' proj <- "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs"
+#' # We are in the UK, therefore the British National Grid has been used as the
+#' # projection system
 #'
 #' # Apply parallel function and add variable to data frame
-#' data.places$distance <- sp_distance(
-#'   sp.places, sp.coast.line, unit = "km", cores = 8, proj = proj)
+#' data.places$distance <- sp_distance(sp.places, sp.coast.line, unit = "km", 
+#'                                     cores = 4)
 #'
 #' # Have a look
 #' head(data.places)
@@ -81,31 +80,44 @@
 #' 
 #' @export
 #' 
-sp_distance <- function (sp1, sp2, proj = NA, cores = 1, unit = "m") {
+sp_distance <- function (sp.1, sp.2, cores = 1, unit = "m") {
   
-  # Change projection to one with metres as the unit, a good start is ESRI:54009
-  # but accuracy depends where you are in the globe. 
-  if (is.na(proj)) {
-    # Mollweide projection/ESRI:54009
-    proj <- "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+  # Check the projection systems
+  if (!identical(sp_projection(sp.1), sp_projection(sp.2))) {
+    stop("The projection systems of the two spatial objects are not identical.")
   }
   
-  # Need to degrade spatial data frame to just spatial for rgeos::gDistance
-  # Loss of projection so need to state it again
-  if (grepl("data", class(sp1), ignore.case = TRUE)) {
-    sp1 <- sp::SpatialPoints(sp1, sp::CRS("+proj=longlat +datum=WGS84"))
+  # Transform projections to Mollweide projection/ESRI:54009 if projection systems
+  # do not have metres for units
+  if (!grepl("+units=m", sp_projection(sp.1))) {
+    
+    # Projection string
+    projection <- "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    
+    # Do the transforming
+    sp.1 <- sp_transform(sp.1, projection)
+    sp.2 <- sp_transform(sp.2, projection)
+    
+    # Give a message
+    message("The projection systems have been transformed for calculation.")
+    
+    # Need to degrade spatial-data-frame to just spatial for rgeos::gDistance
+    if (grepl("data", class(sp.1), ignore.case = TRUE)) {
+      
+      # Loss of projection so need to state it again
+      sp.1 <- sp::SpatialPoints(sp.1, sp::CRS(projection))
+      
+    }
+    
   }
-  
-  # Transform projection systems
-  sp1 <- sp_transform(sp1, to = proj)
-  sp2 <- sp_transform(sp2, to = proj)
   
   # Do the test
   if (cores == 1) {
     
     # Use a vectorised loop 
     # Superscript notation is necessary
-    distance <- lapply(1:length(sp1), function (x) rgeos::gDistance(sp1[x], sp2))
+    distance <- lapply(1:length(sp.1), function (x) 
+      rgeos::gDistance(sp.1[x], sp.2))
     
     # Make vector
     distance <- unlist(distance)
@@ -114,10 +126,10 @@ sp_distance <- function (sp1, sp2, proj = NA, cores = 1, unit = "m") {
     
     # Use a multi-threaded vectorised loop
     # Superscript notation is necessary
-    distance.list <- parallel::mclapply(1:length(sp1), function (x) 
-      rgeos::gDistance(sp1[x], sp2), mc.cores = getOption("mc.cores", cores))
+    distance.list <- parallel::mclapply(1:length(sp.1), function (x) 
+      rgeos::gDistance(sp.1[x], sp.2), mc.cores = getOption("mc.cores", cores))
     
-    
+    # Make vector
     distance <- unlist(distance.list)
     
   }

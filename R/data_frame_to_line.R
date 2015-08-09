@@ -30,6 +30,12 @@ data_frame_to_line <- function (df, latitude = "latitude",
     df[, "id"] <- 1
   }
   
+  # If ID does not start with 1, the id's do not match later
+  # Happens post-filtering
+#   df[, "id"] <- as.numeric(as.character(df[, "id"]))
+#   id.min <- min(df[, "id"])
+#   df[, "id"] <- df[, "id"] - id.min
+  
   # Get data part for the SpatialLinesDataFrame
   data.extras <- data.frame(id = unique(df[, "id"]))
   

@@ -5,16 +5,12 @@
 \title{Function to find distances between two spatial objects in metres or
 kilometres.}
 \usage{
-sp_distance(sp1, sp2, proj = NA, cores = 1, unit = "m")
+sp_distance(sp.1, sp.2, cores = 1, unit = "m")
 }
 \arguments{
-\item{sp1}{Spatial object one.}
+\item{sp.1}{Spatial object one.}
 
-\item{sp2}{Spatial object two.}
-
-\item{proj}{A proj4 string for the distance calculations. Defaults to the
-Mollweide projection, but should be changed to a location-specific projection
-if possible.}
+\item{sp.2}{Spatial object two.}
 
 \item{cores}{Number of cores for the function to use. Not available for
 Windows systems.}
@@ -31,9 +27,11 @@ far cities are away from the coast.
 \details{
 \code{sp_distance} uses \code{rgeos::gDistance} for the distance calculations.
 This function returns distances based on the unit of the projection system
-contained within the spatial objects. By default, the Mollweide projection
-is used. The Mollweide projection is applicable in any location on Earth, but
-the accuracy of the returned values is dependent on location.
+contained within the spatial objects. When spatial objects are used with
+\code{sp_distance} which have projection systems without metre units (such as
+WGS84), the Mollweide projection system is used by default. The Mollweide
+projection is applicable in any location on Earth, but the accuracy of the
+returned values is dependent on location.
 
 If the spatial objects are located in a zone which has a more appropriate
 projection system, it is highly recommended that this is used. For example,
@@ -43,7 +41,7 @@ Grid; both of which have metre units (\code{+units=m}).
 
 \code{sp_distance} supports parallel processing by forking the
 \code{rgeos::gDistance} function across multiple cores. This can make the
-distance calculations much faster.
+distance calculations faster.
 }
 \examples{
 \dontrun{
@@ -58,21 +56,21 @@ distances <- sp_distance(sp.places, sp.coast.line, unit = "km", cores = 4)
 # Usage for transforming a data frame
 # Load shapefiles
 # Coastline, spatial lines
-sp.coast.line <- readOGR("coastlines, "coastlines")
+sp.coast.line <- sp_transform("coastlines/coastlines")
 
 # Places in the UK, spatial points
-sp.places <- readOGR("great-britain", "places")
+sp.places <- sp_transform("great-britain/places")
 
 # Get a data frame from the sp.places object
 data.places <- data.frame(sp.places)
 
 # Find distances between every place in sp.places and sp.coast.line
-# We are in the UK, therefore use British National Grid for the projection
-proj <- "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs"
+# We are in the UK, therefore the British National Grid has been used as the
+# projection system
 
 # Apply parallel function and add variable to data frame
-data.places$distance <- sp_distance(
-  sp.places, sp.coast.line, unit = "km", cores = 8, proj = proj)
+data.places$distance <- sp_distance(sp.places, sp.coast.line, unit = "km",
+                                    cores = 4)
 
 # Have a look
 head(data.places)
@@ -91,7 +89,7 @@ Charlbury 60.3
 Stuart K. Grange
 }
 \seealso{
-\code{\link{gDistance}}, \code{\link{spTransform}},
+\code{\link{gDistance}}, \code{\link{sp_transform}},
 \code{\link{mclapply}}
 }
 

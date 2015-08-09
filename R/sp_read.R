@@ -3,12 +3,12 @@
 #' \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the 
 #' same as the other file readers in R. Unlike \code{rgdal::readOGR},
 #' \code{sp_read} uses a single file string which does not have to be expanded 
-#' and can handle shape files with or without specified extensions. GPX files 
-#' can also be read with \code{sp_read}. 
+#' and can handle shapefiles with or without specified extensions. GPX files 
+#' containing tracks, routes, or waypoints can also be read with \code{sp_read}.
 #' 
 #' @param file Spatial data file. 
 #' @param verbose Should information about the data be printed when being 
-#' loaded? 
+#' loaded? Default is TRUE. 
 #'
 #' @author Stuart K. Grange
 #' 
@@ -20,29 +20,29 @@
 #' # Load a shape file with an extension within a home area
 #' sp.london <- sp_read("~/Desktop/london_borough.shp")
 #' 
-#' # Load a gpx file
+#' # Load a gpx file, no need to define layer
 #' sp.hira <- sp_read("~/Desktop/hira_mtb_park.gpx")
 #' }
 #' 
 #' @export
 #'
-sp_read <- function (file, verbose = FALSE) {
+sp_read <- function (file, verbose = TRUE) {
   
   # Expand path
   file <- path.expand(file)
   
-  # Needs to store layer if gpx
+  # GPX reader needs a layer
   if (grepl(".gpx$", file, ignore.case = TRUE)) {
     
-    # Not really helpful names here
+    # Not really helpful variable names here...
     dir.name <- file
     
-    # Layer as lines
+    # Layer, in my usage, the most common type of layer
     file.name <- "tracks"
     
   } else {
     
-    # Shapefile stuff
+    # Shapefile handling
     # Get file name
     file.name <- basename(file)
     
@@ -54,11 +54,45 @@ sp_read <- function (file, verbose = FALSE) {
     
   }
   
-  # Load file with readOGR
-  sp <- rgdal::readOGR(dir.name, file.name, verbose)
+  # Load file with readOGR will work with shapefiles and GPX files with tracks
+  suppressWarnings(
+    sp <- tryCatch(
+      rgdal::readOGR(dir.name, file.name, verbose), 
+      error = function(e) NA)
+  )
+  
+  # Try the different layers for GPX files if the first call failed
+  # suppressWarnings is due to the is.na() on an S4 class
+  # Routes
+  suppressWarnings(
+    if (grepl(".gpx$", dir.name, ignore.case = TRUE) & is.na(sp)) {
+      sp <- tryCatch(rgdal::readOGR(dir.name, "routes", verbose), 
+                     error = function(e) NA)
+    }
+  )
+  
+  # Waypoints
+  suppressWarnings(
+    if (grepl(".gpx$", dir.name, ignore.case = TRUE) & is.na(sp)) {
+      sp <- tryCatch(rgdal::readOGR(dir.name, "waypoints", verbose), 
+                     error = function(e) NA)
+    }
+  )
+  
+  suppressWarnings(
+    if (is.na(sp)) {
+      stop("No spatial data can be found. ")
+    }
+  )
   
   # Add transform functionality?
   
+  # Print projection too
+  # cat to keep consistent with rgdal::readOGR
+  if (verbose) {
+    cat("Projection:", sp_projection(sp))
+  }
+    
   # Return
   sp
   
