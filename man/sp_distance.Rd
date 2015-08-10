@@ -56,7 +56,7 @@ distances <- sp_distance(sp.places, sp.coast.line, unit = "km", cores = 4)
 # Usage for transforming a data frame
 # Load shapefiles
 # Coastline, spatial lines
-sp.coast.line <- sp_transform("coastlines/coastlines")
+sp.coast.line <- sp_read("coastlines/coastlines")
 
 # Places in the UK, spatial points
 sp.places <- sp_transform("great-britain/places")
