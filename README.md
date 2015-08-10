@@ -16,7 +16,7 @@ The development version: `devtools::install_github("skgrange/gissr")`
 
 R's spatial data analysis abilities are very well developed. Therefore, R can be used as a rather effective geographical information system (GIS). A key advantage of R in GIS applications is that the user can dip in-and-out of R's general string, numerical, and visualisation tools and apply them to spatial data.
 
-However, the challenges I have had with using R as a GIS include: keeping track of the multiple packages which are used, the lack of consistency, and the lack of tidy outputs which other areas of the R ecosystem have been so good at developing. To overcome this, I have written wrappers for geographical functions which generally begin `sp_` to do particular tasks. Others have found some of these wrappers useful, so I have formalised these functions within a package.
+However, the challenges I have had with using R as a GIS have included: keeping track of the multiple packages which are used, the lack of consistency, and the lack of tidy outputs which other areas of the R ecosystem have been so good at developing. To overcome this, I have written wrappers for many geographical functions which generally begin `sp_` to do particular tasks. Some of these functions will likely be useful for others too. 
 
 ## Utility functions
 
@@ -34,5 +34,5 @@ However, the challenges I have had with using R as a GIS include: keeping track 
 
   - Point-in-polygon tests with `left_join_spatial`.
   - Calculate distances between spatial objects with `sp_distance`.
-    - `distance_by_haversine` does the same thing, but with a different method and for data frames.
+    - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
   - Simplify spatial objects with `sp_simplify`.

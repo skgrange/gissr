@@ -1,4 +1,4 @@
-#' Function to calculate areas of spatial polygons in meters-squared, 
+#' Function to calculate areas of spatial polygons in metres-squared, 
 #' kilometres-squared, or hectares. 
 #' 
 #' If the spatial polygons are projected in a system with a metre unit,

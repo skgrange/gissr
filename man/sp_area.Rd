@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_area.R
 \name{sp_area}
 \alias{sp_area}
-\title{Function to calculate areas of spatial polygons in meters-squared,
+\title{Function to calculate areas of spatial polygons in metres-squared,
 kilometres-squared, or hectares.}
 \usage{
 sp_area(sp, unit = "m", features = TRUE)
