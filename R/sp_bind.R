@@ -29,28 +29,38 @@
 #'
 sp_bind <- function (sp, sp.2) {
   
-  # Get length of first spatial object
-  n <- length(sp)
+  # Class check
+  if (!class(sp) == class(sp.2)) {
+    stop("Spatial objects must be of the same type to be bound. ")
+  }
   
-  # Create a sequence of ids
-  id <- 1:n
-  id.character <- as.character(id)
-  
-  # Alter feature ids within sp
-  sp <- sp::spChFIDs(sp, id.character)
-  
-  # Store final id for next object manipulation
-  id.push <- id[length(id)]
-  # Next object has the next feature
-  id.push <- id.push + 1
-  
-  # Length of second object
-  n.2 <- length(sp.2)
-  id.2 <- seq(id.push, length.out = n.2)
-  id.2.character <- as.character(id.2)
-  
-  # Alter feature ids within sp
-  sp.2 <- sp::spChFIDs(sp.2, id.2.character)
+  # For polygons and lines, the ids must be manipulated
+  if (!grepl("points", class(sp), ignore.case = TRUE)) {
+    
+    # Get length of first spatial object
+    n <- length(sp)
+    
+    # Create a sequence of ids
+    id <- 1:n
+    id.character <- as.character(id)
+    
+    # Alter feature ids within sp
+    sp <- sp::spChFIDs(sp, id.character)
+    
+    # Store final id for next object manipulation
+    id.push <- id[length(id)]
+    # Next object has the next feature
+    id.push <- id.push + 1
+    
+    # Length of second object
+    n.2 <- length(sp.2)
+    id.2 <- seq(id.push, length.out = n.2)
+    id.2.character <- as.character(id.2)
+    
+    # Alter feature ids within sp
+    sp.2 <- sp::spChFIDs(sp.2, id.2.character)
+    
+  }
   
   # Bind/combine objects
   sp.combine <- maptools::spRbind(sp, sp.2)
