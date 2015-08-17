@@ -3,11 +3,14 @@
 #' \code{sp_bind} combines two similar spatial objects together with the same 
 #' syntax of \code{rbind}. Currently, only two objects can be bound together. 
 #' \code{sp_bind_many} combines multiple spatial objects together but 
-#' the input must be a list. These function are useful for combining shape files
+#' the input must be a list. 
+#' 
+#' These function are useful for combining shapefiles or vectors of WKT strings
 #' together. 
 #' 
-#' The feature IDs within the spatial objects must be manipulated for the 
-#' binding to occur. The original, non-manipulated IDs are not preserved. 
+#' The feature IDs within line- and polygon-spatial objects must be manipulated 
+#' for the binding to occur. The original, non-manipulated IDs are not 
+#' preserved. 
 #' 
 #' @param sp Spatial object one. 
 #' @param sp.2 Spatial object two.
@@ -37,28 +40,8 @@ sp_bind <- function (sp, sp.2) {
   # For polygons and lines, the ids must be manipulated
   if (!grepl("points", class(sp), ignore.case = TRUE)) {
     
-    # Get length of first spatial object
-    n <- length(sp)
-    
-    # Create a sequence of ids
-    id <- 1:n
-    id.character <- as.character(id)
-    
-    # Alter feature ids within sp
-    sp <- sp::spChFIDs(sp, id.character)
-    
-    # Store final id for next object manipulation
-    id.push <- id[length(id)]
-    # Next object has the next feature
-    id.push <- id.push + 1
-    
-    # Length of second object
-    n.2 <- length(sp.2)
-    id.2 <- seq(id.push, length.out = n.2)
-    id.2.character <- as.character(id.2)
-    
-    # Alter feature ids within sp
-    sp.2 <- sp::spChFIDs(sp.2, id.2.character)
+    # Change feature ids for second spatial object based on the first object
+    sp.2 <- change_feature_ids(sp, sp.2)
     
   }
   
@@ -96,8 +79,16 @@ sp_bind_many <- function (sp.list, progress = TRUE) {
       
     } else {
       
-      # Accumulate sp.bind and add the extra objects
-      sp.bind <- sp_bind(sp.bind, sp.list[[i]])
+      # Need to jump over the second element in sp.list for i = 2
+      k <- i + 1
+      
+      # k is i + 1 so need to pass the final k as it will not exist
+      if (k <= length(sp.list)) {
+        
+        # Accumulate sp.bind and add the extra objects
+        sp.bind <- sp_bind(sp.bind, sp.list[[k]])
+        
+      }
       
     }
     
@@ -110,5 +101,40 @@ sp_bind_many <- function (sp.list, progress = TRUE) {
   
   # Return
   sp.bind
+  
+}
+
+
+#' Function to manipulate feature ids in spatial- lines and polygons. 
+#'
+#' No export 
+#'
+change_feature_ids <- function (sp, sp.2) {
+  
+  # Get length of first spatial object
+  n <- length(sp)
+  
+  # Create a sequence of ids
+  id <- 1:n
+  id.character <- as.character(id)
+  
+  # Alter feature ids within sp
+  sp <- sp::spChFIDs(sp, id.character)
+  
+  # Store final id for next object manipulation
+  id.push <- id[length(id)]
+  # Next object has the next feature
+  id.push <- id.push + 1
+  
+  # Length of second object
+  n.2 <- length(sp.2)
+  id.2 <- seq(id.push, length.out = n.2)
+  id.2.character <- as.character(id.2)
+  
+  # Alter feature ids within sp
+  sp.2 <- sp::spChFIDs(sp.2, id.2.character)
+  
+  # Return
+  sp.2
   
 }
