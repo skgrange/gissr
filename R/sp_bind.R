@@ -114,25 +114,25 @@ change_feature_ids <- function (sp, sp.2) {
   # Get length of first spatial object
   n <- length(sp)
   
-  # Create a sequence of ids
-  id <- 1:n
-  id.character <- as.character(id)
-  
-  # Alter feature ids within sp
-  sp <- sp::spChFIDs(sp, id.character)
-  
-  # Store final id for next object manipulation
-  id.push <- id[length(id)]
   # Next object has the next feature
-  id.push <- id.push + 1
+  id.push <- n + 1
   
   # Length of second object
   n.2 <- length(sp.2)
-  id.2 <- seq(id.push, length.out = n.2)
-  id.2.character <- as.character(id.2)
+  
+  # Only create a sequence if necessary
+  if (n.2 > 1) {
+    
+    id.2 <- seq(id.push, length.out = n.2)
+    
+  } else{
+    
+    id.2 <- id.push
+    
+  }
   
   # Alter feature ids within sp
-  sp.2 <- sp::spChFIDs(sp.2, id.2.character)
+  sp.2 <- sp::spChFIDs(sp.2, as.character(id.2))
   
   # Return
   sp.2

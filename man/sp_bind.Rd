@@ -20,12 +20,15 @@ sp_bind_many(sp.list, progress = TRUE)
 \code{sp_bind} combines two similar spatial objects together with the same
 syntax of \code{rbind}. Currently, only two objects can be bound together.
 \code{sp_bind_many} combines multiple spatial objects together but
-the input must be a list. These function are useful for combining shape files
-together.
+the input must be a list.
 }
 \details{
-The feature IDs within the spatial objects must be manipulated for the
-binding to occur. The original, non-manipulated IDs are not preserved.
+These function are useful for combining shapefiles or vectors of WKT strings
+together.
+
+The feature IDs within line- and polygon-spatial objects must be manipulated
+for the binding to occur. The original, non-manipulated IDs are not
+preserved.
 }
 \examples{
 \dontrun{

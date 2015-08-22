@@ -39,12 +39,12 @@ sp_transform <- function (sp, to = "+proj=longlat +datum=WGS84") {
     
     # If no projection, give projection
     message("Spatial object has no projection, so projection has been forced.")
-    sp::proj4string(sp) <- "+proj=longlat +datum=WGS84"
+    sp::proj4string(sp) <- to
     
   } else {
     
     # Otherwise convert projection system to WGS84
-    sp <- sp::spTransform(sp, CRS(to))
+    sp <- sp::spTransform(sp, sp::CRS(to))
     
   }
   
