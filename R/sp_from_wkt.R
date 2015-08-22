@@ -24,7 +24,7 @@
 #' 
 #' @export
 #'
-sp_from_wkt <- function (df, wkt = "geom", data = FALSE) {
+sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   
   # Catch vector
   if (class(df) == "character") {
@@ -52,13 +52,13 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE) {
   
   # Parse WKT strings
   message("Parsing WKT strings...")
-  sp.list <- lapply(wkt.vector, rgeos::readWKT)
+  sp.list <- pbapply::pblapply(wkt.vector, rgeos::readWKT)
   
   # If the wkt strings are just points, a different method is needed
   if (class(sp.list[[1]])[1] == "SpatialPoints") {
     
     message("Extracting coordinates from spatial points...")
-    sp.list <- lapply(seq_along(sp.list), function (x) 
+    sp.list <- pbapply::pblapply(seq_along(sp.list), function (x) 
       extract_point_coordinates(sp.list, x))
     
     # Bind all features
@@ -70,6 +70,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE) {
   } else {
     
     # Rename feature ids within list
+    message("Binding all spatial features together...")
     sp.list <- sp_rename(sp.list)
     
     # Bind all objects in list
@@ -90,6 +91,13 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE) {
     sp <- sp::SpatialPointsDataFrame(sp, data = df.data)
   }
   
+  # Add projection
+  if (!is.na(projection)) {
+    suppressMessages(
+      sp <- sp_transform(sp, projection)
+    )
+  }
+  
   # Return 
   sp
   
@@ -103,8 +111,7 @@ sp_rename <- function (sp) {
   id.vector <- as.character(id.vector)
   
   # Rename all elements in list
-  sp <- lapply(seq_along(sp), function (x) 
-    sp::spChFIDs(sp[[x]], id.vector[x]))
+  sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id.vector[x]))
   
   # Return
   sp
@@ -113,8 +120,12 @@ sp_rename <- function (sp) {
 
 
 sp_list_bind <- function (sp.list) {
+  
+  # Do call appends rather than create new
   sp <- do.call("rbind", sp.list)
+  # Return
   sp
+  
 }
 
 
@@ -123,10 +134,24 @@ extract_point_coordinates <- function (sp.list, index) {
   # Extract coordinates from slot
   coordinates <- sp.list[[index]]@coords
   
-  # Build a data frame, watch the order
-  df <- data.frame(x = coordinates[2], y = coordinates[1])
+  # Single points and multipoints require different processing
+  if (dim(coordinates)[1] == 1) {
+    
+    # Simply reverse the pairs
+    coordinates <- rev(coordinates)
+    
+  } else {
+    
+    # Manipulate row names so apply works, this took time to figure out why
+    # apply was failing! 
+    row.names(coordinates) <- 1:nrow(coordinates)
+    
+    # Apply function to every row
+    coordinates <- apply(coordinates, 2, rev)
+    
+  }
   
   # Return
-  df
+  coordinates
   
 }

@@ -4,7 +4,7 @@
 \alias{sp_from_wkt}
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
-sp_from_wkt(df, wkt = "geom", data = FALSE)
+sp_from_wkt(df, wkt = "geom", data = FALSE, projection = NA)
 }
 \arguments{
 \item{df}{Data frame containing a WKT string variable. \code{df} can also be
