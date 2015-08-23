@@ -20,13 +20,14 @@ However, the challenges I have had with using R as a GIS have included: keeping 
 
 ## Utility functions
 
-  - Reading shapefiles or GPX files with `sp_read`.
-  - Transforming projection systems with `sp_transform`.
+  - Read shapefiles or GPX files with `sp_read`.
+  - Transform projection systems with `sp_transform`.
     - `sp_transform` can also force projections when a spatial object has none.
     - `transform_coordinates` does a similar thing, but for data frames.
-  - Transforming a data frame to a spatial line or spatial polygon object with `data_frame_to_line` and `data_frame_to_polygon`.
-  - Binding/combining spatial objects with `sp_bind` or `sp_bind_many`.
+  - Transform a data frame to a spatial line or spatial polygon object with `data_frame_to_line` and `data_frame_to_polygon`.
+  - Binding/combining spatial objects with `sp_bind` and `sp_bind_many`.
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
+  - Transform a data frame with a well known text (WKT) variable to a spatial object with `sp_from_wkt`.
   - Transform addresses/postcodes/other location strings to latitude and longitude pairs with `google_geocode`.
   - Export spatial objects and data frames to GPX files with `write.gpx`. 
   

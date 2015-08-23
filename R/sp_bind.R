@@ -12,6 +12,10 @@
 #' for the binding to occur. The original, non-manipulated IDs are not 
 #' preserved. 
 #' 
+#' To-do: This function accumulates a spatial object in a for-loop which is 
+#' inefficient. The binding process should be handled by \code{do.call("rbind")}. 
+#' This needs to be solved soon. 
+#' 
 #' @param sp Spatial object one. 
 #' @param sp.2 Spatial object two.
 #' @param sp.list A list containing spatial two or more spatial objects. 
@@ -46,7 +50,7 @@ sp_bind <- function (sp, sp.2) {
   }
   
   # Bind/combine objects
-  sp.combine <- maptools::spRbind(sp, sp.2)
+  # sp.combine <- maptools::spRbind(sp, sp.2)
   
   # Return
   sp.combine
@@ -125,7 +129,7 @@ change_feature_ids <- function (sp, sp.2) {
     
     id.2 <- seq(id.push, length.out = n.2)
     
-  } else{
+  } else {
     
     id.2 <- id.push
     

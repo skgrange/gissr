@@ -2,6 +2,8 @@
 #' 
 #' \code{sp_from_wkt} creates spatial objects from WKT strings and can create
 #' spatial-data frames from the other variables contained within the data frame. 
+#' \code{sp_from_wkt} is useful after querying a PostGIS database and formating
+#' the geometry variable to WKT strings. 
 #' 
 #' @param df Data frame containing a WKT string variable. \code{df} can also be
 #' a vecotr of WKT strings. 
