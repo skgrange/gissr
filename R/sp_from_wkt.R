@@ -6,7 +6,7 @@
 #' the geometry variable to WKT strings. 
 #' 
 #' @param df Data frame containing a WKT string variable. \code{df} can also be
-#' a vecotr of WKT strings. 
+#' a vector of WKT strings. 
 #' @param wkt Variable name of WKT strings in \code{df}. 
 #' @param data Should all variables other than \code{wkt} be added to the
 #' spatial object's data-slot? I.e. create a spatial-data frame.
@@ -44,11 +44,12 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
     
   }
   
-  # Store data
+  # Store data and overwrite row names
   if (data) {
     
     df.data <- df
     df.data[, wkt] <- NULL
+    row.names(df.data) <- seq_len(nrow(df.data))
     
   }
   

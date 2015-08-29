@@ -8,7 +8,7 @@ sp_from_wkt(df, wkt = "geom", data = FALSE, projection = NA)
 }
 \arguments{
 \item{df}{Data frame containing a WKT string variable. \code{df} can also be
-a vecotr of WKT strings.}
+a vector of WKT strings.}
 
 \item{wkt}{Variable name of WKT strings in \code{df}.}
 
@@ -18,6 +18,8 @@ spatial object's data-slot? I.e. create a spatial-data frame.}
 \description{
 \code{sp_from_wkt} creates spatial objects from WKT strings and can create
 spatial-data frames from the other variables contained within the data frame.
+\code{sp_from_wkt} is useful after querying a PostGIS database and formating
+the geometry variable to WKT strings.
 }
 \examples{
 \dontrun{
