@@ -5,14 +5,17 @@
 \alias{sp_bind_many}
 \title{Functions to bind/combine spatial objects together.}
 \usage{
-sp_bind(sp, sp.2)
+sp_bind(sp, sp.2, force = TRUE)
 
-sp_bind_many(sp.list, progress = TRUE)
+sp_bind_many(sp.list, force = FALSE, progress = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object one.}
 
 \item{sp.2}{Spatial object two.}
+
+\item{force}{Should the feature IDs be forced to change? This may be
+necessary when feature IDs are not sequential.}
 
 \item{sp.list}{A list containing spatial two or more spatial objects.}
 }

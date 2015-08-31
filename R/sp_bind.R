@@ -18,6 +18,8 @@
 #' 
 #' @param sp Spatial object one. 
 #' @param sp.2 Spatial object two.
+#' @param force Should the feature IDs be forced to change? This may be 
+#' necessary when feature IDs are not sequential.
 #' @param sp.list A list containing spatial two or more spatial objects. 
 #'
 #' @author Stuart K. Grange
@@ -34,7 +36,7 @@
 #'
 #' @export
 #'
-sp_bind <- function (sp, sp.2) {
+sp_bind <- function (sp, sp.2, force = TRUE) {
   
   # Class check
   if (!class(sp) == class(sp.2)) {
@@ -43,7 +45,7 @@ sp_bind <- function (sp, sp.2) {
   
   # Change ids, this is wasteful but robust
   # First object
-  if (sp_feature_ids(sp)[1] != 1) {
+  if (sp_feature_ids(sp)[1] != 1 | force) {
     sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
   }
   
@@ -81,7 +83,7 @@ sp_bind <- function (sp, sp.2) {
 #' 
 #' @export
 #'
-sp_bind_many <- function (sp.list, progress = TRUE) {
+sp_bind_many <- function (sp.list, force = FALSE, progress = TRUE) {
   
   if (class(sp.list) != "list") {
     stop("The input must be list of spatial objects")
@@ -98,7 +100,7 @@ sp_bind_many <- function (sp.list, progress = TRUE) {
     if (i == 1) {
       
       # The first loop, just bind the first two objects
-      sp.bind <- sp_bind(sp.list[[1]], sp.list[[2]])
+      sp.bind <- sp_bind(sp.list[[1]], sp.list[[2]], force = force)
       
     } else {
       
@@ -109,7 +111,7 @@ sp_bind_many <- function (sp.list, progress = TRUE) {
       if (k <= length(sp.list)) {
         
         # Accumulate sp.bind and add the extra objects
-        sp.bind <- sp_bind(sp.bind, sp.list[[k]])
+        sp.bind <- sp_bind(sp.bind, sp.list[[k]], force = force)
         
       }
       
