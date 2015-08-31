@@ -10,7 +10,7 @@
 sp_dissolve_polygons <- function (sp) {
   
   # Create a single sp object
-  sp <- rgeos::gUnaryUnion(sp.boundary)
+  sp <- rgeos::gUnaryUnion(sp)
   
   # Return
   sp

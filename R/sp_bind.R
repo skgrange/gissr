@@ -41,13 +41,32 @@ sp_bind <- function (sp, sp.2) {
     stop("Spatial objects must be of the same type to be bound. ")
   }
   
-  # For polygons and lines, the ids must be manipulated
-  if (!grepl("points", class(sp), ignore.case = TRUE)) {
-    
-    # Change feature ids for second spatial object based on the first object
-    sp.2 <- change_feature_ids(sp, sp.2)
-    
+  # Change ids, this is wasteful but robust
+  # First object
+  if (sp_feature_ids(sp)[1] != 1) {
+    sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
   }
+  
+  # Second object
+  sp.2 <- sp::spChFIDs(sp.2, as.character(length(sp) + 1:length(sp.2)))
+  
+#   # Old code
+#   # For polygons and lines, the ids must be manipulated
+#   if (!grepl("points", class(sp), ignore.case = TRUE)) {
+#     
+#     # Change ids in first object, but only if they need to be
+#     if (sp_feature_ids(sp)[1] != 1) {
+#       
+#       # message("Changing feature IDs of first object...")
+#       sp <- spChFIDs(sp, as.character(1:length(sp)))
+#       
+#     }
+#     
+#     # Change feature ids for second spatial object based on the first object
+#     # message("Changing feature IDs of second object...")
+#     sp.2 <- change_feature_ids(sp, sp.2)
+#     
+#   }
   
   # Bind/combine objects
   sp.combine <- maptools::spRbind(sp, sp.2)
@@ -109,39 +128,39 @@ sp_bind_many <- function (sp.list, progress = TRUE) {
 }
 
 
-#' Function to manipulate feature ids in spatial- lines and polygons. 
-#'
-#' No export 
-#'
-change_feature_ids <- function (sp, sp.2) {
-  
-  # Get length of first spatial object
-  n <- length(sp)
-  
-  # Next object has the next feature
-  id.push <- n + 1
-  
-  # Length of second object
-  n.2 <- length(sp.2)
-  
-  # Only create a sequence if necessary
-  if (n.2 > 1) {
-    
-    id.2 <- seq(id.push, length.out = n.2)
-    
-  } else {
-    
-    id.2 <- id.push
-    
-  }
-  
-  # Alter feature ids within sp
-  sp.2 <- sp::spChFIDs(sp.2, as.character(id.2))
-  
-  # Return
-  sp.2
-  
-}
+# # Function to manipulate feature ids in spatial- lines and polygons.
+# #
+# # No export 
+# #
+# change_feature_ids <- function (sp, sp.2) {
+#   
+#   # Get length of first spatial object
+#   n <- length(sp)
+#   
+#   # Next object has the next feature
+#   id.push <- n + 1
+#   
+#   # Length of second object
+#   n.2 <- length(sp.2)
+#   
+#   # Only create a sequence if necessary
+#   if (n.2 > 1) {
+#     
+#     id.2 <- seq(id.push, length.out = n.2)
+#     
+#   } else {
+#     
+#     id.2 <- id.push
+#     
+#   }
+#   
+#   # Alter feature ids within sp
+#   sp.2 <- sp::spChFIDs(sp.2, as.character(id.2))
+#   
+#   # Return
+#   sp.2
+#   
+# }
 
 
 # Funcion to randomly sample n features in a spatial object. 
@@ -150,4 +169,30 @@ change_feature_ids <- function (sp, sp.2) {
 sp_sample_n <- function (sp, n) {
   sp <- sp[sample(nrow(sp), n), ]
   sp
+}
+
+
+# Function to get ids from spatial objects
+# To-do, other objects, not tested
+#' @export
+#' 
+sp_feature_ids <- function (sp) {
+  
+  # Polygons
+  if (grepl("polygon", class(sp), ignore.case = TRUE)) {
+    
+    ids <- sapply(slot(sp, "polygons"), slot, "ID")
+    
+  }
+  
+  # Lines
+  if (grepl("line", class(sp), ignore.case = TRUE)) {
+    
+    ids <- sapply(slot(sp, "lines"), slot, "ID")
+    
+  }
+  
+  # Return
+  ids
+  
 }

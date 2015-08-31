@@ -158,3 +158,14 @@ extract_point_coordinates <- function (sp.list, index) {
   coordinates
   
 }
+
+
+# Function for creating wkt strings from spatial object. 
+# To-do add data handling too
+# 
+#' @export
+#' 
+sp_to_wkt <- function (sp, features = TRUE) {
+  string <- rgeos::writeWKT(sp, byid = features)
+  string
+}
