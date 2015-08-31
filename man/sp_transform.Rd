@@ -38,6 +38,6 @@ sp_projection(shape.file)
 Stuart K. Grange
 }
 \seealso{
-\code{\link{spTransform}}
+\code{\link{spTransform}}, \code{\link{sp_projection}}
 }
 

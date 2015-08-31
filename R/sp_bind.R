@@ -50,7 +50,7 @@ sp_bind <- function (sp, sp.2) {
   }
   
   # Bind/combine objects
-  # sp.combine <- maptools::spRbind(sp, sp.2)
+  sp.combine <- maptools::spRbind(sp, sp.2)
   
   # Return
   sp.combine
@@ -144,10 +144,7 @@ change_feature_ids <- function (sp, sp.2) {
 }
 
 
-#' Funcion to randomly sample n features in a spatial object. 
-#' 
-#' @rdname sp_bind
-#' 
+# Funcion to randomly sample n features in a spatial object. 
 #' @export
 #'
 sp_sample_n <- function (sp, n) {

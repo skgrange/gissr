@@ -3,14 +3,11 @@
 \name{sp_bind}
 \alias{sp_bind}
 \alias{sp_bind_many}
-\alias{sp_sample_n}
 \title{Functions to bind/combine spatial objects together.}
 \usage{
 sp_bind(sp, sp.2)
 
 sp_bind_many(sp.list, progress = TRUE)
-
-sp_sample_n(sp, n)
 }
 \arguments{
 \item{sp}{Spatial object one.}
@@ -24,8 +21,6 @@ sp_sample_n(sp, n)
 syntax of \code{rbind}. Currently, only two objects can be bound together.
 \code{sp_bind_many} combines multiple spatial objects together but
 the input must be a list.
-
-Funcion to randomly sample n features in a spatial object.
 }
 \details{
 These function are useful for combining shapefiles or vectors of WKT strings

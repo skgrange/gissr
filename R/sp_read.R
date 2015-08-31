@@ -90,7 +90,7 @@ sp_read <- function (file, verbose = TRUE) {
   # Print projection too
   # cat to keep consistent with rgdal::readOGR
   if (verbose) {
-    cat("Projection:", sp_projection(sp))
+    cat("Projection:", sp_projection(sp), "\n")
   }
     
   # Return

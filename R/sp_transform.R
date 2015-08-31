@@ -10,7 +10,7 @@
 #' @param to A proj4 string for the projection-transformation. Default is WGS84
 #' string. 
 #' 
-#' @seealso \code{\link{spTransform}}
+#' @seealso \code{\link{spTransform}}, \code{\link{sp_projection}}
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -35,10 +35,14 @@
 #' 
 sp_transform <- function (sp, to = "+proj=longlat +datum=WGS84") {
   
+  # Switch
+  to <- ifelse(to %in% c("bng", "ogb", "osgb36"), "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs", to)
+  to <- ifelse(to %in% c("nztm"), "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs", to)
+  
   if (is.na(sp::proj4string(sp))) {
     
     # If no projection, give projection
-    message("Spatial object has no projection, so projection has been forced.")
+    message("Spatial object had no projection. The projection has been forced.")
     sp::proj4string(sp) <- to
     
   } else {
