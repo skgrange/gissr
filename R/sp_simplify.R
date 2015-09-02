@@ -1,5 +1,4 @@
-#' Function to simplify spatial objects using the Ramer–Douglas–Peucker
-#' algorithm. 
+#' Function to simplify spatial objects using the Douglas-Peuker algorithm. 
 #'
 #' Holes will appear. 
 #'

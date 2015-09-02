@@ -2,8 +2,7 @@
 % Please edit documentation in R/sp_simplify.R
 \name{sp_simplify}
 \alias{sp_simplify}
-\title{Function to simplify spatial objects using the Ramer–Douglas–Peucker
-algorithm.}
+\title{Function to simplify spatial objects using the Douglas-Peuker algorithm.}
 \usage{
 sp_simplify(sp, tolerance, preserve = TRUE)
 }
