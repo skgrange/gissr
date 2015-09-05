@@ -9,6 +9,7 @@
 #' @param file Spatial data file. 
 #' @param verbose Should information about the data be printed when being 
 #' loaded? Default is TRUE. 
+#' @param tolower Should the names of the data slot be forced to be lower case? 
 #'
 #' @author Stuart K. Grange
 #' 
@@ -26,14 +27,13 @@
 #' 
 #' @export
 #'
-sp_read <- function (file, verbose = TRUE) {
+sp_read <- function (file, verbose = TRUE, tolower = TRUE) {
   
   # Expand path
   file <- path.expand(file)
   
   # GPX reader needs a layer
   if (grepl(".gpx$", file, ignore.case = TRUE)) {
-    
     # Not really helpful variable names here...
     dir.name <- file
     
@@ -41,8 +41,7 @@ sp_read <- function (file, verbose = TRUE) {
     file.name <- "tracks"
     
   } else {
-    
-    # Shapefile handling
+    # Shape file handling
     # Get file name
     file.name <- basename(file)
     
@@ -81,7 +80,7 @@ sp_read <- function (file, verbose = TRUE) {
   
   suppressWarnings(
     if (is.na(sp)) {
-      stop("No spatial data can be found. ")
+      stop("No spatial data can be found.")
     }
   )
   
@@ -91,6 +90,12 @@ sp_read <- function (file, verbose = TRUE) {
   # cat to keep consistent with rgdal::readOGR
   if (verbose) {
     cat("Projection:", sp_projection(sp), "\n")
+  }
+  
+  # Lower case names for data slot
+  if (tolower & grepl("data", class(sp), ignore.case = TRUE)) {
+    names(sp@data) <- tolower(names(sp@data))
+    
   }
     
   # Return

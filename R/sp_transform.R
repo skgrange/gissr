@@ -40,13 +40,11 @@ sp_transform <- function (sp, to = "+proj=longlat +datum=WGS84") {
   to <- ifelse(to %in% c("nztm"), "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs", to)
   
   if (is.na(sp::proj4string(sp))) {
-    
-    # If no projection, give projection
+    # If no projection, give projection and message
     message("Spatial object had no projection. The projection has been forced.")
     sp::proj4string(sp) <- to
     
   } else {
-    
     # Otherwise convert projection system to WGS84
     sp <- sp::spTransform(sp, sp::CRS(to))
     

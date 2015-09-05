@@ -5,19 +5,19 @@
 \alias{sp_bind_many}
 \title{Functions to bind/combine spatial objects together.}
 \usage{
-sp_bind(sp, sp.2, force = TRUE)
+sp_bind(sp, sp.2)
 
-sp_bind_many(sp.list, force = FALSE, progress = TRUE)
+sp_bind_many(sp.list, progress = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object one.}
 
 \item{sp.2}{Spatial object two.}
 
+\item{sp.list}{A list containing spatial two or more spatial objects.}
+
 \item{force}{Should the feature IDs be forced to change? This may be
 necessary when feature IDs are not sequential.}
-
-\item{sp.list}{A list containing spatial two or more spatial objects.}
 }
 \description{
 \code{sp_bind} combines two similar spatial objects together with the same
@@ -26,7 +26,7 @@ syntax of \code{rbind}. Currently, only two objects can be bound together.
 the input must be a list.
 }
 \details{
-These function are useful for combining shapefiles or vectors of WKT strings
+These function are useful for combining shape files or tables of WKT strings
 together.
 
 The feature IDs within line- and polygon-spatial objects must be manipulated

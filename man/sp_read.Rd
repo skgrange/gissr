@@ -4,13 +4,15 @@
 \alias{sp_read}
 \title{Function to read spatial data files in a consistent way.}
 \usage{
-sp_read(file, verbose = TRUE)
+sp_read(file, verbose = TRUE, tolower = TRUE)
 }
 \arguments{
 \item{file}{Spatial data file.}
 
 \item{verbose}{Should information about the data be printed when being
 loaded? Default is TRUE.}
+
+\item{tolower}{Should the names of the data slot be forced to be lower case?}
 }
 \description{
 \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the

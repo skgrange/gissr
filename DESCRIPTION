@@ -1,14 +1,15 @@
 Package: gissr
 Type: Package
 Title: Functions To Make Working With Spatial Data Easier
-Version: 0.3
-Date: 2015-08-23
+Version: 0.3.2
+Date: 2015-09-05
 Author: Stuart K. Grange
 Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
 Description: A collection of spatial functions to make R a more effective GIS.
 License: GPL (>= 2)
 Depends:
-  sp
+  sp, 
+  leaflet
 Imports: 
   stringr,
   lubridate,
@@ -21,7 +22,7 @@ Imports:
   maptools,
   rgeos,
   geosphere,
-  pbapply
-Suggests:
+  pbapply, 
   leaflet
+Suggests:
 LazyLoad: yes

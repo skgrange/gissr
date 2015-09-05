@@ -5,7 +5,7 @@
 #' \code{sp_bind_many} combines multiple spatial objects together but 
 #' the input must be a list. 
 #' 
-#' These function are useful for combining shapefiles or vectors of WKT strings
+#' These function are useful for combining shape files or tables of WKT strings
 #' together. 
 #' 
 #' The feature IDs within line- and polygon-spatial objects must be manipulated 
@@ -36,7 +36,7 @@
 #'
 #' @export
 #'
-sp_bind <- function (sp, sp.2, force = TRUE) {
+sp_bind <- function (sp, sp.2) {
   
   # Class check
   if (!class(sp) == class(sp.2)) {
@@ -44,33 +44,15 @@ sp_bind <- function (sp, sp.2, force = TRUE) {
   }
   
   # Change ids, this is wasteful but robust
+  # I have used logic to handle this, but at times the binding fails due to non-
+  # sequental ids
   # First object
-  if (sp_feature_ids(sp)[1] != 1 | force) {
-    sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
-  }
-  
+  sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
+    
   # Second object
   sp.2 <- sp::spChFIDs(sp.2, as.character(length(sp) + 1:length(sp.2)))
   
-#   # Old code
-#   # For polygons and lines, the ids must be manipulated
-#   if (!grepl("points", class(sp), ignore.case = TRUE)) {
-#     
-#     # Change ids in first object, but only if they need to be
-#     if (sp_feature_ids(sp)[1] != 1) {
-#       
-#       # message("Changing feature IDs of first object...")
-#       sp <- spChFIDs(sp, as.character(1:length(sp)))
-#       
-#     }
-#     
-#     # Change feature ids for second spatial object based on the first object
-#     # message("Changing feature IDs of second object...")
-#     sp.2 <- change_feature_ids(sp, sp.2)
-#     
-#   }
-  
-  # Bind/combine objects
+  # Bind objects
   sp.combine <- maptools::spRbind(sp, sp.2)
   
   # Return
@@ -83,13 +65,13 @@ sp_bind <- function (sp, sp.2, force = TRUE) {
 #' 
 #' @export
 #'
-sp_bind_many <- function (sp.list, force = FALSE, progress = TRUE) {
+sp_bind_many <- function (sp.list, progress = TRUE) {
   
+  # Class check
   if (class(sp.list) != "list") {
     stop("The input must be list of spatial objects")
   }
   
-  # A for loop!?
   # Set-up progress bar
   if (progress) {
     pb <- txtProgressBar(min = 0, max = length(sp.list), style = 3)
@@ -98,9 +80,8 @@ sp_bind_many <- function (sp.list, force = FALSE, progress = TRUE) {
   for (i in seq_along(sp.list)) {
     
     if (i == 1) {
-      
       # The first loop, just bind the first two objects
-      sp.bind <- sp_bind(sp.list[[1]], sp.list[[2]], force = force)
+      sp.bind <- sp_bind(sp.list[[1]], sp.list[[2]])
       
     } else {
       
@@ -109,9 +90,8 @@ sp_bind_many <- function (sp.list, force = FALSE, progress = TRUE) {
       
       # k is i + 1 so need to pass the final k as it will not exist
       if (k <= length(sp.list)) {
-        
         # Accumulate sp.bind and add the extra objects
-        sp.bind <- sp_bind(sp.bind, sp.list[[k]], force = force)
+        sp.bind <- sp_bind(sp.bind, sp.list[[k]])
         
       }
       
@@ -130,42 +110,7 @@ sp_bind_many <- function (sp.list, force = FALSE, progress = TRUE) {
 }
 
 
-# # Function to manipulate feature ids in spatial- lines and polygons.
-# #
-# # No export 
-# #
-# change_feature_ids <- function (sp, sp.2) {
-#   
-#   # Get length of first spatial object
-#   n <- length(sp)
-#   
-#   # Next object has the next feature
-#   id.push <- n + 1
-#   
-#   # Length of second object
-#   n.2 <- length(sp.2)
-#   
-#   # Only create a sequence if necessary
-#   if (n.2 > 1) {
-#     
-#     id.2 <- seq(id.push, length.out = n.2)
-#     
-#   } else {
-#     
-#     id.2 <- id.push
-#     
-#   }
-#   
-#   # Alter feature ids within sp
-#   sp.2 <- sp::spChFIDs(sp.2, as.character(id.2))
-#   
-#   # Return
-#   sp.2
-#   
-# }
-
-
-# Funcion to randomly sample n features in a spatial object. 
+# Function to randomly sample n features in a spatial object. 
 #' @export
 #'
 sp_sample_n <- function (sp, n) {
@@ -175,21 +120,19 @@ sp_sample_n <- function (sp, n) {
 
 
 # Function to get ids from spatial objects
-# To-do, other objects, not tested
+# To-do: other objects than polygons, not tested
 #' @export
 #' 
 sp_feature_ids <- function (sp) {
   
   # Polygons
   if (grepl("polygon", class(sp), ignore.case = TRUE)) {
-    
     ids <- sapply(slot(sp, "polygons"), slot, "ID")
     
   }
   
   # Lines
   if (grepl("line", class(sp), ignore.case = TRUE)) {
-    
     ids <- sapply(slot(sp, "lines"), slot, "ID")
     
   }

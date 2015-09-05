@@ -2,8 +2,7 @@
 #' 
 #' \code{sp_from_wkt} creates spatial objects from WKT strings and can create
 #' spatial-data frames from the other variables contained within the data frame. 
-#' \code{sp_from_wkt} is useful after querying a PostGIS database and formating
-#' the geometry variable to WKT strings. 
+#' \code{sp_from_wkt} is useful after querying a PostGIS database. 
 #' 
 #' @param df Data frame containing a WKT string variable. \code{df} can also be
 #' a vector of WKT strings. 
@@ -28,7 +27,7 @@
 #'
 sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   
-  # Catch vector
+  # For vectors
   if (class(df) == "character") {
     
     # Vector is input
@@ -44,11 +43,13 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
     
   }
   
-  # Store data and overwrite row names
+  # Store data
   if (data) {
     
     df.data <- df
     df.data[, wkt] <- NULL
+    
+    # Overwrite row names
     row.names(df.data) <- seq_len(nrow(df.data))
     
   }
@@ -57,19 +58,19 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   message("Parsing WKT strings...")
   sp.list <- pbapply::pblapply(wkt.vector, rgeos::readWKT)
   
-  # If the wkt strings are just points, a different method is needed
+  # If the wkt strings are just points, a different rename method is needed
   if (class(sp.list[[1]])[1] == "SpatialPoints") {
     
-    message("Extracting coordinates from spatial points...")
-    sp.list <- pbapply::pblapply(seq_along(sp.list), function (x)
-      sp.list[[x]]@coords)
+    # Extract coordinates
+    sp.list <- lapply(seq_along(sp.list), function (x) sp.list[[x]]@coords)
     
     # Bind all features
     sp <- sp_list_bind(sp.list)
     
     # Promote to sp
     sp <- sp::SpatialPoints(sp)
-    # Add row names
+    
+    # Add row names, will be the same as data if matched later
     row.names(sp) <- as.character(1:length(sp))
     
   } else {
@@ -109,6 +110,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
 }
 
 
+# Rename sp features within a list
 sp_rename <- function (sp) {
   
   # Create an id vector
@@ -124,19 +126,22 @@ sp_rename <- function (sp) {
 }
 
 
+# Bind objects using do.call
 sp_list_bind <- function (sp.list) {
   
   # Do call appends rather than create new
   sp <- do.call("rbind", sp.list)
+  
   # Return
   sp
   
 }
 
 
-# Function for creating wkt strings from spatial object. 
-# To-do add data handling too
+# Function for creating wkt strings from a spatial object. 
+# To-do: add data handling too. 
 # 
+#' @rdname sp_from_wkt
 #' @export
 #' 
 sp_to_wkt <- function (sp, features = TRUE) {

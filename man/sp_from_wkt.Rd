@@ -2,9 +2,12 @@
 % Please edit documentation in R/sp_from_wkt.R
 \name{sp_from_wkt}
 \alias{sp_from_wkt}
+\alias{sp_to_wkt}
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
 sp_from_wkt(df, wkt = "geom", data = FALSE, projection = NA)
+
+sp_to_wkt(sp, features = TRUE)
 }
 \arguments{
 \item{df}{Data frame containing a WKT string variable. \code{df} can also be
@@ -18,8 +21,7 @@ spatial object's data-slot? I.e. create a spatial-data frame.}
 \description{
 \code{sp_from_wkt} creates spatial objects from WKT strings and can create
 spatial-data frames from the other variables contained within the data frame.
-\code{sp_from_wkt} is useful after querying a PostGIS database and formating
-the geometry variable to WKT strings.
+\code{sp_from_wkt} is useful after querying a PostGIS database.
 }
 \examples{
 \dontrun{

@@ -5,13 +5,16 @@
 \title{Function to find latitude and longitude pairs from an address-string using
 Google Maps.}
 \usage{
-google_geocode(string, override_limit = TRUE)
+google_geocode(input, source = "google", override_limit = TRUE)
 }
 \arguments{
-\item{string}{The address string to transform to latitude and longitude pairs.}
+\item{source}{What API should \code{google_geocode} access? Options are
+"google" or "dsk" and the default is "google".}
 
 \item{override_limit}{Should the function attempt to override the 2500 queries
 a day limit? This does not always work.}
+
+\item{string}{The address string to transform to latitude and longitude pairs.}
 }
 \description{
 The Google Maps API is not open-source, therefore check the licensing
@@ -21,7 +24,7 @@ conditions for usage conditions
 \details{
 \code{google_geocode} is a wrapper for \code{ggmap::geocode} with some simple
 enhancements to clean the output and avoid messages to the console. Other
-address elements such as postcodes can also be transformed sucessfully.
+address elements such as postcodes can also be transformed successfully.
 }
 \examples{
 \dontrun{
