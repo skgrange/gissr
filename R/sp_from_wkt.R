@@ -38,6 +38,9 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
     
   } else {
     
+    # Catch dplyr's table
+    df <- threadr::base_df(df)
+    
     # Get a vector of wkt from df
     wkt.vector <- df[, wkt]
     

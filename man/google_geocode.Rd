@@ -3,7 +3,7 @@
 \name{google_geocode}
 \alias{google_geocode}
 \title{Function to find latitude and longitude pairs from an address-string using
-Google Maps.}
+Google Maps API.}
 \usage{
 google_geocode(input, source = "google", override_limit = TRUE)
 }
@@ -19,7 +19,8 @@ a day limit? This does not always work.}
 \description{
 The Google Maps API is not open-source, therefore check the licensing
 conditions for usage conditions
-(\url{https://developers.google.com/maps/terms}).
+(\url{https://developers.google.com/maps/terms}). Users of this function
+must use the geocoded data to display on an Google Map.
 }
 \details{
 \code{google_geocode} is a wrapper for \code{ggmap::geocode} with some simple

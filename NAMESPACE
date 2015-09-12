@@ -3,6 +3,7 @@
 export(data_frame_to_line)
 export(data_frame_to_polygon)
 export(distance_by_haversine)
+export(google_elevation)
 export(google_geocode)
 export(left_join_spatial)
 export(osgb36_to_wgs84)

@@ -1,8 +1,8 @@
 Package: gissr
 Type: Package
 Title: Functions To Make Working With Spatial Data Easier
-Version: 0.3.2
-Date: 2015-09-05
+Version: 0.3.3
+Date: 2015-09-11
 Author: Stuart K. Grange
 Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
 Description: A collection of spatial functions to make R a more effective GIS.
@@ -15,6 +15,7 @@ Imports:
   lubridate,
   plyr,
   dplyr,
+  jsonlite,
   geojsonio,
   ggplot2,
   ggmap,
