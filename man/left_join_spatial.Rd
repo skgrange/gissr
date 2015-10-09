@@ -38,20 +38,20 @@ spatial-polygon data frame. Observations which do not match are filled with
 \dontrun{
 
 # Join air quality zones to latitude and longitude pairs
-data.join <- left_join_spatial(data.coordinates, latitude = "latitude",
-  longitude = "longitude", polygons = shape.file.pm10)
+data_join <- left_join_spatial(data_coordinates, latitude = "latitude",
+  longitude = "longitude", polygons = shape_file_pm10)
 
 
 # I am in London, I know my latitude and longitude. Which borough am I in?
 
 # Load shape file containing the London boroughs
-shape.file <- sp_read("data_objects/london_boroughs/london_sport.shp")
+shape_file <- sp_read("data_objects/london_boroughs/london_sport.shp")
 
 # Make latitude and longitude a data frame
-data.point <- data.frame(latitude = 51.523595, longitude = -0.027114)
+data_point <- data.frame(latitude = 51.523595, longitude = -0.027114)
 
 # Test point with 33 polygons (boroughs) in the shape file
-left_join_spatial(data.point, polygons = shape.file)
+left_join_spatial(data_point, polygons = shape_file)
 "Tower Hamlets"
 }
 }

@@ -15,10 +15,8 @@
 #' @examples 
 #' 
 #' \dontrun{
-#' sp.lines <- data_frame_to_line(data.gps.track, "latitude", "longitude")
+#' sp_lines <- data_frame_to_line(data_gps_track, "latitude", "longitude")
 #' }
-#' 
-#' @import sp
 #' 
 #' @export
 #' 
@@ -37,29 +35,29 @@ data_frame_to_line <- function (df, latitude = "latitude",
 #   df[, "id"] <- df[, "id"] - id.min
   
   # Get data part for the SpatialLinesDataFrame
-  data.extras <- data.frame(id = unique(df[, "id"]))
+  data_extras <- data.frame(id = unique(df[, "id"]))
   
   # Make sp points object
-  coordinates(df) <- c(longitude, latitude)
+  sp::coordinates(df) <- c(longitude, latitude)
   
   # Reassign
-  sp.object <- df
+  sp_object <- df
   
   # From
   # http://stackoverflow.com/questions/24284356/convert-spatialpointsdataframe-
   # to-spatiallinesdataframe-in-r
   # Generate lines for each id
-  lines <- lapply(split(sp.object, sp.object$id), 
-                  function(x) Lines(list(Line(coordinates(x))), x$id[1L]))
+  lines <- lapply(split(sp_object, sp_object$id), 
+                  function(x) sp::Lines(list(sp::Line(sp::coordinates(x))), x$id[1L]))
   
   # Create SpatialLines
-  lines <- SpatialLines(lines)
+  lines <- sp::SpatialLines(lines)
   
   # Force projection
-  proj4string(lines) <- CRS("+proj=longlat +datum=WGS84")
+  sp::proj4string(lines) <- sp::CRS("+proj=longlat +datum=WGS84")
   
   # Make SpatialLinesDataFrame
-  lines <- SpatialLinesDataFrame(lines, data.extras)
+  lines <- sp::SpatialLinesDataFrame(lines, data_extras)
   
   # Return
   lines

@@ -27,48 +27,48 @@
 #'
 sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   
+  # 
+  df <- threadr::base_df(df)
+  
   # For vectors
   if (class(df) == "character") {
     
     # Vector is input
-    wkt.vector <- df
+    wkt_vector <- df
     
     # Vectors will not contain a data slot
     data <- FALSE
     
   } else {
     
-    # Catch dplyr's table
-    df <- threadr::base_df(df)
-    
     # Get a vector of wkt from df
-    wkt.vector <- df[, wkt]
+    wkt_vector <- df[, wkt]
     
   }
   
   # Store data
   if (data) {
     
-    df.data <- df
-    df.data[, wkt] <- NULL
+    df_data <- df
+    df_data[, wkt] <- NULL
     
     # Overwrite row names
-    row.names(df.data) <- seq_len(nrow(df.data))
+    row.names(df_data) <- seq_len(nrow(df_data))
     
   }
   
   # Parse WKT strings
   message("Parsing WKT strings...")
-  sp.list <- pbapply::pblapply(wkt.vector, rgeos::readWKT)
+  sp_list <- pbapply::pblapply(wkt_vector, rgeos::readWKT)
   
   # If the wkt strings are just points, a different rename method is needed
-  if (class(sp.list[[1]])[1] == "SpatialPoints") {
+  if (class(sp_list[[1]])[1] == "SpatialPoints") {
     
     # Extract coordinates
-    sp.list <- lapply(seq_along(sp.list), function (x) sp.list[[x]]@coords)
+    sp_list <- lapply(seq_along(sp_list), function (x) sp_list[[x]]@coords)
     
     # Bind all features
-    sp <- sp_list_bind(sp.list)
+    sp <- sp_list_bind(sp_list)
     
     # Promote to sp
     sp <- sp::SpatialPoints(sp)
@@ -80,24 +80,24 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
     
     # Rename feature ids within list
     message("Binding all spatial features together...")
-    sp.list <- sp_rename(sp.list)
+    sp_list <- sp_rename(sp_list)
     
     # Bind all objects in list
-    sp <- sp_list_bind(sp.list)
+    sp <- sp_list_bind(sp_list)
     
   }
 
   # Add data
   if (data & grepl("polygon", class(sp), ignore.case = TRUE)) {
-    sp <- sp::SpatialPolygonsDataFrame(sp, data = df.data)
+    sp <- sp::SpatialPolygonsDataFrame(sp, data = df_data)
   }
   
   if (data & grepl("lines", class(sp), ignore.case = TRUE)) {
-    sp <- sp::SpatialLinesDataFrame(sp, data = df.data)
+    sp <- sp::SpatialLinesDataFrame(sp, data = df_data)
   }
   
   if (data & grepl("points", class(sp), ignore.case = TRUE)) {
-    sp <- sp::SpatialPointsDataFrame(sp, data = df.data)
+    sp <- sp::SpatialPointsDataFrame(sp, data = df_data)
   }
   
   # Add projection
@@ -117,11 +117,11 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
 sp_rename <- function (sp) {
   
   # Create an id vector
-  id.vector <- seq_along(sp)
-  id.vector <- as.character(id.vector)
+  id_vector <- seq_along(sp)
+  id_vector <- as.character(id_vector)
   
   # Rename all elements in list
-  sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id.vector[x]))
+  sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id_vector[x]))
   
   # Return
   sp
@@ -130,10 +130,10 @@ sp_rename <- function (sp) {
 
 
 # Bind objects using do.call
-sp_list_bind <- function (sp.list) {
+sp_list_bind <- function (sp_list) {
   
   # Do call appends rather than create new
-  sp <- do.call("rbind", sp.list)
+  sp <- do.call("rbind", sp_list)
   
   # Return
   sp

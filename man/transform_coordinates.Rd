@@ -54,8 +54,8 @@ WGS 84/EPSG:4326 (\code{+proj=longlat +datum=WGS84}).
 # The proj4 string for British National Grid (very long string!)
 bng <- "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +units=m +no_defs"
 
-data.oxford.transform <- transform_coordinates(
-  data.oxford, x = "x_coordinate", y = "y_coordinate", from = bng)
+data_oxford_transform <- transform_coordinates(
+  data_oxford, x = "x_coordinate", y = "y_coordinate", from = bng)
 }
 }
 \author{

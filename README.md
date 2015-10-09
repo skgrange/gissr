@@ -34,7 +34,7 @@ However, the challenges I have with using R as a GIS include keeping track of th
     - To filter objects by other polygons, use `[` subsetting. 
   - "Disolve" polygons to make a single feature with `sp_dissolve_polygons`. 
   - Transform addresses/postcodes/other location strings to latitude and longitude pairs with `google_geocode`.
-  - Export spatial objects and data frames to GPX files with `write.gpx`. 
+  - Export spatial objects and data frames to GPX files with `write_gpx`. 
   
 ## Fancy functions
 

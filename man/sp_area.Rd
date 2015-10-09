@@ -25,9 +25,10 @@ function has been tested and performs very well.
 }
 \examples{
 \dontrun{
-# Calculate the area of the City of London, sp is projected in OSGB36
-sp_area(sp.city.of.london, unit = "km")
-2.903926
+# Calculate the area of the Greater London Built-up area, sp is projected
+in OSGB36, a metric projection system
+sp_area(sp.built.up.london, unit = "km")
+1737.855
 }
 }
 \author{

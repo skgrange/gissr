@@ -17,46 +17,56 @@
 #' This needs to be solved soon. 
 #' 
 #' @param sp Spatial object one. 
-#' @param sp.2 Spatial object two.
+#' @param sp_2 Spatial object two.
 #' @param force Should the feature IDs be forced to change? This may be 
 #' necessary when feature IDs are not sequential.
-#' @param sp.list A list containing spatial two or more spatial objects. 
+#' @param sp_list A list containing spatial two or more spatial objects. 
 #'
 #' @author Stuart K. Grange
 #' 
 #' @examples 
 #' \dontrun{
 #' # Two objects
-#' sp.london.two <- sp_bind(sp.croydon, sp.islington)
+#' sp_london_two <- sp_bind(sp_croydon, sp_islington)
 #' 
 #' # Many objects, note the nested list
-#' sp.london.many <- sp_bind_many(list(sp.croydon, sp.islington, sp.bexley, 
-#'   sp.brent))
+#' sp_london_many <- sp_bind_many(list(sp_croydon, sp_islington, sp_bexley, 
+#'   sp_brent))
 #' }
 #'
 #' @export
 #'
-sp_bind <- function (sp, sp.2) {
+sp_bind <- function (sp, sp_2) {
   
   # Class check
-  if (!class(sp) == class(sp.2)) {
+  if (!class(sp) == class(sp_2)) {
     stop("Spatial objects must be of the same type to be bound. ")
   }
   
-  # Change ids, this is wasteful but robust
-  # I have used logic to handle this, but at times the binding fails due to non-
-  # sequental ids
-  # First object
-  sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
+  # Points can be easily bound with do.call
+  if (grepl("point", class(sp), ignore.case = TRUE)) {
+    # rbind
+    sp_combine <- do.call("rbind", list(sp, sp_2))
     
-  # Second object
-  sp.2 <- sp::spChFIDs(sp.2, as.character(length(sp) + 1:length(sp.2)))
-  
-  # Bind objects
-  sp.combine <- maptools::spRbind(sp, sp.2)
+    # For lines and polygons
+  } else {
+    
+    # Change ids, this is wasteful but robust
+    # I have used logic to handle this, but at times the binding fails due to non-
+    # sequental ids
+    # First object
+    sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
+    
+    # Second object
+    sp_2 <- sp::spChFIDs(sp_2, as.character(length(sp) + 1:length(sp_2)))
+    
+    # Bind objects
+    sp_combine <- maptools::spRbind(sp, sp_2)
+    
+  }
   
   # Return
-  sp.combine
+  sp_combine
   
 }
 
@@ -65,47 +75,56 @@ sp_bind <- function (sp, sp.2) {
 #' 
 #' @export
 #'
-sp_bind_many <- function (sp.list, progress = TRUE) {
+sp_bind_many <- function (sp_list, progress = TRUE) {
   
   # Class check
-  if (class(sp.list) != "list") {
+  if (class(sp_list) != "list") {
     stop("The input must be list of spatial objects")
   }
   
-  # Set-up progress bar
-  if (progress) {
-    pb <- txtProgressBar(min = 0, max = length(sp.list), style = 3)
-  }
-  
-  for (i in seq_along(sp.list)) {
+  # Points can be easily bound with do.call
+  if (grepl("point", class(sp_list[[1]]), ignore.case = TRUE)) {
+    # rbind
+    sp_bind <- do.call("rbind", sp_list)
     
-    if (i == 1) {
-      # The first loop, just bind the first two objects
-      sp.bind <- sp_bind(sp.list[[1]], sp.list[[2]])
+  } else {
+    
+    # Set-up progress bar
+    if (progress) {
+      pb <- txtProgressBar(min = 0, max = length(sp_list), style = 3)
+    }
+    
+    for (i in seq_along(sp_list)) {
       
-    } else {
-      
-      # Need to jump over the second element in sp.list for i = 2
-      k <- i + 1
-      
-      # k is i + 1 so need to pass the final k as it will not exist
-      if (k <= length(sp.list)) {
-        # Accumulate sp.bind and add the extra objects
-        sp.bind <- sp_bind(sp.bind, sp.list[[k]])
+      if (i == 1) {
+        # The first loop, just bind the first two objects
+        sp_bind <- sp_bind(sp_list[[1]], sp_list[[2]])
+        
+      } else {
+        
+        # Need to jump over the second element in sp_list for i = 2
+        k <- i + 1
+        
+        # k is i + 1 so need to pass the final k as it will not exist
+        if (k <= length(sp_list)) {
+          # Accumulate sp_bind and add the extra objects
+          sp_bind <- sp_bind(sp_bind, sp_list[[k]])
+          
+        }
         
       }
       
-    }
-    
-    # Update progress bar
-    if (progress) {
-      setTxtProgressBar(pb, i)
+      # Update progress bar
+      if (progress) {
+        setTxtProgressBar(pb, i)
+      }
+      
     }
     
   }
   
   # Return
-  sp.bind
+  sp_bind
   
 }
 
@@ -120,7 +139,6 @@ sp_sample_n <- function (sp, n) {
 
 
 # Function to get ids from spatial objects
-# To-do: other objects than polygons, not tested
 #' @export
 #' 
 sp_feature_ids <- function (sp) {

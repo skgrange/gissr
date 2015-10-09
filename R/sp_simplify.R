@@ -1,6 +1,6 @@
 #' Function to simplify spatial objects using the Douglas-Peuker algorithm. 
 #'
-#' Holes will appear. 
+#' Holes will appear between the geometries. 
 #'
 #' @param sp Spatial object which is to be simplified.
 #' @param tolerance Tolerance value to be used by the Douglas-Peuker algorithm. 
@@ -11,7 +11,7 @@
 #' 
 #' @examples
 #' \dontrun{
-#' sp.simple <- sp_simplify(sp, 0.01)
+#' sp_simple <- sp_simplify(sp, 0.01)
 #' }
 #' 
 #' @export

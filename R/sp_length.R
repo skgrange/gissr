@@ -34,11 +34,10 @@ sp_length <- function (sp, unit = "m", features = TRUE) {
     
     # Transform projection to mollweide projection/ESRI:54009, a worldwide 
     # projection with metre units
-    sp <- sp_transform(sp, 
-      "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
+    sp <- sp_transform(sp, "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
     
     # Give a message
-    message("The projection system has been transformed for calculation.")
+    message("The projection system was temporarily transformed for calculation.")
     
   }
   

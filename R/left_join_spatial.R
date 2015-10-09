@@ -29,20 +29,20 @@
 #' \dontrun{
 #' 
 #' # Join air quality zones to latitude and longitude pairs
-#' data.join <- left_join_spatial(data.coordinates, latitude = "latitude", 
-#'   longitude = "longitude", polygons = shape.file.pm10)
+#' data_join <- left_join_spatial(data_coordinates, latitude = "latitude", 
+#'   longitude = "longitude", polygons = shape_file_pm10)
 #' 
 #' 
 #' # I am in London, I know my latitude and longitude. Which borough am I in? 
 #' 
 #' # Load shape file containing the London boroughs
-#' shape.file <- sp_read("data_objects/london_boroughs/london_sport.shp")
+#' shape_file <- sp_read("data_objects/london_boroughs/london_sport.shp")
 #' 
 #' # Make latitude and longitude a data frame
-#' data.point <- data.frame(latitude = 51.523595, longitude = -0.027114)
+#' data_point <- data.frame(latitude = 51.523595, longitude = -0.027114)
 #' 
 #' # Test point with 33 polygons (boroughs) in the shape file
-#' left_join_spatial(data.point, polygons = shape.file)
+#' left_join_spatial(data_point, polygons = shape_file)
 #' "Tower Hamlets"
 #' }
 #' 
@@ -67,16 +67,16 @@ left_join_spatial <- function (df, latitude = "latitude",
   sp::coordinates(df) <- c(longitude, latitude)
   
   # Reassign
-  sp.object <- df
+  sp_object <- df
   
   # Give the object a projection
-  proj4string(sp.object) <- projection
+  proj4string(sp_object) <- projection
   
   # The point in polygon function
-  df.match <- sp::over(sp.object, polygons, fn = NULL)
+  df_match <- sp::over(sp_object, polygons, fn = NULL)
   
   # Input back to data frame
-  df <- data.frame(sp.object)
+  df <- data.frame(sp_object)
   
   # Drop logical optional variable which occurs during projection manipulations
   if ("optional" %in% names(df)) {
@@ -84,7 +84,7 @@ left_join_spatial <- function (df, latitude = "latitude",
   }
   
   # Add joined variable to data frame
-  df <- cbind(df, df.match)
+  df <- cbind(df, df_match)
   
   # Return
   df

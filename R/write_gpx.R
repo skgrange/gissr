@@ -1,15 +1,15 @@
 #' Function to write a data frame to a GPX file with usage analogous to 
 #' \code{write.table}.
 #' 
-#' \code{write.gpx} uses \code{rgdal::writeOGR} as the GPX writer. Unlike the 
-#' standard \code{writeOGR} function, \code{write.gpx} will automatically expand 
+#' \code{write_gpx} uses \code{rgdal::writeOGR} as the GPX writer. Unlike the 
+#' standard \code{writeOGR} function, \code{write_gpx} will automatically expand 
 #' file paths and can overwrite previous files if necessary. 
 #'
 #' \code{latitude} and \code{longitude} must not contain \code{NA} values.
 #' 
 #' To-do: Does not work with spatial objects without data. Make sure it does. I
-#' think this is an writeOGR issue so will need to upgrade the spatial ojects in
-#' a robust way. 
+#' think this is an \code{writeOGR} issue so will need to upgrade the spatial 
+#' ojects in a robust way. 
 #' 
 #' @param df Data frame to be written to a GPX file.
 #' @param file File name of GPX file.
@@ -26,15 +26,16 @@
 #' 
 #' \dontrun{
 #' # Export a GPX file containing points
-#' write.gpx(data.bus.stations, "~/Desktop/bus_stations.gpx")
+#' write_gpx(data_bus_stations, "~/Desktop/bus_stations.gpx")
 #' 
 #' # Export GPX file which contains a line object
-#' write.gpx(data.gpx.track, "~/Desktop/drive_to_bath.gpx", layer = "lines")
+#' write_gpx(data_gpx_track, "~/Desktop/drive_to_bath.gpx", layer = "lines")
+#'
 #' }
 #'
 #' @export
 #' 
-write.gpx <- function (df, file, latitude = "latitude", longitude = "longitude", 
+write_gpx <- function (df, file, latitude = "latitude", longitude = "longitude", 
                        name = NA, layer = "points") {
   
   # For data frames
@@ -63,13 +64,13 @@ write.gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
       sp::coordinates(df) <- c(longitude, latitude)
       
       # Reassign
-      sp.object <- df
+      sp_object <- df
       
       # Force projection, not ideal
-      sp::proj4string(sp.object) <- "+proj=longlat +datum=WGS84"
+      sp::proj4string(sp_object) <- "+proj=longlat +datum=WGS84"
       
       # For writeOGR
-      layer.vector <- "points"
+      layer_vector <- "points"
       
     }
     
@@ -77,10 +78,10 @@ write.gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
     if (layer == "lines") {
       
       # Use function
-      sp.object <- data_frame_to_line(df, latitude, longitude)
+      sp_object <- data_frame_to_line(df, latitude, longitude)
       
       # For writeOGR
-      layer.vector <- "lines"
+      layer_vector <- "lines"
       
     }
     
@@ -91,20 +92,20 @@ write.gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
   if (grepl("spatialpoints", class(df), ignore.case = TRUE)) {
     
     # Re-assign input
-    sp.object <- df
+    sp_object <- df
     
     if (!is.na(name)) {
       
       # Extract vector for gpx name
-      name.vector <- sp.object@data[, name]
+      name_vector <- sp_object@data[, name]
       
       # Add vector to object
-      sp.object@data[, "name"] <- name.vector
+      sp_object@data[, "name"] <- name_vector
       
     }
     
     # For writeOGR
-    layer.vector <- "points"
+    layer_vector <- "points"
     
   }
   
@@ -112,24 +113,24 @@ write.gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
   if (grepl("spatiallines", class(df), ignore.case = TRUE)) {
     
     # Simply re-assign input
-    sp.object <- df
+    sp_object <- df
     
     if (!is.na(name)) {
       
-#       if (length(names(sp.object@data)) == 1) {
-#         sp.object@data[, name] <- NA
+#       if (length(names(sp_object@data)) == 1) {
+#         sp_object@data[, name] <- NA
 #       }
       
       # Extract vector for gpx name
-      name.vector <- sp.object@data[, name]
+      name_vector <- sp_object@data[, name]
       
       # Add vector to object
-      sp.object@data[, "name"] <- name.vector
+      sp_object@data[, "name"] <- name_vector
       
     }
     
     # For writeOGR
-    layer.vector <- "tracks"
+    layer_vector <- "tracks"
     
   }
   
@@ -138,20 +139,20 @@ write.gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
     
     # Polygons are not supported by gpx files, convert to lines
     message("Polygons are not supported by GPX, the polygons have been coerced to lines.")
-    sp.object <- as(df, "SpatialLinesDataFrame")
+    sp_object <- as(df, "SpatialLinesDataFrame")
     
     if (!is.na(name)) {
       
       # Extract vector for gpx name
-      name.vector <- sp.object@data[, name]
+      name_vector <- sp_object@data[, name]
       
       # Add vector to object
-      sp.object@data[, "name"] <- name.vector
+      sp_object@data[, "name"] <- name_vector
       
     }
     
     # For writeOGR
-    layer.vector <- "tracks"
+    layer_vector <- "tracks"
     
   }
   
@@ -165,7 +166,7 @@ write.gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
   }
   
   # Export file
-  rgdal::writeOGR(sp.object, file, layer = layer.vector, driver = "GPX", 
+  rgdal::writeOGR(sp_object, file, layer = layer_vector, driver = "GPX", 
                   dataset_options = "GPX_USE_EXTENSIONS=yes")
   
 }

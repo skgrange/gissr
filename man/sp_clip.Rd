@@ -9,17 +9,30 @@ sp_clip(sp, envelope)
 \arguments{
 \item{sp}{Spatial object to be clipped.}
 
-\item{envelope}{A vector containing the extend of the envelope to be used as a
-bounding box. The order must be: xmin, xmax, ymin, ymax and should be in the
-same projection as \code{sp}.}
+\item{envelope}{A vector with the length of 4 containing the extent of the
+envelope to be used as a bounding box. The order is: xmin, xmax, ymin, ymax.
+Watch out when using latitude and longitude, the order is longitude, longitude,
+then latitude, latitude. These coordinates need to be in the same projection
+as \code{sp}.}
 }
 \description{
-Function to clip spatial objects by a rectangular envelope.
+\code{sp_clip} uses \code{raster::crop} rather than
+\code{rgeos::gIntersection} because the \code{crop} method keeps the data slot
+in the spatial object intact.
+}
+\examples{
+\dontrun{
+# Clip a spatial lines object which contains roads in Saudi Arabia
+
+# Build envelope
+envelope <- c(23.830562, 25.584393, 45.200111, 47.311495)
+
+# Clip spatial lines
+sp.road.clip <- sp_clip(sp.roads, envelope)
+
+}
 }
 \author{
 Stuart K. Grange
-}
-\seealso{
-\link{`[`}
 }
 

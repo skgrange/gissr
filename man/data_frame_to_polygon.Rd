@@ -20,7 +20,7 @@ data frame.
 \examples{
 \dontrun{
 # Convert a hand-drawn line from an online application to a polygon
-polygon <- data_frame_to_polygon(data.drawn.line, "latitude", "longitude")
+polygon <- data_frame_to_polygon(data_drawn_line, "latitude", "longitude")
 }
 }
 \author{

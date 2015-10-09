@@ -20,6 +20,12 @@ conditions for usage conditions
 (\url{https://developers.google.com/maps/terms}). Users of this function
 must use the elevation data to display on an Google Map.
 }
+\details{
+\code{google_elevation} returns a data frame with the latitude and longitude
+pairs, elevation estimate, and (horizontal) resolution of elevation estimate.
+Coordinate pairs which contain \code{NA} will be returned as \code{NA}
+observation.
+}
 \author{
 Stuart K. Grange
 }

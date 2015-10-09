@@ -22,7 +22,7 @@ because this is a limitation of the spatial object.
 }
 \examples{
 \dontrun{
-sp.lines <- data_frame_to_line(data.gps.track, "latitude", "longitude")
+sp_lines <- data_frame_to_line(data_gps_track, "latitude", "longitude")
 }
 }
 \author{

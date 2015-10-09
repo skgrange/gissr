@@ -15,11 +15,11 @@ sp_simplify(sp, tolerance, preserve = TRUE)
 Default is TRUE.}
 }
 \description{
-Holes will appear.
+Holes will appear between the geometries.
 }
 \examples{
 \dontrun{
-sp.simple <- sp_simplify(sp, 0.01)
+sp_simple <- sp_simplify(sp, 0.01)
 }
 }
 \author{

@@ -41,8 +41,8 @@
 #' # The proj4 string for British National Grid (very long string!)
 #' bng <- "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +units=m +no_defs"
 #' 
-#' data.oxford.transform <- transform_coordinates(
-#'   data.oxford, x = "x_coordinate", y = "y_coordinate", from = bng)
+#' data_oxford_transform <- transform_coordinates(
+#'   data_oxford, x = "x_coordinate", y = "y_coordinate", from = bng)
 #' }
 #'
 #' @export
@@ -66,10 +66,10 @@ transform_coordinates <- function (df, x = "easting", y = "northing", from = "",
   sp::proj4string(df) <- from
   
   # Convert coordinate system
-  new.projection <- sp::CRS(to)
+  new_projection <- sp::CRS(to)
   
   # Do the projection conversion
-  df <- sp::spTransform(df, new.projection)
+  df <- sp::spTransform(df, new_projection)
   
   # Back to data frame
   df <- data.frame(df)
@@ -80,17 +80,17 @@ transform_coordinates <- function (df, x = "easting", y = "northing", from = "",
   }
   
   # Get the indices
-  x.index <- which(names(df) == x)
-  y.index <- which(names(df) == y)
-  other.index <- which(names(df) %ni% c(x, y))
+  x_index <- which(names(df) == x)
+  y_index <- which(names(df) == y)
+  other_index <- which(names(df) %ni% c(x, y))
   
   # Round coordinates
-  df[, x.index] <- round(df[, x.index], round)
-  df[, y.index] <- round(df[, y.index], round)
+  df[, x_index] <- round(df[, x_index], round)
+  df[, y_index] <- round(df[, y_index], round)
   
   # Reorder df
   if (reorder) {
-    df <- df[, c(y.index, x.index, other.index)]
+    df <- df[, c(y_index, x_index, other_index)]
   }
   
   # Rename variables

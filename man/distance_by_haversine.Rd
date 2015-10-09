@@ -4,7 +4,7 @@
 \alias{distance_by_haversine}
 \title{Function to calculate distances between two points in metres or kilometres.}
 \usage{
-distance_by_haversine(latitude, longitude, latitude.2, longitude.2,
+distance_by_haversine(latitude, longitude, latitude_2, longitude_2,
   unit = "metres", radius = 6371)
 }
 \arguments{
@@ -12,9 +12,9 @@ distance_by_haversine(latitude, longitude, latitude.2, longitude.2,
 
 \item{longitude}{A vector of longitude values in decimal degrees.}
 
-\item{latitude.2}{A vector of latitude values in decimal degrees.}
+\item{latitude_2}{A vector of latitude values in decimal degrees.}
 
-\item{longitude.2}{A vector of longitude values in decimal degrees.}
+\item{longitude_2}{A vector of longitude values in decimal degrees.}
 
 \item{unit}{The unit of the returned distance values. Can be metres or
 kilometres. Metres is the default.}
@@ -53,18 +53,18 @@ distance_by_haversine(51.753447, -1.254024, 51.558170, -0.688250)
 distance_by_haversine(51.753447, -1.254024, 51.558170, -0.688250, "km")
 44.66257
 
-# or because we are in a locle with a different distance unit, in miles
+# or because we are in a locale with a different distance unit, in miles
 distance_by_haversine(51.753447, -1.254024, 51.558170, -0.688250, "km") * 0.62
 27.69079
 
 
 # Data frame usage
 # Distances of many air quality monitoring sites from the City of London
-data.air$distance <- distance_by_haversine(
-  data.air$latitude, data.air$longitude, 51.513468, -0.089133, "km")
+data_air$distance <- distance_by_haversine(
+  data_air$latitude, data_air$longitude, 51.513468, -0.089133, "km")
 
 # Arrange by distance, closest at the top
-data.air <- plyr::arrange(data.air, distance)
+data_air <- plyr::arrange(data_air, distance)
 
 }
 }

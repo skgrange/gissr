@@ -17,8 +17,8 @@
 #' 
 #' @param longitude A vector of longitude values in decimal degrees.
 #' @param latitude A vector of latitude values in decimal degrees.
-#' @param longitude.2 A vector of longitude values in decimal degrees.
-#' @param latitude.2 A vector of latitude values in decimal degrees.
+#' @param longitude_2 A vector of longitude values in decimal degrees.
+#' @param latitude_2 A vector of latitude values in decimal degrees.
 #' @param unit The unit of the returned distance values. Can be metres or 
 #' kilometres. Metres is the default. 
 #' @param radius The radius of the Earth in kilometres. The default value is
@@ -42,25 +42,25 @@
 #' distance_by_haversine(51.753447, -1.254024, 51.558170, -0.688250, "km")
 #' 44.66257
 #' 
-#' # or because we are in a locle with a different distance unit, in miles
+#' # or because we are in a locale with a different distance unit, in miles
 #' distance_by_haversine(51.753447, -1.254024, 51.558170, -0.688250, "km") * 0.62
 #' 27.69079
 #' 
 #' 
 #' # Data frame usage
 #' # Distances of many air quality monitoring sites from the City of London
-#' data.air$distance <- distance_by_haversine(
-#'   data.air$latitude, data.air$longitude, 51.513468, -0.089133, "km")
+#' data_air$distance <- distance_by_haversine(
+#'   data_air$latitude, data_air$longitude, 51.513468, -0.089133, "km")
 #'   
 #' # Arrange by distance, closest at the top
-#' data.air <- plyr::arrange(data.air, distance)
+#' data_air <- plyr::arrange(data_air, distance)
 #' 
 #' }
 #' 
 #' @export
 #' 
 distance_by_haversine <- function (latitude, longitude, 
-                                   latitude.2, longitude.2, unit = "metres",
+                                   latitude_2, longitude_2, unit = "metres",
                                    radius = 6371) {
   # Switch units, a check
   unit <- switch(unit, 
@@ -68,13 +68,13 @@ distance_by_haversine <- function (latitude, longitude,
     "km" =, "kilometer" =, "kilometre" =, "kilometers" =, "kilometres" = "kilometres")
   
   # Get degree deltas for coordinate pairs
-  delta.longitude <- (longitude.2 - longitude) * pi / 180
-  delta.latitude <- (latitude.2 - latitude) * pi / 180
+  delta_longitude <- (longitude_2 - longitude) * pi / 180
+  delta_latitude <- (latitude_2 - latitude) * pi / 180
   
   # Use the haversine function
-  haversin <- sin(delta.latitude / 2) * sin(delta.latitude / 2) + 
-    cos(latitude * pi / 180) * cos(latitude.2 * pi / 180) * 
-    sin(delta.longitude / 2) * sin(delta.longitude / 2)
+  haversin <- sin(delta_latitude / 2) * sin(delta_latitude / 2) + 
+    cos(latitude * pi / 180) * cos(latitude_2 * pi / 180) * 
+    sin(delta_longitude / 2) * sin(delta_longitude / 2)
   
   # Calculate distance
   distance <- 2 * atan2(sqrt(haversin), sqrt(1 - haversin))

@@ -5,16 +5,16 @@
 \alias{sp_bind_many}
 \title{Functions to bind/combine spatial objects together.}
 \usage{
-sp_bind(sp, sp.2)
+sp_bind(sp, sp_2)
 
-sp_bind_many(sp.list, progress = TRUE)
+sp_bind_many(sp_list, progress = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object one.}
 
-\item{sp.2}{Spatial object two.}
+\item{sp_2}{Spatial object two.}
 
-\item{sp.list}{A list containing spatial two or more spatial objects.}
+\item{sp_list}{A list containing spatial two or more spatial objects.}
 
 \item{force}{Should the feature IDs be forced to change? This may be
 necessary when feature IDs are not sequential.}
@@ -40,11 +40,11 @@ This needs to be solved soon.
 \examples{
 \dontrun{
 # Two objects
-sp.london.two <- sp_bind(sp.croydon, sp.islington)
+sp_london_two <- sp_bind(sp_croydon, sp_islington)
 
 # Many objects, note the nested list
-sp.london.many <- sp_bind_many(list(sp.croydon, sp.islington, sp.bexley,
-  sp.brent))
+sp_london_many <- sp_bind_many(list(sp_croydon, sp_islington, sp_bexley,
+  sp_brent))
 }
 }
 \author{

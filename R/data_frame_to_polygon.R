@@ -14,7 +14,7 @@
 #' @examples
 #' \dontrun{
 #' # Convert a hand-drawn line from an online application to a polygon
-#' polygon <- data_frame_to_polygon(data.drawn.line, "latitude", "longitude")
+#' polygon <- data_frame_to_polygon(data_drawn_line, "latitude", "longitude")
 #' }
 #' 
 #' @export
@@ -31,14 +31,14 @@ data_frame_to_polygon <- function (df, latitude = "latitude",
   row.names(df) <- NULL
   
   # Get extras from input data frame
-  other.index <- which(names(df) %ni% c(latitude, longitude))
+  other_index <- which(names(df) %ni% c(latitude, longitude))
   # Only first row. Ok? 
-  data.extras <- df[other.index][1, ]
+  data_extras <- df[other_index][1, ]
   
   # A catch for when only group is present, i.e. there are no extra identifiers
   # in df. To-do: do this better. 
-  if (class(data.extras) == "numeric") {
-    data.extras <- data.frame(group = data.extras)
+  if (class(data_extras) == "numeric") {
+    data_extras <- data.frame(group = data_extras)
   }
   
   # Get coordinate list
@@ -53,15 +53,13 @@ data_frame_to_polygon <- function (df, latitude = "latitude",
   polygons <- sp::Polygons(polygons, 1)
   
   # Make sp class
-  projection.string <- "+proj=longlat +datum=WGS84"
-  polygons.sp <- sp::SpatialPolygons(
-    list(polygons), proj4string = sp::CRS(projection.string))
+  polygons_sp <- sp::SpatialPolygons(list(polygons))
   
   # Make sp dataframe
-  polygons.sp <- sp::SpatialPolygonsDataFrame(polygons.sp, data.extras)
+  polygons_sp <- sp::SpatialPolygonsDataFrame(polygons_sp, data_extras)
   
   # Return
-  polygons.sp
+  polygons_sp
   
 }
 
