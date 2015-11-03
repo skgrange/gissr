@@ -19,7 +19,6 @@
 #' }
 #' 
 #' @export
-#' 
 data_frame_to_line <- function (df, latitude = "latitude", 
                                 longitude = "longitude") {
   
@@ -54,7 +53,7 @@ data_frame_to_line <- function (df, latitude = "latitude",
   lines <- sp::SpatialLines(lines)
   
   # Force projection
-  sp::proj4string(lines) <- sp::CRS("+proj=longlat +datum=WGS84")
+  sp::proj4string(lines) <- sp::CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
   
   # Make SpatialLinesDataFrame
   lines <- sp::SpatialLinesDataFrame(lines, data_extras)

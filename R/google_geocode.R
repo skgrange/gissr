@@ -4,13 +4,11 @@
 #' The Google Maps API is not open-source, therefore check the licensing 
 #' conditions for usage conditions 
 #' (\url{https://developers.google.com/maps/terms}). Users of this function 
-#' must use the geocoded data to display on an Google Map. 
+#' must use the geocoded data to display on a Google Map. 
 #' 
 #' \code{google_geocode} is a wrapper for \code{ggmap::geocode} with some simple 
 #' enhancements to clean the output and avoid messages to the console. Other 
 #' address elements such as postcodes can also be transformed successfully. 
-#' 
-#' @import dplyr
 #'
 #' @param string The address string to transform to latitude and longitude pairs.
 #' @param source What API should \code{google_geocode} access? Options are 
@@ -27,8 +25,8 @@
 #' bath abbey bath abbey, bath, bath and north east somerset ba1 1lt, uk 51.38148 -2.358735
 #' }
 #'
+#' @import dplyr
 #' @export
-#'
 google_geocode <- function (input, source = "google", override_limit = TRUE) {
   
   # Catch factors
@@ -38,33 +36,14 @@ google_geocode <- function (input, source = "google", override_limit = TRUE) {
   
   # Geocode addresses
   df <- ggmap::geocode(input, source = source, output = "latlona")
-  
+
   # Rename and add input string
   df <- df %>% 
     mutate(input = input) %>% 
     select(input, 
-           address.geocode = address, 
+           address_geocode = address, 
            latitude = lat, 
            longitude = lon)
-  
-  
-  #   # Do not allow function to message the screen
-  #   suppressMessages(
-  #     # Do not warn about un-matchable string
-  #     suppressWarnings(
-  #       # Do not stop if string cannot be matched
-  #       x <- tryCatch(
-  #         # Get latitude and longitude as data frame
-  #         ggmap::geocode(string, output = "latlona", source = source,
-  #                        override_limit = override_limit),
-  #         error = function(e) data.frame(lon = NA, lat = NA, address = NA)
-  #       )
-  #     )
-  #   )
-  #   
-  #   # Create tidy data
-  #   df <- data.frame(string = string, address = x$address, latitude = x$lat, 
-  #                    longitude = x$lon)
   
   # Return
   df

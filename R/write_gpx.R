@@ -34,7 +34,6 @@
 #' }
 #'
 #' @export
-#' 
 write_gpx <- function (df, file, latitude = "latitude", longitude = "longitude", 
                        name = NA, layer = "points") {
   
@@ -67,7 +66,7 @@ write_gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
       sp_object <- df
       
       # Force projection, not ideal
-      sp::proj4string(sp_object) <- "+proj=longlat +datum=WGS84"
+      sp::proj4string(sp_object) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
       
       # For writeOGR
       layer_vector <- "points"
@@ -166,7 +165,11 @@ write_gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
   }
   
   # Export file
-  rgdal::writeOGR(sp_object, file, layer = layer_vector, driver = "GPX", 
-                  dataset_options = "GPX_USE_EXTENSIONS=yes")
+  # Warnings when projection is unkown, not really an issue for me
+  suppressWarnings(
+    rgdal::writeOGR(sp_object, file, layer = layer_vector, driver = "GPX", 
+                    dataset_options = "GPX_USE_EXTENSIONS=yes")
+  )
+  
   
 }

@@ -28,7 +28,7 @@
 #' @param round How many decimal points should the converted coordinates be
 #' rounded to? Default is 6. 
 #' 
-#' @seealso See \code{\link{spTransform}}
+#' @seealso See \code{\link{spTransform}}, \code{\link{sp_transform}}
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -46,9 +46,8 @@
 #' }
 #'
 #' @export
-#' 
 transform_coordinates <- function (df, x = "easting", y = "northing", from = "", 
-                                   to = "+proj=longlat +datum=WGS84", 
+                                   to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", 
                                    rename = TRUE, reorder = TRUE, round = 6) {
   
   # Check argument

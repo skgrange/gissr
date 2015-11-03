@@ -5,7 +5,6 @@
 #' @author Stuart K. Grange
 #' 
 #' @export
-#' 
 sp_projection <- function (sp) {
   string <- sp::proj4string(sp)
   string

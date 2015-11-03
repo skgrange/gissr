@@ -13,12 +13,11 @@
 #'
 #' }
 #' 
-#' @export
-#' 
+#' @export 
 write_geojson <- function (sp, file, pretty = TRUE) {
   
   # Make json string
-  json <- geojsonio::geojson_json(sp, pretty = pretty, null = "null")
+  json <- geojsonio::geojson_json(sp, pretty = pretty)
   
   # Write string to disk
   write(json, file)

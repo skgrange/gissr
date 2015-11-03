@@ -21,12 +21,11 @@
 #' envelope <- c(23.830562, 25.584393, 45.200111, 47.311495)
 #' 
 #' # Clip spatial lines
-#' sp.road.clip <- sp_clip(sp.roads, envelope)
+#' sp_road_clip <- sp_clip(sp_roads, envelope)
 #' 
 #' }
-#'   
-#' @export
 #' 
+#' @export
 sp_clip <- function (sp, envelope) {
   
   # Use rgeos to clip, faster, but will loose data slot
@@ -34,9 +33,9 @@ sp_clip <- function (sp, envelope) {
   # sp::proj4string(sp.envelope) <- sp::CRS(proj4string(sp))
   # sp.clip <- rgeos::gIntersection(sp, sp.envelope, byid = TRUE)
   
-  sp.clip <- raster::crop(sp, envelope)
+  sp <- raster::crop(sp, envelope)
   
   # Return
-  sp.clip
+  sp
   
 }

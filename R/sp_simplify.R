@@ -1,6 +1,6 @@
 #' Function to simplify spatial objects using the Douglas-Peuker algorithm. 
 #'
-#' Holes will appear between the geometries. 
+#' Holes will appear between the geometries at times. 
 #'
 #' @param sp Spatial object which is to be simplified.
 #' @param tolerance Tolerance value to be used by the Douglas-Peuker algorithm. 
@@ -15,10 +15,9 @@
 #' }
 #' 
 #' @export
-#'
 sp_simplify <- function (sp, tolerance, preserve = TRUE) {
   
-  # If a spatial data object is given, store the data piece of the object
+  # If a spatial data object is given, store the data slot
   if (grepl("data", class(sp), ignore.case = TRUE)) {
     df <- data.frame(sp)
   }

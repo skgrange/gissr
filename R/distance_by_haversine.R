@@ -58,7 +58,6 @@
 #' }
 #' 
 #' @export
-#' 
 distance_by_haversine <- function (latitude, longitude, 
                                    latitude_2, longitude_2, unit = "metres",
                                    radius = 6371) {

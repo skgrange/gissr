@@ -35,12 +35,11 @@
 #' }
 #'
 #' @export
-#'
 sp_bind <- function (sp, sp_2) {
   
   # Class check
   if (!class(sp) == class(sp_2)) {
-    stop("Spatial objects must be of the same type to be bound. ")
+    stop("Spatial objects must be of the same type to be bound.")
   }
   
   # Points can be easily bound with do.call
@@ -50,10 +49,9 @@ sp_bind <- function (sp, sp_2) {
     
     # For lines and polygons
   } else {
-    
     # Change ids, this is wasteful but robust
     # I have used logic to handle this, but at times the binding fails due to non-
-    # sequental ids
+    # sequential ids
     # First object
     sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
     
@@ -74,7 +72,6 @@ sp_bind <- function (sp, sp_2) {
 #' @rdname sp_bind
 #' 
 #' @export
-#'
 sp_bind_many <- function (sp_list, progress = TRUE) {
   
   # Class check
@@ -88,7 +85,6 @@ sp_bind_many <- function (sp_list, progress = TRUE) {
     sp_bind <- do.call("rbind", sp_list)
     
   } else {
-    
     # Set-up progress bar
     if (progress) {
       pb <- txtProgressBar(min = 0, max = length(sp_list), style = 3)
@@ -101,7 +97,6 @@ sp_bind_many <- function (sp_list, progress = TRUE) {
         sp_bind <- sp_bind(sp_list[[1]], sp_list[[2]])
         
       } else {
-        
         # Need to jump over the second element in sp_list for i = 2
         k <- i + 1
         
@@ -113,12 +108,11 @@ sp_bind_many <- function (sp_list, progress = TRUE) {
         }
         
       }
-      
       # Update progress bar
       if (progress) {
         setTxtProgressBar(pb, i)
       }
-      
+
     }
     
   }
@@ -131,7 +125,6 @@ sp_bind_many <- function (sp_list, progress = TRUE) {
 
 # Function to randomly sample n features in a spatial object. 
 #' @export
-#'
 sp_sample_n <- function (sp, n) {
   sp <- sp[sample(nrow(sp), n), ]
   sp
@@ -140,7 +133,6 @@ sp_sample_n <- function (sp, n) {
 
 # Function to get ids from spatial objects
 #' @export
-#' 
 sp_feature_ids <- function (sp) {
   
   # Polygons

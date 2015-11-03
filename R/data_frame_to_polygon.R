@@ -18,7 +18,6 @@
 #' }
 #' 
 #' @export
-#' 
 data_frame_to_polygon <- function (df, latitude = "latitude", 
                                    longitude = "longitude") {
   

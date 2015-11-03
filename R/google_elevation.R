@@ -4,7 +4,7 @@
 #' The Google Maps API is not open-source, therefore check the licensing 
 #' conditions for usage conditions 
 #' (\url{https://developers.google.com/maps/terms}). Users of this function 
-#' must use the elevation data to display on an Google Map. 
+#' must use the elevation data to display on a Google Map. 
 #'
 #' \code{google_elevation} returns a data frame with the latitude and longitude
 #' pairs, elevation estimate, and (horizontal) resolution of elevation estimate. 
@@ -20,7 +20,6 @@
 #' @author Stuart K. Grange
 #' 
 #' @export
-#' 
 google_elevation <- function (latitude, longitude, key) {
   
   # Build query with arguments

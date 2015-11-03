@@ -1,27 +1,29 @@
-#' Function for a point-in-polygon test. 
+#' Function for point-in-polygon tests. 
 #' 
 #' \code{left_join_spatial} tests if a point is within a polygon and joins 
-#' data from a spatial object (the data component of the spatial-polygon data
-#' frame) if the match is TRUE. This process is analogous to a SQL left join 
-#' with the match being a spatial intersection. 
+#' data from a spatial object (the data slot of the spatial-polygon data frame)
+#' if the match is \code{TRUE}. This process is analogous to a SQL left join but
+#' with a spatial object.
 #' 
 #' Points to be tested are generally stored in a data frame with latitude and 
-#' longitude pairs, while the polygons are stored in a spatial-polygon object. 
-#' The result is the input data frame with the joined data contained within the 
-#' spatial-polygon data frame. Observations which do not match are filled with
-#' \code{NA}.  
+#' longitude pairs (or any other projection system), while the polygons are 
+#' stored in a spatial-polygon object. The result is the input data frame, with
+#' the joined data contained within the spatial-polygon data frame. Observations
+#' which do not match are filled with \code{NA}. 
 #' 
-#' \code{sp::over} is used for the point-in-polygon test. 
+#' \code{sp::over} is used for the point-in-polygon test and the projection which
+#' is used for the data frame must be identical to that within the spatial object. 
 #' 
-#' @param df Data frame containing latitude and longitude variables. 
+#' @param df Data frame containing latitude and longitude (or other coordinate
+#' pair) variables. 
 #' @param latitude \code{df}'s latitude variable name.
 #' @param longitude \code{df}'s longitude variable name.
 #' @param projection \code{df}'s latitude and longitude projection system. 
 #' Default is WGS84.
 #' @param polygons A spatial-polygon data frame to be joined to \code{df}.
 #' 
-#' @seealso See \code{\link{spTransform}}, \code{\link{over}}, 
-#' \code{\link{merge}}, \code{\link{join}}
+#' @seealso See \code{\link{sp_transform}}, \code{\link{over}}, 
+#' \code{\link{merge}}
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -47,10 +49,9 @@
 #' }
 #' 
 #' @export
-#' 
 left_join_spatial <- function (df, latitude = "latitude", 
                                longitude = "longitude", 
-                               projection = "+proj=longlat +datum=WGS84", 
+                               projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", 
                                polygons = NA) {
   
   # Check the spatial object
@@ -70,7 +71,7 @@ left_join_spatial <- function (df, latitude = "latitude",
   sp_object <- df
   
   # Give the object a projection
-  proj4string(sp_object) <- projection
+  sp::proj4string(sp_object) <- projection
   
   # The point in polygon function
   df_match <- sp::over(sp_object, polygons, fn = NULL)

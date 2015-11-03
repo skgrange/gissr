@@ -2,16 +2,21 @@
 #' 
 #' \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the 
 #' same as the other file readers in R. Unlike \code{rgdal::readOGR},
-#' \code{sp_read} uses a single file-string which does not have to be expanded 
-#' and can handle shapefiles with or without specified extensions. 
+#' \code{sp_read} uses a single file-string which does not have to be expanded.
 #' 
-#' GPX files containing tracks, routes, or waypoints can be read with 
-#' \code{sp_read} as can GeoJSON files.
+#' \code{sp_read} can read: 
+#' \itemize{
+#'   \item Shapefiles with or without specified extensions. 
+#'   \item GPX files containing tracks, routes, or waypoints. 
+#'   \item GeoJSON files. 
+#'   \item Mapinfo TAB files with or without specified extensions. 
+#' }
 #' 
 #' @param file Spatial data file. 
 #' @param verbose Should information about the data be printed when being 
-#' loaded? Default is TRUE. 
+#' loaded? Default is \code{TRUE}. 
 #' @param tolower Should the names of the data slot be forced to be lower case? 
+#' Note that the default is \code{TRUE}.
 #'
 #' @author Stuart K. Grange
 #' 
@@ -30,10 +35,12 @@
 #' # Load GeoJSON file
 #' sp_thames_locks <- sp_read("thames_locks.json", verbose = FALSE)
 #' 
+#' # Load mapinfo file
+#' sp_coastline <- sp_read("nz-land-districts.map", verbose = FALSE)
+#' 
 #' }
 #' 
 #' @export
-#'
 sp_read <- function (file, verbose = TRUE, tolower = TRUE) {
   
   # Expand path
@@ -55,7 +62,7 @@ sp_read <- function (file, verbose = TRUE, tolower = TRUE) {
       layer <- "OGRGeoJSON"
     }
     
-  # Shape file handling
+  # Shape file and mapinfo handling
   } else {
     
     # Get layer which is file name
@@ -69,8 +76,8 @@ sp_read <- function (file, verbose = TRUE, tolower = TRUE) {
     
   }
   
-  # Load file with readOGR will work with shapefiles, geojson and GPX files with
-  # tracks
+  # Load file with readOGR will work with shapefiles, geojson, GPX files with
+  # tracks, and mapinfo files
   suppressWarnings(
     sp <- tryCatch(
       rgdal::readOGR(destination, layer, verbose), 

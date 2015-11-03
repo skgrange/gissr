@@ -24,15 +24,13 @@
 #' }
 #' 
 #' @export
-#'
 sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   
-  # 
+  # Catch dplyr's table data frame
   df <- threadr::base_df(df)
   
   # For vectors
   if (class(df) == "character") {
-    
     # Vector is input
     wkt_vector <- df
     
@@ -40,15 +38,13 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
     data <- FALSE
     
   } else {
-    
     # Get a vector of wkt from df
     wkt_vector <- df[, wkt]
     
   }
   
   # Store data
-  if (data) {
-    
+  if (data) {  
     df_data <- df
     df_data[, wkt] <- NULL
     
@@ -146,7 +142,6 @@ sp_list_bind <- function (sp_list) {
 # 
 #' @rdname sp_from_wkt
 #' @export
-#' 
 sp_to_wkt <- function (sp, features = TRUE) {
   string <- rgeos::writeWKT(sp, byid = features)
   string

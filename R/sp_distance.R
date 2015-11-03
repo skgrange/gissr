@@ -29,8 +29,8 @@
 #' @seealso \code{\link{gDistance}}, \code{\link{sp_transform}}, 
 #' \code{\link{mclapply}}
 #' 
-#' @param sp.1 Spatial object one. 
-#' @param sp.2 Spatial object two. 
+#' @param sp_1 Spatial object one. 
+#' @param sp_2 Spatial object two. 
 #' @param cores Number of cores for the function to use. Not available for 
 #' Windows systems. 
 #' @param unit If \code{"km"}, the returned vector is returned in kilometres 
@@ -40,33 +40,33 @@
 #' \dontrun{
 #' # Simple usage
 #' # Calculate the distances of places from the coastline
-#' distances <- sp_distance(sp.places, sp.coast.line, unit = "km")
+#' distances <- sp_distance(sp_places, sp_coast_line, unit = "km")
 #' 
 #' # Speed the function up by using multiple system cores
-#' distances <- sp_distance(sp.places, sp.coast.line, unit = "km", cores = 4)
+#' distances <- sp_distance(sp_places, sp_coast_line, unit = "km", cores = 4)
 #' 
 #' 
 #' # Usage for transforming a data frame
 #' # Load shapefiles
 #' # Coastline, spatial lines
-#' sp.coast.line <- sp_read("coastlines/coastlines")
+#' sp_coast_line <- sp_read("coastlines/coastlines")
 #' 
 #' # Places in the UK, spatial points
-#' sp.places <- sp_transform("great-britain/places")
+#' sp_places <- sp_transform("great-britain/places")
 #' 
-#' # Get a data frame from the sp.places object
-#' data.places <- data.frame(sp.places)
+#' # Get a data frame from the sp_places object
+#' data_places <- data.frame(sp_places)
 #' 
-#' # Find distances between every place in sp.places and sp.coast.line
+#' # Find distances between every place in sp_places and sp_coast_line
 #' # We are in the UK, therefore the British National Grid has been used as the
 #' # projection system
 #'
 #' # Apply parallel function and add variable to data frame
-#' data.places$distance <- sp_distance(sp.places, sp.coast.line, unit = "km", 
+#' data_places$distance <- sp_distance(sp_places, sp_coast_line, unit = "km", 
 #'                                     cores = 4)
 #'
 #' # Have a look
-#' head(data.places)
+#' head(data_places)
 #' 
 #' London 33.4
 #' Basingstoke 43.5
@@ -79,33 +79,32 @@
 #' }
 #' 
 #' @export
-#' 
-sp_distance <- function (sp.1, sp.2, cores = 1, unit = "m") {
+sp_distance <- function (sp_1, sp_2, cores = 1, unit = "m") {
   
   # Check the projection systems
-  if (!identical(sp_projection(sp.1), sp_projection(sp.2))) {
+  if (!identical(sp_projection(sp_1), sp_projection(sp_2))) {
     stop("The projection systems of the two spatial objects are not identical.")
   }
   
   # Transform projections to Mollweide projection/ESRI:54009 if projection systems
   # do not have metres for units
-  if (!grepl("+units=m", sp_projection(sp.1))) {
+  if (!grepl("+units=m", sp_projection(sp_1))) {
     
     # Projection string
     projection <- "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
     
     # Do the transforming
-    sp.1 <- sp_transform(sp.1, projection)
-    sp.2 <- sp_transform(sp.2, projection)
+    sp_1 <- sp_transform(sp_1, projection)
+    sp_2 <- sp_transform(sp_2, projection)
     
     # Give a message
     message("The projection systems have been transformed for calculation.")
     
     # Need to degrade spatial-data-frame to just spatial for rgeos::gDistance
-    if (grepl("data", class(sp.1), ignore.case = TRUE)) {
+    if (grepl("data", class(sp_1), ignore.case = TRUE)) {
       
       # Loss of projection so need to state it again
-      sp.1 <- sp::SpatialPoints(sp.1, sp::CRS(projection))
+      sp_1 <- sp::SpatialPoints(sp_1, sp::CRS(projection))
       
     }
     
@@ -113,24 +112,20 @@ sp_distance <- function (sp.1, sp.2, cores = 1, unit = "m") {
   
   # Do the test
   if (cores == 1) {
-    
-    # Use a vectorised loop 
     # Superscript notation is necessary
-    distance <- lapply(1:length(sp.1), function (x) 
-      rgeos::gDistance(sp.1[x], sp.2))
+    distance <- lapply(1:length(sp_1), function (x) 
+      rgeos::gDistance(sp_1[x], sp_2))
     
     # Make vector
     distance <- unlist(distance)
     
   } else {
-    
-    # Use a multi-threaded vectorised loop
     # Superscript notation is necessary
-    distance.list <- parallel::mclapply(1:length(sp.1), function (x) 
-      rgeos::gDistance(sp.1[x], sp.2), mc.cores = getOption("mc.cores", cores))
+    distance_list <- parallel::mclapply(1:length(sp_1), function (x) 
+      rgeos::gDistance(sp_1[x], sp_2), mc.cores = getOption("mc.cores", cores))
     
     # Make vector
-    distance <- unlist(distance.list)
+    distance <- unlist(distance_list)
     
   }
   

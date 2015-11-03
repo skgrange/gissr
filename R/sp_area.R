@@ -1,17 +1,17 @@
 #' Function to calculate areas of spatial polygons in metres-squared, 
 #' kilometres-squared, or hectares. 
 #' 
-#' If the spatial polygons are projected in a system with a metre unit,
+#' If the spatial-polygons are projected in a system with a metre unit,
 #' \code{rgeos::gArea} is used to calculate the area of the polygons. If the
 #' projection system is WGS84, a trigonometric function is used 
 #' (\code{geosphere::areaPolygon}). Although using a projection system with 
 #' metres yields the most accurate results, the \code{geosphere::areaPolygon} 
-#' function has been tested and performs very well. 
+#' function has been tested and performs well. 
 #' 
 #' @param sp Spatial-polygons object.
 #' @param unit Unit of returned area. Can be "m", "km", or "ha". Default is "m".
 #' @param features Should the individual areas of the features contained within
-#' \code{sp} be calculated? Default is TRUE. 
+#' \code{sp} be calculated? Default is \code{TRUE}.
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -19,12 +19,15 @@
 #' \dontrun{
 #' # Calculate the area of the Greater London Built-up area, sp is projected 
 #' in OSGB36, a metric projection system
-#' sp_area(sp.built.up.london, unit = "km")
+#'
+#' sp_area(sp_built_up_london, unit = "km")
 #' 1737.855
+#'
+#' # Wikipedia says the same
+#' # https://en.wikipedia.org/wiki/Greater_London_Built-up_Area
 #' }
 #' 
 #' @export
-#'
 sp_area <- function (sp, unit = "m", features = TRUE) {
   
   # Unit check
