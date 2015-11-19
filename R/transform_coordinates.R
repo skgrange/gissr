@@ -15,16 +15,23 @@
 #' WGS 84/EPSG:4326 (\code{+proj=longlat +datum=WGS84}).
 #' 
 #' @param df Data frame with coordinates to be transformed. 
+#' 
 #' @param x Name of \code{x} variable. 
+#' 
 #' @param y Name of \code{y} variable. 
+#' 
 #' @param from A proj4 string which represents what coordinate system the
 #' data frame \code{x} and \code{y} are in. 
+#' 
 #' @param to A proj4 string which represents what coordinate system the 
 #' converted coordinates will be converted to.
+#' 
 #' @param rename Should the converted coordinates be renamed to a generic 
 #' \code{x} and \code{y}?
+#' 
 #' @param reorder Should the converted coordinates be placed in the first two 
 #' columns of the returned data frame? 
+#' 
 #' @param round How many decimal points should the converted coordinates be
 #' rounded to? Default is 6. 
 #' 
@@ -68,7 +75,7 @@ transform_coordinates <- function (df, x = "easting", y = "northing", from = "",
   new_projection <- sp::CRS(to)
   
   # Do the projection conversion
-  df <- sp::spTransform(df, new_projection)
+  df <- sp_transform(df, new_projection)
   
   # Back to data frame
   df <- data.frame(df)

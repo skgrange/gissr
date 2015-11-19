@@ -17,9 +17,12 @@
 #' This needs to be solved soon. 
 #' 
 #' @param sp Spatial object one. 
+#' 
 #' @param sp_2 Spatial object two.
+#' 
 #' @param force Should the feature IDs be forced to change? This may be 
 #' necessary when feature IDs are not sequential.
+#' 
 #' @param sp_list A list containing spatial two or more spatial objects. 
 #'
 #' @author Stuart K. Grange

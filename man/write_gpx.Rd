@@ -21,6 +21,7 @@ write_gpx(df, file, latitude = "latitude", longitude = "longitude",
 of the GPX file. Optional.}
 
 \item{layer}{Type of layer to be written to GPX file. Can either be 
+
 \code{"points"} or \code{"lines"}. Default is \code{"points"}.}
 }
 \description{

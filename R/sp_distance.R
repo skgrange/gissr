@@ -30,9 +30,12 @@
 #' \code{\link{mclapply}}
 #' 
 #' @param sp_1 Spatial object one. 
+#' 
 #' @param sp_2 Spatial object two. 
+#' 
 #' @param cores Number of cores for the function to use. Not available for 
 #' Windows systems. 
+#' 
 #' @param unit If \code{"km"}, the returned vector is returned in kilometres 
 #' rather than metres. 
 #' 
@@ -94,8 +97,8 @@ sp_distance <- function (sp_1, sp_2, cores = 1, unit = "m") {
     projection <- "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
     
     # Do the transforming
-    sp_1 <- sp_transform(sp_1, projection)
-    sp_2 <- sp_transform(sp_2, projection)
+    sp_1 <- sp_transform(sp_1, projection, warn = FALSE)
+    sp_2 <- sp_transform(sp_2, projection, warn = FALSE)
     
     # Give a message
     message("The projection systems have been transformed for calculation.")

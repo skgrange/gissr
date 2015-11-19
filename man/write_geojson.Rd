@@ -2,9 +2,12 @@
 % Please edit documentation in R/write_geojson.R
 \name{write_geojson}
 \alias{write_geojson}
-\title{Function to write GeoJSON files with usage analogous to \code{write.table}.}
+\alias{write_geojson_js}
+\title{Functions to write GeoJSON files with usage analogous to \code{write.table}.}
 \usage{
 write_geojson(sp, file, pretty = TRUE)
+
+write_geojson_js(sp, file, name, pretty = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object to be written as GeoJSON file.}
@@ -12,14 +15,21 @@ write_geojson(sp, file, pretty = TRUE)
 \item{file}{File name of GeoJSON file.}
 
 \item{pretty}{Format the JSON for readability.}
+
+\item{name}{Name of JavaScript object (only used in \code{write_geojson_js}).}
 }
 \description{
-Function to write GeoJSON files with usage analogous to \code{write.table}.
+\code{write_geojson_js} is a simple extension which adds a \code{var} to the 
+GeoJSON string so leaflet and other JavaScript libraries can assign the 
+objects easily.
 }
 \examples{
 \dontrun{
 # Export spatial object as GeoJSON file
-write_geojson(sp_thames_locks, "thames_locks.json")
+write_geojson(sp_thames_locks, "thames_locks.json", pretty = TRUE)
+
+# Export spatial object as GeoJSON file ready for leaflet
+write_geojson(sp_thames_locks, "thames_locks.js", name = "data_locks")
 
 }
 

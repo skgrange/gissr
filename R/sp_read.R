@@ -13,8 +13,10 @@
 #' }
 #' 
 #' @param file Spatial data file. 
+#' 
 #' @param verbose Should information about the data be printed when being 
 #' loaded? Default is \code{TRUE}. 
+#' 
 #' @param tolower Should the names of the data slot be forced to be lower case? 
 #' Note that the default is \code{TRUE}.
 #'

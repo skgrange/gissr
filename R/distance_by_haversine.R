@@ -16,11 +16,16 @@
 #' \code{\link{sp_distance}}.
 #' 
 #' @param longitude A vector of longitude values in decimal degrees.
+#' 
 #' @param latitude A vector of latitude values in decimal degrees.
+#' 
 #' @param longitude_2 A vector of longitude values in decimal degrees.
+#' 
 #' @param latitude_2 A vector of latitude values in decimal degrees.
+#' 
 #' @param unit The unit of the returned distance values. Can be metres or 
 #' kilometres. Metres is the default. 
+#' 
 #' @param radius The radius of the Earth in kilometres. The default value is
 #' 6371, but I have seen versions of similar functions which use slightly
 #' different values (plus or minus two or three kilometres) so this value can

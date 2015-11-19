@@ -5,13 +5,16 @@
 \title{Convenience function to transform a spatial object's projection system to 
 WGS84 latitude and longitude.}
 \usage{
-sp_transform(sp, to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+sp_transform(sp, to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+  warn = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object which is to be transformed.}
 
 \item{to}{A proj4 string for the projection-transformation. Default is the 
 WGS84 string.}
+
+\item{warn}{Should the functions raise a warning when the projection is forced?}
 }
 \description{
 \code{sp_transform} is a simple wrapper for \code{sp::spTransform} which has 
@@ -24,6 +27,7 @@ when the spatial object contains no projection information.
 # Load a shape file of canal locks for the UK
 sp_locks <- readOGR("uk-canals", "locks")
 
+# Print projection string
 sp_projection(sp_locks)
 "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +datum=OSGB36 +units=m +no_defs +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894"
 
@@ -31,6 +35,7 @@ sp_projection(sp_locks)
 to WGS84 latitude and longitude
 sp_locks <- sp_transform(sp_locks)
 
+# Print projection string
 sp_projection(sp_locks)
 "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 }

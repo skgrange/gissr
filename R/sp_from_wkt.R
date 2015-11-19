@@ -98,9 +98,8 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   
   # Add projection
   if (!is.na(projection)) {
-    suppressMessages(
-      sp <- sp_transform(sp, projection)
-    )
+    sp <- sp_transform(sp, projection, warn = FALSE)
+  
   }
   
   # Return 

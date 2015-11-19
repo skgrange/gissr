@@ -12,12 +12,18 @@
 #' ojects in a robust way. 
 #' 
 #' @param df Data frame to be written to a GPX file.
+#' 
 #' @param file File name of GPX file.
+#' 
 #' @param latitude \code{df}'s latitude variable name.
+#' 
 #' @param longitude \code{df}'s longitude variable name.
+#' 
 #' @param name Name of variable which will be added in the \code{"name"} element
 #' of the GPX file. Optional. 
+#' 
 #' @param layer Type of layer to be written to GPX file. Can either be 
+#' 
 #' \code{"points"} or \code{"lines"}. Default is \code{"points"}. 
 #'   
 #' @author Stuart K. Grange
@@ -115,10 +121,6 @@ write_gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
     sp_object <- df
     
     if (!is.na(name)) {
-      
-#       if (length(names(sp_object@data)) == 1) {
-#         sp_object@data[, name] <- NA
-#       }
       
       # Extract vector for gpx name
       name_vector <- sp_object@data[, name]

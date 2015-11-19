@@ -7,8 +7,11 @@
 #' when the spatial object contains no projection information. 
 #' 
 #' @param sp Spatial object which is to be transformed.
+#' 
 #' @param to A proj4 string for the projection-transformation. Default is the 
 #' WGS84 string. 
+#' 
+#' @param warn Should the functions raise a warning when the projection is forced?
 #' 
 #' @seealso \code{\link{spTransform}}, \code{\link{sp_projection}}
 #' 
@@ -19,6 +22,7 @@
 #' # Load a shape file of canal locks for the UK
 #' sp_locks <- readOGR("uk-canals", "locks")
 #' 
+#' # Print projection string
 #' sp_projection(sp_locks)
 #' "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +datum=OSGB36 +units=m +no_defs +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894"
 #' 
@@ -26,6 +30,7 @@
 #' to WGS84 latitude and longitude
 #' sp_locks <- sp_transform(sp_locks)
 #' 
+#' # Print projection string
 #' sp_projection(sp_locks)
 #' "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 #' }
@@ -33,21 +38,27 @@
 #' @import sp
 #' 
 #' @export
-sp_transform <- function (sp, to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") {
+sp_transform <- function (sp, to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+                          warn = TRUE) {
   
   # Switch
   to <- ifelse(to %in% c("bng", "ogb", "osgb36"), "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs", to)
   to <- ifelse(to %in% c("nztm"), "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs", to)
   
+  # If no projection
   if (is.na(sp::proj4string(sp))) {
-  
-    # If no projection, give projection and message
-    message("Spatial object had no projection. The projection has been forced.")
+    # Warn
+    if (warn) {
+      warning("Spatial object had no projection. The projection has been forced.",
+              call. = FALSE)
+      
+    }
+    
+    # Now force
     sp::proj4string(sp) <- to
     
   } else {
-  
-    # Otherwise convert projection system to WGS84
+    # Otherwise convert projection system
     sp <- sp::spTransform(sp, sp::CRS(to))
     
   }

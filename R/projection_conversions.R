@@ -16,9 +16,7 @@ wgs84_to_osgb36 <- function (y, x) {
   sp <- SpatialPoints(point)
   
   # Force sp projection to wgs84
-  suppressMessages(
-    sp <- sp_transform(sp)
-  )
+  sp <- sp_transform(sp, warn = FALSE)
   
   # Do the conversion to osgb36
   sp_transformed <- sp_transform(sp, "bng")
@@ -46,9 +44,7 @@ osgb36_to_wgs84 <- function (x, y) {
   sp <- SpatialPoints(point)
   
   # Force sp projection to osgb36
-  suppressMessages(
-    sp <- sp_transform(sp, "bng")
-  )
+  sp <- sp_transform(sp, "bng", warn = FALSE)
   
   # Do the conversion to wgs84
   sp_transformed <- sp_transform(sp)
