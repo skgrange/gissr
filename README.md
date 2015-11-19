@@ -36,7 +36,7 @@ However, the challenges I have with using R as a GIS include: keeping track of t
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - Transform addresses/postcodes/other location strings to latitude and longitude pairs with `google_geocode`.
   - Export spatial objects and data frames to GPX or GeoJSON files with `write_gpx` and `write_geojson`. 
-  - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of (`cleangeo::clgeo_Clean`)[https://github.com/eblondel/cleangeo]. This function is a good piece of work so make sure you have a look at the **cleangeo** package.
+  - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
   
 ## Fancy functions
 
