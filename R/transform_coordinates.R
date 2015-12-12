@@ -70,12 +70,9 @@ transform_coordinates <- function (df, x = "easting", y = "northing", from = "",
   
   # Give input a projection
   sp::proj4string(df) <- from
-  
-  # Convert coordinate system
-  new_projection <- sp::CRS(to)
-  
+
   # Do the projection conversion
-  df <- sp_transform(df, new_projection)
+  df <- sp_transform(df, to)
   
   # Back to data frame
   df <- data.frame(df)
@@ -109,3 +106,7 @@ transform_coordinates <- function (df, x = "easting", y = "northing", from = "",
   df
   
 }
+
+# Define custom function
+`%ni%` <- Negate(`%in%`)
+

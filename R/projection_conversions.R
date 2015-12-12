@@ -49,8 +49,6 @@ osgb36_to_wgs84 <- function (x, y) {
   # Do the conversion to wgs84
   sp_transformed <- sp_transform(sp)
   
-  # Extract
-  
   # Extract coordinates from spatial object
   coordinates <- sp_transformed@coords
   
@@ -148,5 +146,63 @@ os_grid_to_osgb36 <- function (grid_reference) {
   
   # Return
   df
+  
+}
+
+
+#' @rdname wgs84_to_osgb36
+#' @export
+nztm_to_wgs84 <- function (x, y) {
+  
+  # Make a matrix
+  # Order: x, y
+  point <- cbind(x, y)
+  
+  # Spatial points
+  sp <- SpatialPoints(point)
+  
+  # Force sp projection to nztm
+  sp <- sp_transform(sp, "nztm", warn = FALSE)
+  
+  # Do the conversion to wgs84
+  sp_transformed <- sp_transform(sp)
+  
+  # Extract coordinates from spatial object
+  coordinates <- sp_transformed@coords
+  
+  # Order is different for lat and longs
+  coordinates <- data.frame(latitude = coordinates[, 2], longitude = coordinates[, 1])
+  row.names(coordinates) <- NULL
+  
+  # Return
+  coordinates
+  
+}
+
+
+#' @rdname wgs84_to_osgb36
+#' @export
+wgs84_to_nztm <- function (y, x) {
+  
+  # Make a matrix
+  # Order: x, y
+  point <- cbind(x, y)
+  
+  # Spatial points
+  sp <- SpatialPoints(point)
+  
+  # Force sp projection to wgs84
+  sp <- sp_transform(sp, warn = FALSE)
+  
+  # Do the conversion to osgb36
+  sp_transformed <- sp_transform(sp, "nztm")
+  
+  # Extract coordinates from spatial object
+  coordinates <- sp_transformed@coords
+  coordinates <- data.frame(x = coordinates[, 1], y = coordinates[, 2])
+  row.names(coordinates) <- NULL
+  
+  # Return
+  coordinates
   
 }

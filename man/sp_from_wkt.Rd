@@ -5,7 +5,8 @@
 \alias{sp_to_wkt}
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
-sp_from_wkt(df, wkt = "geom", data = FALSE, projection = NA)
+sp_from_wkt(df, wkt = "geom", data = FALSE, projection = NA,
+  verbose = FALSE)
 
 sp_to_wkt(sp, features = TRUE)
 }
@@ -13,24 +14,24 @@ sp_to_wkt(sp, features = TRUE)
 \item{df}{Data frame containing a WKT string variable. \code{df} can also be
 a vector of WKT strings.}
 
-\item{wkt}{Variable name of WKT strings in \code{df}.}
+\item{wkt}{Variable name of WKT strings in \code{df}. Default is \code{"geom"}.}
 
 \item{data}{Should all variables other than \code{wkt} be added to the
-spatial object's data-slot? I.e. create a spatial-data frame.}
+spatial object's data-slot? I.e. create a spatial data frame.}
 }
 \description{
 \code{sp_from_wkt} creates spatial objects from WKT strings and can create
-spatial-data frames from the other variables contained within the data frame. 
-\code{sp_from_wkt} is useful after querying a PostGIS database.
+spatial data frames from the other variables contained within the input data 
+frame. \code{sp_from_wkt} is useful after querying a PostGIS database for 
+geometries in WKT format.
 }
 \examples{
 \dontrun{
-
 # Make a spatial object from many wkt strings
-sp.from.wkt <- sp_from_wkt(data.wkt, wkt = "geom")
+sp_wkt <- sp_from_wkt(data_wkt, wkt = "geom")
 
 # Make a spatial-data frame object from many wkt strings
-sp.data.from.wkt <- sp_from_wkt(data.wkt, wkt = "geom", data = TRUE)
+sp_wkt_with_data <- sp_from_wkt(data_wkt, wkt = "geom", data = TRUE)
 
 }
 

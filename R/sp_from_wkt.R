@@ -1,30 +1,33 @@
 #' Function to parse a data frame containing WKT strings to a spatial object. 
 #' 
 #' \code{sp_from_wkt} creates spatial objects from WKT strings and can create
-#' spatial-data frames from the other variables contained within the data frame. 
-#' \code{sp_from_wkt} is useful after querying a PostGIS database. 
+#' spatial data frames from the other variables contained within the input data 
+#' frame. \code{sp_from_wkt} is useful after querying a PostGIS database for 
+#' geometries in WKT format. 
 #' 
 #' @param df Data frame containing a WKT string variable. \code{df} can also be
 #' a vector of WKT strings. 
-#' @param wkt Variable name of WKT strings in \code{df}. 
+#' 
+#' @param wkt Variable name of WKT strings in \code{df}. Default is \code{"geom"}.
+#' 
 #' @param data Should all variables other than \code{wkt} be added to the
-#' spatial object's data-slot? I.e. create a spatial-data frame.
+#' spatial object's data-slot? I.e. create a spatial data frame.
 #'
 #' @author Stuart K. Grange
 #' 
 #' @examples 
 #' \dontrun{
-#' 
 #' # Make a spatial object from many wkt strings
-#' sp.from.wkt <- sp_from_wkt(data.wkt, wkt = "geom")
+#' sp_wkt <- sp_from_wkt(data_wkt, wkt = "geom")
 #' 
 #' # Make a spatial-data frame object from many wkt strings
-#' sp.data.from.wkt <- sp_from_wkt(data.wkt, wkt = "geom", data = TRUE)
+#' sp_wkt_with_data <- sp_from_wkt(data_wkt, wkt = "geom", data = TRUE)
 #' 
 #' }
 #' 
 #' @export
-sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
+sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA, 
+                         verbose = FALSE) {
   
   # Catch dplyr's table data frame
   df <- threadr::base_df(df)
@@ -49,13 +52,24 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
     df_data[, wkt] <- NULL
     
     # Overwrite row names
-    row.names(df_data) <- seq_len(nrow(df_data))
+    row.names(df_data) <- NULL
     
   }
   
   # Parse WKT strings
-  message("Parsing WKT strings...")
-  sp_list <- pbapply::pblapply(wkt_vector, rgeos::readWKT)
+  if (verbose) {
+    message("Parsing WKT strings...")
+    # Warning catch is for geoms with negative areas. Why does this occur? 
+    suppressWarnings(
+      sp_list <- pbapply::pblapply(wkt_vector, rgeos::readWKT)
+    )
+    
+  } else {
+    suppressWarnings(
+      sp_list <- lapply(wkt_vector, rgeos::readWKT)
+    )
+    
+  }
   
   # If the wkt strings are just points, a different rename method is needed
   if (class(sp_list[[1]])[1] == "SpatialPoints") {
@@ -66,7 +80,10 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
     # Bind all features
     sp <- sp_list_bind(sp_list)
     
-    # Promote to sp
+    # Alter row names in matrix
+    row.names(sp) <- NULL
+    
+    # Promote matrix to sp
     sp <- sp::SpatialPoints(sp)
     
     # Add row names, will be the same as data if matched later
@@ -75,15 +92,20 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   } else {
     
     # Rename feature ids within list
-    message("Binding all spatial features together...")
-    sp_list <- sp_rename(sp_list)
+    if (verbose) {
+      message("Binding all spatial features together...")
+    }
     
+    # Reset feature ids
+    # sp_list <- sp_rename(sp_list)
+    sp_list <- sp_reset_feature_ids(sp_list)
+
     # Bind all objects in list
     sp <- sp_list_bind(sp_list)
     
   }
 
-  # Add data
+  # Add data slots
   if (data & grepl("polygon", class(sp), ignore.case = TRUE)) {
     sp <- sp::SpatialPolygonsDataFrame(sp, data = df_data)
   }
@@ -103,22 +125,6 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA) {
   }
   
   # Return 
-  sp
-  
-}
-
-
-# Rename sp features within a list
-sp_rename <- function (sp) {
-  
-  # Create an id vector
-  id_vector <- seq_along(sp)
-  id_vector <- as.character(id_vector)
-  
-  # Rename all elements in list
-  sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id_vector[x]))
-  
-  # Return
   sp
   
 }
@@ -145,3 +151,19 @@ sp_to_wkt <- function (sp, features = TRUE) {
   string <- rgeos::writeWKT(sp, byid = features)
   string
 }
+
+
+# # Rename sp features within a list
+# sp_rename <- function (sp) {
+#   
+#   # Create an id vector
+#   id_vector <- seq_along(sp)
+#   id_vector <- as.character(id_vector)
+#   
+#   # Rename all elements in list
+#   sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id_vector[x]))
+#   
+#   # Return
+#   sp
+#   
+# }
