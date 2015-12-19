@@ -107,7 +107,7 @@ sp_read <- function (file, verbose = TRUE, tolower = TRUE) {
   # Message
   suppressWarnings(
     if (is.na(sp)) {
-      stop("No spatial data can be found.")
+      stop("No spatial data can be found.", call. = FALSE)
     }
   )
   

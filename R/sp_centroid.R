@@ -7,9 +7,4 @@
 #' calculated? Default is TRUE. 
 #'
 #' @export
-sp_centroid <- function (sp, features = TRUE) {
-  
-  sp_centre <- rgeos::gCentroid(sp, byid = features)
-  sp_centre
-  
-}
+sp_centroid <- function (sp, features = TRUE) rgeos::gCentroid(sp, byid = features)

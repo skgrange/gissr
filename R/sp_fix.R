@@ -14,12 +14,4 @@
 #' }
 #' 
 #' @export
-sp_fix <- function (sp, print = TRUE) {
-  
-  # Fix polygons
-  sp <- cleangeo::clgeo_Clean(sp, print.log = print)
-  
-  # Return
-  sp
-  
-}
+sp_fix <- function (sp, print = TRUE) cleangeo::clgeo_Clean(sp, print.log = print)

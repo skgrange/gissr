@@ -7,12 +7,4 @@
 #' @author Stuart K. Grange
 #'
 #' @export
-sp_dissolve_polygons <- function (sp, feature = NULL) {
-  
-  # Create a single sp object
-  sp <- rgeos::gUnaryUnion(sp, id = feature)
-  
-  # Return
-  sp
-  
-}
+sp_dissolve_polygons <- function (sp, feature = NULL) rgeos::gUnaryUnion(sp, id = feature)

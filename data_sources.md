@@ -34,3 +34,6 @@
  
   - <http://www.gpsvisualizer.com/>
   - <http://spatialreference.org/>
+  - <http://oscarperpinan.github.io/rastervis/FAQ.html>
+  - <https://pakillo.github.io/R-GIS-tutorial/>
+  - <http://rpsychologist.com/working-with-shapefiles-projections-and-world-maps-in-ggplot>

@@ -217,3 +217,4 @@ data_frame_to_polygon <- function (df, latitude = "latitude",
 
 # Define the negative %in% function
 `%ni%` <- Negate(`%in%`)
+

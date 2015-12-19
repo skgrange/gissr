@@ -34,9 +34,9 @@
 get_sunrise <- function (latitude, longitude, start = NA, end = NA, json = FALSE) {
   
   # Make spatial points, assumes latitude and longitude
-  sp <- gissr::data_frame_to_points(data.frame(latitude, longitude))
+  sp <- data_frame_to_points(data.frame(latitude, longitude))
   
-  # Parse dates
+  # Catch dates
   if (is.na(start)) {
     start <- Sys.Date()
   }
@@ -49,7 +49,7 @@ get_sunrise <- function (latitude, longitude, start = NA, end = NA, json = FALSE
   start <- lubridate::ymd(start)
   end <- lubridate::ymd(end)
   
-  # Catch
+  # Catch again
   if (start > end) {
     end <- start
   }
@@ -131,3 +131,4 @@ parse_date_arguments <- function (date, what) {
   date
   
 }
+
