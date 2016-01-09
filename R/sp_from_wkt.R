@@ -12,6 +12,15 @@
 #' 
 #' @param data Should all variables other than \code{wkt} be added to the
 #' spatial object's data-slot? I.e. create a spatial data frame.
+#' 
+#' @param projection A proj4 string to force the projection system after the WKT
+#' strings have been parsed. Default is \code{NA}. 
+#' 
+#' @param verbose Should the function give messages? Useful when large number of
+#' WKT strings are to be parsed. Default is \code{FALSE}. 
+#' 
+#' @param reset Should the feature IDs be reset before binding? Default is 
+#' \code{TRUE} but may need to be altered for polygons. 
 #'
 #' @author Stuart K. Grange
 #' 
@@ -27,7 +36,7 @@
 #' 
 #' @export
 sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA, 
-                         verbose = FALSE) {
+                         verbose = FALSE, reset = TRUE) {
   
   # Catch dplyr's table data frame
   df <- threadr::base_df(df)
@@ -47,7 +56,8 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
   }
   
   # Store data
-  if (data) {  
+  if (data) {
+    # Store
     df_data <- df
     df_data[, wkt] <- NULL
     
@@ -97,8 +107,11 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
     }
     
     # Reset feature ids
-    # sp_list <- sp_rename(sp_list)
-    sp_list <- sp_reset_feature_ids(sp_list)
+    if (reset) {
+      # sp_list <- sp_rename(sp_list)
+      sp_list <- sp_reset_feature_ids(sp_list)
+      
+    }
 
     # Bind all objects in list
     sp <- sp_list_bind(sp_list)

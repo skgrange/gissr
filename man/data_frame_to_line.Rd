@@ -2,12 +2,10 @@
 % Please edit documentation in R/data_frame_to_spatial.R
 \name{data_frame_to_line}
 \alias{data_frame_to_line}
-\alias{data_frame_to_polygons}
 \title{Function for converting a data frame into a spatial-lines data frame.}
 \usage{
 data_frame_to_line(df, latitude = "latitude", longitude = "longitude",
-  projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-  force = TRUE)
+  projection = "+proj=longlat +datum=WGS84 +no_defs", id = NA)
 }
 \arguments{
 \item{df}{Data frame to be converted into SpatialLinesDataFrame.}
@@ -19,9 +17,7 @@ data_frame_to_line(df, latitude = "latitude", longitude = "longitude",
 \item{projection}{\code{df}'s latitude and longitude projection system. 
 Default is WGS84.}
 
-\item{force}{Force all lines to have the same id? This is needed to keep data
-and lines within the same unit and therefore allow for correct binding. 
-Default is \code{TRUE}.}
+\item{id}{What variable in \code{df} should be used to create separate line}
 }
 \description{
 \code{data_frame_to_line} returns a SpatialLinesDataFrame with a single line 

@@ -26,7 +26,7 @@
 #' @export
 data_frame_to_points <- function (df, latitude = "latitude", 
                                   longitude = "longitude", 
-                                  projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") {
+                                  projection = "+proj=longlat +datum=WGS84 +no_defs") {
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
@@ -35,13 +35,13 @@ data_frame_to_points <- function (df, latitude = "latitude",
   sp::coordinates(df) <- c(longitude, latitude)
   
   # Reassign
-  sp_object <- df
+  sp <- df
   
   # Give the object a projection
-  sp_object <- sp_transform(sp_object, projection, warn = FALSE)
+  sp <- sp_transform(sp, projection, warn = FALSE)
   
   # Return
-  sp_object
+  sp
   
 }
 
@@ -65,11 +65,8 @@ data_frame_to_points <- function (df, latitude = "latitude",
 #' @param projection \code{df}'s latitude and longitude projection system. 
 #' Default is WGS84.
 #' 
-#' @param force Force all lines to have the same id? This is needed to keep data
-#' and lines within the same unit and therefore allow for correct binding. 
-#' Default is \code{TRUE}.
-#' 
-#' @aliases data_frame_to_polygons
+#' @param id What variable in \code{df} should be used to create separate line 
+# features? If \code{id} is not used, a single feature will be created. 
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -81,19 +78,25 @@ data_frame_to_points <- function (df, latitude = "latitude",
 #' @export
 data_frame_to_line <- function (df, latitude = "latitude", 
                                 longitude = "longitude", 
-                                projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", 
-                                force = TRUE) {
+                                projection = "+proj=longlat +datum=WGS84 +no_defs", 
+                                id = NA) {
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
   
   # Make an identifier variable for lines
-  if (force) {
+  if (is.na(id)) {
+    # Single line object, no grouping
     df[, "id"] <- 1
+    
+  } else {
+    # Use input variable
+    df[, "id"] <- df[, id]
+    
   }
   
   # Get data part for the SpatialLinesDataFrame
-  data_extras <- data.frame(id = unique(df[, "id"]))
+  data_extras <- dplyr::distinct(df, id)
   
   # Make sp points object
   sp::coordinates(df) <- c(longitude, latitude)
@@ -106,19 +109,24 @@ data_frame_to_line <- function (df, latitude = "latitude",
   # to-spatiallinesdataframe-in-r
   # Generate lines for each id
   lines <- lapply(split(sp_object, sp_object$id), 
-                  function(x) sp::Lines(list(sp::Line(sp::coordinates(x))), x$id[1L]))
+    function(x) sp::Lines(list(sp::Line(sp::coordinates(x))), x$id[1L]))
+  
+  if (!is.na(id)) {
+    # Drop
+    data_extras[, "id"] <- NULL
+  }
   
   # Create SpatialLines
-  lines <- sp::SpatialLines(lines)
+  sp <- sp::SpatialLines(lines)
   
   # Give projection
-  lines <- sp_transform(lines, projection, warn = FALSE)
+  sp <- sp_transform(sp, projection, warn = FALSE)
   
   # Make SpatialLinesDataFrame
-  lines <- sp::SpatialLinesDataFrame(lines, data_extras)
+  sp <- sp::SpatialLinesDataFrame(sp, data_extras, match.ID = FALSE)
   
   # Return
-  lines
+  sp
   
 }
 
@@ -165,7 +173,7 @@ data_frame_to_line <- function (df, latitude = "latitude",
 #' @export
 data_frame_to_polygon <- function (df, latitude = "latitude", 
                                    longitude = "longitude", 
-                                   projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+                                   projection = "+proj=longlat +datum=WGS84 +no_defs",
                                    force = TRUE) {
   
   # Catch for dplyr's data frame class
@@ -217,4 +225,3 @@ data_frame_to_polygon <- function (df, latitude = "latitude",
 
 # Define the negative %in% function
 `%ni%` <- Negate(`%in%`)
-

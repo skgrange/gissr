@@ -5,8 +5,7 @@
 \title{Convenience function to transform a spatial object's projection system to 
 WGS84 latitude and longitude.}
 \usage{
-sp_transform(sp, to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-  warn = TRUE)
+sp_transform(sp, to = "+proj=longlat +datum=WGS84 +no_defs", warn = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object which is to be transformed.}

@@ -6,8 +6,7 @@
 \title{Function for converting a data frame to spatial-polygon data frame.}
 \usage{
 data_frame_to_polygon(df, latitude = "latitude", longitude = "longitude",
-  projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-  force = TRUE)
+  projection = "+proj=longlat +datum=WGS84 +no_defs", force = TRUE)
 }
 \arguments{
 \item{df}{Data frame to be converted into SpatialPolygonsDataFrame.}

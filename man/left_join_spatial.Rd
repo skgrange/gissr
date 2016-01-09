@@ -5,8 +5,7 @@
 \title{Function for point-in-polygon tests.}
 \usage{
 left_join_spatial(df, latitude = "latitude", longitude = "longitude",
-  projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-  polygons = NA)
+  projection = "+proj=longlat +datum=WGS84 +no_defs", polygons = NA)
 }
 \arguments{
 \item{df}{Data frame containing latitude and longitude (or other coordinate

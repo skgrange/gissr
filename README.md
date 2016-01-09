@@ -41,7 +41,6 @@ However, the challenges I have with using R as a GIS include: keeping track of t
 ## Fancy functions
 
   - Point-in-polygon tests with `left_join_spatial`.
-  - Extract values from a raster layer with `left_join_raster`
   - Calculate distances between spatial objects with `sp_distance`.
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
   - Simplify spatial objects with `sp_simplify`.

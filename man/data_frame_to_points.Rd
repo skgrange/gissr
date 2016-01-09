@@ -5,7 +5,7 @@
 \title{Function for converting a data frame into a spatial-points data frame.}
 \usage{
 data_frame_to_points(df, latitude = "latitude", longitude = "longitude",
-  projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs")
+  projection = "+proj=longlat +datum=WGS84 +no_defs")
 }
 \arguments{
 \item{df}{Data frame to be converted into SpatialPointsDataFrame.}

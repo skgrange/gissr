@@ -9,7 +9,9 @@
 #' function has been tested and performs well. 
 #' 
 #' @param sp Spatial-polygons object.
+#' 
 #' @param unit Unit of returned area. Can be "m", "km", or "ha". Default is "m".
+#' 
 #' @param features Should the individual areas of the features contained within
 #' \code{sp} be calculated? Default is \code{TRUE}.
 #' 
@@ -37,7 +39,8 @@ sp_area <- function (sp, unit = "m", features = TRUE) {
   
   # Use a trigonometric function for latitude and longitude pairs
   if (sp_projection(sp) %in% 
-      c("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0", 
+      c("+proj=longlat +datum=WGS84 +no_defs", 
+        "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0", 
         "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")) {
     
     # Calculate area

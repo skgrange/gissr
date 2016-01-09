@@ -38,7 +38,7 @@
 #' @import sp
 #' 
 #' @export
-sp_transform <- function (sp, to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+sp_transform <- function (sp, to = "+proj=longlat +datum=WGS84 +no_defs",
                           warn = TRUE) {
   
   # Switch

@@ -6,7 +6,7 @@
 within a data frame.}
 \usage{
 left_join_raster(df, latitude = "latitude", longitude = "longitude",
-  projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", raster,
+  projection = "+proj=longlat +datum=WGS84 +no_defs", raster,
   name = "raster_value")
 }
 \arguments{
@@ -46,7 +46,9 @@ aggregation functions are used either.
 \examples{
 \dontrun{
 # Get ozone concentrations from a raster object
-data_select <- left_join_raster(data_select, raster = raster_ozone, name = "ozone")
+data_select <- left_join_raster(data_select, raster = raster_ozone, 
+                                name = "ozone")
+
 }
 
 }

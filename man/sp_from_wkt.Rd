@@ -6,7 +6,7 @@
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
 sp_from_wkt(df, wkt = "geom", data = FALSE, projection = NA,
-  verbose = FALSE)
+  verbose = FALSE, reset = TRUE)
 
 sp_to_wkt(sp, features = TRUE)
 }
@@ -18,6 +18,15 @@ a vector of WKT strings.}
 
 \item{data}{Should all variables other than \code{wkt} be added to the
 spatial object's data-slot? I.e. create a spatial data frame.}
+
+\item{projection}{A proj4 string to force the projection system after the WKT
+strings have been parsed. Default is \code{NA}.}
+
+\item{verbose}{Should the function give messages? Useful when large number of
+WKT strings are to be parsed. Default is \code{FALSE}.}
+
+\item{reset}{Should the feature IDs be reset before binding? Default is 
+\code{TRUE} but may need to be altered for polygons.}
 }
 \description{
 \code{sp_from_wkt} creates spatial objects from WKT strings and can create

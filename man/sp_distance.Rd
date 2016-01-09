@@ -59,10 +59,10 @@ distances <- sp_distance(sp_places, sp_coast_line, unit = "km", cores = 4)
 sp_coast_line <- sp_read("coastlines/coastlines")
 
 # Places in the UK, spatial points
-sp_places <- sp_transform("great-britain/places")
+sp_places <- sp_read("great-britain/places")
 
 # Get a data frame from the sp_places object
-data_places <- data.frame(sp_places)
+data_places <- sp_places@data
 
 # Find distances between every place in sp_places and sp_coast_line
 # We are in the UK, therefore the British National Grid has been used as the

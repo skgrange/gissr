@@ -55,7 +55,7 @@
 #' @export
 left_join_spatial <- function (df, latitude = "latitude", 
                                longitude = "longitude", 
-                               projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", 
+                               projection = "+proj=longlat +datum=WGS84 +no_defs", 
                                polygons = NA) {
   
   # Check the spatial object
@@ -135,13 +135,15 @@ left_join_spatial <- function (df, latitude = "latitude",
 #' @examples 
 #' \dontrun{
 #' # Get ozone concentrations from a raster object
-#' data_select <- left_join_raster(data_select, raster = raster_ozone, name = "ozone")
+#' data_select <- left_join_raster(data_select, raster = raster_ozone, 
+#'                                 name = "ozone")
+#' 
 #' }
 #' 
 #' @export
 left_join_raster <- function (df, latitude = "latitude", 
                               longitude = "longitude", 
-                              projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+                              projection = "+proj=longlat +datum=WGS84 +no_defs",
                               raster, name = "raster_value") {
   
   # Promote to spatial object

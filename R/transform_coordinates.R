@@ -54,7 +54,7 @@
 #'
 #' @export
 transform_coordinates <- function (df, x = "easting", y = "northing", from = "", 
-                                   to = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", 
+                                   to = "+proj=longlat +datum=WGS84 +no_defs", 
                                    rename = TRUE, reorder = TRUE, round = 6) {
   
   # Check argument
