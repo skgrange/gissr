@@ -160,4 +160,3 @@ left_join_raster <- function (df, latitude = "latitude",
   df
   
 }
-

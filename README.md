@@ -20,20 +20,21 @@ However, the challenges I have with using R as a GIS include: keeping track of t
 
 ## Utility functions
 
-  - Read shapefiles GPX, or GeoJSON files with `sp_read`.
+  - Read shapefiles, GPX, GeoJSON, and MapInfo files with `sp_read`.
   - Transform projection systems with `sp_transform`.
     - `sp_transform` can also force projections when a spatial object has none.
     - `transform_coordinates` does a similar thing, but for data frames.
-  - Transform a data frames (tables) to a spatial objects with:
+  - Transform data frames (tables) to spatial objects with:
     - `data_frame_to_point`,
     - `data_frame_to_line`, and
     - `data_frame_to_polygon`.
   - Bind/combine spatial objects with `sp_bind` and `sp_bind_many`.
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
-  - Transform a data frame with a well known text (WKT) variable to a spatial object with `sp_from_wkt`.
+  - Transform a data frame with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_crop`. 
     - To filter objects by other polygons, use `[` subsetting. 
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
+  - "Punch" a hole in polygons with `sp_punch`. 
   - Transform addresses/postcodes/other location strings to latitude and longitude pairs with `google_geocode`.
   - Export spatial objects and data frames to GPX or GeoJSON files with `write_gpx` and `write_geojson`. 
   - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
