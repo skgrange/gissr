@@ -33,11 +33,12 @@ However, the challenges I have with using R as a GIS include: keeping track of t
   - Transform a data frame with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_crop`. 
     - To filter objects by other polygons, use `[` subsetting. 
+      - Rectangular polygons can be created with `sp_create_envelope` for this purpose too. 
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
-  - "Punch" a hole in polygons with `sp_punch`. 
+  - "Punch" a holes in polygons with `sp_punch`. 
+  - Add a positive or negative buffer with `sp_buffer`. 
   - Transform addresses/postcodes/other location strings to latitude and longitude pairs with `google_geocode`.
   - Export spatial objects and data frames to GPX or GeoJSON files with `write_gpx` and `write_geojson`. 
-  - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
   
 ## Fancy functions
 
@@ -45,3 +46,4 @@ However, the challenges I have with using R as a GIS include: keeping track of t
   - Calculate distances between spatial objects with `sp_distance`.
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
   - Simplify spatial objects with `sp_simplify`.
+  - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
