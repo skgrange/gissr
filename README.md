@@ -25,7 +25,7 @@ However, the challenges I have with using R as a GIS include: keeping track of t
     - `sp_transform` can also force projections when a spatial object has none.
     - `transform_coordinates` does a similar thing, but for data frames.
   - Transform data frames (tables) to spatial objects with:
-    - `data_frame_to_point`,
+    - `data_frame_to_points`,
     - `data_frame_to_line`, and
     - `data_frame_to_polygon`.
   - Bind/combine spatial objects with `sp_bind` and `sp_bind_many`.
@@ -35,9 +35,8 @@ However, the challenges I have with using R as a GIS include: keeping track of t
     - To filter objects by other polygons, use `[` subsetting. 
       - Rectangular polygons can be created with `sp_create_envelope` for this purpose too. 
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
-  - "Punch" a holes in polygons with `sp_punch`. 
+  - "Punch" holes in polygons with `sp_punch`. 
   - Add a positive or negative buffer with `sp_buffer`. 
-  - Transform addresses/postcodes/other location strings to latitude and longitude pairs with `google_geocode`.
   - Export spatial objects and data frames to GPX or GeoJSON files with `write_gpx` and `write_geojson`. 
   
 ## Fancy functions
