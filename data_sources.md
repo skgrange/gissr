@@ -37,3 +37,4 @@
   - <http://oscarperpinan.github.io/rastervis/FAQ.html>
   - <https://pakillo.github.io/R-GIS-tutorial/>
   - <http://rpsychologist.com/working-with-shapefiles-projections-and-world-maps-in-ggplot>
+  - <http://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/cheatsheet.html>

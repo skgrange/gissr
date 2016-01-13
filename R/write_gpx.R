@@ -140,8 +140,17 @@ write_gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
     
     # Polygons are not supported by gpx files, convert to lines
     message("Polygons are not supported by GPX, the polygons have been coerced to lines.")
-    sp_object <- as(df, "SpatialLinesDataFrame")
     
+    # Add a data slot if polygons does not contain one
+    if (!grepl("data", class(df), ignore.case = TRUE)) {
+      df <- SpatialPolygonsDataFrame(df, 
+                                     data.frame(id = as.character(1:length(df))))
+      
+    }
+    
+    # To lines
+    sp_object <- as(df, "SpatialLinesDataFrame")
+
     if (!is.na(name)) {
       
       # Extract vector for gpx name
@@ -172,6 +181,5 @@ write_gpx <- function (df, file, latitude = "latitude", longitude = "longitude",
     rgdal::writeOGR(sp_object, file, layer = layer_vector, driver = "GPX", 
                     dataset_options = "GPX_USE_EXTENSIONS=yes")
   )
-  
   
 }

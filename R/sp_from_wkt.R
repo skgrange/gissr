@@ -67,19 +67,22 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
   }
   
   # Parse WKT strings
+  # Select progress bar type
+  if (verbose) {
+    progress <- "text"
+  } else {
+    progress <- "none"
+  }
+  
+  # Message
   if (verbose) {
     message("Parsing WKT strings...")
-    # Warning catch is for geoms with negative areas. Why does this occur? 
-    suppressWarnings(
-      sp_list <- pbapply::pblapply(wkt_vector, rgeos::readWKT)
-    )
-    
-  } else {
-    suppressWarnings(
-      sp_list <- lapply(wkt_vector, rgeos::readWKT)
-    )
-    
   }
+  
+  # Warning catch is for geoms with negative areas. Why does this occur? 
+  suppressWarnings(
+    sp_list <- plyr::llply(wkt_vector, rgeos::readWKT, .progress = progress)
+  )
   
   # If the wkt strings are just points, a different rename method is needed
   if (class(sp_list[[1]])[1] == "SpatialPoints") {
@@ -103,7 +106,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
     
     # Rename feature ids within list
     if (verbose) {
-      message("Binding all spatial features together...")
+      message("Binding spatial features together...")
     }
     
     # Reset feature ids
@@ -144,15 +147,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
 
 
 # Bind objects using do.call
-sp_list_bind <- function (sp_list) {
-  
-  # Do call appends rather than create new
-  sp <- do.call("rbind", sp_list)
-  
-  # Return
-  sp
-  
-}
+sp_list_bind <- function (sp_list) do.call("rbind", sp_list)
 
 
 # Function for creating wkt strings from a spatial object. 
@@ -160,10 +155,7 @@ sp_list_bind <- function (sp_list) {
 # 
 #' @rdname sp_from_wkt
 #' @export
-sp_to_wkt <- function (sp, features = TRUE) {
-  string <- rgeos::writeWKT(sp, byid = features)
-  string
-}
+sp_to_wkt <- function (sp, features = TRUE) rgeos::writeWKT(sp, byid = features)
 
 
 # # Rename sp features within a list

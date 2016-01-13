@@ -31,8 +31,10 @@ sp_reset_feature_ids <- function (sp) {
     # Create an id vector
     id_vector <- as.character(seq_along(sp))
     
+    # a <- length(unlist(lapply(sp, function (x) seq_along(x))))
+    
     # Rename all elements within list
-    # To-do, enhance the resetter to include a id argument
+    # To-do, enhance the resetter to include an id argument
     sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id_vector[x]))
     
     # Reset row names too
