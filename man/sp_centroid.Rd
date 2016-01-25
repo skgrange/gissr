@@ -10,7 +10,7 @@ sp_centroid(sp, features = TRUE)
 \item{sp}{Spatial object.}
 
 \item{features}{Should the centroids of all features within \code{sp} be
-calculated? Default is TRUE.}
+calculated? Default is \code{TRUE}.}
 }
 \description{
 Function to find the centroid of a spatial object.

@@ -18,9 +18,6 @@
 #' 
 #' @param verbose Should the function give messages? Useful when large number of
 #' WKT strings are to be parsed. Default is \code{FALSE}. 
-#' 
-#' @param reset Should the feature IDs be reset before binding? Default is 
-#' \code{TRUE} but may need to be altered for polygons. 
 #'
 #' @author Stuart K. Grange
 #' 
@@ -35,8 +32,8 @@
 #' }
 #' 
 #' @export
-sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA, 
-                         verbose = FALSE, reset = TRUE) {
+sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA, 
+                         verbose = FALSE) {
   
   # Catch dplyr's table data frame
   df <- threadr::base_df(df)
@@ -61,9 +58,6 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
     df_data <- df
     df_data[, wkt] <- NULL
     
-    # Overwrite row names
-    row.names(df_data) <- NULL
-    
   }
   
   # Parse WKT strings
@@ -75,9 +69,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
   }
   
   # Message
-  if (verbose) {
-    message("Parsing WKT strings...")
-  }
+  if (verbose) message("Parsing WKT strings...")
   
   # Warning catch is for geoms with negative areas. Why does this occur? 
   suppressWarnings(
@@ -93,28 +85,18 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
     # Bind all features
     sp <- sp_list_bind(sp_list)
     
-    # Alter row names in matrix
+    # All row names will be "1", this will case an error in the future, reset
     row.names(sp) <- NULL
     
     # Promote matrix to sp
     sp <- sp::SpatialPoints(sp)
     
-    # Add row names, will be the same as data if matched later
-    row.names(sp) <- as.character(1:length(sp))
-    
   } else {
-    
     # Rename feature ids within list
-    if (verbose) {
-      message("Binding spatial features together...")
-    }
+    if (verbose) message("Binding spatial features together...")
     
     # Reset feature ids
-    if (reset) {
-      # sp_list <- sp_rename(sp_list)
-      sp_list <- sp_reset_feature_ids(sp_list)
-      
-    }
+    sp_list <- sp_reset_feature_ids(sp_list)
 
     # Bind all objects in list
     sp <- sp_list_bind(sp_list)
@@ -123,31 +105,24 @@ sp_from_wkt <- function (df, wkt = "geom", data = FALSE, projection = NA,
 
   # Add data slots
   if (data & grepl("polygon", class(sp), ignore.case = TRUE)) {
-    sp <- sp::SpatialPolygonsDataFrame(sp, data = df_data)
+    sp <- sp::SpatialPolygonsDataFrame(sp, data = df_data, match.ID = FALSE)
   }
   
   if (data & grepl("lines", class(sp), ignore.case = TRUE)) {
-    sp <- sp::SpatialLinesDataFrame(sp, data = df_data)
+    sp <- sp::SpatialLinesDataFrame(sp, data = df_data, match.ID = FALSE)
   }
   
   if (data & grepl("points", class(sp), ignore.case = TRUE)) {
-    sp <- sp::SpatialPointsDataFrame(sp, data = df_data)
+    sp <- sp::SpatialPointsDataFrame(sp, data = df_data, match.ID = FALSE)
   }
   
   # Add projection
-  if (!is.na(projection)) {
-    sp <- sp_transform(sp, projection, warn = FALSE)
-  
-  }
+  if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
   
   # Return 
   sp
   
 }
-
-
-# Bind objects using do.call
-sp_list_bind <- function (sp_list) do.call("rbind", sp_list)
 
 
 # Function for creating wkt strings from a spatial object. 
@@ -156,19 +131,3 @@ sp_list_bind <- function (sp_list) do.call("rbind", sp_list)
 #' @rdname sp_from_wkt
 #' @export
 sp_to_wkt <- function (sp, features = TRUE) rgeos::writeWKT(sp, byid = features)
-
-
-# # Rename sp features within a list
-# sp_rename <- function (sp) {
-#   
-#   # Create an id vector
-#   id_vector <- seq_along(sp)
-#   id_vector <- as.character(id_vector)
-#   
-#   # Rename all elements in list
-#   sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id_vector[x]))
-#   
-#   # Return
-#   sp
-#   
-# }

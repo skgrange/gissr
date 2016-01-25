@@ -32,9 +32,12 @@
  
 ## Other useful places to visit
  
-  - <http://www.gpsvisualizer.com/>
-  - <http://spatialreference.org/>
-  - <http://oscarperpinan.github.io/rastervis/FAQ.html>
-  - <https://pakillo.github.io/R-GIS-tutorial/>
-  - <http://rpsychologist.com/working-with-shapefiles-projections-and-world-maps-in-ggplot>
-  - <http://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/cheatsheet.html>
+  - [GPS visualizer](http://www.gpsvisualizer.com/)
+    - A place to drawn and look at spatial data
+  - [Spatial reference](http://spatialreference.org/) 
+    - A place to find projection strings
+  - [rastervis package notes](http://oscarperpinan.github.io/rastervis/FAQ.html)
+  - [Spatial data in R: Using R as a GIS](https://pakillo.github.io/R-GIS-tutorial/)
+    - A tutorial
+  - [ggplot2 and projections](http://rpsychologist.com/working-with-shapefiles-projections-and-world-maps-in-ggplot)
+  - [Spatial cheatsheet](http://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/cheatsheet.html)

@@ -1,29 +1,19 @@
-#' Functions to bind/combine spatial objects together. 
+#' Functions to bind spatial objects together. 
 #' 
 #' \code{sp_bind} combines two similar spatial objects together with the same 
-#' syntax of \code{rbind}. Currently, only two objects can be bound together. 
-#' \code{sp_bind_many} combines multiple spatial objects together but 
-#' the input must be a list. 
+#' syntax of \code{rbind}. \code{sp_bind_many} combines multiple spatial objects 
+#' together but the input must be a list. 
 #' 
-#' These function are useful for combining shape files or tables of WKT strings
-#' together. 
-#' 
-#' The feature IDs within line- and polygon-spatial objects must be manipulated 
-#' for the binding to occur. The original, non-manipulated IDs are not 
-#' preserved. 
-#' 
-#' To-do: This function accumulates a spatial object in a for-loop which is 
-#' inefficient. The binding process should be handled by \code{do.call("rbind")}. 
-#' This needs to be solved soon. 
+#' These function are useful for combining shapefiles or tables of WKT strings
+#' together. The feature IDs within line- and polygon-spatial objects must be 
+#' manipulated for the binding to occur. The original, non-manipulated IDs are 
+#' not preserved. 
 #' 
 #' @param sp Spatial object one. 
 #' 
 #' @param sp_2 Spatial object two.
 #' 
-#' @param force Should the feature IDs be forced to change? This may be 
-#' necessary when feature IDs are not sequential.
-#' 
-#' @param sp_list A list containing spatial two or more spatial objects. 
+#' @param sp_list A list containing two or more spatial objects. 
 #'
 #' @author Stuart K. Grange
 #' 
@@ -42,32 +32,17 @@ sp_bind <- function (sp, sp_2) {
   
   # Class check
   if (!class(sp) == class(sp_2)) {
-    stop("Spatial objects must be of the same type to be bound.")
+    stop("Geometries must be of the same type to be bound.", .call = FALSE)
   }
   
-  # Points can be easily bound with do.call
-  if (grepl("point", class(sp), ignore.case = TRUE)) {
-    # rbind
-    sp_combine <- do.call("rbind", list(sp, sp_2))
-    
-    # For lines and polygons
-  } else {
-    # Change ids, this is wasteful but robust
-    # I have used logic to handle this, but at times the binding fails due to non-
-    # sequential ids
-    # First object
-    sp <- sp::spChFIDs(sp, as.character(1:length(sp)))
-    
-    # Second object
-    sp_2 <- sp::spChFIDs(sp_2, as.character(length(sp) + 1:length(sp_2)))
-    
-    # Bind objects
-    sp_combine <- maptools::spRbind(sp, sp_2)
-    
-  }
+  # Create a list
+  sp_list <- list(sp, sp_2)
   
+  # Bind
+  sp_bind <- sp_bind_many(sp_list)
+
   # Return
-  sp_combine
+  sp_bind
   
 }
 
@@ -75,49 +50,25 @@ sp_bind <- function (sp, sp_2) {
 #' @rdname sp_bind
 #' 
 #' @export
-sp_bind_many <- function (sp_list, progress = TRUE) {
+sp_bind_many <- function (sp_list) {
   
   # Class check
-  if (class(sp_list) != "list") {
-    stop("The input must be list of spatial objects")
-  }
+  if (!is.list(sp_list)) stop("Input must be list.", .call = FALSE)
   
   # Points can be easily bound with do.call
   if (grepl("point", class(sp_list[[1]]), ignore.case = TRUE)) {
-    # rbind
-    sp_bind <- do.call("rbind", sp_list)
+    sp_bind <- sp_list_bind(sp_list)
     
   } else {
-    # Set-up progress bar
-    if (progress) {
-      pb <- txtProgressBar(min = 0, max = length(sp_list), style = 3)
-    }
+    # Reset ids, this will use uuids for uniqueness
+    sp_list <- sp_reset_feature_ids(sp_list)
     
-    for (i in seq_along(sp_list)) {
-      
-      if (i == 1) {
-        # The first loop, just bind the first two objects
-        sp_bind <- sp_bind(sp_list[[1]], sp_list[[2]])
-        
-      } else {
-        # Need to jump over the second element in sp_list for i = 2
-        k <- i + 1
-        
-        # k is i + 1 so need to pass the final k as it will not exist
-        if (k <= length(sp_list)) {
-          # Accumulate sp_bind and add the extra objects
-          sp_bind <- sp_bind(sp_bind, sp_list[[k]])
-          
-        }
-        
-      }
-      # Update progress bar
-      if (progress) {
-        setTxtProgressBar(pb, i)
-      }
-
-    }
+    # Bind
+    sp_bind <- sp_list_bind(sp_list)
     
+    # Reset ids again to something suitable, a character vector
+    sp_bind <- sp_reset_feature_ids(sp_bind)
+  
   }
   
   # Return
@@ -126,32 +77,10 @@ sp_bind_many <- function (sp_list, progress = TRUE) {
 }
 
 
+# Bind objects using do.call
+sp_list_bind <- function (sp_list) do.call("rbind", sp_list)
+
+
 # Function to randomly sample n features in a spatial object. 
 #' @export
-sp_sample_n <- function (sp, n) {
-  sp <- sp[sample(nrow(sp), n), ]
-  sp
-}
-
-
-# Function to get ids from spatial objects
-#' @export
-sp_feature_ids <- function (sp) {
-  
-  # Polygons
-  if (grepl("polygon", class(sp), ignore.case = TRUE)) {
-    ids <- sapply(slot(sp, "polygons"), slot, "ID")
-    
-  }
-  
-  # Lines
-  if (grepl("line", class(sp), ignore.case = TRUE)) {
-    ids <- sapply(slot(sp, "lines"), slot, "ID")
-    
-  }
-  
-  # Return
-  ids
-  
-}
-
+sp_sample_n <- function (sp, n) sp[sample(nrow(sp), n), ]

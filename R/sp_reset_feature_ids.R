@@ -28,17 +28,11 @@ sp_reset_feature_ids <- function (sp) {
   
   # A list of spatial objects? 
   if (class(sp) == "list") {
-    # Create an id vector
-    id_vector <- as.character(seq_along(sp))
+    # Will use uuids for the features to ensure uniqueness
+    sp <- lapply(sp, function (x) resetter(x, uuid = TRUE))
     
-    # a <- length(unlist(lapply(sp, function (x) seq_along(x))))
-    
-    # Rename all elements within list
-    # To-do, enhance the resetter to include an id argument
-    sp <- lapply(seq_along(sp), function (x) sp::spChFIDs(sp[[x]], id_vector[x]))
-    
-    # Reset row names too
-    sp <- lapply(sp, reset_data_slot)
+    # Reset row names too, not in lapply
+    sp <- reset_data_slot(sp)
     
   } else {
     # Reset spatial features
@@ -54,13 +48,57 @@ sp_reset_feature_ids <- function (sp) {
   
 }
 
+
 # Reset feature ids
-resetter <- function (sp) sp::spChFIDs(sp, as.character(seq_along(sp)))
+resetter <- function (sp, uuid = FALSE) {
+  
+  if (uuid) {
+    # Use uuids to ensure unique-ness 
+    sp <- spChFIDs(sp, replicate(length(sp), threadr::uuid()))
+    
+  } else {
+    # Otherwise, just a character sequence
+    sp <- spChFIDs(sp, as.character(seq_along(sp)))
+    
+  }
+  
+  # Return
+  sp
+  
+}
+
 
 # For resetting data slots
 reset_data_slot <- function (sp) {
+  
+  # Only if object has a data slot
   if (grepl("data", class(sp), ignore.case = TRUE)) {
     row.names(sp@data) <- NULL
   }
+  
+  # Return
   sp
+  
+}
+
+
+# Function to get ids from spatial objects.
+#' @export
+sp_feature_ids <- function (sp) {
+  
+  # Polygons
+  if (grepl("polygon", class(sp), ignore.case = TRUE)) {
+    id <- sapply(slot(sp, "polygons"), slot, "ID")
+    
+  }
+  
+  # Lines
+  if (grepl("line", class(sp), ignore.case = TRUE)) {
+    id <- sapply(slot(sp, "lines"), slot, "ID")
+    
+  }
+  
+  # Return
+  id
+  
 }

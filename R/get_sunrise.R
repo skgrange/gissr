@@ -8,9 +8,13 @@
 #' @seealso \link{maptools::sunriset}
 #' 
 #' @param latitude Latitude of a location. 
+#' 
 #' @param longitude Longitude of a location. 
+#' 
 #' @param start Start date.
+#' 
 #' @param end End date
+#' 
 #' @param json Should the return be a json string rather than a data frame? 
 #' Useful for single observations.
 #'
@@ -131,4 +135,3 @@ parse_date_arguments <- function (date, what) {
   date
   
 }
-

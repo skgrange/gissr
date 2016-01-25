@@ -3,39 +3,29 @@
 \name{sp_bind}
 \alias{sp_bind}
 \alias{sp_bind_many}
-\title{Functions to bind/combine spatial objects together.}
+\title{Functions to bind spatial objects together.}
 \usage{
 sp_bind(sp, sp_2)
 
-sp_bind_many(sp_list, progress = TRUE)
+sp_bind_many(sp_list)
 }
 \arguments{
 \item{sp}{Spatial object one.}
 
 \item{sp_2}{Spatial object two.}
 
-\item{sp_list}{A list containing spatial two or more spatial objects.}
-
-\item{force}{Should the feature IDs be forced to change? This may be 
-necessary when feature IDs are not sequential.}
+\item{sp_list}{A list containing two or more spatial objects.}
 }
 \description{
 \code{sp_bind} combines two similar spatial objects together with the same 
-syntax of \code{rbind}. Currently, only two objects can be bound together. 
-\code{sp_bind_many} combines multiple spatial objects together but 
-the input must be a list.
+syntax of \code{rbind}. \code{sp_bind_many} combines multiple spatial objects 
+together but the input must be a list.
 }
 \details{
-These function are useful for combining shape files or tables of WKT strings
-together.
-
-The feature IDs within line- and polygon-spatial objects must be manipulated 
-for the binding to occur. The original, non-manipulated IDs are not 
-preserved.
-
-To-do: This function accumulates a spatial object in a for-loop which is 
-inefficient. The binding process should be handled by \code{do.call("rbind")}. 
-This needs to be solved soon.
+These function are useful for combining shapefiles or tables of WKT strings
+together. The feature IDs within line- and polygon-spatial objects must be 
+manipulated for the binding to occur. The original, non-manipulated IDs are 
+not preserved.
 }
 \examples{
 \dontrun{

@@ -1,0 +1,158 @@
+<?xml version="1.0" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ <Document>
+  <Style id="kmlLineStyle">
+   <LineStyle>
+    <color>
+     7f0000ff
+    </color>
+    <width>
+     4
+    </width>
+   </LineStyle>
+  </Style>
+  <Placemark>
+   <name>test</name>
+   <styleUrl>
+    #kmlLineStyle
+   </styleUrl>
+   <LineString>
+    <altitudeMode>
+     clampToGround
+    </altitudeMode>
+    <tessellate>
+     1
+    </tessellate>
+    <coordinates>
+     -1.07517,53.96443,0 -1.07672,53.96365,0 -1.07697,53.96354,0 -1.0776,53.96329,0 -1.07815,53.96302,0 -1.07815,53.96302,0 -1.07741,53.96259,0 -1.07687,53.96231,0 -1.07615,53.96187,0 -1.0758,53.96165,0 -1.07561,53.96156,0 -1.07539,53.9615,0 -1.07482,53.96145,0 -1.07475,53.96144,0 -1.07475,53.96144,0 -1.07375,53.96122,0 -1.07359,53.96118,0 -1.07334,53.96094,0 -1.07223,53.95996,0 -1.07173,53.95944,0 -1.07128,53.9586,0 -1.07103,53.95804,0 -1.07086,53.95769,0 -1.07074,53.95736,0 -1.07054,53.95672,0 -1.07042,53.95626,0 -1.0704,53.95592,0 -1.07045,53.9554,0 -1.07041,53.95518,0 -1.07039,53.9551,0 -1.07044,53.95505,0 -1.07057,53.95494,0 -1.07092,53.95465,0 -1.07111,53.95448,0 -1.07144,53.95432,0 -1.07192,53.95419,0 -1.07313,53.95399,0 -1.07313,53.95399,0 -1.07378,53.9539,0 -1.07434,53.95386,0 -1.07504,53.95383,0 -1.07588,53.95381,0 -1.07628,53.95374,0 -1.07655,53.95367,0 -1.07664,53.95349,0 -1.07687,53.95372,0 -1.07687,53.95372,0 -1.07718,53.9541,0 -1.07727,53.95419,0 -1.07743,53.95429,0 -1.07765,53.95436,0 -1.07811,53.9544,0 -1.07878,53.95443,0 -1.07939,53.9545,0 -1.07984,53.95453,0 -1.08036,53.95445,0 -1.08091,53.95427,0 -1.08179,53.954,0 -1.08191,53.95396,0 -1.08279,53.95363,0 -1.08344,53.9533,0 -1.0837,53.95315,0 -1.08384,53.95304,0 -1.08401,53.95298,0 -1.08418,53.95294,0 -1.08418,53.95294,0 -1.08431,53.95292,0 -1.08446,53.95294,0 -1.08464,53.95299,0 -1.08479,53.95304,0 -1.08584,53.95355,0 -1.08615,53.95363,0 -1.08665,53.95367,0 -1.08762,53.95408,0 -1.0884,53.95439,0 -1.08898,53.95462,0 -1.09127,53.95556,0 -1.09157,53.9557,0 -1.09178,53.95587,0 -1.09178,53.95587,0 -1.09212,53.95613,0 -1.09251,53.95634,0 -1.0927,53.95649,0 -1.09271,53.95663,0 -1.09261,53.95693,0 -1.09242,53.95732,0 -1.09214,53.9577,0 -1.0917,53.95826,0 -1.09148,53.95849,0 -1.09132,53.95859,0 -1.09062,53.95897,0 -1.09062,53.95897,0 -1.0902,53.95914,0 -1.08936,53.9594,0 -1.08908,53.95948,0 -1.0889,53.95947,0 -1.08867,53.95939,0 -1.08848,53.95938,0 -1.08834,53.9594,0 -1.08791,53.9596,0 -1.08786,53.95962,0 -1.08769,53.9597,0 -1.08733,53.95992,0 -1.08693,53.96022,0 -1.08683,53.96029,0 -1.08649,53.96059,0 -1.08632,53.96074,0 -1.08599,53.96095,0 -1.08556,53.96117,0 -1.08556,53.96117,0 -1.08514,53.96136,0 -1.08528,53.9615,0 -1.08542,53.96166,0 -1.08549,53.96181,0 -1.08552,53.96192,0 -1.08554,53.96213,0 -1.08552,53.96228,0 -1.08545,53.96246,0 -1.08533,53.96268,0 -1.0853,53.9628,0 -1.08543,53.96295,0 -1.08497,53.96337,0 -1.08367,53.96439,0 -1.08342,53.96464,0 -1.08312,53.965,0 -1.08312,53.965,0 -1.08306,53.96512,0 -1.08271,53.96507,0 -1.08217,53.96495,0 -1.08163,53.96479,0 -1.08092,53.96443,0 -1.07915,53.96344,0 -1.07853,53.96317,0 -1.07847,53.96315,0 -1.07847,53.96315,0 -1.07815,53.96302,0 -1.0776,53.96329,0 -1.07697,53.96354,0 -1.07672,53.96365,0 -1.07581,53.96411,0 -1.07531,53.96436,0 
+    </coordinates>
+   </LineString>
+  </Placemark>
+  <Style id="Kilometer_1">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=1]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Kilometer_1
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -1.07103,53.95804,0
+    </coordinates>
+   </Point>
+   <name>
+    Kilometer 1
+   </name>
+  </Placemark>
+  <Style id="Kilometer_2">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=2]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Kilometer_2
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -1.07878,53.95443,0
+    </coordinates>
+   </Point>
+   <name>
+    Kilometer 2
+   </name>
+  </Placemark>
+  <Style id="Kilometer_3">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=3]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Kilometer_3
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -1.09178,53.95587,0
+    </coordinates>
+   </Point>
+   <name>
+    Kilometer 3
+   </name>
+  </Placemark>
+  <Style id="Kilometer_4">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[http://api.mapmyfitness.com/vx/map_marker_image/0/?format=png&txt=4]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #Kilometer_4
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -1.08545,53.96246,0
+    </coordinates>
+   </Point>
+   <name>
+    Kilometer 4
+   </name>
+  </Placemark>
+  <Style id="start_marker">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[https://mmf.cachefly.net/d/mapping_api/stable/img/markers/start.png]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #start_marker
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -1.07517,53.96443,0
+    </coordinates>
+   </Point>
+   <name>
+    York City wall run
+   </name>
+  </Placemark>
+  <Style id="finish_marker">
+   <IconStyle>
+    <Icon>
+     <href>
+<![CDATA[https://mmf.cachefly.net/d/mapping_api/stable/img/markers/stop.png]]>     </href>
+    </Icon>
+   </IconStyle>
+  </Style>
+  <Placemark>
+   <styleUrl>
+    #finish_marker
+   </styleUrl>
+   <Point>
+    <coordinates>
+     -1.07531,53.96436,0
+    </coordinates>
+   </Point>
+   <name>
+    York City wall run
+   </name>
+  </Placemark>
+ </Document>
+</kml>

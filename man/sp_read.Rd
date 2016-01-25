@@ -4,7 +4,7 @@
 \alias{sp_read}
 \title{Function to read spatial data files in a consistent way.}
 \usage{
-sp_read(file, verbose = TRUE, tolower = TRUE)
+sp_read(file, verbose = TRUE, clean = TRUE, unit = NULL, geom = NULL)
 }
 \arguments{
 \item{file}{Spatial data file.}
@@ -12,8 +12,17 @@ sp_read(file, verbose = TRUE, tolower = TRUE)
 \item{verbose}{Should information about the data be printed when being 
 loaded? Default is \code{TRUE}.}
 
-\item{tolower}{Should the names of the data slot be forced to be lower case? 
+\item{clean}{Should the names of the data slot be forced to be lower case? 
 Note that the default is \code{TRUE}.}
+
+\item{unit}{An override for when a spatial data file has an layer name which
+is not related to its file name.}
+
+\item{geom}{An override for when spatial data files contain more than one 
+geometry type; such as KML files. The default is \code{NULL} but use one of 
+\code{"wkbPoint"}, \code{"wkbLineString"}, or \code{"wkbPolygon"}. See the 
+\code{require_geomType} argument for the \code{\link{readOGR}} function for 
+more information.}
 }
 \description{
 \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the 
@@ -21,17 +30,17 @@ same as the other file readers in R. Unlike \code{rgdal::readOGR},
 \code{sp_read} uses a single file-string which does not have to be expanded.
 }
 \details{
-\code{sp_read} can read: 
+\code{sp_read} supports: 
 \itemize{
   \item Shapefiles with or without specified extensions. 
   \item GPX files containing tracks, routes, or waypoints. 
   \item GeoJSON files. 
   \item Mapinfo TAB files with or without specified extensions. 
+  \item Partial support for KML files. 
 }
 }
 \examples{
 \dontrun{
-
 # Load a shapefile without extension
 sp_london <- sp_read("london_borough")
 
@@ -52,5 +61,8 @@ sp_coastline <- sp_read("nz-land-districts.map", verbose = FALSE)
 }
 \author{
 Stuart K. Grange
+}
+\seealso{
+\code{\link{readOGR}}, \code{\link{ogrInfo}}, \code{\link{ogrDrivers}}
 }
 

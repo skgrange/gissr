@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_frame_to_spatial.R
 \name{data_frame_to_points}
 \alias{data_frame_to_points}
-\title{Function for converting a data frame into a spatial-points data frame.}
+\title{Function for converting a data frame to a SpatialPointsDataFrame.}
 \usage{
 data_frame_to_points(df, latitude = "latitude", longitude = "longitude",
   projection = "+proj=longlat +datum=WGS84 +no_defs")
@@ -18,13 +18,7 @@ data_frame_to_points(df, latitude = "latitude", longitude = "longitude",
 Default is WGS84.}
 }
 \description{
-\code{data_frame_to_points} conveniently transforms a data frame to a 
-SpatialPointsDataFrame.
-}
-\details{
-In general usage, \code{latitude} and \code{longitude} will be projected in 
-WGS84. \code{latitude} and \code{longitude} must not contain \code{NA} values 
-because this is a limitation of the spatial object.
+Function for converting a data frame to a SpatialPointsDataFrame.
 }
 \examples{
 \dontrun{

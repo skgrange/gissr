@@ -5,8 +5,8 @@
 \alias{sp_to_wkt}
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
-sp_from_wkt(df, wkt = "geom", data = FALSE, projection = NA,
-  verbose = FALSE, reset = TRUE)
+sp_from_wkt(df, wkt = "geom", data = TRUE, projection = NA,
+  verbose = FALSE)
 
 sp_to_wkt(sp, features = TRUE)
 }
@@ -24,9 +24,6 @@ strings have been parsed. Default is \code{NA}.}
 
 \item{verbose}{Should the function give messages? Useful when large number of
 WKT strings are to be parsed. Default is \code{FALSE}.}
-
-\item{reset}{Should the feature IDs be reset before binding? Default is 
-\code{TRUE} but may need to be altered for polygons.}
 }
 \description{
 \code{sp_from_wkt} creates spatial objects from WKT strings and can create

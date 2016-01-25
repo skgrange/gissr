@@ -2,48 +2,26 @@
 % Please edit documentation in R/write_gpx.R
 \name{write_gpx}
 \alias{write_gpx}
-\title{Function to write a data frame to a GPX file with usage analogous to 
-\code{write.table}.}
+\title{Function to export geometries as a GPX file.}
 \usage{
-write_gpx(df, file, latitude = "latitude", longitude = "longitude",
-  name = NA, layer = "points")
+write_gpx(sp, file)
 }
 \arguments{
-\item{df}{Data frame to be written to a GPX file.}
+\item{sp}{Spatial object.}
 
 \item{file}{File name of GPX file.}
-
-\item{latitude}{\code{df}'s latitude variable name.}
-
-\item{longitude}{\code{df}'s longitude variable name.}
-
-\item{name}{Name of variable which will be added in the \code{"name"} element
-of the GPX file. Optional.}
-
-\item{layer}{Type of layer to be written to GPX file. Can either be 
-
-\code{"points"} or \code{"lines"}. Default is \code{"points"}.}
 }
 \description{
-\code{write_gpx} uses \code{rgdal::writeOGR} as the GPX writer. Unlike the 
-standard \code{writeOGR} function, \code{write_gpx} will automatically expand 
-file paths and can overwrite previous files if necessary.
-}
-\details{
-\code{latitude} and \code{longitude} must not contain \code{NA} values.
-
-To-do: Does not work with spatial objects without data. Make sure it does. I
-think this is an \code{writeOGR} issue so will need to upgrade the spatial 
-ojects in a robust way.
+\code{write_gpx} uses \code{rgdal::writeOGR} as the GPX writer. GPX files do 
+not support polygons, therefore polygon geometries will be coerced to lines.
 }
 \examples{
-
 \dontrun{
 # Export a GPX file containing points
-write_gpx(data_bus_stations, "~/Desktop/bus_stations.gpx")
+write_gpx(sp_bus_stations, "~/Desktop/bus_stations.gpx")
 
-# Export GPX file which contains a line object
-write_gpx(data_gpx_track, "~/Desktop/drive_to_bath.gpx", layer = "lines")
+# Export GPX file which contains a track
+write_gpx(sp_gpx_track, "~/Desktop/drive_to_bath.gpx")
 
 }
 

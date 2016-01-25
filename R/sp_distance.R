@@ -107,7 +107,7 @@ sp_distance <- function (sp_1, sp_2, cores = 1, unit = "m") {
     if (grepl("data", class(sp_1), ignore.case = TRUE)) {
       
       # Loss of projection so need to state it again
-      sp_1 <- sp::SpatialPoints(sp_1, sp::CRS(projection))
+      sp_1 <- sp::SpatialPoints(sp_1, CRS(projection))
       
     }
     
@@ -124,11 +124,11 @@ sp_distance <- function (sp_1, sp_2, cores = 1, unit = "m") {
     
   } else {
     # Superscript notation is necessary
-    distance_list <- parallel::mclapply(1:length(sp_1), function (x) 
+    distance <- parallel::mclapply(1:length(sp_1), function (x) 
       rgeos::gDistance(sp_1[x], sp_2), mc.cores = getOption("mc.cores", cores))
     
     # Make vector
-    distance <- unlist(distance_list)
+    distance <- unlist(distance)
     
   }
   

@@ -1,5 +1,14 @@
-sp_buffer <- function (sp, features, width) {
-  sp <- rgeos::gBuffer(sp, byid = features, width = width)
-  # Return
-  sp
+#' Function to include or exclude an area of a spatial object. 
+#' 
+#' @author Stuart K. Grange
+#' 
+#' @param sp Spatial object. 
+#' . 
+#' @param features Should the geometries of all features within \code{sp} be
+#' buffered? Default is \code{TRUE}. 
+#' 
+#' @export
+sp_buffer <- function (sp, features = TRUE, width) {
+  rgeos::gBuffer(sp, byid = features, width = width)
 }
+  
