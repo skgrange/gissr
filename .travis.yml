@@ -1,3 +1,21 @@
 language: r
 sudo: required
 warnings_are_errors: true
+
+r_binary_packages:
+  - Rcpp
+  - testthat
+  
+# System dependencies for rgdal
+apt_packages:
+ - libgdal-dev
+ - libproj-dev
+ 
+# and V8
+  - libv8-dev
+
+# Install development package
+r_github_packages:
+  - skgrange/threadr
+  
+  
