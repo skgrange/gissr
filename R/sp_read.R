@@ -101,7 +101,7 @@ sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TR
   # Remove NA variables
   
   # Message projection string
-  if (verbose) message(sp_projection(sp), call. = FALSE)
+  if (verbose) cat(sp_projection(sp))
   
   # Return
   sp
