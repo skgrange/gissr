@@ -4,47 +4,39 @@
 \alias{sp_read}
 \title{Function to read spatial data files in a consistent way.}
 \usage{
-sp_read(file, verbose = TRUE, clean = TRUE, unit = NULL, geom = NULL)
+sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE)
 }
 \arguments{
-\item{file}{Spatial data file.}
+\item{file}{Spatial data file name. For shapefiles and Mapinfo TAB files, a
+file extension is optional.}
+
+\item{layer}{Layer within \code{file} to read. Default is \code{NULL} and 
+should not be needed for shapefiles, Mapinfo TAB files, and GeoJSON files. 
+Default behavior for GPX files is to attempt to read the \code{"tracks"} 
+layer.}
+
+\item{geom}{An override for when spatial data files contain more than one 
+geometry type which is commonly found in GeoJSON and KML files. \code{geom} 
+can be one of: \code{"points"}, \code{"lines"}, or \code{"polygons"}.}
+
+\item{lower}{Should the names of the data slot be forced to be lower case? 
+Note that the default is \code{TRUE}.}
 
 \item{verbose}{Should information about the data be printed when being 
 loaded? Default is \code{TRUE}.}
-
-\item{clean}{Should the names of the data slot be forced to be lower case? 
-Note that the default is \code{TRUE}.}
-
-\item{unit}{An override for when a spatial data file has an layer name which
-is not related to its file name.}
-
-\item{geom}{An override for when spatial data files contain more than one 
-geometry type; such as KML files. The default is \code{NULL} but use one of 
-\code{"wkbPoint"}, \code{"wkbLineString"}, or \code{"wkbPolygon"}. See the 
-\code{require_geomType} argument for the \code{\link{readOGR}} function for 
-more information.}
 }
 \description{
 \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the 
 same as the other file readers in R. Unlike \code{rgdal::readOGR},
-\code{sp_read} uses a single file-string which does not have to be expanded.
-}
-\details{
-\code{sp_read} supports: 
-\itemize{
-  \item Shapefiles with or without specified extensions. 
-  \item GPX files containing tracks, routes, or waypoints. 
-  \item GeoJSON files. 
-  \item Mapinfo TAB files with or without specified extensions. 
-  \item Partial support for KML files. 
-}
+\code{sp_read} will expand file paths and make a "best-guess" on what layer 
+is to be loaded for spatial data files.
 }
 \examples{
 \dontrun{
 # Load a shapefile without extension
 sp_london <- sp_read("london_borough")
 
-# Load a shapefile with an extension within a home area
+# Load a shapefile with an extension within home area
 sp_london <- sp_read("~/Desktop/london_borough.shp")
 
 # Load a gpx file, no need to define layer

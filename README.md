@@ -4,11 +4,18 @@
 
 ## To install:
 
-The development version: `devtools::install_github("skgrange/gissr")`
+The development version: 
+```
+# Install dependency
+devtools::install_github("skgrange/threadr")
+
+# Install gissr
+devtools::install_github("skgrange/gissr")
+```
 
 ## To-do: 
 
-  1. Do some unit testing
+  1. Do some more unit testing
   2. Work on documentation
   3. Get package on CRAN
 
@@ -20,24 +27,25 @@ However, the challenges I have with using R as a GIS include: keeping track of t
 
 ## Utility functions
 
-  - Read shapefiles, GPX, GeoJSON, and MapInfo files with `sp_read`.
+  - Read shapefiles, GPX, GeoJSON, KML, MapInfo files with `sp_read`, a wrapper for `rgdal::readOGR`.
   - Transform projection systems with `sp_transform`.
     - `sp_transform` can also force projections when a spatial object has none.
     - `transform_coordinates` does a similar thing, but for data frames.
   - Transform data frames (tables) to spatial objects with:
     - `data_frame_to_points`,
-    - `data_frame_to_line`, and
-    - `data_frame_to_polygon`.
+    - `data_frame_to_lines`, and
+    - `data_frame_to_polygons`.
   - Bind/combine spatial objects with `sp_bind` and `sp_bind_many`.
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
   - Transform a data frame with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_crop`. 
     - To filter objects by other polygons, use `[` subsetting. 
-      - Rectangular polygons can be created with `sp_create_envelope` for this purpose too. 
+      - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
   - Add a positive or negative buffer with `sp_buffer`. 
-  - Export spatial objects and data frames to GPX or GeoJSON files with `write_gpx` and `write_geojson`. 
+  - "Promote" or "demote" Spatial* to Spatial*DataFrame, **i.e.** add or drop data slots for geometries. 
+  - Export spatial objects to spatial files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
   
 ## Fancy functions
 

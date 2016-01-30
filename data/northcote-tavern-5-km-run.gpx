@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx version="1.1" creator="Mapometer.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+<name>Northcote Tavern 5 km run</name>
+<desc></desc>
+<author><name>stug.stug</name></author>
+<time>2013-12-31T11:07:37Z</time>
+<bounds minlat="-36.826591" minlon="174.740707" maxlat="-36.814880" maxlon="174.749313" />
+</metadata>
+<rte>
+
+<rtept lon="174.749000" lat="-36.822660">
+</rtept>
+<rtept lon="174.749030" lat="-36.822750">
+</rtept>
+<rtept lon="174.748950" lat="-36.822840">
+</rtept>
+<rtept lon="174.748270" lat="-36.823020">
+</rtept>
+<rtept lon="174.748180" lat="-36.823130">
+</rtept>
+<rtept lon="174.748070" lat="-36.823860">
+</rtept>
+<rtept lon="174.747830" lat="-36.824560">
+</rtept>
+<rtept lon="174.747480" lat="-36.826590">
+</rtept>
+<rtept lon="174.748190" lat="-36.826380">
+</rtept>
+<rtept lon="174.748580" lat="-36.825930">
+</rtept>
+<rtept lon="174.748870" lat="-36.825270">
+</rtept>
+<rtept lon="174.749120" lat="-36.823040">
+</rtept>
+<rtept lon="174.749100" lat="-36.822890">
+</rtept>
+<rtept lon="174.748670" lat="-36.821750">
+</rtept>
+<rtept lon="174.748350" lat="-36.821710">
+</rtept>
+<rtept lon="174.748020" lat="-36.821740">
+</rtept>
+<rtept lon="174.747920" lat="-36.821670">
+</rtept>
+<rtept lon="174.747360" lat="-36.820070">
+</rtept>
+<rtept lon="174.747150" lat="-36.819820">
+</rtept>
+<rtept lon="174.747210" lat="-36.819760">
+</rtept>
+<rtept lon="174.747660" lat="-36.819590">
+</rtept>
+<rtept lon="174.747720" lat="-36.819520">
+</rtept>
+<rtept lon="174.747720" lat="-36.818910">
+</rtept>
+<rtept lon="174.747830" lat="-36.817390">
+</rtept>
+<rtept lon="174.747730" lat="-36.817320">
+</rtept>
+<rtept lon="174.746760" lat="-36.817280">
+</rtept>
+<rtept lon="174.746720" lat="-36.817450">
+</rtept>
+<rtept lon="174.746550" lat="-36.817780">
+</rtept>
+<rtept lon="174.746420" lat="-36.817850">
+</rtept>
+<rtept lon="174.745500" lat="-36.817810">
+</rtept>
+<rtept lon="174.745460" lat="-36.817640">
+</rtept>
+<rtept lon="174.745290" lat="-36.817590">
+</rtept>
+<rtept lon="174.745390" lat="-36.816170">
+</rtept>
+<rtept lon="174.745290" lat="-36.816130">
+</rtept>
+<rtept lon="174.744220" lat="-36.816210">
+</rtept>
+<rtept lon="174.743120" lat="-36.816400">
+</rtept>
+<rtept lon="174.743010" lat="-36.816390">
+</rtept>
+<rtept lon="174.742980" lat="-36.816050">
+</rtept>
+<rtept lon="174.743310" lat="-36.815020">
+</rtept>
+<rtept lon="174.743310" lat="-36.814920">
+</rtept>
+<rtept lon="174.743230" lat="-36.814880">
+</rtept>
+<rtept lon="174.742290" lat="-36.815150">
+</rtept>
+<rtept lon="174.741890" lat="-36.815350">
+</rtept>
+<rtept lon="174.741370" lat="-36.815450">
+</rtept>
+<rtept lon="174.740730" lat="-36.815660">
+</rtept>
+<rtept lon="174.740710" lat="-36.815740">
+</rtept>
+<rtept lon="174.740770" lat="-36.815870">
+</rtept>
+<rtept lon="174.740890" lat="-36.815940">
+</rtept>
+<rtept lon="174.741390" lat="-36.816060">
+</rtept>
+<rtept lon="174.741830" lat="-36.816070">
+</rtept>
+<rtept lon="174.741890" lat="-36.816130">
+</rtept>
+<rtept lon="174.741890" lat="-36.816200">
+</rtept>
+<rtept lon="174.742730" lat="-36.816410">
+</rtept>
+<rtept lon="174.742830" lat="-36.816500">
+</rtept>
+<rtept lon="174.742860" lat="-36.816710">
+</rtept>
+<rtept lon="174.742940" lat="-36.816770">
+</rtept>
+<rtept lon="174.745130" lat="-36.817640">
+</rtept>
+<rtept lon="174.745240" lat="-36.817660">
+</rtept>
+<rtept lon="174.745340" lat="-36.817600">
+</rtept>
+<rtept lon="174.745400" lat="-36.817610">
+</rtept>
+<rtept lon="174.745470" lat="-36.817520">
+</rtept>
+<rtept lon="174.745590" lat="-36.816220">
+</rtept>
+<rtept lon="174.745690" lat="-36.816150">
+</rtept>
+<rtept lon="174.746620" lat="-36.816180">
+</rtept>
+<rtept lon="174.747500" lat="-36.816040">
+</rtept>
+<rtept lon="174.749270" lat="-36.816280">
+</rtept>
+<rtept lon="174.749320" lat="-36.816350">
+</rtept>
+<rtept lon="174.749210" lat="-36.816680">
+</rtept>
+<rtept lon="174.749100" lat="-36.816720">
+</rtept>
+<rtept lon="174.748470" lat="-36.816750">
+</rtept>
+<rtept lon="174.748310" lat="-36.816830">
+</rtept>
+<rtept lon="174.748000" lat="-36.817220">
+</rtept>
+<rtept lon="174.747820" lat="-36.817740">
+</rtept>
+<rtept lon="174.747740" lat="-36.818720">
+</rtept>
+<rtept lon="174.747730" lat="-36.819520">
+</rtept>
+<rtept lon="174.747690" lat="-36.819590">
+</rtept>
+<rtept lon="174.747180" lat="-36.819790">
+</rtept>
+<rtept lon="174.747390" lat="-36.820120">
+</rtept>
+<rtept lon="174.747950" lat="-36.821710">
+</rtept>
+<rtept lon="174.748190" lat="-36.822490">
+</rtept>
+<rtept lon="174.748200" lat="-36.822850">
+</rtept>
+<rtept lon="174.748310" lat="-36.822870">
+</rtept>
+<rtept lon="174.748970" lat="-36.822820">
+</rtept>
+<rtept lon="174.749040" lat="-36.822750">
+</rtept>
+<rtept lon="174.749000" lat="-36.822620">
+</rtept>
+
+</rte>
+</gpx>

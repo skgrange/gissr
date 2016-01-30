@@ -26,9 +26,7 @@ write_shapefile <- function (sp, file) {
   destination <- dirname(file)
   
   # Create directory if it does not exist
-  if (!file.exists(destination)) {
-    dir.create(destination, recursive = TRUE)
-  }
+  if (!file.exists(destination)) dir.create(destination, recursive = TRUE)
   
   # Get layer which is file name
   layer <- basename(file)
@@ -46,3 +44,4 @@ write_shapefile <- function (sp, file) {
   # No return
   
 }
+

@@ -25,7 +25,7 @@ data_frame_to_points <- function (df, latitude = "latitude",
   df <- threadr::base_df(df)
   
   # Make sp points object
-  coordinates(df) <- c(longitude, latitude)
+  sp::coordinates(df) <- c(longitude, latitude)
   
   # Reassign
   sp <- df
@@ -100,10 +100,10 @@ data_frame_to_lines <- function (df, latitude = "latitude",
   }
   
   # Create SpatialLines
-  sp <- SpatialLines(lines)
+  sp <- sp::SpatialLines(lines)
   
   # Make SpatialLinesDataFrame
-  sp <- SpatialLinesDataFrame(sp, data_extras, match.ID = FALSE)
+  sp <- sp::SpatialLinesDataFrame(sp, data_extras, match.ID = FALSE)
   
   # Give projection
   sp <- sp_transform(sp, projection, warn = FALSE)
@@ -179,7 +179,7 @@ data_frame_to_polygons <- function (df, latitude = "latitude",
   sp <- do.call(rbind, sp)
   
   # Make sp dataframe
-  sp <- SpatialPolygonsDataFrame(sp, data_extras)
+  sp <- sp::SpatialPolygonsDataFrame(sp, data_extras)
   
   # Give projection
   sp <- sp_transform(sp, projection, warn = FALSE)
@@ -199,7 +199,7 @@ matrix_to_sp_polygon <- function (matrix, id) {
   polygon <- Polygons(list(polygon), id)
   
   # To spatial polygons
-  sp <- SpatialPolygons(list(polygon))
+  sp <- sp::SpatialPolygons(list(polygon))
   
   # Return
   sp

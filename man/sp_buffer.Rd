@@ -7,11 +7,13 @@
 sp_buffer(sp, features = TRUE, width)
 }
 \arguments{
-\item{sp}{Spatial object. 
-.}
+\item{sp}{Spatial object.}
 
 \item{features}{Should the geometries of all features within \code{sp} be
 buffered? Default is \code{TRUE}.}
+
+\item{width}{Width of buffer. \code{width}'s units is in \code{sp}'s 
+projection system.}
 }
 \description{
 Function to include or exclude an area of a spatial object.

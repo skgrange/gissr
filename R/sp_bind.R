@@ -84,3 +84,4 @@ sp_list_bind <- function (sp_list) do.call("rbind", sp_list)
 # Function to randomly sample n features in a spatial object. 
 #' @export
 sp_sample_n <- function (sp, n) sp[sample(nrow(sp), n), ]
+

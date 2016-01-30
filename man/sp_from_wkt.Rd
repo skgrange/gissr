@@ -6,7 +6,7 @@
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
 sp_from_wkt(df, wkt = "geom", data = TRUE, projection = NA,
-  verbose = FALSE)
+  verbose = TRUE)
 
 sp_to_wkt(sp, features = TRUE)
 }
@@ -16,20 +16,20 @@ a vector of WKT strings.}
 
 \item{wkt}{Variable name of WKT strings in \code{df}. Default is \code{"geom"}.}
 
-\item{data}{Should all variables other than \code{wkt} be added to the
-spatial object's data-slot? I.e. create a spatial data frame.}
+\item{data}{Should variables other than \code{wkt} be added to the spatial 
+object's data-slot? I.e. create a spatial data frame.}
 
 \item{projection}{A proj4 string to force the projection system after the WKT
 strings have been parsed. Default is \code{NA}.}
 
 \item{verbose}{Should the function give messages? Useful when large number of
-WKT strings are to be parsed. Default is \code{FALSE}.}
+WKT strings are to be parsed. Default is \code{TRUE}.}
 }
 \description{
-\code{sp_from_wkt} creates spatial objects from WKT strings and can create
-spatial data frames from the other variables contained within the input data 
-frame. \code{sp_from_wkt} is useful after querying a PostGIS database for 
-geometries in WKT format.
+\code{sp_from_wkt} creates geometries from WKT strings and can create spatial
+data frames from the other variables contained within the input data frame. 
+\code{sp_from_wkt} is useful after querying a PostGIS database for geometries
+in WKT format.
 }
 \examples{
 \dontrun{

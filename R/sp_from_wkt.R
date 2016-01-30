@@ -1,23 +1,23 @@
 #' Function to parse a data frame containing WKT strings to a spatial object. 
 #' 
-#' \code{sp_from_wkt} creates spatial objects from WKT strings and can create
-#' spatial data frames from the other variables contained within the input data 
-#' frame. \code{sp_from_wkt} is useful after querying a PostGIS database for 
-#' geometries in WKT format. 
+#' \code{sp_from_wkt} creates geometries from WKT strings and can create spatial
+#' data frames from the other variables contained within the input data frame. 
+#' \code{sp_from_wkt} is useful after querying a PostGIS database for geometries
+#' in WKT format. 
 #' 
 #' @param df Data frame containing a WKT string variable. \code{df} can also be
 #' a vector of WKT strings. 
 #' 
 #' @param wkt Variable name of WKT strings in \code{df}. Default is \code{"geom"}.
 #' 
-#' @param data Should all variables other than \code{wkt} be added to the
-#' spatial object's data-slot? I.e. create a spatial data frame.
+#' @param data Should variables other than \code{wkt} be added to the spatial 
+#' object's data-slot? I.e. create a spatial data frame.
 #' 
 #' @param projection A proj4 string to force the projection system after the WKT
 #' strings have been parsed. Default is \code{NA}. 
 #' 
 #' @param verbose Should the function give messages? Useful when large number of
-#' WKT strings are to be parsed. Default is \code{FALSE}. 
+#' WKT strings are to be parsed. Default is \code{TRUE}. 
 #'
 #' @author Stuart K. Grange
 #' 
@@ -33,7 +33,7 @@
 #' 
 #' @export
 sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA, 
-                         verbose = FALSE) {
+                         verbose = TRUE) {
   
   # Catch dplyr's table data frame
   df <- threadr::base_df(df)
@@ -69,7 +69,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
   }
   
   # Message
-  if (verbose) message("Parsing WKT strings...")
+  if (verbose) message("Parsing WKT...")
   
   # Warning catch is for geoms with negative areas. Why does this occur? 
   suppressWarnings(
@@ -93,7 +93,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
     
   } else {
     # Rename feature ids within list
-    if (verbose) message("Binding spatial features together...")
+    if (verbose) message("Binding geometries...")
     
     # Reset feature ids
     sp_list <- sp_reset_feature_ids(sp_list)

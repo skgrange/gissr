@@ -29,11 +29,45 @@ sp_create_envelope <- function (envelope, projection = "+proj=longlat +datum=WGS
   polygon <- SpatialPolygons(list(polygon))
   
   # Give projection
-  if (!is.na(projection)) {
-    polygon <- sp_transform(polygon, projection, warn = FALSE)
-  }
+  if (!is.na(projection)) polygon <- sp_transform(polygon, projection, warn = FALSE)
+  
   
   # Return
   polygon
   
 }
+
+
+#' Function to create a elliptical polygon from a point, usually used for 
+#' filtering. 
+#' 
+#' @parm latitude
+#'
+#' @parm longitude
+#'
+#' @param width
+#'
+#' @param projection A proj4 string. Default is the WGS84 string. 
+#' 
+#' @author Stuart K. Grange
+#'
+#' @export
+sp_create_ellipse <- function (latitude, longitude, width = 0.01,
+                               projection = "+proj=longlat +datum=WGS84 +no_defs") {
+  
+  # Create a point
+  sp_point <- sp::SpatialPoints(cbind(longitude, latitude))
+  
+  # Give projection
+  sp_point <- sp_transform(sp_point, projection, warn = FALSE)
+  
+  # Buffer point
+  suppressWarnings(
+    sp_polygon <- sp_buffer(sp_point, width = width)
+  )
+  
+  # Return
+  sp_polygon
+  
+}
+

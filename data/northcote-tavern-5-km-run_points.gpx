@@ -1,0 +1,599 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 1.11.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://osgeo.org/gdal" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata><bounds minlat="-36.826590000000003" minlon="174.740710000000007" maxlat="-36.814880000000002" maxlon="174.749320000000012"/></metadata>              
+<wpt lat="-36.82266" lon="174.749">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82275" lon="174.74903">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82284" lon="174.74895">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82302" lon="174.74827">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82313" lon="174.74818">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82386" lon="174.74807">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82456" lon="174.74783">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82659" lon="174.74748">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82638" lon="174.74819">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82593" lon="174.74858">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82527" lon="174.74887">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82304" lon="174.74912">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82289" lon="174.7491">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82175" lon="174.74867">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82171" lon="174.74835">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82174" lon="174.74802">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82167" lon="174.74792">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82007" lon="174.74736">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81982" lon="174.74715">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81976" lon="174.74721">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81959" lon="174.74766">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81952" lon="174.74772">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81891" lon="174.74772">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81739" lon="174.74783">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81732" lon="174.74773">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81728" lon="174.74676">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81745" lon="174.74672">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81778" lon="174.74655">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81785" lon="174.74642">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81781" lon="174.7455">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81764" lon="174.74546">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81759" lon="174.74529">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81617" lon="174.74539">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81613" lon="174.74529">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81621" lon="174.74422">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.8164" lon="174.74312">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81639" lon="174.74301">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81605" lon="174.74298">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81502" lon="174.74331">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81492" lon="174.74331">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81488" lon="174.74323">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81515" lon="174.74229">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81535" lon="174.74189">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81545" lon="174.74137">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81566" lon="174.74073">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81574" lon="174.74071">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81587" lon="174.74077">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81594" lon="174.74089">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81606" lon="174.74139">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81607" lon="174.74183">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81613" lon="174.74189">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.8162" lon="174.74189">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81641" lon="174.74273">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.8165" lon="174.74283">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81671" lon="174.74286">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81677" lon="174.74294">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81764" lon="174.74513">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81766" lon="174.74524">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.8176" lon="174.74534">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81761" lon="174.7454">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81752" lon="174.74547">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81622" lon="174.74559">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81615" lon="174.74569">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81618" lon="174.74662">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81604" lon="174.7475">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81628" lon="174.74927">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81635" lon="174.74932">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81668" lon="174.74921">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81672" lon="174.7491">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81675" lon="174.74847">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81683" lon="174.74831">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81722" lon="174.748">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81774" lon="174.74782">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81872" lon="174.74774">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81952" lon="174.74773">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81959" lon="174.74769">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.81979" lon="174.74718">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82012" lon="174.74739">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82171" lon="174.74795">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82249" lon="174.74819">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82285" lon="174.7482">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82287" lon="174.74831">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82282" lon="174.74897">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82275" lon="174.74904">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+<wpt lat="-36.82262" lon="174.749">
+  <extensions>
+    <ogr:Lines.NR>1</ogr:Lines.NR>
+    <ogr:Lines.ID>0</ogr:Lines.ID>
+    <ogr:Line.NR>1</ogr:Line.NR>
+  </extensions>
+</wpt>
+</gpx>

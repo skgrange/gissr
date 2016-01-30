@@ -64,6 +64,7 @@ sp_promote <- function (sp) {
 #' sp_without_data <- sp_promote(sp_with_data)
 #' }
 #'
+#' @export
 sp_demote <- function (sp) {
 
   # Get class of object
