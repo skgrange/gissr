@@ -6,14 +6,12 @@ r_binary_packages:
   - Rcpp
   - testthat
   
-# System dependencies for rgdal
+# System dependencies for rgdal and V8
 apt_packages:
- - libgdal-dev
- - libproj-dev
- 
-# and V8
+  - libgdal-dev
+  - libproj-dev
   - libv8-dev
-
+  
 # Install development package
 r_github_packages:
   - skgrange/threadr
