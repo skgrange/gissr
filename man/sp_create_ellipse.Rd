@@ -9,7 +9,12 @@ sp_create_ellipse(latitude, longitude, width = 0.01,
   projection = "+proj=longlat +datum=WGS84 +no_defs")
 }
 \arguments{
-\item{width}{}
+\item{latitude}{Latitude of a point.}
+
+\item{longitude}{Longitude of a point.}
+
+\item{width}{Width of radius. \code{"width"}'s unit is in the projection of
+\code{projection}. The default is 0.01 decimal degrees.}
 
 \item{projection}{A proj4 string. Default is the WGS84 string.}
 }

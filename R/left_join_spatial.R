@@ -26,8 +26,7 @@
 #' 
 #' @param polygons A spatial-polygon data frame to be joined to \code{df}.
 #' 
-#' @seealso See \code{\link{sp_transform}}, \code{\link{over}}, 
-#' \code{\link{merge}}
+#' @seealso \code{\link{sp_transform}}, \code{\link{over}}, \code{\link{merge}}
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -83,9 +82,7 @@ left_join_spatial <- function (df, latitude = "latitude",
   df <- data.frame(sp_object)
   
   # Drop logical optional variable which occurs during projection manipulations
-  if ("optional" %in% names(df)) {
-    df[, "optional"] <- NULL
-  }
+  if ("optional" %in% names(df)) df[, "optional"] <- NULL
   
   # Add joined variable to data frame
   df <- cbind(df, df_match)

@@ -62,7 +62,6 @@ left_join_spatial(data_point, polygons = shape_file)
 Stuart K. Grange
 }
 \seealso{
-See \code{\link{sp_transform}}, \code{\link{over}}, 
-\code{\link{merge}}
+\code{\link{sp_transform}}, \code{\link{over}}, \code{\link{merge}}
 }
 

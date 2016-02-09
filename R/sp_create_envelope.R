@@ -26,11 +26,10 @@ sp_create_envelope <- function (envelope, projection = "+proj=longlat +datum=WGS
   polygon <- Polygons(list(polygon), ID = "1")
   
   # Spatial class with projection
-  polygon <- SpatialPolygons(list(polygon))
+  polygon <- sp::SpatialPolygons(list(polygon))
   
   # Give projection
   if (!is.na(projection)) polygon <- sp_transform(polygon, projection, warn = FALSE)
-  
   
   # Return
   polygon
@@ -41,11 +40,12 @@ sp_create_envelope <- function (envelope, projection = "+proj=longlat +datum=WGS
 #' Function to create a elliptical polygon from a point, usually used for 
 #' filtering. 
 #' 
-#' @parm latitude
+#' @param latitude Latitude of a point. 
 #'
-#' @parm longitude
+#' @param longitude Longitude of a point. 
 #'
-#' @param width
+#' @param width Width of radius. \code{"width"}'s unit is in the projection of
+#' \code{projection}. The default is 0.01 decimal degrees. 
 #'
 #' @param projection A proj4 string. Default is the WGS84 string. 
 #' 

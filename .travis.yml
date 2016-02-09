@@ -10,10 +10,10 @@ r_binary_packages:
 apt_packages:
   - libgdal-dev
   - libproj-dev
+  - libhdf5-serial-dev
   - libv8-dev
   
 # Install development package
 r_github_packages:
   - skgrange/threadr
-  
-  
+

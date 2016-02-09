@@ -19,9 +19,9 @@
 #' 
 #' @param latitude A vector of latitude values in decimal degrees.
 #' 
-#' @param longitude_2 A vector of longitude values in decimal degrees.
+#' @param longitude_lag A vector of longitude values in decimal degrees.
 #' 
-#' @param latitude_2 A vector of latitude values in decimal degrees.
+#' @param latitude_lag A vector of latitude values in decimal degrees.
 #' 
 #' @param unit The unit of the returned distance values. Can be metres or 
 #' kilometres. Metres is the default. 
@@ -63,21 +63,27 @@
 #' }
 #' 
 #' @export
-distance_by_haversine <- function (latitude, longitude, 
-                                   latitude_2, longitude_2, unit = "metres",
-                                   radius = 6371) {
+distance_by_haversine <- function (latitude = "latitude", longitude = "longitude", 
+                                   latitude_lag = NA, longitude_lag = NA, 
+                                   unit = "metres", radius = 6371) {
   # Switch units, a check
   unit <- switch(unit, 
     "m" =, "meter" =, "metre" =, "metres" =, "meters" = "meters",
     "km" =, "kilometer" =, "kilometre" =, "kilometers" =, "kilometres" = "kilometres")
   
+  # Create lagged variables if not declared
+  if (is.na(latitude_lag) & is.na(longitude_lag)) {
+    latitude_lag <- dplyr::lag(latitude, 1)
+    longitude_lag <- dplyr::lag(longitude, 1)
+  }
+  
   # Get degree deltas for coordinate pairs
-  delta_longitude <- (longitude_2 - longitude) * pi / 180
-  delta_latitude <- (latitude_2 - latitude) * pi / 180
+  delta_longitude <- (longitude_lag - longitude) * pi / 180
+  delta_latitude <- (latitude_lag - latitude) * pi / 180
   
   # Use the haversine function
   haversin <- sin(delta_latitude / 2) * sin(delta_latitude / 2) + 
-    cos(latitude * pi / 180) * cos(latitude_2 * pi / 180) * 
+    cos(latitude * pi / 180) * cos(latitude_lag * pi / 180) * 
     sin(delta_longitude / 2) * sin(delta_longitude / 2)
   
   # Calculate distance
@@ -86,9 +92,7 @@ distance_by_haversine <- function (latitude, longitude,
   # Calculate distance as metres
   distance <- radius * distance
   
-  if (unit == "meters") {
-    distance <- distance * 1000
-  }
+  if (unit == "meters") distance <- distance * 1000
   
   # Return
   distance

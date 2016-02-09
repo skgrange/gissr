@@ -4,17 +4,17 @@
 \alias{distance_by_haversine}
 \title{Function to calculate distances between two points in metres or kilometres.}
 \usage{
-distance_by_haversine(latitude, longitude, latitude_2, longitude_2,
-  unit = "metres", radius = 6371)
+distance_by_haversine(latitude = "latitude", longitude = "longitude",
+  latitude_lag = NA, longitude_lag = NA, unit = "metres", radius = 6371)
 }
 \arguments{
 \item{latitude}{A vector of latitude values in decimal degrees.}
 
 \item{longitude}{A vector of longitude values in decimal degrees.}
 
-\item{latitude_2}{A vector of latitude values in decimal degrees.}
+\item{latitude_lag}{A vector of latitude values in decimal degrees.}
 
-\item{longitude_2}{A vector of longitude values in decimal degrees.}
+\item{longitude_lag}{A vector of longitude values in decimal degrees.}
 
 \item{unit}{The unit of the returned distance values. Can be metres or 
 kilometres. Metres is the default.}

@@ -80,3 +80,28 @@ test_that("Test `sp_read` for kml files", {
   expect_equal(class(sp_kml_points)[1], "SpatialPointsDataFrame")
 
 })
+
+
+test_that("Test `sp_read` for gml files", {
+  
+  # GML to GeoJSON conversion
+  suppressWarnings(
+    sp_gml <- sp_read("../../data/2013_G_GB_Attainment.xml", 
+                      layer = "AQD_Attainment", verbose = FALSE)
+  )
+
+  # Test the types
+  expect_equal(class(sp_gml)[1], "SpatialPolygonsDataFrame")
+  
+})
+
+
+test_that("Test `sp_read` for Geodatabase", {
+  
+  # GML to GeoJSON conversion
+  sp <- sp_read("../../data/World.gdb", "Yemen", verbose = FALSE)
+  
+  # Test the types
+  expect_equal(class(sp)[1], "SpatialPolygonsDataFrame")
+  
+})

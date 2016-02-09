@@ -8,16 +8,18 @@ sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{file}{Spatial data file name. For shapefiles and Mapinfo TAB files, a
-file extension is optional.}
+file extension is optional. For File Geodatabases, an extension is required 
+(usually \code{.gdb}).}
 
 \item{layer}{Layer within \code{file} to read. Default is \code{NULL} and 
 should not be needed for shapefiles, Mapinfo TAB files, and GeoJSON files. 
-Default behavior for GPX files is to attempt to read the \code{"tracks"} 
+Default behaviour for GPX files is to attempt to read the \code{"tracks"} 
 layer.}
 
 \item{geom}{An override for when spatial data files contain more than one 
-geometry type which is commonly found in GeoJSON and KML files. \code{geom} 
-can be one of: \code{"points"}, \code{"lines"}, or \code{"polygons"}.}
+geometry type in a layer. This is commonly found in GeoJSON and KML files. 
+\code{geom} can be one of: \code{"points"}, \code{"lines"}, or 
+\code{"polygons"}.}
 
 \item{lower}{Should the names of the data slot be forced to be lower case? 
 Note that the default is \code{TRUE}.}
@@ -48,6 +50,9 @@ sp_thames_locks <- sp_read("thames_locks.json", verbose = FALSE)
 # Load mapinfo file
 sp_coastline <- sp_read("nz-land-districts.map", verbose = FALSE)
 
+# Geodatabase
+sp_yemen <- sp_read("world.gdb", layer = "yemen", verbose = FALSE)
+
 }
 
 }
@@ -55,6 +60,7 @@ sp_coastline <- sp_read("nz-land-districts.map", verbose = FALSE)
 Stuart K. Grange
 }
 \seealso{
-\code{\link{readOGR}}, \code{\link{ogrInfo}}, \code{\link{ogrDrivers}}
+\code{\link{readOGR}}, \code{\link{sp_list_drivers}}, 
+\code{\link{sp_list_layers}}, \code{\link{sp_list_info}}
 }
 
