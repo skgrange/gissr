@@ -14,6 +14,9 @@ apt_packages:
   - libhdf5-7
   - libhdf5-serial-dev
   - libv8-dev
+  - libgdal1h
+  - libnetcdf-dev
+  - libhdf4-alt-dev
   
 # Install development package
 r_github_packages:
