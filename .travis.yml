@@ -11,6 +11,7 @@ apt_packages:
   - libgdal-dev
   - libproj-dev
   - libhdf5-dev
+  - libhdf5-7
   - libhdf5-serial-dev
   - libv8-dev
   
