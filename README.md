@@ -27,7 +27,7 @@ However, the challenges I have with using R as a GIS include: keeping track of t
 
 ## Utility functions
 
-  - Read shapefiles, GPX, GeoJSON, KML, MapInfo files with `sp_read`, a wrapper for `rgdal::readOGR`.
+  - Read: shapefiles, GPX, GeoJSON, KML, GML, TAB, and File Geodatabases with `sp_read`, a wrapper for `rgdal::readOGR`.
   - Transform projection systems with `sp_transform`.
     - `sp_transform` can also force projections when a spatial object has none.
     - `transform_coordinates` does a similar thing, but for data frames.
@@ -44,7 +44,7 @@ However, the challenges I have with using R as a GIS include: keeping track of t
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
   - Add a positive or negative buffer with `sp_buffer`. 
-  - "Promote" or "demote" Spatial* to Spatial*DataFrame, **i.e.** add or drop data slots for geometries. 
+  - "Promote" or "demote" Spatial\* to Spatial\*DataFrame, *i.e.* add or drop data slots for geometries. 
   - Export spatial objects to spatial files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
   
 ## Fancy functions

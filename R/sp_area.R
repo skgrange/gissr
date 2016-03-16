@@ -33,9 +33,8 @@
 sp_area <- function (sp, unit = "m", features = TRUE) {
   
   # Unit check
-  if (!unit %in% c("m", "km", "ha", "ac")) {
-    stop("Unit must be 'm', 'km', 'ha', or 'ac'.")
-  }
+  if (!unit %in% c("m", "km", "ha", "ac"))
+    stop("Unit must be 'm', 'km', 'ha', or 'ac'.", call. = FALSE)
   
   # Use a trigonometric function for latitude and longitude pairs
   if (sp_projection(sp) %in% 
@@ -62,17 +61,11 @@ sp_area <- function (sp, unit = "m", features = TRUE) {
   }
   
   # Transform units
-  if (unit == "km") {
-    vector <- vector / 1000000
-  }
+  if (unit == "km") vector <- vector / 1000000
   
-  if (unit == "ha") {
-    vector <- vector / 10000
-  }
-  
-  if (unit == "ac") {
-    vector <- vector * 0.000247105381
-  }
+  if (unit == "ha") vector <- vector / 10000
+
+  if (unit == "ac") vector <- vector * 0.000247105381
   
   # Return
   vector

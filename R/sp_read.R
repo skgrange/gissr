@@ -62,13 +62,16 @@ sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TR
   if (is.null(layer)) {
     
     if (grepl("json$", file, ignore.case = TRUE)) {
+    
       layer <- "OGRGeoJSON"
       
     } else if (grepl(".gpx$", file, ignore.case = TRUE)) {
+    
       # Default to tracks because this is what I use most often
       layer <- "tracks"
       
     } else {
+    
       # The best guess for shapefiles and mapinfo files
       # Get layer which is file name
       layer <- basename(file)
@@ -85,7 +88,9 @@ sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TR
   
   # Switch for GPX files
   if (!is.null(layer) & grepl(".gpx$", file, ignore.case = TRUE)) {
+  
     layer <- ifelse(layer %in% c("point", "points"), "waypoints", layer)
+    
   }
   
   # Switch for geom type
@@ -99,7 +104,9 @@ sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TR
   
   # Lower case names for data slot
   if (lower & grepl("data", class(sp), ignore.case = TRUE)) {
+  
     names(sp@data) <- tolower(names(sp@data))
+    
   }
   
   # Remove NA variables, happens often in gpx files
@@ -181,6 +188,7 @@ sp_layer_info <- function (file, layer, geom) {
 
 # A useful swtich 
 parse_geom <- function (geom) {
+
   geom <- stringr::str_to_lower(geom)
   geom <- ifelse(geom %in% c("point", "points"), "wkbPoint", geom)
   geom <- ifelse(geom %in% c("line", "lines"), "wkbLineString", geom)

@@ -7,6 +7,7 @@
 #' @author Stuart K. Grange
 #' 
 #' @param sp Spatial object to be clipped. 
+#' 
 #' @param envelope A vector with the length of 4 containing the extent of the 
 #' envelope to be used as a bounding box. The order is: xmin, xmax, ymin, ymax.
 #' Watch out when using latitude and longitude, the order is longitude, longitude,

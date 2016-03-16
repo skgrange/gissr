@@ -1,11 +1,11 @@
 #' Function to calculate sunrise and sunset dates and times for a location. 
 #' 
-#' \code{get_sunrise} uses \code{maptools::sunriset} for the calculation of dates
+#' \code{get_sunrise} uses \code{\link{sunriset}} for the calculation of dates
 #' and times. 
 #' 
 #' @return Tidy data frame or pretty printed JSON.
 #' 
-#' @seealso \link{maptools::sunriset}
+#' @seealso \code{\link{sunriset}}
 #' 
 #' @param latitude Latitude of a location. 
 #' 
@@ -41,22 +41,15 @@ get_sunrise <- function (latitude, longitude, start = NA, end = NA, json = FALSE
   sp <- data_frame_to_points(data.frame(latitude, longitude))
   
   # Catch dates
-  if (is.na(start)) {
-    start <- Sys.Date()
-  }
-  
-  if (is.na(end)) {
-    end <- Sys.Date()
-  }
+  if (is.na(start)) start <- Sys.Date()
+  if (is.na(end)) end <- Sys.Date()
   
   # Parse
   start <- lubridate::ymd(start)
   end <- lubridate::ymd(end)
   
   # Catch again
-  if (start > end) {
-    end <- start
-  }
+  if (start > end) end <- start
   
   # Create date sequence
   date <- seq(start, end, "day")
@@ -64,19 +57,24 @@ get_sunrise <- function (latitude, longitude, start = NA, end = NA, json = FALSE
   # Calculate sunrise for dates
   sunrise <- maptools::sunriset(sp, date, direction = "sunrise", POSIXct.out = TRUE)
   sunrise <- sunrise[, 2]
+  sunrise <- lubridate::round_date(sunrise, "second")
   
   # Calculate sunset for dates
   sunset <- maptools::sunriset(sp, date, direction = "sunset", POSIXct.out = TRUE)
   sunset <- sunset[, 2]
+  sunset <- lubridate::round_date(sunset, "second")
   
-  # Bind variables
-  df <- data.frame(date, latitude, longitude, date_sunrise = sunrise, 
+  # Build data frame
+  df <- data.frame(date, 
+                   latitude, 
+                   longitude, 
+                   date_sunrise = sunrise, 
                    date_sunset = sunset)
   
   # Add the extras
   df$daylight <- difftime(df$date_sunset, df$date_sunrise, units = "hours")
   df$daylight <- as.numeric(df$daylight)
-  df$daylight <- round(df$daylight, 3)
+  # df$daylight <- round(df$daylight, 3)
   
   # Get times
   df$time_sunrise <- stringr::str_split_fixed(df$date_sunrise, " ", 2)[, 2]
@@ -85,9 +83,7 @@ get_sunrise <- function (latitude, longitude, start = NA, end = NA, json = FALSE
   df$time_sunset <- stringr::str_split_fixed(df$date_sunset, " ", 2)[, 2]
   df$time_sunset <- lubridate::parse_date_time(df$time_sunset, "hms")
   
-  if (json) {
-    df <- jsonlite::toJSON(df, pretty = TRUE)
-  }
+  if (json) df <- jsonlite::toJSON(df, pretty = TRUE)
   
   # Return
   df
@@ -105,9 +101,7 @@ parse_date_arguments <- function (date, what) {
   if (what == "start") {
     
     # Catch for when years are used as dates
-    if (!is.na(date) & nchar(date) == 4) {
-      date <- stringr::str_c(date, "-01-01")
-    }
+    if (!is.na(date) & nchar(date) == 4) date <- stringr::str_c(date, "-01-01")
     
     # Round
     date <- ifelse(is.na(date), 
@@ -118,9 +112,7 @@ parse_date_arguments <- function (date, what) {
   # End of year
   if (what == "end") {
     
-    if (!is.na(date) & nchar(date) == 4) {
-      date <- stringr::str_c(date, "-12-31")
-    }
+    if (!is.na(date) & nchar(date) == 4) date <- stringr::str_c(date, "-12-31")
     
     # Round
     date <- ifelse(is.na(date), 

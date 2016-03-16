@@ -16,8 +16,16 @@ leaflet_plot <- function (sp, popup = NULL, force = TRUE) {
   if (force) sp <- sp_transform(sp)
   
   # Create map
-  map <- leaflet(sp) %>% 
-    addTiles()
+  map <- leaflet(sp) %>%
+    addTiles(group = "OpenStreetMap") %>%
+    addProviderTiles("Stamen.Toner", group = "Toner") %>%
+    addProviderTiles("Thunderforest.Landscape", group = "Landscape") %>%
+    addProviderTiles("Thunderforest.TransportDark", group = "Transport dark") %>%
+    addProviderTiles("Thunderforest.Outdoors", group = "Outdoors") %>%
+    addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
+    addLayersControl(baseGroups = c(
+      "OpenStreetMap", "Toner", "Landscape", "Transport dark", "Outdoors", "Images"))
+
   
   # Add layers
   sp_class <- class(sp)[1]

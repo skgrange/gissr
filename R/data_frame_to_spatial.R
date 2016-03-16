@@ -215,7 +215,7 @@ data_frame_to_line <- function (df, latitude = "latitude",
                                 id = NA) {
   
   # Message
-  .Deprecated("data_frame_to_line", package = "gissr")
+  .Deprecated("data_frame_to_lines", package = "gissr")
   
   # Use function
   sp <- data_frame_to_lines(df, latitude, longitude, projection, id)
@@ -232,7 +232,7 @@ data_frame_to_polygon <- function (df, latitude = "latitude",
                                    id = NA) {
   
   # Message
-  .Deprecated("data_frame_to_polygon", package = "gissr")
+  .Deprecated("data_frame_to_polygons", package = "gissr")
   
   # Use function
   sp <- data_frame_to_polygons(df, latitude, longitude, projection, id)

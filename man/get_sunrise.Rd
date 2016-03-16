@@ -22,7 +22,7 @@ Useful for single observations.}
 Tidy data frame or pretty printed JSON.
 }
 \description{
-\code{get_sunrise} uses \code{maptools::sunriset} for the calculation of dates
+\code{get_sunrise} uses \code{\link{sunriset}} for the calculation of dates
 and times.
 }
 \examples{
@@ -44,6 +44,6 @@ get_sunrise(latitude = 51.5072, longitude = 0.1275, json = TRUE)
 Stuart K. Grange
 }
 \seealso{
-\link{maptools::sunriset}
+\code{\link{sunriset}}
 }
 
