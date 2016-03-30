@@ -2,7 +2,7 @@
 
 **gissr** is a collection of R functions which make working with spatial data easier.
 
-## To install:
+## Installation
 
 The development version: 
 ```
@@ -13,7 +13,7 @@ devtools::install_github("skgrange/threadr")
 devtools::install_github("skgrange/gissr")
 ```
 
-## To-do: 
+## To-do
 
   1. Do some more unit testing
   2. Work on documentation

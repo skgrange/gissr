@@ -12,14 +12,16 @@ sp_simplify(sp, tolerance, preserve = TRUE)
 \item{tolerance}{Tolerance value to be used by the Douglas-Peuker algorithm.}
 
 \item{preserve}{Should the algorithm attempt to preserve the topology? 
-Default is TRUE.}
+Default is \code{TRUE}.}
 }
 \description{
 Holes will appear between the geometries at times.
 }
 \examples{
 \dontrun{
+
 sp_simple <- sp_simplify(sp, 0.01)
+
 }
 
 }

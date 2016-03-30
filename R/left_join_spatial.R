@@ -52,16 +52,15 @@
 #' }
 #' 
 #' @export
-left_join_spatial <- function (df, latitude = "latitude", 
-                               longitude = "longitude", 
-                               projection = "+proj=longlat +datum=WGS84 +no_defs", 
-                               polygons = NA) {
+left_join_spatial <- function(df, latitude = "latitude", 
+                              longitude = "longitude", 
+                              projection = "+proj=longlat +datum=WGS84 +no_defs", 
+                              polygons = NA) {
   
   # Check the spatial object
-  if (!grepl("polygon", class(polygons), ignore.case = TRUE)) {
-    stop("Spatial-polygons must be defined in the 'polygon' argument.", 
+  if (!grepl("polygon", class(polygons), ignore.case = TRUE))
+    stop("Spatial-polygons must be defined in the 'polygons' argument.", 
          call. = FALSE)
-  }
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
@@ -82,7 +81,7 @@ left_join_spatial <- function (df, latitude = "latitude",
   df <- data.frame(sp_object)
   
   # Drop logical optional variable which occurs during projection manipulations
-  if ("optional" %in% names(df)) df[, "optional"] <- NULL
+  if ("optional" %in% names(df)) df <- df[, -grep("optional", names(df))]
   
   # Add joined variable to data frame
   df <- cbind(df, df_match)
