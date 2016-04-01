@@ -22,7 +22,7 @@ Function for converting a data frame to a SpatialPointsDataFrame.
 }
 \examples{
 \dontrun{
-sp_points <- data_frame_to_line(data_monitoring_sites, "latitude", "longitude")
+sp_points <- data_frame_to_points(data_monitoring_sites, "latitude", "longitude")
 }
 
 }

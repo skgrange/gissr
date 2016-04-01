@@ -29,9 +29,11 @@ address elements such as postcodes can also be transformed successfully.
 }
 \examples{
 \dontrun{
+
 google_geocode("bath abbey")
 string     address                                                    latitude longitude
 bath abbey bath abbey, bath, bath and north east somerset ba1 1lt, uk 51.38148 -2.358735
+
 }
 
 }

@@ -21,6 +21,7 @@ as \code{sp}.}
 in the spatial object intact.
 }
 \examples{
+
 \dontrun{
 # Clip a spatial lines object which contains roads in Saudi Arabia
 

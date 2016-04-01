@@ -26,6 +26,7 @@ Tidy data frame or pretty printed JSON.
 and times.
 }
 \examples{
+
 \dontrun{
 # Get sunrise and sunset dates for London for the current year
 get_sunrise(latitude = 51.5072, longitude = 0.1275)
