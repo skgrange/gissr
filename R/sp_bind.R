@@ -28,7 +28,7 @@
 #' }
 #'
 #' @export
-sp_bind <- function (sp, sp_2) {
+sp_bind <- function(sp, sp_2) {
   
   # Class check
   if (!class(sp) == class(sp_2)) {
@@ -50,16 +50,18 @@ sp_bind <- function (sp, sp_2) {
 #' @rdname sp_bind
 #' 
 #' @export
-sp_bind_many <- function (sp_list) {
+sp_bind_many <- function(sp_list) {
   
   # Class check
   if (!is.list(sp_list)) stop("Input must be list.", .call = FALSE)
   
   # Points can be easily bound with do.call
   if (grepl("point", class(sp_list[[1]]), ignore.case = TRUE)) {
+    
     sp_bind <- sp_list_bind(sp_list)
     
   } else {
+    
     # Reset ids, this will use uuids for uniqueness
     sp_list <- sp_reset_feature_ids(sp_list)
     
@@ -78,10 +80,10 @@ sp_bind_many <- function (sp_list) {
 
 
 # Bind objects using do.call
-sp_list_bind <- function (sp_list) do.call("rbind", sp_list)
+sp_list_bind <- function(sp_list) do.call("rbind", sp_list)
 
 
 # Function to randomly sample n features in a spatial object. 
 #' @export
-sp_sample_n <- function (sp, n) sp[sample(nrow(sp), n), ]
+sp_sample_n <- function(sp, n) sp[sample(nrow(sp), n), ]
 

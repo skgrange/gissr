@@ -32,14 +32,15 @@
 #' }
 #' 
 #' @export
-sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA, 
-                         verbose = TRUE) {
+sp_from_wkt <- function(df, wkt = "geom", data = TRUE, projection = NA, 
+                        verbose = TRUE) {
   
   # Catch dplyr's table data frame
   df <- threadr::base_df(df)
   
   # For vectors
   if (class(df) == "character") {
+    
     # Vector is input
     wkt_vector <- df
     
@@ -47,6 +48,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
     data <- FALSE
     
   } else {
+    
     # Get a vector of wkt from df
     wkt_vector <- df[, wkt]
     
@@ -54,7 +56,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
   
   # Store data
   if (data) {
-    # Store
+    
     df_data <- df
     df_data[, wkt] <- NULL
     
@@ -62,11 +64,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
   
   # Parse WKT strings
   # Select progress bar type
-  if (verbose) {
-    progress <- "text"
-  } else {
-    progress <- "none"
-  }
+  if (verbose) progress <- "text" else progress <- "none"
   
   # Message
   if (verbose) message("Parsing WKT...")
@@ -80,7 +78,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
   if (class(sp_list[[1]])[1] == "SpatialPoints") {
     
     # Extract coordinates
-    sp_list <- lapply(seq_along(sp_list), function (x) sp_list[[x]]@coords)
+    sp_list <- lapply(seq_along(sp_list), function(x) sp_list[[x]]@coords)
     
     # Bind all features
     sp <- sp_list_bind(sp_list)
@@ -92,6 +90,7 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
     sp <- sp::SpatialPoints(sp)
     
   } else {
+    
     # Rename feature ids within list
     if (verbose) message("Binding geometries...")
     
@@ -104,17 +103,14 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
   }
 
   # Add data slots
-  if (data & grepl("polygon", class(sp), ignore.case = TRUE)) {
+  if (data & grepl("polygon", class(sp), ignore.case = TRUE))
     sp <- sp::SpatialPolygonsDataFrame(sp, data = df_data, match.ID = FALSE)
-  }
   
-  if (data & grepl("lines", class(sp), ignore.case = TRUE)) {
+  if (data & grepl("lines", class(sp), ignore.case = TRUE))
     sp <- sp::SpatialLinesDataFrame(sp, data = df_data, match.ID = FALSE)
-  }
   
-  if (data & grepl("points", class(sp), ignore.case = TRUE)) {
+  if (data & grepl("points", class(sp), ignore.case = TRUE))
     sp <- sp::SpatialPointsDataFrame(sp, data = df_data, match.ID = FALSE)
-  }
   
   # Add projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
@@ -130,4 +126,4 @@ sp_from_wkt <- function (df, wkt = "geom", data = TRUE, projection = NA,
 # 
 #' @rdname sp_from_wkt
 #' @export
-sp_to_wkt <- function (sp, features = TRUE) rgeos::writeWKT(sp, byid = features)
+sp_to_wkt <- function(sp, features = TRUE) rgeos::writeWKT(sp, byid = features)

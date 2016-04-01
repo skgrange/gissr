@@ -15,15 +15,21 @@ devtools::install_github("skgrange/gissr")
 
 ## To-do
 
-  1. Do some more unit testing
-  2. Work on documentation
+  1. Travis builds are breaking because of the package's dependence on system-spatial packages; needs to be resolved. 
+  2. Do some more unit testing
   3. Get package on CRAN
 
 ## Background
 
 R's spatial data analysis abilities are very well developed. Therefore, R can be used as an effective geographical information system (GIS). A key advantage of R in GIS applications is that the user can dip in-and-out of R's general string, numerical, and visualisation tools and apply them to spatial data.
 
-However, the challenges I have with using R as a GIS include: keeping track of the multiple packages which are used, the lack of consistency among these packages, and the lack of tidy outputs which other areas of the R ecosystem have been so good at developing. To overcome this, I have written wrappers for many geographical functions which generally begin `sp_` to do particular tasks. Some of these functions will likely be useful for others. 
+However, the challenges I have with using R as a GIS are 
+
+  - Keeping track of the multiple packages which are used,
+  - the lack of consistency among these packages, and
+  - the lack of tidy outputs which other areas of the R ecosystem have been so good at developing. 
+  
+To overcome these points, I have written wrappers for many geographical functions which generally begin `sp_` to do particular tasks and bundled all the dependencies together as a package. Some of these functions will likely be useful for others. 
 
 ## Utility functions
 
@@ -44,13 +50,14 @@ However, the challenges I have with using R as a GIS include: keeping track of t
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
   - Add a positive or negative buffer with `sp_buffer`. 
+  - Create enclosing polygons with `sp_convex_hull`. 
   - "Promote" or "demote" Spatial\* to Spatial\*DataFrame, *i.e.* add or drop data slots for geometries. 
   - Export spatial objects to spatial files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
   
 ## Fancy functions
 
   - Point-in-polygon tests with `left_join_spatial`.
-  - Calculate distances between spatial objects with `sp_distance`.
+  - Calculate distances among spatial objects with `sp_distance`.
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
   - Simplify spatial objects with `sp_simplify`.
   - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.

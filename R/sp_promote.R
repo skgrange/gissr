@@ -14,7 +14,7 @@
 #' }
 #'
 #' @export
-sp_promote <- function (sp) {
+sp_promote <- function(sp) {
   
   # Get class of object
   sp_class <- class(sp)[1]
@@ -26,18 +26,21 @@ sp_promote <- function (sp) {
     
     # Points
     if (sp_class == "SpatialPoints") {
+      
       sp <- sp::SpatialPointsDataFrame(sp, data = data.frame(id = id_vector),
                                        match.ID = FALSE)
     }
     
     # Lines
     if (sp_class == "SpatialLines") {
+      
       sp <- sp::SpatialLinesDataFrame(sp, data = data.frame(id = id_vector),
                                       match.ID = FALSE)
     }
     
     # Polygons
     if (sp_class == "SpatialPolygons") {
+      
       sp <- sp::SpatialPolygonsDataFrame(sp, data = data.frame(id = id_vector),
                                          match.ID = FALSE)
     }
@@ -65,7 +68,7 @@ sp_promote <- function (sp) {
 #' }
 #'
 #' @export
-sp_demote <- function (sp) {
+sp_demote <- function(sp) {
 
   # Get class of object
   sp_class <- class(sp)[1]
@@ -74,19 +77,16 @@ sp_demote <- function (sp) {
   if (grepl("Data", sp_class)) {
     
     # Points
-    if (sp_class == "SpatialPointsDataFrame") {
+    if (sp_class == "SpatialPointsDataFrame")
       sp <- as(sp, "SpatialPoints")
-    }
-    
+
     # Lines
-    if (sp_class == "SpatialLinesDataFrame") {
+    if (sp_class == "SpatialLinesDataFrame")
       sp <- as(sp, "SpatialLines")
-    }
     
     # Polygons
-    if (sp_class == "SpatialPolygonsDataFrame") {
+    if (sp_class == "SpatialPolygonsDataFrame")
       sp <- as(sp, "SpatialPolygons")
-    }
     
   }
   

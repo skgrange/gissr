@@ -53,17 +53,15 @@
 #' }
 #'
 #' @export
-transform_coordinates <- function (df, x = "easting", y = "northing", from = "", 
-                                   to = "+proj=longlat +datum=WGS84 +no_defs", 
-                                   rename = TRUE, reorder = TRUE, round = 6) {
+transform_coordinates <- function(df, x = "easting", y = "northing", from = "", 
+                                  to = "+proj=longlat +datum=WGS84 +no_defs", 
+                                  rename = TRUE, reorder = TRUE, round = 6) {
   
   # Check argument
-  if (from == "") {
-    stop("A 'from' projection string must defined.")
-  }
-  
+  if (from == "") stop("A 'from' projection string must defined.", call. = FALSE)
+
   # Make standard data frame, catch for tbl_df
-  df <- data.frame(df)
+  df <- threadr::base_df(df)
   
   # Make sp points object, x, y order
   sp::coordinates(df) <- c(x, y)
@@ -78,9 +76,7 @@ transform_coordinates <- function (df, x = "easting", y = "northing", from = "",
   df <- data.frame(df)
   
   # Remove optional variable
-  if ("optional" %in% names(df)) {
-    df$optional <- NULL
-  }
+  if ("optional" %in% names(df)) df$optional <- NULL
   
   # Get the indices
   x_index <- which(names(df) == x)
@@ -92,21 +88,17 @@ transform_coordinates <- function (df, x = "easting", y = "northing", from = "",
   df[, y_index] <- round(df[, y_index], round)
   
   # Reorder df
-  if (reorder) {
-    df <- df[, c(y_index, x_index, other_index)]
-  }
+  if (reorder) df <- df[, c(y_index, x_index, other_index)]
   
   # Rename variables
   if (rename) {
+    
     names(df) <- ifelse(names(df) == x, "x", names(df))
     names(df) <- ifelse(names(df) == y, "y", names(df))
+    
   }
   
   # Return
   df
   
 }
-
-# Define custom function
-`%ni%` <- Negate(`%in%`)
-

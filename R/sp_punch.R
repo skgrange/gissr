@@ -32,7 +32,5 @@
 #' }
 #' 
 #' @export
-sp_punch <- function (sp_base, sp_hole, features = FALSE) {
-  sp <- rgeos::gDifference(sp_base, sp_hole, byid = features)
-  sp
-}
+sp_punch <- function(sp_base, sp_hole, features = FALSE)
+  rgeos::gDifference(sp_base, sp_hole, byid = features)

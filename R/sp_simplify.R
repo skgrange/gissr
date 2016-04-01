@@ -19,7 +19,7 @@
 #' }
 #' 
 #' @export
-sp_simplify <- function (sp, tolerance, preserve = TRUE) {
+sp_simplify <- function(sp, tolerance, preserve = TRUE) {
   
   # If a spatial data object is given, store the data slot
   if (grepl("data", class(sp), ignore.case = TRUE))

@@ -20,7 +20,7 @@
 #' }
 #'
 #' @export
-write_gpx <- function (sp, file) {
+write_gpx <- function(sp, file) {
   
   # Promote
   sp <- sp_promote(sp)
@@ -29,19 +29,17 @@ write_gpx <- function (sp, file) {
   sp_class <- class(sp)[1]
   
   # Points
-  if (sp_class == "SpatialPointsDataFrame") {
-    layer <- "points"
-  }
-  
+  if (sp_class == "SpatialPointsDataFrame") layer <- "points"
+
   # Lines
-  if (sp_class == "SpatialLinesDataFrame") {
-    layer <- "tracks"
-  }
+  if (sp_class == "SpatialLinesDataFrame") layer <- "tracks"
   
   # Polygons, not supported by gpx
   if (sp_class == "SpatialPolygonsDataFrame") {
+    
     # Polygons are not supported by gpx files, coerce to lines
-    message("Polygons are not supported by GPX, polygons have been coerced to lines.")
+    warning("Polygons are not supported by GPX, polygons have been coerced to lines.", 
+            call. = FALSE)
     
     # Change data type
     sp <- as(sp, "SpatialLinesDataFrame")
@@ -56,12 +54,10 @@ write_gpx <- function (sp, file) {
   file <- path.expand(file)
   
   # Delete file, rgdal does not do this
-  if (file.exists(file)) {
-    file.remove(file)
-  }
+  if (file.exists(file)) file.remove(file)
   
   # Export file
-  # Warnings when projection is unknown, not really an issue for me
+  # Warnings when projection is unknown or not wgs86, not really an issue for me
   suppressWarnings(
     rgdal::writeOGR(sp, file, layer = layer, driver = "GPX", 
                     dataset_options = "GPX_USE_EXTENSIONS=yes")

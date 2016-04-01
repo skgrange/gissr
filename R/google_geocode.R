@@ -20,19 +20,19 @@
 #' 
 #' @examples 
 #' \dontrun{
+#' 
 #' google_geocode("bath abbey")
 #' string     address                                                    latitude longitude
 #' bath abbey bath abbey, bath, bath and north east somerset ba1 1lt, uk 51.38148 -2.358735
+#' 
 #' }
 #'
 #' @import dplyr
 #' @export
-google_geocode <- function (input, source = "google", override_limit = TRUE) {
+google_geocode <- function(input, source = "google", override_limit = TRUE) {
   
   # Catch factors
-  if (is.factor(input)) {
-    input <- as.character(input)
-  }
+  if (is.factor(input)) input <- as.character(input)
   
   # Geocode addresses
   df <- ggmap::geocode(input, source = source, output = "latlona")

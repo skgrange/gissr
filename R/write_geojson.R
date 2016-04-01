@@ -25,7 +25,7 @@
 #' }
 #' 
 #' @export 
-write_geojson <- function (sp, file, pretty = TRUE) {
+write_geojson <- function(sp, file, pretty = TRUE) {
   
   # Make json string
   json <- geojsonio::geojson_json(sp, pretty = pretty)

@@ -21,6 +21,7 @@
 #' @author Stuart K. Grange
 #' 
 #' @examples 
+#' 
 #' \dontrun{
 #' # Get sunrise and sunset dates for London for the current year
 #' get_sunrise(latitude = 51.5072, longitude = 0.1275)
@@ -35,7 +36,7 @@
 #' }
 #'
 #' @export
-get_sunrise <- function (latitude, longitude, start = NA, end = NA, json = FALSE) {
+get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE) {
   
   # Make spatial points, assumes latitude and longitude
   sp <- data_frame_to_points(data.frame(latitude, longitude))

@@ -137,10 +137,10 @@ left_join_spatial <- function(df, latitude = "latitude",
 #' }
 #' 
 #' @export
-left_join_raster <- function (df, latitude = "latitude", 
-                              longitude = "longitude", 
-                              projection = "+proj=longlat +datum=WGS84 +no_defs",
-                              raster, name = "raster_value") {
+left_join_raster <- function(df, latitude = "latitude", 
+                             longitude = "longitude", 
+                             projection = "+proj=longlat +datum=WGS84 +no_defs",
+                             raster, name = "raster_value") {
   
   # Promote to spatial object
   sp <- data_frame_to_points(df, latitude = latitude, longitude = longitude,

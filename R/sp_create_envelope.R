@@ -11,7 +11,8 @@
 #' @author Stuart K. Grange
 #' 
 #' @export
-sp_create_envelope <- function (envelope, projection = "+proj=longlat +datum=WGS84 +no_defs") {
+sp_create_envelope <- function(envelope, 
+                               projection = "+proj=longlat +datum=WGS84 +no_defs") {
   
   # Could this use raster::extent? 
   
@@ -52,8 +53,8 @@ sp_create_envelope <- function (envelope, projection = "+proj=longlat +datum=WGS
 #' @author Stuart K. Grange
 #'
 #' @export
-sp_create_ellipse <- function (latitude, longitude, width = 0.01,
-                               projection = "+proj=longlat +datum=WGS84 +no_defs") {
+sp_create_ellipse <- function(latitude, longitude, width = 0.01,
+                              projection = "+proj=longlat +datum=WGS84 +no_defs") {
   
   # Create a point
   sp_point <- sp::SpatialPoints(cbind(longitude, latitude))
@@ -70,4 +71,3 @@ sp_create_ellipse <- function (latitude, longitude, width = 0.01,
   sp_polygon
   
 }
-

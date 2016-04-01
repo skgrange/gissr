@@ -14,4 +14,4 @@
 #' }
 #' 
 #' @export
-sp_fix <- function (sp, print = TRUE) cleangeo::clgeo_Clean(sp, print.log = print)
+sp_fix <- function(sp, print = TRUE) cleangeo::clgeo_Clean(sp, print.log = print)

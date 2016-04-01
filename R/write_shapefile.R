@@ -17,7 +17,7 @@
 #' }
 #' 
 #' @export
-write_shapefile <- function (sp, file) {
+write_shapefile <- function(sp, file) {
   
   # Expand path
   file <- path.expand(file)
@@ -44,4 +44,3 @@ write_shapefile <- function (sp, file) {
   # No return
   
 }
-

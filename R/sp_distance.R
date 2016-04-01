@@ -82,12 +82,11 @@
 #' }
 #' 
 #' @export
-sp_distance <- function (sp_1, sp_2, cores = 1, unit = "m") {
+sp_distance <- function(sp_1, sp_2, cores = 1, unit = "m") {
   
   # Check the projection systems
-  if (!identical(sp_projection(sp_1), sp_projection(sp_2))) {
+  if (!identical(sp_projection(sp_1), sp_projection(sp_2)))
     stop("The projection systems of the two spatial objects are not identical.")
-  }
   
   # Transform projections to Mollweide projection/ESRI:54009 if projection systems
   # do not have metres for units
@@ -115,16 +114,18 @@ sp_distance <- function (sp_1, sp_2, cores = 1, unit = "m") {
   
   # Do the test
   if (cores == 1) {
+    
     # Superscript notation is necessary
-    distance <- lapply(1:length(sp_1), function (x) 
+    distance <- lapply(1:length(sp_1), function(x) 
       rgeos::gDistance(sp_1[x], sp_2))
     
     # Make vector
     distance <- unlist(distance)
     
   } else {
+    
     # Superscript notation is necessary
-    distance <- parallel::mclapply(1:length(sp_1), function (x) 
+    distance <- parallel::mclapply(1:length(sp_1), function(x) 
       rgeos::gDistance(sp_1[x], sp_2), mc.cores = getOption("mc.cores", cores))
     
     # Make vector
@@ -133,9 +134,7 @@ sp_distance <- function (sp_1, sp_2, cores = 1, unit = "m") {
   }
   
   # Transform units
-  if (unit == "km") {
-    distance <- distance / 1000
-  }
+  if (unit == "km") distance <- distance / 1000
   
   # Return
   distance

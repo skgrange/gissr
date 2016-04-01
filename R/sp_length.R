@@ -20,12 +20,10 @@
 #' @author Stuart K. Grange
 #' 
 #' @export
-sp_length <- function (sp, unit = "m", features = TRUE) {
+sp_length <- function(sp, unit = "m", features = TRUE) {
   
   # Check units argument
-  if (!unit %in% c("m", "km")) {
-    stop("Unit must be 'm' or 'km'")
-  }
+  if (!unit %in% c("m", "km")) stop("Unit must be 'm' or 'km'")
   
   # geosphere::perimeter has large errors for lat and long pairs, therefore, do
   # something different
@@ -49,9 +47,7 @@ sp_length <- function (sp, unit = "m", features = TRUE) {
   vector <- unname(vector)
   
   # Transform unit
-  if (unit == "km") {
-    vector <- vector / 1000
-  }
+  if (unit == "km") vector <- vector / 1000
   
   # Return
   vector

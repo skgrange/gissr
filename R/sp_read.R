@@ -53,7 +53,7 @@
 #' }
 #' 
 #' @export
-sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE) {
+sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE) {
   
   # Expand path
   file <- path.expand(file)
@@ -87,12 +87,9 @@ sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TR
   }
   
   # Switch for GPX files
-  if (!is.null(layer) & grepl(".gpx$", file, ignore.case = TRUE)) {
-  
+  if (!is.null(layer) & grepl(".gpx$", file, ignore.case = TRUE))
     layer <- ifelse(layer %in% c("point", "points"), "waypoints", layer)
-    
-  }
-  
+
   # Switch for geom type
   if (!is.null(geom)) geom <- parse_geom(geom)
   
@@ -103,11 +100,8 @@ sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TR
   if (verbose) cat(sp_projection(sp), "\n")
   
   # Lower case names for data slot
-  if (lower & grepl("data", class(sp), ignore.case = TRUE)) {
-  
+  if (lower & grepl("data", class(sp), ignore.case = TRUE))
     names(sp@data) <- tolower(names(sp@data))
-    
-  }
   
   # Remove NA variables, happens often in gpx files
   # if (drop) sp@data <- sp@data[, colSums(is.na(sp@data)) < nrow(sp@data)]
@@ -131,7 +125,7 @@ sp_read <- function (file, layer = NULL, geom = NULL, lower = TRUE, verbose = TR
 #' }
 #' 
 #' @export
-sp_list_drivers <- function () rgdal::ogrDrivers()
+sp_list_drivers <- function() rgdal::ogrDrivers()
 
 
 #' Function to list layers within a spatial data file. 
@@ -147,7 +141,7 @@ sp_list_drivers <- function () rgdal::ogrDrivers()
 #' }
 #' 
 #' @export
-sp_list_layers <- function (file) rgdal::ogrListLayers(path.expand(file))
+sp_list_layers <- function(file) rgdal::ogrListLayers(path.expand(file))
 
 
 #' Function to return layer information within a spatial data file. 
@@ -171,7 +165,7 @@ sp_list_layers <- function (file) rgdal::ogrListLayers(path.expand(file))
 #' }
 #' 
 #' @export
-sp_layer_info <- function (file, layer, geom) {
+sp_layer_info <- function(file, layer, geom) {
   # Expand path
   file <- path.expand(file)
   
@@ -187,7 +181,7 @@ sp_layer_info <- function (file, layer, geom) {
 
 
 # A useful swtich 
-parse_geom <- function (geom) {
+parse_geom <- function(geom) {
 
   geom <- stringr::str_to_lower(geom)
   geom <- ifelse(geom %in% c("point", "points"), "wkbPoint", geom)

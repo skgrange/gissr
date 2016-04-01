@@ -6,7 +6,7 @@
 #' @author Stuart K. Grange
 #'
 #' @export
-wgs84_to_osgb36 <- function (y, x) {
+wgs84_to_osgb36 <- function(y, x) {
   
   # Make a matrix
   # Order: x, y
@@ -34,7 +34,7 @@ wgs84_to_osgb36 <- function (y, x) {
 
 #' @rdname wgs84_to_osgb36
 #' @export
-osgb36_to_wgs84 <- function (x, y) {
+osgb36_to_wgs84 <- function(x, y) {
   
   # Make a matrix
   # Order: x, y
@@ -136,7 +136,7 @@ OSGParse1 <- function(gridRef) {
 
 #' @rdname wgs84_to_osgb36
 #' @export
-os_grid_to_osgb36 <- function (grid_reference) {
+os_grid_to_osgb36 <- function(grid_reference) {
   
   # Use other function
   df <- OSGParse(grid_reference)
@@ -152,7 +152,7 @@ os_grid_to_osgb36 <- function (grid_reference) {
 
 #' @rdname wgs84_to_osgb36
 #' @export
-nztm_to_wgs84 <- function (x, y) {
+nztm_to_wgs84 <- function(x, y) {
   
   # Make a matrix
   # Order: x, y
@@ -182,7 +182,7 @@ nztm_to_wgs84 <- function (x, y) {
 
 #' @rdname wgs84_to_osgb36
 #' @export
-wgs84_to_nztm <- function (y, x) {
+wgs84_to_nztm <- function(y, x) {
   
   # Make a matrix
   # Order: x, y

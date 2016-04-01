@@ -15,6 +15,7 @@
 #' as \code{sp}. 
 #' 
 #' @examples 
+#' 
 #' \dontrun{
 #' # Clip a spatial lines object which contains roads in Saudi Arabia
 #' 
@@ -27,7 +28,7 @@
 #' }
 #' 
 #' @export
-sp_clip <- function (sp, envelope) {
+sp_clip <- function(sp, envelope) {
   
   # Use rgeos to clip, faster, but will loose data slot
   # sp.envelope <- as(raster::extent(envelope), "SpatialPolygons")

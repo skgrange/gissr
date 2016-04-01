@@ -13,13 +13,13 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' sp_points <- data_frame_to_line(data_monitoring_sites, "latitude", "longitude")
+#' sp_points <- data_frame_to_points(data_monitoring_sites, "latitude", "longitude")
 #' }
 #' 
 #' @export
-data_frame_to_points <- function (df, latitude = "latitude", 
-                                  longitude = "longitude", 
-                                  projection = "+proj=longlat +datum=WGS84 +no_defs") {
+data_frame_to_points <- function(df, latitude = "latitude", 
+                                 longitude = "longitude", 
+                                 projection = "+proj=longlat +datum=WGS84 +no_defs") {
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
@@ -62,20 +62,22 @@ data_frame_to_points <- function (df, latitude = "latitude",
 #' }
 #' 
 #' @export
-data_frame_to_lines <- function (df, latitude = "latitude", 
-                                 longitude = "longitude", 
-                                 projection = "+proj=longlat +datum=WGS84 +no_defs", 
-                                 id = NA) {
+data_frame_to_lines <- function(df, latitude = "latitude", 
+                                longitude = "longitude", 
+                                projection = "+proj=longlat +datum=WGS84 +no_defs", 
+                                id = NA) {
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
   
   # Make an identifier variable for lines
   if (is.na(id)) {
+    
     # Single line object, no grouping
     df[, "id"] <- 1
     
   } else {
+    
     # Use input variable
     df[, "id"] <- df[, id]
     
@@ -94,10 +96,8 @@ data_frame_to_lines <- function (df, latitude = "latitude",
   lines <- lapply(split(sp_object, sp_object$id), function(x) 
     Lines(list(Line(sp::coordinates(x))), x$id[1L]))
   
-  if (!is.na(id)) {
-    # Drop
-    data_extras[, "id"] <- NULL
-  }
+  # Drop
+  if (!is.na(id)) data_extras[, "id"] <- NULL
   
   # Create SpatialLines
   sp <- sp::SpatialLines(lines)
@@ -141,20 +141,22 @@ data_frame_to_lines <- function (df, latitude = "latitude",
 #' }
 #' 
 #' @export
-data_frame_to_polygons <- function (df, latitude = "latitude", 
-                                    longitude = "longitude", 
-                                    projection = "+proj=longlat +datum=WGS84 +no_defs",
-                                    id = NA) {
+data_frame_to_polygons <- function(df, latitude = "latitude", 
+                                   longitude = "longitude", 
+                                   projection = "+proj=longlat +datum=WGS84 +no_defs",
+                                   id = NA) {
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
   
   # Make an identifier variable for lines
   if (is.na(id)) {
+    
     # Single line object, no grouping
     df[, "id"] <- 1
     
   } else {
+    
     # Use input variable
     df[, "id"] <- df[, id]
     
@@ -209,10 +211,10 @@ matrix_to_sp_polygon <- function (matrix, id) {
 
 # Deprecate some functions
 #' @export
-data_frame_to_line <- function (df, latitude = "latitude", 
-                                longitude = "longitude", 
-                                projection = "+proj=longlat +datum=WGS84 +no_defs", 
-                                id = NA) {
+data_frame_to_line <- function(df, latitude = "latitude", 
+                               longitude = "longitude", 
+                               projection = "+proj=longlat +datum=WGS84 +no_defs", 
+                               id = NA) {
   
   # Message
   .Deprecated("data_frame_to_lines", package = "gissr")
@@ -226,10 +228,10 @@ data_frame_to_line <- function (df, latitude = "latitude",
 
 
 #' @export
-data_frame_to_polygon <- function (df, latitude = "latitude", 
-                                   longitude = "longitude", 
-                                   projection = "+proj=longlat +datum=WGS84 +no_defs",
-                                   id = NA) {
+data_frame_to_polygon <- function(df, latitude = "latitude", 
+                                  longitude = "longitude", 
+                                  projection = "+proj=longlat +datum=WGS84 +no_defs",
+                                  id = NA) {
   
   # Message
   .Deprecated("data_frame_to_polygons", package = "gissr")

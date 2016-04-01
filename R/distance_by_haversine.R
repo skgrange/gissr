@@ -63,9 +63,9 @@
 #' }
 #' 
 #' @export
-distance_by_haversine <- function (latitude = "latitude", longitude = "longitude", 
-                                   latitude_lag = NA, longitude_lag = NA, 
-                                   unit = "metres", radius = 6371) {
+distance_by_haversine <- function(latitude = "latitude", longitude = "longitude", 
+                                  latitude_lag = NA, longitude_lag = NA, 
+                                  unit = "metres", radius = 6371) {
   # Switch units, a check
   unit <- switch(unit, 
     "m" =, "meter" =, "metre" =, "metres" =, "meters" = "meters",
@@ -73,8 +73,10 @@ distance_by_haversine <- function (latitude = "latitude", longitude = "longitude
   
   # Create lagged variables if not declared
   if (is.na(latitude_lag) & is.na(longitude_lag)) {
+    
     latitude_lag <- dplyr::lag(latitude, 1)
     longitude_lag <- dplyr::lag(longitude, 1)
+    
   }
   
   # Get degree deltas for coordinate pairs

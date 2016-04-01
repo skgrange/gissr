@@ -11,9 +11,5 @@
 #' projection system.
 #' 
 #' @export
-sp_buffer <- function (sp, features = TRUE, width) {
-  
+sp_buffer <- function(sp, features = TRUE, width)
   rgeos::gBuffer(sp, byid = features, width = width)
-  
-}
-  

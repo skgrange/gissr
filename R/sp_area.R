@@ -30,7 +30,7 @@
 #' }
 #' 
 #' @export
-sp_area <- function (sp, unit = "m", features = TRUE) {
+sp_area <- function(sp, unit = "m", features = TRUE) {
   
   # Unit check
   if (!unit %in% c("m", "km", "ha", "ac"))
@@ -62,9 +62,7 @@ sp_area <- function (sp, unit = "m", features = TRUE) {
   
   # Transform units
   if (unit == "km") vector <- vector / 1000000
-  
   if (unit == "ha") vector <- vector / 10000
-
   if (unit == "ac") vector <- vector * 0.000247105381
   
   # Return

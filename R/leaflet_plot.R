@@ -9,7 +9,7 @@
 #' @author Stuart K. Grange
 #' 
 #' @export
-leaflet_plot <- function (sp, popup = NULL, force = TRUE) {
+leaflet_plot <- function(sp, popup = NULL, force = TRUE) {
   
   # Projection check
   # sp_projection(sp)
@@ -31,18 +31,24 @@ leaflet_plot <- function (sp, popup = NULL, force = TRUE) {
   sp_class <- class(sp)[1]
   
   if (grepl("points", sp_class, ignore.case = TRUE)) {
+    
     map <- map %>% 
       addMarkers(popup = popup)
+    
   }
   
   if (grepl("lines", sp_class, ignore.case = TRUE)) {
+    
     map <- map %>% 
       addPolylines(popup = popup)
+    
   }
   
   if (grepl("polygons", sp_class, ignore.case = TRUE)) {
+    
     map <- map %>% 
       addPolygons(popup = popup)
+    
   }
   
   # Return
