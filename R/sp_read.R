@@ -3,7 +3,8 @@
 #' \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the 
 #' same as the other file readers in R. Unlike \code{rgdal::readOGR},
 #' \code{sp_read} will expand file paths and make a "best-guess" on what layer 
-#' is to be loaded for spatial data files. 
+#' is to be loaded for spatial data files. Use \code{sp_list_layers} to find what
+#' layers a spatial data file contains. 
 #' 
 #' @param file Spatial data file name. For shapefiles and Mapinfo TAB files, a
 #' file extension is optional. For File Geodatabases, an extension is required 
@@ -25,10 +26,14 @@
 #' @param verbose Should information about the data be printed when being 
 #' loaded? Default is \code{TRUE}. 
 #' 
+#' @param drop Should empty variables in the geometries' data frame be dropped? 
+#' This is useful for removing useless variables which are commonly found in 
+#' \code{GPX} files. 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @seealso \code{\link{readOGR}}, \code{\link{sp_list_drivers}}, 
-#' \code{\link{sp_list_layers}}, \code{\link{sp_list_info}}
+#' \code{\link{sp_list_layers}}
 #' 
 #' @examples 
 #' \dontrun{
@@ -53,7 +58,8 @@
 #' }
 #' 
 #' @export
-sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE) {
+sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE,
+                    drop = FALSE) {
   
   # Expand path
   file <- path.expand(file)
@@ -104,7 +110,14 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRU
     names(sp@data) <- tolower(names(sp@data))
   
   # Remove NA variables, happens often in gpx files
-  # if (drop) sp@data <- sp@data[, colSums(is.na(sp@data)) < nrow(sp@data)]
+  if (drop) {
+    
+    # To characters
+    sp@data <- threadr::factor_coerce(sp@data)
+    # Drop
+    sp@data <- sp@data[, colSums(is.na(sp@data)) < nrow(sp@data)]
+    
+  }
   
   # Return
   sp
@@ -165,7 +178,7 @@ sp_list_layers <- function(file) rgdal::ogrListLayers(path.expand(file))
 #' }
 #' 
 #' @export
-sp_layer_info <- function(file, layer, geom) {
+sp_layer_info <- function(file, layer, geom = NULL) {
   # Expand path
   file <- path.expand(file)
   

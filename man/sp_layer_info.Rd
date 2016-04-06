@@ -4,7 +4,7 @@
 \alias{sp_layer_info}
 \title{Function to return layer information within a spatial data file.}
 \usage{
-sp_layer_info(file, layer, geom)
+sp_layer_info(file, layer, geom = NULL)
 }
 \arguments{
 \item{file}{Spatial data file.}

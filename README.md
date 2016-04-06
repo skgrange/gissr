@@ -23,7 +23,7 @@ devtools::install_github("skgrange/gissr")
 
 R's spatial data analysis abilities are very well developed. Therefore, R can be used as an effective geographical information system (GIS). A key advantage of R in GIS applications is that the user can dip in-and-out of R's general string, numerical, and visualisation tools and apply them to spatial data.
 
-However, the challenges I have with using R as a GIS are 
+However, the challenges I have with using R as a GIS are:
 
   - Keeping track of the multiple packages which are used,
   - the lack of consistency among these packages, and

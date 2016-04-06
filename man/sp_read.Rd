@@ -4,7 +4,8 @@
 \alias{sp_read}
 \title{Function to read spatial data files in a consistent way.}
 \usage{
-sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE)
+sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE,
+  drop = FALSE)
 }
 \arguments{
 \item{file}{Spatial data file name. For shapefiles and Mapinfo TAB files, a
@@ -26,12 +27,17 @@ Note that the default is \code{TRUE}.}
 
 \item{verbose}{Should information about the data be printed when being 
 loaded? Default is \code{TRUE}.}
+
+\item{drop}{Should empty variables in the geometries' data frame be dropped? 
+This is useful for removing useless variables which are commonly found in 
+\code{GPX} files.}
 }
 \description{
 \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the 
 same as the other file readers in R. Unlike \code{rgdal::readOGR},
 \code{sp_read} will expand file paths and make a "best-guess" on what layer 
-is to be loaded for spatial data files.
+is to be loaded for spatial data files. Use \code{sp_list_layers} to find what
+layers a spatial data file contains.
 }
 \examples{
 \dontrun{
@@ -61,6 +67,6 @@ Stuart K. Grange
 }
 \seealso{
 \code{\link{readOGR}}, \code{\link{sp_list_drivers}}, 
-\code{\link{sp_list_layers}}, \code{\link{sp_list_info}}
+\code{\link{sp_list_layers}}
 }
 
