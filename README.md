@@ -33,7 +33,8 @@ To overcome these points, I have written wrappers for many geographical function
 
 ## Utility functions
 
-  - Read: shapefiles, GPX, GeoJSON, KML, GML, TAB, and File Geodatabases with `sp_read`, a wrapper for `rgdal::readOGR`.
+  - Read shapefiles, GPX, GeoJSON, KML, GML, TAB, and File Geodatabases with `sp_read`, a wrapper for `rgdal::readOGR`.
+    - Also check spatial file and system things with `sp_list_drivers`, `sp_list_layers`, and `sp_layer_info`. 
   - Transform projection systems with `sp_transform`.
     - `sp_transform` can also force projections when a spatial object has none.
     - `transform_coordinates` does a similar thing, but for data frames.
@@ -51,7 +52,9 @@ To overcome these points, I have written wrappers for many geographical function
   - "Punch" holes in polygons with `sp_punch`. 
   - Add a positive or negative buffer with `sp_buffer`. 
   - Create enclosing polygons with `sp_convex_hull`. 
-  - "Promote" or "demote" Spatial\* to Spatial\*DataFrame, *i.e.* add or drop data slots for geometries. 
+  - Find centroids of geometries with `sp_centroid`. 
+  - "Promote" or "demote" Spatial\* to Spatial\*DataFrame, *i.e.* add or drop data slots for geometries with `sp_promote` and `sp_demote`. 
+  - Return and reset geometry IDs with `sp_feature_ids` and `sp_reset_feature_ids`.
   - Export spatial objects to spatial files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
   
 ## Fancy functions
