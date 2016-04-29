@@ -3,10 +3,6 @@
 #' \code{get_sunrise} uses \code{\link{sunriset}} for the calculation of dates
 #' and times. 
 #' 
-#' @return Tidy data frame or pretty printed JSON.
-#' 
-#' @seealso \code{\link{sunriset}}
-#' 
 #' @param latitude Latitude of a location. 
 #' 
 #' @param longitude Longitude of a location. 
@@ -17,8 +13,15 @@
 #' 
 #' @param json Should the return be a json string rather than a data frame? 
 #' Useful for single observations.
+#' 
+#' @param round Should dates be rounded to the nearest second? Default is 
+#' \code{FALSE}. 
 #'
 #' @author Stuart K. Grange
+#' 
+#' @return Data frame or pretty printed JSON.
+#' 
+#' @seealso \code{\link{sunriset}}
 #' 
 #' @examples 
 #' 
@@ -36,19 +39,20 @@
 #' }
 #'
 #' @export
-get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE) {
+get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE, 
+                        round = FALSE) {
   
   # Make spatial points, assumes latitude and longitude
-  sp <- data_frame_to_points(data.frame(latitude, longitude))
+  sp <- sp_from_data_frame(data.frame(latitude, longitude), type = "points")
   
   # Catch dates
   if (is.na(start)) start <- Sys.Date()
   if (is.na(end)) end <- Sys.Date()
   
   # Parse
-  start <- lubridate::ymd(start)
-  end <- lubridate::ymd(end)
-  
+  start <- lubridate::ymd(start, tz = "UTC")
+  end <- lubridate::ymd(end, tz = "UTC")
+
   # Catch again
   if (start > end) end <- start
   
@@ -58,12 +62,12 @@ get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE)
   # Calculate sunrise for dates
   sunrise <- maptools::sunriset(sp, date, direction = "sunrise", POSIXct.out = TRUE)
   sunrise <- sunrise[, 2]
-  sunrise <- lubridate::round_date(sunrise, "second")
+  if (round) sunrise <- lubridate::round_date(sunrise, "second")
   
   # Calculate sunset for dates
   sunset <- maptools::sunriset(sp, date, direction = "sunset", POSIXct.out = TRUE)
   sunset <- sunset[, 2]
-  sunset <- lubridate::round_date(sunset, "second")
+  if (round) sunset <- lubridate::round_date(sunset, "second")
   
   # Build data frame
   df <- data.frame(date, 
@@ -88,43 +92,5 @@ get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE)
   
   # Return
   df
-  
-}
-
-
-# Parse dates. This will handle normal and UK locale preference as well as 
-# strings or integers which are years. 
-#
-# No export
-parse_date_arguments <- function (date, what) {
-  
-  # Start of year
-  if (what == "start") {
-    
-    # Catch for when years are used as dates
-    if (!is.na(date) & nchar(date) == 4) date <- stringr::str_c(date, "-01-01")
-    
-    # Round
-    date <- ifelse(is.na(date), 
-                   as.character(lubridate::floor_date(Sys.Date(), "year")), date)
-    
-  }
-  
-  # End of year
-  if (what == "end") {
-    
-    if (!is.na(date) & nchar(date) == 4) date <- stringr::str_c(date, "-12-31")
-    
-    # Round
-    date <- ifelse(is.na(date), 
-                   as.character(lubridate::ceiling_date(Sys.Date(), "year")), date)
-    
-  }
-  
-  # Parse date
-  date <- lubridate::parse_date_time(date, c("ymd", "dmy"))
-  
-  # Return
-  date
   
 }

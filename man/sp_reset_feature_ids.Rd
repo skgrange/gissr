@@ -18,6 +18,7 @@ also be reset.
 }
 \examples{
 \dontrun{
+
 # Load data
 sp_zones <- sp_read("zones.json")
 

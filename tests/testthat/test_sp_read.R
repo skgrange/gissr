@@ -5,7 +5,9 @@ test_that("Test `sp_read` for gpx files", {
   # Where the files are located
   file_path <- system.file("extdata", package = "gissr")
   
-  sp_gpx_tracks <- sp_read(file.path(file_path, "york.gpx"), verbose = FALSE)
+  sp_gpx_tracks <- sp_read(file.path(file_path, "york.gpx"), layer = "tracks",
+                           verbose = FALSE)
+  
   sp_gpx_routes <- sp_read(file.path(file_path, "northcote-tavern-5-km-run.gpx"),
                            layer = "routes", verbose = FALSE)
   
@@ -93,8 +95,11 @@ test_that("Test `sp_read` for kml files", {
     # No geom override used
     expect_error(sp_read(file.path(file_path, "york.kml"), verbose = FALSE))
     
-    sp_kml_lines <- sp_read(file.path(file_path, "york.kml"), geom = "lines", 
-                            verbose = FALSE)
+    # No warnings for discarding z-dimension
+    suppressWarnings(
+      sp_kml_lines <- sp_read(file.path(file_path, "york.kml"), geom = "lines", 
+                              verbose = FALSE)
+    )
     
     sp_kml_points <- sp_read(file.path(file_path, "york.kml"), geom = "points", 
                              verbose = FALSE)
@@ -129,7 +134,6 @@ test_that("Test `sp_read` for Geodatabase", {
   
   # Where the files are located
   file_path <- system.file("extdata", package = "gissr")
-  
   
   # Geodatabase
   sp <- sp_read(file.path(file_path, "World.gdb"), "Yemen", verbose = FALSE)

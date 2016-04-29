@@ -14,7 +14,7 @@ file extension is optional. For File Geodatabases, an extension is required
 
 \item{layer}{Layer within \code{file} to read. Default is \code{NULL} and 
 should not be needed for shapefiles, Mapinfo TAB files, and GeoJSON files. 
-Default behaviour for GPX files is to attempt to read the \code{"tracks"} 
+Default behaviour for GPX files is to attempt to read the \code{"routes"} 
 layer.}
 
 \item{geom}{An override for when spatial data files contain more than one 
@@ -41,14 +41,15 @@ layers a spatial data file contains.
 }
 \examples{
 \dontrun{
+
 # Load a shapefile without extension
 sp_london <- sp_read("london_borough")
 
 # Load a shapefile with an extension within home area
 sp_london <- sp_read("~/Desktop/london_borough.shp")
 
-# Load a gpx file, no need to define layer
-sp_hira <- sp_read("~/Desktop/hira_mtb_park.gpx")
+# Load a gpx file
+sp_hira <- sp_read("~/Desktop/hira_mtb_park.gpx", type = "tracks")
 
 # Load GeoJSON file
 sp_thames_locks <- sp_read("thames_locks.json", verbose = FALSE)

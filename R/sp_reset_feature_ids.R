@@ -10,6 +10,7 @@
 #' 
 #' @examples 
 #' \dontrun{
+#' 
 #' # Load data
 #' sp_zones <- sp_read("zones.json")
 #' 
@@ -57,12 +58,12 @@ resetter <- function(sp, uuid = FALSE) {
   if (uuid) {
     
     # Use uuids to ensure unique-ness 
-    sp <- spChFIDs(sp, replicate(length(sp), threadr::uuid()))
+    sp <- sp::spChFIDs(sp, replicate(length(sp), threadr::uuid()))
     
   } else {
     
     # Otherwise, just a character sequence
-    sp <- spChFIDs(sp, as.character(seq_along(sp)))
+    sp <- sp::spChFIDs(sp, as.character(seq_along(sp)))
     
   }
   
@@ -88,13 +89,23 @@ reset_data_slot <- function(sp) {
 #' @export
 sp_feature_ids <- function(sp) {
   
+  # Points
+  if (grepl("points", class(sp), ignore.case = TRUE))
+    id <- row.names(sp@data)
+  
+  # Lines
+  if (grepl("line", class(sp), ignore.case = TRUE)) {
+    
+    id <- sapply(slot(sp, "lines"), slot, "ID")
+    
+    # Stip names for lines
+    id <- as.vector(id)
+    
+  }
+    
   # Polygons
   if (grepl("polygon", class(sp), ignore.case = TRUE))
     id <- sapply(slot(sp, "polygons"), slot, "ID")
-
-  # Lines
-  if (grepl("line", class(sp), ignore.case = TRUE))
-    id <- sapply(slot(sp, "lines"), slot, "ID")
 
   # Return
   id

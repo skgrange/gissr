@@ -18,5 +18,4 @@
 #' 
 #' @export
 sp_convex_hull <- function(sp, features = FALSE)
-  # Just a wrap
   rgeos::gConvexHull(sp, byid = features)
