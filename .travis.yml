@@ -8,9 +8,8 @@ r_binary_packages:
   
 # System dependencies for rgdal and V8
 apt_packages:
-  - libgdal-dev
-  - libhdf5-serial-dev
-  - libhdf5-dev
+  - libgeos-dev
+  - libgdal1-dev 
   - libproj-dev
   - libv8-dev
   
