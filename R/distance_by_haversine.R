@@ -63,9 +63,9 @@
 #' }
 #' 
 #' @export
-distance_by_haversine <- function(latitude = "latitude", longitude = "longitude", 
-                                  latitude_lag = NA, longitude_lag = NA, 
-                                  unit = "metres", radius = 6371) {
+distance_by_haversine <- function(latitude, longitude, latitude_lag = NA, 
+                                  longitude_lag = NA, unit = "metres", 
+                                  radius = 6371) {
   # Switch units, a check
   unit <- switch(unit, 
     "m" =, "meter" =, "metre" =, "metres" =, "meters" = "meters",

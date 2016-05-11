@@ -10,7 +10,9 @@ sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE,
 \arguments{
 \item{file}{Spatial data file name. For shapefiles and Mapinfo TAB files, a
 file extension is optional. For File Geodatabases, an extension is required 
-(usually \code{.gdb}).}
+(usually \code{.gdb}). For spatial data types which are composed of a single 
+file, \code{file} can be a URL and the file will be downloaded into a 
+temporary directory and then loaded.}
 
 \item{layer}{Layer within \code{file} to read. Default is \code{NULL} and 
 should not be needed for shapefiles, Mapinfo TAB files, and GeoJSON files. 
@@ -59,6 +61,10 @@ sp_coastline <- sp_read("nz-land-districts.map", verbose = FALSE)
 
 # Geodatabase
 sp_yemen <- sp_read("world.gdb", layer = "yemen", verbose = FALSE)
+
+# Load a file by using a url
+file <- "http://www.gps-routes.co.uk/A55CD9/home.nsf/All/E03CB3E66AEAF5178025778200749F3F/$FILE/The\%20Ridgeway.gpx"
+sp_ridgeway <- sp_read(file, layer = "routes") 
 
 }
 

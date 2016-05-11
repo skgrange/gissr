@@ -34,7 +34,15 @@ wgs84_to_osgb36 <- function(y, x) {
 
 #' @rdname wgs84_to_osgb36
 #' @export
-osgb36_to_wgs84 <- function(x, y) {
+osgb36_to_wgs84 <- function(x, y, string = FALSE) {
+
+  # if (string) {
+  #   
+  #   x_split <- stringr::str_split_fixed(x, pattern = " ", n = 2)
+  #   x <- as.numeric(x_split[, 1])
+  #   y <- as.numeric(x_split[, 2])
+  #   
+  # }
   
   # Make a matrix
   # Order: x, y
@@ -56,6 +64,9 @@ osgb36_to_wgs84 <- function(x, y) {
   coordinates <- data.frame(latitude = coordinates[, 2], longitude = coordinates[, 1])
   row.names(coordinates) <- NULL
   
+  if (string)
+    coordinates <- stringr::str_c(coordinates$latitude, ",", coordinates$longitude)
+    
   # Return
   coordinates
   
@@ -152,7 +163,7 @@ os_grid_to_osgb36 <- function(grid_reference) {
 
 #' @rdname wgs84_to_osgb36
 #' @export
-nztm_to_wgs84 <- function(x, y) {
+nztm_to_wgs84 <- function(x, y, string = FALSE) {
   
   # Make a matrix
   # Order: x, y
@@ -173,6 +184,9 @@ nztm_to_wgs84 <- function(x, y) {
   # Order is different for lat and longs
   coordinates <- data.frame(latitude = coordinates[, 2], longitude = coordinates[, 1])
   row.names(coordinates) <- NULL
+  
+  if (string)
+    coordinates <- stringr::str_c(coordinates$latitude, ",", coordinates$longitude)
   
   # Return
   coordinates

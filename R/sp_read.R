@@ -8,7 +8,9 @@
 #' 
 #' @param file Spatial data file name. For shapefiles and Mapinfo TAB files, a
 #' file extension is optional. For File Geodatabases, an extension is required 
-#' (usually \code{.gdb}). 
+#' (usually \code{.gdb}). For spatial data types which are composed of a single 
+#' file, \code{file} can be a URL and the file will be downloaded into a 
+#' temporary directory and then loaded. 
 #' 
 #' @param layer Layer within \code{file} to read. Default is \code{NULL} and 
 #' should not be needed for shapefiles, Mapinfo TAB files, and GeoJSON files. 
@@ -56,14 +58,31 @@
 #' # Geodatabase
 #' sp_yemen <- sp_read("world.gdb", layer = "yemen", verbose = FALSE)
 #' 
+#' # Load a file by using a url
+#' file <- "http://www.gps-routes.co.uk/A55CD9/home.nsf/All/E03CB3E66AEAF5178025778200749F3F/$FILE/The%20Ridgeway.gpx"
+#' sp_ridgeway <- sp_read(file, layer = "routes") 
+#' 
 #' }
 #' 
 #' @export
 sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE,
                     drop = FALSE) {
   
-  # Expand path
-  file <- path.expand(file)
+  # Download file if a url
+  if (grepl("^http:|^https:", file)) {
+    
+    # Download file
+    threadr:::download_to_temporary(file, quiet = !verbose)
+    
+    # Get downloaded file's new path
+    file <- file.path(tempdir(), basename(file))
+    
+  } else {
+    
+    # Expand path
+    file <- path.expand(file)
+    
+  }
   
   # Do some guess work for the layer string
   if (is.null(layer)) {

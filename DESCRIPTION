@@ -1,8 +1,8 @@
 Package: gissr
 Type: Package
 Title: Functions to make working with spatial data easier
-Version: 0.4.19
-Date: 2016-04-29
+Version: 0.4.21
+Date: 2016-05-11
 Author: Stuart K. Grange
 Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
 Description: A collection of spatial functions to make R a more effective GIS.

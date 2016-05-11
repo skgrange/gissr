@@ -142,3 +142,21 @@ test_that("Test `sp_read` for Geodatabase", {
   expect_equal(class(sp)[1], "SpatialPolygonsDataFrame")
   
 })
+
+test_that("Test `sp_read` when using a url", {
+  
+  # The ridgeway route
+  file <- "http://www.gps-routes.co.uk/A55CD9/home.nsf/All/E03CB3E66AEAF5178025778200749F3F/$FILE/The%20Ridgeway.gpx"
+  
+  # Load
+  sp <- sp_read(file, "routes", verbose = FALSE)
+  
+  # Test the types
+  expect_equal(class(sp)[1], "SpatialLinesDataFrame")
+  
+})
+
+
+
+
+

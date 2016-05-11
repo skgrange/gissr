@@ -10,11 +10,11 @@
 \usage{
 wgs84_to_osgb36(y, x)
 
-osgb36_to_wgs84(x, y)
+osgb36_to_wgs84(x, y, string = FALSE)
 
 os_grid_to_osgb36(grid_reference)
 
-nztm_to_wgs84(x, y)
+nztm_to_wgs84(x, y, string = FALSE)
 
 wgs84_to_nztm(y, x)
 }
