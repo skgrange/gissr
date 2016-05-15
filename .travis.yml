@@ -12,6 +12,7 @@ apt_packages:
   - libgdal1-dev 
   - libproj-dev
   - libv8-dev
+  - libgdal-dev # other packages from here
   
 # Install development package
 r_github_packages:
