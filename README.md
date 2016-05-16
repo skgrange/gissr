@@ -44,7 +44,7 @@ To overcome these points, I have written wrappers for many geographical function
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_crop`. 
     - To filter objects by other polygons, use `[` subsetting. 
-      - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
+    - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
   - Add a positive or negative buffer with `sp_buffer`. 
@@ -61,3 +61,9 @@ To overcome these points, I have written wrappers for many geographical function
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
   - Simplify spatial objects with `sp_simplify`.
   - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
+  
+## Things I want to do
+
+  - Develop a function which can read *n* features in a spatial data file. This will be helpful when large data files are encountered and system memory is too small. 
+  - Get the interface between R and SpatiaLite sorted. 
+  - Concave hull function *i.e.* find minimum area polygon.  
