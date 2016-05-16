@@ -38,13 +38,10 @@ To overcome these points, I have written wrappers for many geographical function
   - Transform projection systems with `sp_transform`.
     - `sp_transform` can also force projections when a spatial object has none.
     - `transform_coordinates` does a similar thing, but for data frames.
-  - Transform data frames (tables) to spatial objects with:
-    - `data_frame_to_points`,
-    - `data_frame_to_lines`, and
-    - `data_frame_to_polygons`.
+  - Transform data frames (tables) to spatial points, lines, or polygons with `sp_from_data_frame`. 
+  - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   - Bind/combine spatial objects with `sp_bind` and `sp_bind_many`.
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
-  - Transform a data frame with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_crop`. 
     - To filter objects by other polygons, use `[` subsetting. 
       - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
