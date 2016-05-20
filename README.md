@@ -40,7 +40,7 @@ To overcome these points, I have written wrappers for many geographical function
     - `transform_coordinates` does a similar thing, but for data frames.
   - Transform data frames (tables) to spatial points, lines, or polygons with `sp_from_data_frame`. 
   - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
-  - Bind/combine spatial objects with `sp_bind` and `sp_bind_many`.
+  - Bind/combine spatial objects with `sp_bind`. 
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_crop`. 
     - To filter objects by other polygons, use `[` subsetting. 
