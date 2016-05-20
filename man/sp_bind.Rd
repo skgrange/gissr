@@ -2,39 +2,44 @@
 % Please edit documentation in R/sp_bind.R
 \name{sp_bind}
 \alias{sp_bind}
-\alias{sp_bind_many}
-\title{Functions to bind spatial objects together.}
+\title{Function to bind spatial objects together.}
 \usage{
-sp_bind(sp, sp_2)
-
-sp_bind_many(sp_list)
+sp_bind(...)
 }
 \arguments{
-\item{sp}{Spatial object one.}
-
-\item{sp_2}{Spatial object two.}
-
-\item{sp_list}{A list containing two or more spatial objects.}
+\item{...}{Spatial objects of the same type. \code{...} can be a number of 
+individual objects or a list containing many objects.}
 }
 \description{
-\code{sp_bind} combines two similar spatial objects together with the same 
-syntax of \code{rbind}. \code{sp_bind_many} combines multiple spatial objects 
-together but the input must be a list.
-}
-\details{
-These function are useful for combining shapefiles or tables of WKT strings
+\code{sp_bind} combines spatial objects of the same type together. This 
+function is useful for combining shapefiles or tables of WKT strings
 together. The feature IDs within line- and polygon-spatial objects must be 
 manipulated for the binding to occur. The original, non-manipulated IDs are 
 not preserved.
 }
 \examples{
 \dontrun{
+
 # Two objects
 sp_london_two <- sp_bind(sp_croydon, sp_islington)
 
-# Many objects, note the nested list
-sp_london_many <- sp_bind_many(list(sp_croydon, sp_islington, sp_bexley, 
-  sp_brent))
+# Many objects
+sp_london_many <- sp_bind(sp_croydon, sp_islington, sp_bexley, sp_brent)
+
+# Or a list of many objects
+sp_london_many_many <- sp_bind(sp_list_of_many)
+
+
+# Load many files with plyr then bind together
+# Get files
+file_list <- list.files("data/shapefiles", "shp")
+
+# Load files
+sp_list <- llply(file_list, sp_read, verbose = FALSE)
+
+# Bind all spatial objects
+sp_bound <- sp_bind(sp_list)
+
 }
 
 }

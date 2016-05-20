@@ -11,8 +11,14 @@
 #' @export
 leaflet_plot <- function(sp, popup = NULL, force = TRUE) {
   
-  # Projection check
-  # sp_projection(sp)
+  # Sort out popups
+  # Use name variable even if not declared
+  if (is.null(popup) & "name" %in% names(sp@data)) popup <- "name"
+  
+  # Parse
+  if (!is.null(popup)) popup <- as.formula(stringr::str_c("~ ", popup))
+  
+  # Projection force
   if (force) sp <- sp_transform(sp)
   
   # Create map
@@ -25,9 +31,9 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE) {
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(baseGroups = c(
       "OpenStreetMap", "Toner", "Landscape", "Transport dark", "Outdoors", "Images"))
-
   
   # Add layers
+  # Find geom type
   sp_class <- class(sp)[1]
   
   if (grepl("points", sp_class, ignore.case = TRUE)) {
