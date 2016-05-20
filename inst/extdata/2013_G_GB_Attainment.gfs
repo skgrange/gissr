@@ -11,8 +11,7 @@
       <Name>change</Name>
       <ElementPath>change</ElementPath>
       <Type>String</Type>
-      <Subtype>Boolean</Subtype>
-      <Width>0</Width>
+      <Width>4</Width>
     </PropertyDefn>
     <PropertyDefn>
       <Name>changeDescription</Name>
@@ -132,8 +131,7 @@
       <Name>exceedance</Name>
       <ElementPath>exceedanceDescriptionFinal|ExceedanceDescription|exceedance</ElementPath>
       <Type>String</Type>
-      <Subtype>Boolean</Subtype>
-      <Width>0</Width>
+      <Width>5</Width>
     </PropertyDefn>
     <PropertyDefn>
       <Name>numericalExceedance</Name>
@@ -198,8 +196,7 @@
       <Name>exceedanceDescriptionBase|ExceedanceDescription|exceedance</Name>
       <ElementPath>exceedanceDescriptionBase|ExceedanceDescription|exceedance</ElementPath>
       <Type>String</Type>
-      <Subtype>Boolean</Subtype>
-      <Width>0</Width>
+      <Width>4</Width>
     </PropertyDefn>
     <PropertyDefn>
       <Name>exceedanceDescriptionBase|ExceedanceDescription|numberExceedances</Name>
@@ -216,8 +213,7 @@
       <Name>exceedanceDescriptionAdjustment|ExceedanceDescription|exceedance</Name>
       <ElementPath>exceedanceDescriptionAdjustment|ExceedanceDescription|exceedance</ElementPath>
       <Type>String</Type>
-      <Subtype>Boolean</Subtype>
-      <Width>0</Width>
+      <Width>5</Width>
     </PropertyDefn>
     <PropertyDefn>
       <Name>exceedanceDescriptionAdjustment|ExceedanceDescription|numberExceedances</Name>

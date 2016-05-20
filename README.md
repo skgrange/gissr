@@ -67,3 +67,4 @@ To overcome these points, I have written wrappers for many geographical function
   - Develop a function which can read *n* features in a spatial data file. This will be helpful when large data files are encountered and system memory is too small. 
   - Get the interface between R and SpatiaLite sorted. 
   - Concave hull function *i.e.* find minimum area polygon.  
+  - Add support for WKB. 

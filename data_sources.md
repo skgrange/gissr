@@ -8,10 +8,7 @@
   - [Office of National Statistics](http://www.ons.gov.uk/ons/guide-method/geography/products/census/spatial/2011/index.html)
     - Output areas
     - Built-up areas
-  - [Environment agency](http://www.geostore.com/environment-agency/WebStore?xml=environment-agency/xml/ogcDataDownload.xml)
-    - Canals
-    - High noise level zones
-    - etc.
+  - [Spatial Data Catalogue](http://environment.data.gov.uk/ds/catalogue/index.jsp#/catalogue)
   
 ### London 
 
