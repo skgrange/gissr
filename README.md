@@ -42,13 +42,14 @@ To overcome these points, I have written wrappers for many geographical function
   - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   - Bind/combine spatial objects with `sp_bind`. 
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
-  - Clip or crop a spatial object to an rectangular envelope with `sp_crop`. 
+  - Clip or crop a spatial object to an rectangular envelope with `sp_clip`. 
     - To filter objects by other polygons, use `[` subsetting. 
     - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
+  - Simplify spatial objects with `sp_simplify`.
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
-  - Add a positive or negative buffer with `sp_buffer`. 
-  - Create enclosing polygons with `sp_convex_hull`. 
+  - Add a positive or negative buffer with `sp_buffer`.
+  - Create enclosing polygons with `sp_convex_hull`.
   - Find centroids of geometries with `sp_centroid`. 
   - "Promote" or "demote" Spatial\* to Spatial\*DataFrame, *i.e.* add or drop data slots for geometries with `sp_promote` and `sp_demote`. 
   - Return and reset geometry IDs with `sp_feature_ids` and `sp_reset_feature_ids`.
@@ -59,7 +60,6 @@ To overcome these points, I have written wrappers for many geographical function
   - Point-in-polygon tests with `left_join_spatial`.
   - Calculate distances among spatial objects with `sp_distance`.
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
-  - Simplify spatial objects with `sp_simplify`.
   - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
   
 ## Things I want to do

@@ -7,10 +7,14 @@
 #' 
 #' @param file File name of GPX file.
 #' 
+#' @param force Should the projection be forced to WGS84? Default is \code{TRUE}
+#' because this is generally the standard for GPX files. 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @examples
 #' \dontrun{
+#' 
 #' # Export a GPX file containing points
 #' write_gpx(sp_bus_stations, "~/Desktop/bus_stations.gpx")
 #' 
@@ -20,7 +24,10 @@
 #' }
 #'
 #' @export
-write_gpx <- function(sp, file) {
+write_gpx <- function(sp, file, force = TRUE) {
+  
+  # Projection force
+  if (force) sp <- sp_transform(sp)
   
   # Promote
   sp <- sp_promote(sp)
@@ -57,10 +64,7 @@ write_gpx <- function(sp, file) {
   if (file.exists(file)) file.remove(file)
   
   # Export file
-  # Warnings when projection is unknown or not wgs86, not really an issue for me
-  suppressWarnings(
-    rgdal::writeOGR(sp, file, layer = layer, driver = "GPX", 
-                    dataset_options = "GPX_USE_EXTENSIONS=yes")
-  )
+  rgdal::writeOGR(sp, file, layer = layer, driver = "GPX", 
+                  dataset_options = "GPX_USE_EXTENSIONS=yes")
   
 }

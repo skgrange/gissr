@@ -4,12 +4,15 @@
 \alias{write_gpx}
 \title{Function to export geometries as a GPX file.}
 \usage{
-write_gpx(sp, file)
+write_gpx(sp, file, force = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object.}
 
 \item{file}{File name of GPX file.}
+
+\item{force}{Should the projection be forced to WGS84? Default is \code{TRUE}
+because this is generally the standard for GPX files.}
 }
 \description{
 \code{write_gpx} uses \code{rgdal::writeOGR} as the GPX writer. GPX files do 
@@ -17,6 +20,7 @@ not support polygons, therefore polygon geometries will be coerced to lines.
 }
 \examples{
 \dontrun{
+
 # Export a GPX file containing points
 write_gpx(sp_bus_stations, "~/Desktop/bus_stations.gpx")
 
