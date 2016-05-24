@@ -17,6 +17,11 @@ map_to_sp <- function(map = "world") {
   # Give projection
   sp <- sp_transform(sp, warn = FALSE)
   
+  # Clean-up bad geometries
+  suppressWarnings(
+    sp <- sp_buffer(sp, features = TRUE, width = 0)
+  )
+  
   # Return
   sp
   

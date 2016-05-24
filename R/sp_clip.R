@@ -1,8 +1,8 @@
 #' Function to clip spatial objects by a rectangular envelope.  
 #' 
 #' \code{sp_clip} uses \code{raster::crop} rather than 
-#' \code{rgeos::gIntersection} because the \code{crop} method keeps the data slot 
-#' in the spatial object intact. 
+#' \code{rgeos::gIntersection} by default because the \code{crop} method can 
+#' keep the data slot in the spatial object intact at times.  
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -13,6 +13,10 @@
 #' Watch out when using latitude and longitude, the order is longitude, longitude,
 #' then latitude, latitude. These coordinates need to be in the same projection 
 #' as \code{sp}. 
+#' 
+#' @param method What method to use? Default is to use \code{raster::crop} but
+#' \code{rgeos::gIntersection} could be used if prefered. \code{method} can be
+#' \code{"raster"} or \code{"rgeos"}
 #' 
 #' @examples 
 #' 
@@ -28,16 +32,32 @@
 #' }
 #' 
 #' @export
-sp_clip <- function(sp, envelope) {
+sp_clip <- function(sp, envelope, method = "raster") {
   
-  # Use rgeos to clip, faster, but will loose data slot
-  # sp.envelope <- as(raster::extent(envelope), "SpatialPolygons")
-  # sp::proj4string(sp.envelope) <- sp::CRS(proj4string(sp))
-  # sp.clip <- rgeos::gIntersection(sp, sp.envelope, byid = TRUE)
+  if (method == "raster") sp <- raster::crop(sp, envelope)
   
-  sp <- raster::crop(sp, envelope)
+  if (method == "rgeos") {
+    
+    # Use rgeos to clip, faster, but will loose data slot
+    # Promote
+    sp_envelope <- as(raster::extent(envelope), "SpatialPolygons")
+    
+    # Give projection
+    projection <- sp_projection(sp)
+    sp_envelope <- sp_transform(sp_envelope, projection, warn = FALSE)
+    
+    # Clip
+    sp <- rgeos::gIntersection(sp, sp_envelope, byid = TRUE)
+    
+  }
   
   # Return
   sp
   
 }
+
+
+#' @rdname sp_clip
+#' 
+#' @export
+sp_crop <- sp_clip

@@ -2,9 +2,12 @@
 % Please edit documentation in R/sp_clip.R
 \name{sp_clip}
 \alias{sp_clip}
+\alias{sp_crop}
 \title{Function to clip spatial objects by a rectangular envelope.}
 \usage{
-sp_clip(sp, envelope)
+sp_clip(sp, envelope, method = "raster")
+
+sp_crop(sp, envelope, method = "raster")
 }
 \arguments{
 \item{sp}{Spatial object to be clipped.}
@@ -14,11 +17,15 @@ envelope to be used as a bounding box. The order is: xmin, xmax, ymin, ymax.
 Watch out when using latitude and longitude, the order is longitude, longitude,
 then latitude, latitude. These coordinates need to be in the same projection 
 as \code{sp}.}
+
+\item{method}{What method to use? Default is to use \code{raster::crop} but
+\code{rgeos::gIntersection} could be used if prefered. \code{method} can be
+\code{"raster"} or \code{"rgeos"}}
 }
 \description{
 \code{sp_clip} uses \code{raster::crop} rather than 
-\code{rgeos::gIntersection} because the \code{crop} method keeps the data slot 
-in the spatial object intact.
+\code{rgeos::gIntersection} by default because the \code{crop} method can 
+keep the data slot in the spatial object intact at times.
 }
 \examples{
 
