@@ -19,8 +19,9 @@
 #' 
 #' @examples 
 #' \dontrun{
+#' 
 #' # Load a shape file of canal locks for the UK
-#' sp_locks <- readOGR("uk-canals", "locks")
+#' sp_locks <- sp_read("uk-canals", "locks")
 #' 
 #' # Print projection string
 #' sp_projection(sp_locks)
@@ -33,17 +34,21 @@
 #' # Print projection string
 #' sp_projection(sp_locks)
 #' "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+#' 
 #' }
 #' 
 #' @import sp
 #' 
 #' @export
-sp_transform <- function(sp, to = "+proj=longlat +datum=WGS84 +no_defs",
-                         warn = TRUE) {
+sp_transform <- function(sp, to = NA, warn = TRUE) {
   
-  # Switch
+  # Default
+  if (is.na(to)) to <- "+proj=longlat +datum=WGS84 +no_defs"
+  
+  # Switch for projections I use
   to <- ifelse(to %in% c("bng", "ogb", "osgb36"), "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs", to)
-  to <- ifelse(to %in% c("nztm"), "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs", to)
+  to <- ifelse(to == "nztm", "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs", to)
+  to <- ifelse(to == "wgs84", "+proj=longlat +datum=WGS84 +no_defs", to)
   
   # If no projection
   if (is.na(proj4string(sp))) {

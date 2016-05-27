@@ -16,32 +16,24 @@
 #' 
 #' @param df Data frame with coordinates to be transformed. 
 #' 
-#' @param x Name of \code{x} variable. 
+#' @param latitude Name of latitude/y variable. 
 #' 
-#' @param y Name of \code{y} variable. 
+#' @param longitude Name of longitude/x variable. 
 #' 
 #' @param from A proj4 string which represents what coordinate system the
-#' data frame \code{x} and \code{y} are in. 
+#' data frame is within. 
 #' 
 #' @param to A proj4 string which represents what coordinate system the 
 #' converted coordinates will be converted to.
 #' 
-#' @param rename Should the converted coordinates be renamed to a generic 
-#' \code{x} and \code{y}?
-#' 
-#' @param reorder Should the converted coordinates be placed in the first two 
-#' columns of the returned data frame? 
-#' 
-#' @param round How many decimal points should the converted coordinates be
-#' rounded to? Default is 6. 
-#' 
-#' @seealso See \code{\link{spTransform}}, \code{\link{sp_transform}}
+#' @seealso \code{\link{sp_transform}}, \code{\link{sp_from_data_frame}}
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @examples 
 #' 
 #' \dontrun{
+#' 
 #' # Convert British National Grid/Ordnance Survey National Grid/OSGB36/EPSG:7405
 #' # to latitude and longitude (WGS 84/EPSG:4326)
 #' 
@@ -49,54 +41,31 @@
 #' bng <- "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +units=m +no_defs"
 #' 
 #' data_oxford_transform <- transform_coordinates(
-#'   data_oxford, x = "x_coordinate", y = "y_coordinate", from = bng)
+#'   data_oxford, latitude = "latitude", longitude = "longitude", from = bng)
+#'   
 #' }
 #'
 #' @export
-transform_coordinates <- function(df, x = "easting", y = "northing", from = "", 
-                                  to = "+proj=longlat +datum=WGS84 +no_defs", 
-                                  rename = TRUE, reorder = TRUE, round = 6) {
+transform_coordinates <- function(df, latitude = "latitude", longitude = "longitude", 
+                                  from, to) {
   
-  # Check argument
-  if (from == "") stop("A 'from' projection string must defined.", call. = FALSE)
-
-  # Make standard data frame, catch for tbl_df
-  df <- threadr::base_df(df)
+  # Get variable order
+  variables <- names(df)
   
-  # Make sp points object, x, y order
-  sp::coordinates(df) <- c(x, y)
+  # Promote
+  sp <- sp_from_data_frame(df, latitude, longitude, projection = from, 
+                           type = "points")
   
-  # Give input a projection
-  sp::proj4string(df) <- from
-
   # Do the projection conversion
-  df <- sp_transform(df, to)
+  sp <- sp_transform(sp, to)
   
   # Back to data frame
-  df <- data.frame(df)
+  df <- data.frame(sp)
   
   # Remove optional variable
-  if ("optional" %in% names(df)) df$optional <- NULL
+  df$optional <- NULL
   
-  # Get the indices
-  x_index <- which(names(df) == x)
-  y_index <- which(names(df) == y)
-  other_index <- which(names(df) %ni% c(x, y))
-  
-  # Round coordinates
-  df[, x_index] <- round(df[, x_index], round)
-  df[, y_index] <- round(df[, y_index], round)
-  
-  # Reorder df
-  if (reorder) df <- df[, c(y_index, x_index, other_index)]
-  
-  # Rename variables
-  if (rename) {
-    
-    names(df) <- ifelse(names(df) == x, "x", names(df))
-    names(df) <- ifelse(names(df) == y, "y", names(df))
-    
-  }
+  df <- threadr::arrange_left(df, variables)
   
   # Return
   df

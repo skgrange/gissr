@@ -5,7 +5,7 @@
 \title{Convenience function to transform a spatial object's projection system to 
 WGS84 latitude and longitude.}
 \usage{
-sp_transform(sp, to = "+proj=longlat +datum=WGS84 +no_defs", warn = TRUE)
+sp_transform(sp, to = NA, warn = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object which is to be transformed.}
@@ -23,8 +23,9 @@ when the spatial object contains no projection information.
 }
 \examples{
 \dontrun{
+
 # Load a shape file of canal locks for the UK
-sp_locks <- readOGR("uk-canals", "locks")
+sp_locks <- sp_read("uk-canals", "locks")
 
 # Print projection string
 sp_projection(sp_locks)
@@ -37,6 +38,7 @@ sp_locks <- sp_transform(sp_locks)
 # Print projection string
 sp_projection(sp_locks)
 "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
 }
 
 }

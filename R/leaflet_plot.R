@@ -19,7 +19,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE) {
   if (!is.null(popup)) popup <- as.formula(stringr::str_c("~ ", popup))
   
   # Projection force
-  if (force) sp <- sp_transform(sp)
+  if (force) sp <- sp_transform(sp, warn = FALSE)
   
   # Create map
   map <- leaflet(sp) %>%
@@ -29,8 +29,10 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE) {
     addProviderTiles("Thunderforest.TransportDark", group = "Transport dark") %>%
     addProviderTiles("Thunderforest.Outdoors", group = "Outdoors") %>%
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
-    addLayersControl(baseGroups = c(
-      "OpenStreetMap", "Toner", "Landscape", "Transport dark", "Outdoors", "Images"))
+    # addProviderTiles(provider = "http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    #                  group = "Topo") %>% 
+    addLayersControl(baseGroups = c("OpenStreetMap", "Toner", "Landscape", 
+                                    "Transport dark", "Outdoors", "Images"))
   
   # Add layers
   # Find geom type
@@ -39,7 +41,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE) {
   if (grepl("points", sp_class, ignore.case = TRUE)) {
     
     map <- map %>% 
-      addMarkers(popup = popup)
+      addCircleMarkers(popup = popup)
     
   }
   
