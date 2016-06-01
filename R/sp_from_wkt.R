@@ -17,7 +17,7 @@
 #' strings have been parsed. Default is \code{NA}. 
 #' 
 #' @param verbose Should the function give messages? Useful when large number of
-#' WKT strings are to be parsed. Default is \code{TRUE}. 
+#' WKT strings are to be parsed. Default is \code{FALSE}. 
 #'
 #' @author Stuart K. Grange
 #' 
@@ -33,7 +33,7 @@
 #' 
 #' @export
 sp_from_wkt <- function(df, wkt = "geom", data = TRUE, projection = NA, 
-                        verbose = TRUE) {
+                        verbose = FALSE) {
   
   # Catch dplyr's table data frame
   df <- threadr::base_df(df)

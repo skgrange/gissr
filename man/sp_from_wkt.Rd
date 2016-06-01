@@ -6,7 +6,7 @@
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
 sp_from_wkt(df, wkt = "geom", data = TRUE, projection = NA,
-  verbose = TRUE)
+  verbose = FALSE)
 
 sp_to_wkt(sp, features = TRUE)
 }
@@ -23,7 +23,7 @@ object's data-slot? I.e. create a spatial data frame.}
 strings have been parsed. Default is \code{NA}.}
 
 \item{verbose}{Should the function give messages? Useful when large number of
-WKT strings are to be parsed. Default is \code{TRUE}.}
+WKT strings are to be parsed. Default is \code{FALSE}.}
 }
 \description{
 \code{sp_from_wkt} creates geometries from WKT strings and can create spatial
