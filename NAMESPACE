@@ -2,6 +2,7 @@
 
 export(distance_by_haversine)
 export(dms_to_decimal)
+export(get_osm_boundary)
 export(get_sunrise)
 export(google_elevation)
 export(google_geocode)
