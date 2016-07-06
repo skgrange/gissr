@@ -119,11 +119,3 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, projection = NA,
   sp
   
 }
-
-
-# Function for creating wkt strings from a spatial object. 
-# To-do: add data handling too. 
-# 
-#' @rdname sp_from_wkt
-#' @export
-sp_to_wkt <- function(sp, features = TRUE) rgeos::writeWKT(sp, byid = features)

@@ -2,13 +2,10 @@
 % Please edit documentation in R/sp_from_wkt.R
 \name{sp_from_wkt}
 \alias{sp_from_wkt}
-\alias{sp_to_wkt}
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
 sp_from_wkt(df, wkt = "geom", data = TRUE, projection = NA,
   verbose = FALSE)
-
-sp_to_wkt(sp, features = TRUE)
 }
 \arguments{
 \item{df}{Data frame containing a WKT string variable. \code{df} can also be
