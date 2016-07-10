@@ -15,6 +15,10 @@
   - London data
     - <http://data.london.gov.uk/dataset/statistical-gis-boundary-files-london>
     - <http://data.london.gov.uk/dataset/2011-boundary-files>
+    
+### Scotland
+
+  - [Scottish Natural Heritage](https://gateway.snh.gov.uk/natural-spaces/)
 
 ## New Zealand
 

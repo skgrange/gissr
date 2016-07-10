@@ -89,5 +89,50 @@ sp_bind_many <- function(sp_list) {
 }
 
 
-# Bind objects using do.call
-sp_list_bind <- function(sp_list) do.call("rbind", sp_list)
+sp_list_bind <- function(sp_list) {
+  
+  sp <- tryCatch({
+    
+    # Bind objects using do.call
+    do.call("rbind", sp_list)
+    
+  }, error = function(e) {
+    
+    # On error, try some fancy data slot manipulations
+    # Get names of all variables in data slot
+    names <- lapply(sp_list, function(x) names(x@data))
+    
+    # Make a name vector
+    names <- unlist(names)
+    names <- unique(names)
+    
+    # Create data frame with zero rows
+    names <- stringr::str_c(names, collapse = ",")
+    df <- read.csv(textConnection(names), stringsAsFactors = FALSE)
+    
+    # Create new data slots with the same variable names
+    # sp_data_slot <- lapply(sp_list, function(x) plyr::rbind.fill(x@data, df))
+    
+    # A for loop in R!? 
+    for (x in 1:length(sp_list)) {
+      
+      # Row names need to persist
+      row_names <- rownames(sp_list[[x]]@data)
+      
+      # Alter data slot
+      sp_list[[x]]@data <- plyr::rbind.fill(sp_list[[x]]@data, df)
+      
+      # Add row names again
+      rownames(sp_list[[x]]@data) <- row_names
+      
+    }
+    
+    # Return
+    do.call("rbind", sp_list)
+    
+  })
+  
+  # Return
+  sp
+
+}

@@ -100,7 +100,8 @@ sp_distance <- function(sp_1, sp_2, cores = 1, unit = "m") {
     sp_2 <- sp_transform(sp_2, projection, warn = FALSE)
     
     # Give a message
-    message("The projection systems have been transformed for calculation.")
+    warning("The projection systems have been transformed for calculation.",
+            call. = FALSE)
     
     # Need to degrade spatial-data-frame to just spatial for rgeos::gDistance
     if (grepl("data", class(sp_1), ignore.case = TRUE)) {
