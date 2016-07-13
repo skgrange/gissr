@@ -13,7 +13,8 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE) {
   
   # Sort out popups
   # Use name variable even if not declared
-  if (is.null(popup) & "name" %in% names(sp@data)) popup <- "name"
+  if (grepl("data", class(sp)[1], ignore.case = TRUE))
+    if (is.null(popup) & "name" %in% names(sp@data)) popup <- "name"
   
   # Parse
   if (!is.null(popup)) popup <- as.formula(stringr::str_c("~ ", popup))
