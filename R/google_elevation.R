@@ -31,6 +31,7 @@ google_elevation <- function(latitude, longitude, key) {
   )
   
   # Get elevation data for all queries
+  # To-do: change this behaviour
   if (length(url) >= 10) {
     
     # With progress bar

@@ -1,15 +1,21 @@
-#' Function to bind spatial objects together. 
+#' Function to bind different spatial objects together. 
 #' 
 #' \code{sp_bind} combines spatial objects of the same type together. This 
 #' function is useful for combining shapefiles or tables of WKT strings
 #' together. The feature IDs within line- and polygon-spatial objects must be 
 #' manipulated for the binding to occur. The original, non-manipulated IDs are 
-#' not preserved. 
+#' not preserved. \code{sp_bind} will still bind objects if their data slots
+#' contain different variables. 
+#' 
+#' For uniting geometries which exist in the same data object, use 
+#' \code{\link{sp_unite}}. 
 #' 
 #' @param ... Spatial objects of the same type. \code{...} can be a number of 
 #' individual objects or a list containing many objects. 
 #'
 #' @author Stuart K. Grange
+#' 
+#' @seealso \code{\link{sp_unite}}
 #' 
 #' @examples 
 #' \dontrun{

@@ -10,15 +10,18 @@ sp_unite(sp)
 \item{sp}{Spatial object.}
 }
 \description{
-\code{sp_unite} will join/combine/unite geometries which intersect.
+\code{sp_unite} will join/combine/unite geometries which are contained in the
+same data object. For example, use \code{sp_unite} when a data object contains
+many individual polygons but they form the same unit and therefore they are 
+considered sub-geometries.
 }
 \details{
-This function is not complete.
+For binding different spatial objects together, use \code{\link{sp_bind}}.
 }
 \author{
 Stuart K. Grange
 }
 \seealso{
-\code{\link{gUnion}}
+\code{\link{gUnion}}, \code{\link{sp_bind}}
 }
 

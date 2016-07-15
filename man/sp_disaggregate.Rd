@@ -16,4 +16,7 @@ polygons and is a simple wrapper for \code{\link{sp::disaggregate}}.
 \author{
 Stuart K. Grange
 }
+\seealso{
+\code{\link{sp_unite}}
+}
 

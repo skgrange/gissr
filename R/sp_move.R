@@ -32,5 +32,6 @@ sp_move <- function(sp, x, y) {
 
 
 # Wrap
+#' @rdname sp_move
 #' @export
 sp_shift <- sp_move

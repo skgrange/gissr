@@ -1,14 +1,17 @@
-#' Function to unite spatial objects. 
+#' Function to unite spatial objects.
 #' 
-#' \code{sp_unite} will join/combine/unite geometries which intersect. 
+#' \code{sp_unite} will join/combine/unite geometries which are contained in the
+#' same data object. For example, use \code{sp_unite} when a data object contains
+#' many individual polygons but they form the same unit and therefore they are 
+#' considered sub-geometries. 
 #' 
-#' This function is not complete. 
+#' For binding different spatial objects together, use \code{\link{sp_bind}}. 
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @param sp Spatial object. 
 #' 
-#' @seealso \code{\link{gUnion}}
+#' @seealso \code{\link{gUnion}}, \code{\link{sp_bind}}
 #'
 #' @export
 sp_unite <- function(sp) {

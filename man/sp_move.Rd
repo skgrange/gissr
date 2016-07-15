@@ -2,9 +2,12 @@
 % Please edit documentation in R/sp_move.R
 \name{sp_move}
 \alias{sp_move}
+\alias{sp_shift}
 \title{Function to move/shift a spatial object.}
 \usage{
 sp_move(sp, x, y)
+
+sp_shift(sp, x, y)
 }
 \arguments{
 \item{sp}{Spatial object.}

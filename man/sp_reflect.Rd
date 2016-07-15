@@ -2,19 +2,19 @@
 % Please edit documentation in R/sp_reflect.R
 \name{sp_reflect}
 \alias{sp_reflect}
-\title{Function to relect/reverse a spatial object.}
+\title{Function to reflect/reverse a spatial object.}
 \usage{
 sp_reflect(sp, x = FALSE, y = FALSE)
 }
 \arguments{
 \item{sp}{Spatial object.}
 
-\item{x}{Should \code{sp} be reflected in the \code{x} diemsion?}
+\item{x}{Should \code{sp} be reflected in the \code{x} dimension?}
 
-\item{y}{Should \code{sp} be reflected in the \code{y} diemsion?}
+\item{y}{Should \code{sp} be reflected in the \code{y} dimension?}
 }
 \description{
-Function to relect/reverse a spatial object.
+Function to reflect/reverse a spatial object.
 }
 \author{
 Stuart K. Grange

@@ -40,11 +40,13 @@ To overcome these points, I have written wrappers for many geographical function
     - `transform_coordinates` does a similar thing, but for data frames.
   - Transform data frames (tables) to spatial points, lines, or polygons with `sp_from_data_frame`. 
   - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
-  - Bind/combine spatial objects with `sp_bind`. 
+  - Bind/combine different spatial objects with `sp_bind`. 
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_clip`. 
     - To filter objects by other polygons, use `[` subsetting. 
     - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
+  - Do simple transformations to spatial objects with `sp_move`, `sp_flip`, `sp_reflect`, and `sp_rotate`. 
+  - Unite spatial objects with `sp_unite` and do the oposite with `sp_disaggregate`. 
   - Simplify spatial objects with `sp_simplify`.
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
@@ -53,8 +55,8 @@ To overcome these points, I have written wrappers for many geographical function
   - Find centroids of geometries with `sp_centroid`. 
   - "Promote" or "demote" Spatial\* to Spatial\*DataFrame, *i.e.* add or drop data slots for geometries with `sp_promote` and `sp_demote`. 
   - Return and reset geometry IDs with `sp_feature_ids` and `sp_reset_feature_ids`.
-  - Export spatial objects to spatial files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
-  
+  - Export spatial objects to spatial data files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
+
 ## Fancy functions
 
   - Point-in-polygon tests with `left_join_spatial`.

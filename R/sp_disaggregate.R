@@ -7,5 +7,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
+#' @seealso \code{\link{sp_unite}}
+#' 
 #' @export
 sp_disaggregate <- function(sp) disaggregate(sp)

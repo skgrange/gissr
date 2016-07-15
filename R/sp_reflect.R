@@ -1,12 +1,12 @@
-#' Function to relect/reverse a spatial object. 
+#' Function to reflect/reverse a spatial object. 
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @param sp Spatial object. 
 #' 
-#' @param x Should \code{sp} be reflected in the \code{x} diemsion? 
+#' @param x Should \code{sp} be reflected in the \code{x} dimension? 
 #' 
-#' @param y Should \code{sp} be reflected in the \code{y} diemsion? 
+#' @param y Should \code{sp} be reflected in the \code{y} dimension? 
 #' 
 #' @seealso \code{\link{elide}}
 #' 
