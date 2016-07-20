@@ -64,23 +64,14 @@ sp_from_data_frame <- function(df, latitude = "latitude",
     stop("'type' must be one of 'points', 'lines', or 'polygons'.", call. = FALSE)
   
   # Promote to spatial data
-  if (type == "points") {
-    
+  if (type == "points")
     sp <- data_frame_to_points(df, latitude, longitude, projection)
-    
-  }
   
-  if (type == "lines") {
-    
+  if (type == "lines")
     sp <- data_frame_to_lines(df, latitude, longitude, projection, id)
-    
-  }
   
-  if (type == "polygons") {
-    
+  if (type == "polygons")
     sp <- data_frame_to_polygons(df, latitude, longitude, projection, id)
-    
-  }
   
   # Return
   sp
@@ -92,6 +83,21 @@ data_frame_to_points <- function(df, latitude, longitude, projection) {
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
+  
+  # NA check, if NAs drop them
+  if (any(is.na(c(df[, latitude], df[, longitude])))) {
+    
+    # Remove NAs
+    df <- df[!(is.na(df[, latitude]) & is.na(df[, longitude])), ]
+    
+    # Raise warning
+    warning("Missing coordinates were detected and have been removed.", 
+            call. = FALSE)
+    
+    # Check 
+    stop("There are no valid coordinates.", call. = FALSE)
+        
+  }
   
   # Make sp points object
   sp::coordinates(df) <- c(longitude, latitude)
@@ -106,7 +112,6 @@ data_frame_to_points <- function(df, latitude, longitude, projection) {
   sp
   
 }
-
 
 
 data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
@@ -156,7 +161,6 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
   sp
   
 }
-
 
 
 data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {

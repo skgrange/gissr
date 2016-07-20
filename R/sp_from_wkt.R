@@ -49,10 +49,25 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, projection = NA,
     
   } else {
     
+    # Check for missing wkt, sptatial data cannot be empty
+    if (any(is.na(df[, wkt]))) {
+      
+      # Remove NAs
+      df <- df[!is.na(df[, wkt]), ]
+      
+      # Raise warning
+      warning("Missing WKT strings were detected and have been removed.", 
+              call. = FALSE)
+      
+    }
+    
     # Get a vector of wkt from df
     wkt_vector <- df[, wkt]
     
   }
+  
+  # Check 
+  if (length(wkt_vector) == 0) stop("There are no valid WKT strings.", call. = FALSE)
   
   # Store data
   if (data) {
