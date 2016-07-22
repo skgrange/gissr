@@ -95,8 +95,8 @@ data_frame_to_points <- function(df, latitude, longitude, projection) {
             call. = FALSE)
     
     # Check 
-    stop("There are no valid coordinates.", call. = FALSE)
-        
+    if (nrow(df) == 0) stop("There are no valid coordinates.", call. = FALSE)
+    
   }
   
   # Make sp points object
