@@ -46,7 +46,7 @@ To overcome these points, I have written wrappers for many geographical function
     - To filter objects by other polygons, use `[` subsetting. 
     - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
   - Do simple transformations to spatial objects with `sp_move`, `sp_flip`, `sp_reflect`, and `sp_rotate`. 
-  - Unite spatial objects with `sp_unite` and do the oposite with `sp_disaggregate`. 
+  - Unite spatial objects with `sp_unite` and do the opposite with `sp_disaggregate`. 
   - Simplify spatial objects with `sp_simplify`.
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
