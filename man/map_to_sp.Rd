@@ -6,8 +6,26 @@
 \usage{
 map_to_sp(map = "world")
 }
+\arguments{
+\item{map}{Map database to turn into spatial data. \code{map} can be either
+\code{"map"} or \code{"world_hires"}.}
+}
+\value{
+SpatialPolygonsDataFrame with \code{id} and \code{name} variables.
+}
 \description{
 Function to convert map database objects to spatial data.
+}
+\examples{
+\dontrun{
+# Lower resolution
+sp_map <- map_to_sp(map = "world")
+
+#
+sp_map_better <- map_to_sp(map = "world_hires")
+
+}
+
 }
 \author{
 Stuart K. Grange

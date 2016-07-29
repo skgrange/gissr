@@ -1,7 +1,7 @@
 Package: gissr
 Type: Package
 Title: Functions to make working with spatial data easier
-Version: 0.5.4
+Version: 0.5.5
 Date: 2016-07-23
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
@@ -9,13 +9,13 @@ Description: A collection of spatial functions to make R a more effective GIS.
 License: GPL (>= 2)
 ByteCompile: true
 Depends:
-    sp,
-    leaflet
+    sp
 Imports:
     stringr,
     lubridate,
     plyr,
     dplyr,
+    leaflet,
     jsonlite,
     geojsonio,
     ggplot2,

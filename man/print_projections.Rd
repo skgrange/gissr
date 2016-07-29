@@ -2,9 +2,12 @@
 % Please edit documentation in R/print_projections.R
 \name{print_projections}
 \alias{print_projections}
+\alias{sp_all_projections}
 \title{Function to print projections supported by R.}
 \usage{
 print_projections()
+
+sp_all_projections()
 }
 \description{
 Function to print projections supported by R.
