@@ -41,29 +41,28 @@ To overcome these points, I have written wrappers for many geographical function
   - Transform data frames (tables) to spatial points, lines, or polygons with `sp_from_data_frame`. 
   - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   - Bind/combine different spatial objects with `sp_bind`. 
+  - Unite spatial objects with `sp_unite` and do the opposite with `sp_disaggregate`. 
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_clip`. 
     - To filter objects by other polygons, use `[` subsetting. 
     - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
   - Do simple transformations to spatial objects with `sp_move`, `sp_flip`, `sp_reflect`, and `sp_rotate`. 
-  - Unite spatial objects with `sp_unite` and do the opposite with `sp_disaggregate`. 
   - Simplify spatial objects with `sp_simplify`.
   - "Dissolve" polygons to make a single feature with `sp_dissolve_polygons`.
   - "Punch" holes in polygons with `sp_punch`. 
-  - Add a positive or negative buffer with `sp_buffer`.
+  - Add positive or negative buffers with `sp_buffer`.
   - Create enclosing polygons with `sp_convex_hull`.
   - Find centroids of geometries with `sp_centroid`. 
   - "Promote" or "demote" Spatial\* to Spatial\*DataFrame, *i.e.* add or drop data slots for geometries with `sp_promote` and `sp_demote`. 
   - Return and reset geometry IDs with `sp_feature_ids` and `sp_reset_feature_ids`.
-  - Export spatial objects to spatial data files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
-
-## Fancy functions
-
-  - Point-in-polygon tests with `left_join_spatial`.
+  - Point-in-polygon tests with `sp_left_join`.
   - Calculate distances among spatial objects with `sp_distance`.
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
   - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
-  
+  - Parse vectors of degrees, minutes, and seconds into decimal degress with `dms_to_decimal`. 
+  - Sort/arrange points in a clockwise order with `sort_points`. 
+  - Export spatial objects to spatial data files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
+
 ## Things I want to do
 
   - Develop a function which can read *n* features in a spatial data file. This will be helpful when large data files are encountered and system memory is too small to load the entire file at once. 

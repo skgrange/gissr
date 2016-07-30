@@ -20,6 +20,7 @@
 #' @export
 map_to_sp <- function(map = "world") {
   
+  # Parse arguments
   map <- stringr::str_to_lower(map)
   map <- stringr::str_replace(map, "world.hires|world_hires|world_highres|world_high", 
                               "worldHires")
