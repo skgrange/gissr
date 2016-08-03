@@ -5,7 +5,8 @@
 \title{Function to find elevation from latitude and longitude coordinate pairs using
 Google Maps API.}
 \usage{
-google_elevation(latitude, longitude, key)
+google_elevation(latitude, longitude, key, round = NA, vector = TRUE,
+  progress = "time")
 }
 \arguments{
 \item{latitude}{Numeric vector of latitude values.}
@@ -13,18 +14,25 @@ google_elevation(latitude, longitude, key)
 \item{longitude}{Numeric vector of longitude values.}
 
 \item{key}{Google Maps API key.}
+
+\item{round}{Number of decimal points to round the elevation variable to.
+Default is no rounding.}
+
+\item{vector}{Should the function only return a vector of elevation? Default
+is \code{TRUE} but a data frame can be returned with \code{FALSE}.}
+
+\item{progress}{Type of progress bar to display. Default is \code{"time"}.}
+}
+\value{
+Either a data frame containing latitude and longitude
+pairs, elevation estimate, and (horizontal) resolution of elevation estimate 
+or a numeric vector containing only elevation estimates.
 }
 \description{
 The Google Maps API is not open-source, therefore check the licensing 
 conditions for usage conditions 
 (\url{https://developers.google.com/maps/terms}). Users of this function 
 must use the elevation data to display on a Google Map.
-}
-\details{
-\code{google_elevation} returns a data frame with the latitude and longitude
-pairs, elevation estimate, and (horizontal) resolution of elevation estimate. 
-Coordinate pairs which contain \code{NA} will be returned as \code{NA} 
-observation.
 }
 \author{
 Stuart K. Grange

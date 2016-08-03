@@ -6,12 +6,12 @@
 #' (\url{https://developers.google.com/maps/terms}). Users of this function 
 #' must use the elevation data to display on a Google Map. 
 #'
-#' \code{google_elevation} returns a data frame with the latitude and longitude
-#' pairs, elevation estimate, and (horizontal) resolution of elevation estimate. 
-#' Coordinate pairs which contain \code{NA} will be returned as \code{NA} 
-#' observation. 
+#' @return Either a data frame containing latitude and longitude
+#' pairs, elevation estimate, and (horizontal) resolution of elevation estimate 
+#' or a numeric vector containing only elevation estimates. 
 #' 
 #' @import dplyr
+#' @importFrom jsonlite fromJSON
 #' 
 #' @param latitude Numeric vector of latitude values.
 #' 
@@ -19,33 +19,33 @@
 #' 
 #' @param key Google Maps API key. 
 #' 
+#' @param round Number of decimal points to round the elevation variable to.
+#' Default is no rounding. 
+#' 
+#' @param vector Should the function only return a vector of elevation? Default
+#' is \code{TRUE} but a data frame can be returned with \code{FALSE}. 
+#' 
+#' @param progress Type of progress bar to display. Default is \code{"time"}. 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @export
-google_elevation <- function(latitude, longitude, key) {
+google_elevation <- function(latitude, longitude, key, round = NA, vector = TRUE,
+                             progress = "time") {
   
   # Build query with arguments
-  suppressWarnings(
-    url <- stringr::str_c("https://maps.googleapis.com/maps/api/elevation/json?locations=", 
-                          latitude, ",", longitude, "&key=", key)
-  )
-  
+  urls <- stringr::str_c(
+    "https://maps.googleapis.com/maps/api/elevation/json?locations=", 
+    latitude, ",", longitude, "&key=", key)
+   
   # Get elevation data for all queries
-  # To-do: change this behaviour
-  if (length(url) >= 10) {
-    
-    # With progress bar
-    list <- pbapply::pblapply(url, get_elevation)
-    
-  } else {
-    
-    # Without progress bar
-    list <- lapply(url, get_elevation)
-    
-  }
+  df <- plyr::ldply(urls, google_elevation_worker, .progress = progress)
   
-  # Bind all data frames
-  df <- do.call("rbind", list)
+  # Round if desired. 
+  if (!is.na(round)) df$elevation <- round(df$elevation, round)
+  
+  # Get only the elevation vector, not a good object name here
+  if (vector) df <- df$elevation
   
   # Return
   df
@@ -53,22 +53,19 @@ google_elevation <- function(latitude, longitude, key) {
 }
 
 
-# Function which interacts with the api
 # No export
-get_elevation <- function(url) {
+google_elevation_worker <- function(url) {
   
-  # Query url and get a json object if not NA
   if (!is.na(url)) {
     
+    # Get return
     string <- readLines(url)
-    string <- stringr::str_c(string, collapse = "")
     
-    # Parse json string
-    json <- jsonlite::fromJSON(string)
+    # Parse
+    json <- fromJSON(string, flatten = TRUE)
     
     # Extract data
     df <- json$results
-    df <- jsonlite::flatten(df)
     
     # Arrange variables
     df <- df %>% 
@@ -79,11 +76,13 @@ get_elevation <- function(url) {
     
   } else {
     
-    # Data frame full of nas
-    df <- data.frame(latitude = NA, 
-                     longitude = NA,
-                     elevation = NA,
-                     resolution = NA)
+    # An empty data frame
+    df <- data_frame(
+      latitude = NA, 
+      longitude = NA,
+      elevation = NA, 
+      resolution = NA
+    )
     
   }
   
