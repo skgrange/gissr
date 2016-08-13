@@ -28,10 +28,6 @@
 #' @param verbose Should information about the data be printed when being 
 #' loaded? Default is \code{TRUE}. 
 #' 
-#' @param drop Should empty variables in the geometries' data frame be dropped? 
-#' This is useful for removing useless variables which are commonly found in 
-#' \code{GPX} files. 
-#' 
 #' @author Stuart K. Grange
 #' 
 #' @seealso \code{\link{readOGR}}, \code{\link{sp_list_drivers}}, 
@@ -65,8 +61,8 @@
 #' }
 #' 
 #' @export
-sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE,
-                    drop = FALSE) {
+sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, 
+                    verbose = TRUE) {
   
   # Download file if a url
   if (grepl("^http:|^https:", file)) {
@@ -87,6 +83,7 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRU
   # Do some guess work for the layer string
   if (is.null(layer)) {
     
+    # No period because could be geojson too
     if (grepl("json$", file, ignore.case = TRUE)) {
     
       layer <- "OGRGeoJSON"
@@ -125,19 +122,9 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRU
   # Message projection string
   if (verbose) cat(sp_projection(sp), "\n")
   
-  # Lower case names for data slot
+  # Lower case names for data slot, for me rather than anyone else
   if (lower & grepl("data", class(sp), ignore.case = TRUE))
-    names(sp@data) <- tolower(names(sp@data))
-  
-  # Remove NA variables, happens often in gpx files
-  if (drop) {
-    
-    # To characters
-    sp@data <- threadr::factor_coerce(sp@data)
-    # Drop
-    sp@data <- sp@data[, colSums(is.na(sp@data)) < nrow(sp@data)]
-    
-  }
+    names(sp@data) <- stringr::str_to_lower(names(sp@data))
   
   # Return
   sp

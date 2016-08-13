@@ -4,8 +4,7 @@
 \alias{sp_read}
 \title{Function to read spatial data files in a consistent way.}
 \usage{
-sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE,
-  drop = FALSE)
+sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{file}{Spatial data file name. For shapefiles and Mapinfo TAB files, a
@@ -29,10 +28,6 @@ Note that the default is \code{TRUE}.}
 
 \item{verbose}{Should information about the data be printed when being 
 loaded? Default is \code{TRUE}.}
-
-\item{drop}{Should empty variables in the geometries' data frame be dropped? 
-This is useful for removing useless variables which are commonly found in 
-\code{GPX} files.}
 }
 \description{
 \code{sp_read} is a wrapper for \code{rgdal::readOGR}, but its usage is the 
