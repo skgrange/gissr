@@ -7,7 +7,7 @@
 \usage{
 write_geojson(sp, file, pretty = TRUE)
 
-write_geojson_js(sp, file, name, pretty = TRUE)
+write_geojson_js(sp, file, name = NA, pretty = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object to be written as GeoJSON file.}

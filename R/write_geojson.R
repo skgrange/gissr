@@ -27,8 +27,8 @@
 #' @export 
 write_geojson <- function(sp, file, pretty = TRUE) {
   
-  # Make json string
-  json <- geojsonio::geojson_json(sp, pretty = pretty)
+  # Create
+  json <- create_geojson(sp, pretty)
   
   # Write string to disk
   write(json, file)
@@ -39,15 +39,38 @@ write_geojson <- function(sp, file, pretty = TRUE) {
 #' @rdname write_geojson
 #' 
 #' @export 
-write_geojson_js <- function (sp, file, name, pretty = TRUE) {
+write_geojson_js <- function (sp, file, name = NA, pretty = TRUE) {
   
-  # Make json string
-  json <- geojsonio::geojson_json(sp, pretty = pretty)
+  # A name
+  if (is.na(name[1])) name <- "spatial_object"
+  
+  # Create
+  json <- create_geojson(sp, pretty)
   
   # Add the js formatting for an object
-  js <- stringr::str_c("var ", name, " = [", json, "];")
+  json_js <- stringr::str_c("var ", name, " = [", json, "];")
   
   # Write string to disk
-  write(js, file)
+  write(json_js, file)
+  
+}
+
+
+# No export
+create_geojson <- function(sp, pretty = TRUE) {
+  
+  # Make json string, will also work for data frames some times
+  json <- geojsonio::geojson_json(sp)
+  
+  # Use jsonlite to do a better job of pretty printing, expensive though
+  if (pretty) {
+    
+    json <- jsonlite::fromJSON(json)
+    json <- jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE)
+    
+  }
+  
+  # Return
+  json
   
 }

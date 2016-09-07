@@ -38,12 +38,15 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   map <- leaflet(sp) %>%
     addTiles(group = "OpenStreetMap") %>%
     addProviderTiles("Stamen.Toner", group = "Toner") %>%
+    addProviderTiles("Stamen.TonerLite", group = "Toner lite") %>%
+    # addProviderTiles("Stamen.Terrain", group = "Terrain") %>%
     addProviderTiles("Thunderforest.Landscape", group = "Landscape") %>%
     addProviderTiles("Thunderforest.TransportDark", group = "Transport dark") %>%
     addProviderTiles("Thunderforest.Outdoors", group = "Outdoors") %>%
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
-    addLayersControl(baseGroups = c("OpenStreetMap", "Toner", "Landscape", 
-                                    "Transport dark", "Outdoors", "Images"))
+    addLayersControl(
+      baseGroups = c("OpenStreetMap", "Toner", "Toner lite", "Landscape", 
+                     "Transport dark", "Outdoors", "Images"))
   
   # Add layers
   if (grepl("points", sp_class, ignore.case = TRUE)) {
