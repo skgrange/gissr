@@ -65,8 +65,9 @@ create_geojson <- function(sp, pretty = TRUE) {
   # Use jsonlite to do a better job of pretty printing, expensive though
   if (pretty) {
     
+    # Max precision is needed here
     json <- jsonlite::fromJSON(json)
-    json <- jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE)
+    json <- jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE, digits = NA)
     
   }
   
