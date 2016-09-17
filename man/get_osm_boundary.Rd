@@ -4,10 +4,12 @@
 \alias{get_osm_boundary}
 \title{Function to get OpenStreetMap boundaries as spatial polygons.}
 \usage{
-get_osm_boundary(id, progress = "none")
+get_osm_boundary(id, print_query = FALSE, progress = "none")
 }
 \arguments{
 \item{id}{A vector of OpenStreetMap relations. An integer key.}
+
+\item{print_query}{Should the query to the API be printed?}
 
 \item{progress}{Type of progress bar to display. Default is \code{"none"}}
 }

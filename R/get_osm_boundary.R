@@ -4,6 +4,7 @@
 #' polygon creator tool. 
 #' 
 #' @param id A vector of OpenStreetMap relations. An integer key.
+#' @param print_query Should the query to the API be printed? 
 #' @param progress Type of progress bar to display. Default is \code{"none"}
 #' 
 #' @return SpatialPolygonsDataFrame with WGS84 projection. 
@@ -20,10 +21,11 @@
 #' }
 #' 
 #' @export
-get_osm_boundary <- function(id, progress = "none") {
+get_osm_boundary <- function(id, print_query = FALSE, progress = "none") {
   
   # Vectorise function
-  sp_list <- plyr::llply(id, osm_boundary_worker, .progress = progress)
+  sp_list <- plyr::llply(id, osm_boundary_worker, print_query = print_query, 
+                         .progress = progress)
   
   # Bind list
   sp <- sp_bind(sp_list)
@@ -37,23 +39,26 @@ get_osm_boundary <- function(id, progress = "none") {
 }
 
 # No export
-osm_boundary_worker <- function(id) {
+osm_boundary_worker <- function(id, print_query) {
   
   # Build query
   url <- stringr::str_c("http://polygons.openstreetmap.fr/get_wkt.py?id=", id, 
                         "&params=0")
   
+  # Message
+  if (print_query) message(url)
+  
   # Get wkt
   text <- readLines(url, warn = FALSE)
   
-  # Drop preamble
+  # Drop preamble/projection infomation
   text <- stringr::str_replace(text, "SRID=4326;", "")
   
   # Promote to spatial
   sp <- sp_from_wkt(text, verbose = FALSE)
   
   # Add projection
-  sp <- sp_transform(sp, warn = FALSE)
+  sp <- sp_transform(sp, to = projection_wgs84(), warn = FALSE)
   
   # Give a data slot
   sp <- sp_promote(sp)
