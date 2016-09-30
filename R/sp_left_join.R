@@ -15,6 +15,9 @@
 #' @param sp_polygons Spatial polygons object. \code{sp_polygons} will have a 
 #' data slot (\emph{i.e.} it will be a \code{SpatialPolygonsDataFrame}) because
 #' this is what is joined.
+#' 
+#' @param check Should \code{sp_points} and \code{sp_polygons} be checked for 
+#' data types? 
 #'
 #' @seealso \code{\link{sp_transform}}, \code{\link{over}}, \code{\link{merge}},
 #' \code{\link{sp_from_data_frame}}
@@ -53,16 +56,20 @@
 #' }
 #' 
 #' @export
-sp_left_join <- function(sp_points, sp_polygons) {
+sp_left_join <- function(sp_points, sp_polygons, check = TRUE) {
   
-  # Check the spatial objects
-  if (!grepl("points", sp_class(sp_points), ignore.case = TRUE))
-    stop("Spatial-points must be defined in the 'sp_points' argument.", 
-         call. = FALSE)
-  
-  if (!grepl("polygon", sp_class(sp_polygons), ignore.case = TRUE))
-    stop("Spatial-polygons must be defined in the 'sp_polygons' argument.", 
-         call. = FALSE)
+  # Check the spatial objects 
+  if (check) {
+   
+    if (!grepl("points", sp_class(sp_points), ignore.case = TRUE))
+      stop("Spatial-points must be defined in the 'sp_points' argument.", 
+           call. = FALSE)
+    
+    if (!grepl("polygon", sp_class(sp_polygons), ignore.case = TRUE))
+      stop("Spatial-polygons must be defined in the 'sp_polygons' argument.", 
+           call. = FALSE) 
+    
+  }
   
   # Store data slot of points
   if (grepl("data", sp_class(sp_points), ignore.case = TRUE)) 
@@ -70,6 +77,7 @@ sp_left_join <- function(sp_points, sp_polygons) {
   
   # The point in polygon function, returns data frame
   df_sp <- sp::over(sp_points, sp_polygons, fn = NULL)
+  # df_sp <- dplyr::bind_rows(df_sp) returnList = TRUE
   
   if (grepl("data", sp_class(sp_points), ignore.case = TRUE))  {
     

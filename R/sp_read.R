@@ -6,6 +6,10 @@
 #' is to be loaded for spatial data files. Use \code{sp_list_layers} to find what
 #' layers a spatial data file contains. 
 #' 
+#' \code{sp_read} will also wrap \code{readRDS} if an \code{.rds} file is 
+#' detected, but will raise a warning if the file does not contain a spatial 
+#' data type. 
+#' 
 #' @param file Spatial data file name. For shapefiles and Mapinfo TAB files, a
 #' file extension is optional. For File Geodatabases, an extension is required 
 #' (usually \code{.gdb}). For spatial data types which are composed of a single 
@@ -79,6 +83,22 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
     file <- path.expand(file)
     
   }
+  
+  # If an rds object, just load and return
+  if (grepl(".rds$", file, ignore.case = TRUE)) {
+    
+    # Load rds object
+    sp <- readRDS(file)
+    
+    # Warning to user
+    if (!is.sp(sp)) 
+      warning(".rds file has been loaded but it does not contain spatial data...", 
+              call. = FALSE)
+    
+    # Return here
+    return(sp)
+    
+  } 
   
   # Do some guess work for the layer string
   if (is.null(layer)) {

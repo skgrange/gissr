@@ -157,6 +157,17 @@ test_that("Test `sp_read` when using a url", {
 })
 
 
-
-
-
+test_that("Test `sp_read` for .rds", {
+  
+  # Not guaranteed to be spatial
+  
+  # Where the files are located
+  file_path <- system.file("extdata", package = "gissr")
+  
+  # Load
+  sp <- sp_read(file.path(file_path, "york.rds"))
+  
+  # Test the types
+  expect_equal(class(sp)[1], "SpatialLinesDataFrame")
+  
+})

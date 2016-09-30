@@ -7,8 +7,8 @@ test_that("Test `sp_from_js_array`", {
   text <- readLines(url, warn = FALSE)
   
   # No object
-  text <- str_split_fixed(text[1], "=", 2)[, 2]
-  text <- str_replace(text, ",];", "]")
+  text <- stringr::str_split_fixed(text[1], "=", 2)[, 2]
+  text <- stringr::str_replace(text, ",];", "]")
   
   # Scrape
   sp_points <- sp_from_js_array(text)

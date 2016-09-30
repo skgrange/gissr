@@ -36,6 +36,11 @@ same as the other file readers in R. Unlike \code{rgdal::readOGR},
 is to be loaded for spatial data files. Use \code{sp_list_layers} to find what
 layers a spatial data file contains.
 }
+\details{
+\code{sp_read} will also wrap \code{readRDS} if an \code{.rds} file is 
+detected, but will raise a warning if the file does not contain a spatial 
+data type.
+}
 \examples{
 \dontrun{
 

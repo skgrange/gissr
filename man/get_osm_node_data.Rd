@@ -2,18 +2,30 @@
 % Please edit documentation in R/get_osm_node_data.R
 \name{get_osm_node_data}
 \alias{get_osm_node_data}
-\title{Function to scrape OpenStreetMap's node XML document for data.}
+\title{Function to scrape OpenStreetMap's node XML documents for data.}
 \usage{
 get_osm_node_data(id)
 }
 \arguments{
-\item{id}{OpenStreetMap relation ID.}
+\item{id}{OpenStreetMap node ID.}
 }
 \value{
-Named list with \code{values} and \code{attributes} data frames.
+Named list.
 }
 \description{
-Function to scrape OpenStreetMap's node XML document for data.
+Function to scrape OpenStreetMap's node XML documents for data.
+}
+\examples{
+\dontrun{
+
+# Get data for a peak in the Yorkshire Dales
+get_osm_node_data(312154686)
+
+# Get same data but for another peak in the North York Moors
+get_osm_node_data(c(312154686, 1018516271))
+
+}
+
 }
 \author{
 Stuart K. Grange
