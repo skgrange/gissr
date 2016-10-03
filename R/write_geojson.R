@@ -59,8 +59,11 @@ write_geojson_js <- function (sp, file, name = NA, pretty = TRUE) {
 # No export
 create_geojson <- function(sp, pretty = TRUE) {
   
-  # Make json string, will also work for data frames some times
-  json <- geojsonio::geojson_json(sp)
+  # Make json string, will also work for data frames sometimes but will give
+  # message
+  json <- suppressMessages(
+    geojsonio::geojson_json(sp)
+  )
   
   # Use jsonlite to do a better job of pretty printing, expensive though
   if (pretty) {
