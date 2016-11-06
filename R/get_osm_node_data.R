@@ -57,7 +57,7 @@ get_osm_node_data_worker <- function(url) {
   
   # Get document
   text <- readLines(url, warn = FALSE)
-  
+    
   # Parse xml
   list_xml <- XML::xmlToList(text)
   
@@ -69,7 +69,7 @@ get_osm_node_data_worker <- function(url) {
     
     df_attributes <- as.data.frame(t(list_xml_content), 
                                    stringsAsFactors = FALSE)
-      
+    
     
     df <- data.frame()
     
@@ -83,7 +83,7 @@ get_osm_node_data_worker <- function(url) {
     
     # Make tidy data frame
     df <- bind_rows(list_tidy) %>% 
-      mutate(id = as.integer(df_attributes$id)) %>% 
+      mutate(id = as.numeric(df_attributes$id)) %>% 
       threadr::arrange_left("id")
     
   }
@@ -103,6 +103,7 @@ get_osm_node_data_worker <- function(url) {
     )
     
   }
+  
   
   # Return
   list_return
@@ -200,7 +201,7 @@ get_osm_way_data <- function(id) {
   
   # Make tidy data frame
   df <- bind_rows(list_tidy) %>% 
-    mutate(id = as.integer(df_attributes$id)) %>% 
+    mutate(id = as.numeric(df_attributes$id)) %>% 
     threadr::arrange_left("id")
   
   # Create list
@@ -266,7 +267,7 @@ get_osm_relation_data <- function(id) {
   
   # Make tidy data frame
   df <- bind_rows(list_tidy) %>% 
-    mutate(id = as.integer(df_attributes$id)) %>% 
+    mutate(id = as.numeric(df_attributes$id)) %>% 
     threadr::arrange_left("id")
   
   # Create list
