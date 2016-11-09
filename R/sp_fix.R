@@ -5,8 +5,7 @@
 #' @param sp Spatial object. Polygons are currently the only object-type which
 #' are supported. 
 #' 
-#' @param print Should the features which are corrected, and why be displayed to
-#' the user? Default is \code{TRUE}. 
+#' @param verbose Should the function print messages? Default is \code{TRUE}. 
 #'
 #' @examples 
 #' \dontrun{
@@ -14,4 +13,5 @@
 #' }
 #' 
 #' @export
-sp_fix <- function(sp, print = TRUE) cleangeo::clgeo_Clean(sp, print.log = print)
+sp_fix <- function(sp, verbose = TRUE) 
+  cleangeo::clgeo_Clean(sp, verbose = verbose)
