@@ -13,7 +13,8 @@
 #' 
 #' @param warn Should the functions raise a warning when the projection is forced?
 #' 
-#' @seealso \code{\link{spTransform}}, \code{\link{sp_projection}}
+#' @seealso \code{\link{spTransform}}, \code{\link{sp_projection}}, 
+#' \code{\link{projection_wgs84}}
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -43,15 +44,10 @@
 sp_transform <- function(sp, to = NA, warn = TRUE) {
   
   # Default
-  if (is.na(to)) to <- "+proj=longlat +datum=WGS84 +no_defs"
-  
-  # Switch for projections I use
-  to <- ifelse(to %in% c("bng", "ogb", "osgb36"), "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs", to)
-  to <- ifelse(to == "nztm", "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs", to)
-  to <- ifelse(to == "wgs84", "+proj=longlat +datum=WGS84 +no_defs", to)
+  if (is.na(to)) to <- projection_wgs84()
   
   # If no projection
-  if (is.na(proj4string(sp))) {
+  if (is.na(sp_projection(sp))) {
     
     # Warn
     if (warn) {
@@ -62,12 +58,12 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
     }
     
     # Now force
-    proj4string(sp) <- to
+    sp::proj4string(sp) <- to
     
   } else {
     
     # Otherwise convert projection system
-    sp <- spTransform(sp, CRS(to))
+    sp <- sp::spTransform(sp, CRS(to))
     
   }
   

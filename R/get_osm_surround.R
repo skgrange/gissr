@@ -58,13 +58,22 @@ get_osm_surround_worker <- function(id, type = "data") {
   type <- stringr::str_to_lower(type)
   
   # Build url string
-  # http://ra.osmsurround.org/exportRelation/gpx?relationId=
   url_base <- "http://ra.osmsurround.org/exportRelation/json?relationId="
-  # url_extra <- "&noCache=true&_noCache=on"
   url <- stringr::str_c(url_base, id)
   
   # Read text
-  text <- threadr::read_lines(url)
+  text <- tryCatch({
+    
+    threadr::read_lines(url)
+    
+  }, error = function(e) {
+    
+    NULL
+    
+  })
+  
+  # Return here
+  if (is.null(text)) return(text)
   
   # Parse
   json <- threadr::read_json(text)

@@ -4,14 +4,13 @@
 \alias{sp_fix}
 \title{Function to fix polygons when they have issues with validity and holes.}
 \usage{
-sp_fix(sp, print = TRUE)
+sp_fix(sp, verbose = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object. Polygons are currently the only object-type which
 are supported.}
 
-\item{print}{Should the features which are corrected, and why be displayed to
-the user? Default is \code{TRUE}.}
+\item{verbose}{Should the function print messages? Default is \code{TRUE}.}
 }
 \description{
 Function to fix polygons when they have issues with validity and holes.

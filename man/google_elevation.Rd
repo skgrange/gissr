@@ -6,7 +6,7 @@
 Google Maps API.}
 \usage{
 google_elevation(latitude, longitude, key, round = NA, vector = TRUE,
-  progress = "time")
+  progress = "none")
 }
 \arguments{
 \item{latitude}{Numeric vector of latitude values.}
@@ -21,7 +21,7 @@ Default is no rounding.}
 \item{vector}{Should the function only return a vector of elevation? Default
 is \code{TRUE} but a data frame can be returned with \code{FALSE}.}
 
-\item{progress}{Type of progress bar to display. Default is \code{"time"}.}
+\item{progress}{Type of progress bar to display. Default is \code{"none"}.}
 }
 \value{
 Either a data frame containing latitude and longitude

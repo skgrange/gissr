@@ -46,6 +46,7 @@ sp_projection(sp_locks)
 Stuart K. Grange
 }
 \seealso{
-\code{\link{spTransform}}, \code{\link{sp_projection}}
+\code{\link{spTransform}}, \code{\link{sp_projection}}, 
+\code{\link{projection_wgs84}}
 }
 

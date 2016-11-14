@@ -25,13 +25,13 @@
 #' @param vector Should the function only return a vector of elevation? Default
 #' is \code{TRUE} but a data frame can be returned with \code{FALSE}. 
 #' 
-#' @param progress Type of progress bar to display. Default is \code{"time"}. 
+#' @param progress Type of progress bar to display. Default is \code{"none"}. 
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @export
 google_elevation <- function(latitude, longitude, key, round = NA, vector = TRUE,
-                             progress = "time") {
+                             progress = "none") {
   
   # Build query with arguments
   urls <- stringr::str_c(

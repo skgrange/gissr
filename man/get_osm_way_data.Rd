@@ -4,13 +4,13 @@
 \alias{get_osm_way_data}
 \title{Function to scrape OpenStreetMap's way XML documents for data.}
 \usage{
-get_osm_way_data(id)
+get_osm_way_data(id, progress = "none")
 }
 \arguments{
-\item{id}{OpenStreetMap way ID.}
+\item{id}{A vector os OpenStreetMap way IDs.}
 }
 \value{
-Named list.
+Named list or a list of named lists.
 }
 \description{
 Function to scrape OpenStreetMap's way XML documents for data.
@@ -20,6 +20,9 @@ Function to scrape OpenStreetMap's way XML documents for data.
 
 # Get data for York Minster
 get_osm_way_data(28750371)
+
+# Get data for two ways within a walking route (a relation)
+get_osm_way_data(c(52461049, 233498222))
 
 }
 

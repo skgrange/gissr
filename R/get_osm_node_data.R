@@ -154,13 +154,13 @@ extract_osm_tags <- function(x) {
 
 #' Function to scrape OpenStreetMap's way XML documents for data. 
 #' 
-#' @param id OpenStreetMap way ID. 
+#' @param id A vector os OpenStreetMap way IDs. 
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @import dplyr
 #' 
-#' @return Named list. 
+#' @return Named list or a list of named lists. 
 #' 
 #' @examples 
 #' \dontrun{
@@ -168,10 +168,31 @@ extract_osm_tags <- function(x) {
 #' # Get data for York Minster
 #' get_osm_way_data(28750371)
 #' 
+#' # Get data for two ways within a walking route (a relation)
+#' get_osm_way_data(c(52461049, 233498222))
+#' 
 #' }
 #' 
 #' @export
-get_osm_way_data <- function(id) {
+get_osm_way_data <- function(id, progress = "none") {
+  
+  if (length(id) == 1) {
+    
+    list_way <- get_osm_way_data_worker(id)
+    
+  } else {
+    
+    list_way <- plyr::llply(id, get_osm_way_data_worker, .progress = progress)
+    
+  }
+  
+  # Return
+  list_way
+  
+}
+
+
+get_osm_way_data_worker <- function(id) {
   
   # Build url
   url <- stringr::str_c("http://www.openstreetmap.org/api/0.6/way/", id)
