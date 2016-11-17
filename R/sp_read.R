@@ -137,7 +137,8 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
   if (!is.null(geom)) geom <- parse_geom(geom)
   
   # Read file with rgdal
-  sp <- rgdal::readOGR(file, layer, require_geomType = geom, verbose = verbose)
+  sp <- rgdal::readOGR(file, layer, require_geomType = geom, verbose = verbose,
+                       stringsAsFactors = FALSE)
   
   # Message projection string
   if (verbose) cat(sp_projection(sp), "\n")
@@ -145,6 +146,15 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
   # Lower case names for data slot, for me rather than anyone else
   if (lower & grepl("data", class(sp), ignore.case = TRUE))
     names(sp@data) <- stringr::str_to_lower(names(sp@data))
+  
+  # Drop useless and empty variables in gpx file
+  if (grepl("data", sp_class(sp), ignore.case = TRUE) &
+      grepl(".gpx$", file, ignore.case = TRUE)) {
+    
+    # Drop NA variables
+    sp@data <- drop_na_columns(sp@data)
+    
+  }
   
   # Return
   sp
@@ -228,5 +238,33 @@ parse_geom <- function(geom) {
   geom <- ifelse(geom %in% c("line", "lines"), "wkbLineString", geom)
   geom <- ifelse(geom %in% c("polygon", "polygons"), "wkbPolygon", geom)
   geom
+  
+}
+
+
+drop_na_columns <- function(df) {
+  
+  # Test variables for missing-ness
+  index <- colSums(is.na(df)) < nrow(df)
+  
+  # Drop
+  df <- df[, index]
+  
+  # If subsetting has simplified object, make data frame again
+  if (class(df) != "data.frame") {
+    
+    # Make data frame again
+    df <- data.frame(
+      df, 
+      stringsAsFactors = FALSE
+    )
+    
+    # Give names
+    names(df) <- names(index[index])
+    
+  }
+  
+  # Return
+  df
   
 }
