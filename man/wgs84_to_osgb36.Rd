@@ -18,6 +18,16 @@ nztm_to_wgs84(x, y, string = FALSE)
 
 wgs84_to_nztm(y, x)
 }
+\arguments{
+\item{y}{Coordinate component in the y-dimension.}
+
+\item{x}{Coordinate component in the x-dimension.}
+
+\item{string}{Should the return be a string rather than a data frame?}
+}
+\value{
+Data frame or character vector.
+}
 \description{
 These functions use spatial libraries to do the coordinate conversion so the
 sometimes many-step calculations do not have to be maintained.
