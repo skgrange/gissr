@@ -10,22 +10,44 @@
 #' 
 #' @seealso \code{\link{fortify}}
 #' 
+#' @return Data frame
+#' 
 #' @export
 sp_fortify <- function(sp, rename = TRUE) {
-
-  # Create table, message suppression for polygons
-  suppressMessages(
-    df <- ggplot2::fortify(sp)
-  )
   
-  if (rename) {
+  # ggplot does not do points
+  if (grepl("points", sp_class(sp), ignore.case = TRUE)) {
     
-    # Rename variables
-    names(df) <- ifelse(names(df) == "lat", "latitude", names(df))
-    names(df) <- ifelse(names(df) == "long", "longitude", names(df))
+    df <- data.frame(sp, stringsAsFactors = FALSE)
     
-    # Arrange variables
-    df <- threadr::arrange_left(df, c("latitude", "longitude"))
+    if (rename) {
+      
+      # Rename variables
+      names(df) <- ifelse(names(df) == "x", "longitude", names(df))
+      names(df) <- ifelse(names(df) == "y", "latitude", names(df))
+      
+      # Arrange variables
+      df <- threadr::arrange_left(df, c("latitude", "longitude"))
+      
+    }
+    
+  } else {
+    
+    # Create table, message suppression for polygons
+    suppressMessages(
+      df <- ggplot2::fortify(sp)
+    )
+    
+    if (rename) {
+      
+      # Rename variables
+      names(df) <- ifelse(names(df) == "lat", "latitude", names(df))
+      names(df) <- ifelse(names(df) == "long", "longitude", names(df))
+      
+      # Arrange variables
+      df <- threadr::arrange_left(df, c("latitude", "longitude"))
+      
+    }
     
   }
   
