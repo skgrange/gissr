@@ -25,7 +25,7 @@ wgs84_to_osgb36 <- function(y, x) {
   sp <- sp_transform(sp, warn = FALSE)
   
   # Do the conversion to osgb36
-  sp_transformed <- sp_transform(sp, "bng")
+  sp_transformed <- sp_transform(sp, projection_bng())
   
   # Extract coordinates from spatial object
   coordinates <- sp_transformed@coords

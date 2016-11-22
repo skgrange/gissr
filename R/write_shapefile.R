@@ -13,7 +13,9 @@
 #' 
 #' @examples 
 #' \dontrun{
+#' 
 #' write_shapefile(sp_county, "~/Desktop/county_spatial_data")
+#' 
 #' }
 #' 
 #' @export
