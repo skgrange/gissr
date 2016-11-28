@@ -29,6 +29,9 @@ sp_fortify <- function(sp, rename = TRUE) {
       # Arrange variables
       df <- threadr::arrange_left(df, c("latitude", "longitude"))
       
+      # Drop optional if it exists, why is this here? 
+      if (any(grepl("optional", names(df)))) df$optional <- NULL
+      
     }
     
   } else {

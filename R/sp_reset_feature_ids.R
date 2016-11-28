@@ -57,9 +57,12 @@ resetter <- function(sp, uuid = FALSE) {
   
   if (uuid) {
     
+    # spChFIDs is not implemented for points
+    # if (grepl("points", sp_class(sp), ignore.case = TRUE)) 
+    
     # Use uuids to ensure unique-ness 
     sp <- sp::spChFIDs(sp, replicate(length(sp), threadr::uuid()))
-    
+  
   } else {
     
     # Otherwise, just a character sequence
@@ -77,37 +80,9 @@ resetter <- function(sp, uuid = FALSE) {
 reset_data_slot <- function(sp) {
   
   # Only if object has a data slot
-  if (grepl("data", class(sp), ignore.case = TRUE)) row.names(sp@data) <- NULL
+  if (grepl("data", sp_class(sp), ignore.case = TRUE)) row.names(sp@data) <- NULL
   
   # Return
   sp
-  
-}
-
-
-# Function to get ids from spatial objects.
-#' @export
-sp_feature_ids <- function(sp) {
-  
-  # Points
-  if (grepl("points", class(sp), ignore.case = TRUE))
-    id <- row.names(sp@data)
-  
-  # Lines
-  if (grepl("line", class(sp), ignore.case = TRUE)) {
-    
-    id <- sapply(slot(sp, "lines"), slot, "ID")
-    
-    # Stip names for lines
-    id <- as.vector(id)
-    
-  }
-    
-  # Polygons
-  if (grepl("polygon", class(sp), ignore.case = TRUE))
-    id <- sapply(slot(sp, "polygons"), slot, "ID")
-
-  # Return
-  id
   
 }

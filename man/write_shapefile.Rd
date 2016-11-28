@@ -19,7 +19,9 @@ directory where the shapefile is to be exported if necessary.
 }
 \examples{
 \dontrun{
+
 write_shapefile(sp_county, "~/Desktop/county_spatial_data")
+
 }
 
 }

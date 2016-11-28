@@ -120,19 +120,16 @@ sp_distance <- function(sp_1, sp_2, cores = 1, unit = "m") {
     distance <- lapply(1:length(sp_1), function(x) 
       rgeos::gDistance(sp_1[x], sp_2))
     
-    # Make vector
-    distance <- unlist(distance)
-    
   } else {
     
     # Superscript notation is necessary
     distance <- parallel::mclapply(1:length(sp_1), function(x) 
       rgeos::gDistance(sp_1[x], sp_2), mc.cores = getOption("mc.cores", cores))
     
-    # Make vector
-    distance <- unlist(distance)
-    
   }
+  
+  # Make vector
+  distance <- unlist(distance)
   
   # Transform units
   if (unit == "km") distance <- distance / 1000
