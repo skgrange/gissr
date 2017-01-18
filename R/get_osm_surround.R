@@ -76,7 +76,7 @@ get_osm_surround_worker <- function(id, type = "data") {
   if (is.null(text)) return(text)
   
   # Parse
-  json <- threadr::read_json(text)
+  json <- jsonlite::fromJSON(text)
   
   # Extract coordinates
   df <- json$features$geometry$coordinates[[1]][[1]]
