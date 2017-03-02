@@ -30,4 +30,3 @@ sp_map_better <- map_to_sp(map = "world_hires")
 \author{
 Stuart K. Grange
 }
-

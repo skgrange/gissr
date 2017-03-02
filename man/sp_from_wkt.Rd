@@ -42,4 +42,3 @@ sp_wkt_with_data <- sp_from_wkt(data_wkt, wkt = "geom", data = TRUE)
 \author{
 Stuart K. Grange
 }
-

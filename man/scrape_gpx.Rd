@@ -23,4 +23,3 @@ app.
 \author{
 Stuart K. Grange
 }
-

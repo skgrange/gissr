@@ -15,4 +15,3 @@ Function to find class of spatial object as a vector with a length of 1.
 \author{
 Stuart K. Grange
 }
-

@@ -52,10 +52,9 @@ data_oxford_transform <- transform_coordinates(
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{sp_transform}}, \code{\link{sp_from_data_frame}}
 }
-
+\author{
+Stuart K. Grange
+}

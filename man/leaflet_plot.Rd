@@ -26,4 +26,3 @@ Convenience function to quickly plot geometries on a leaflet map.
 \author{
 Stuart K. Grange
 }
-

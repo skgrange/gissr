@@ -23,4 +23,3 @@ sp_with_data <- sp_promote(sp)
 \author{
 Stuart K. Grange
 }
-

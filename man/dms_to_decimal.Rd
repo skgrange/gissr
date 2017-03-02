@@ -25,4 +25,3 @@ Function to convert degrees, minutes, and seconds (DMS) to decimal degrees.
 \author{
 Stuart K. Grange
 }
-

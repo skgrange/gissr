@@ -12,10 +12,9 @@ sp_flip(sp)
 \description{
 Function to flip a spatial object.
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{elide}}
 }
-
+\author{
+Stuart K. Grange
+}

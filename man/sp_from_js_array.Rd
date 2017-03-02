@@ -18,4 +18,3 @@ JavaScript arrays take the form of:
 \author{
 Stuart K. Grange
 }
-

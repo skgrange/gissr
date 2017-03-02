@@ -18,4 +18,3 @@ Function to extract bounding box from a spatial object.
 \author{
 Stuart K. Grange
 }
-

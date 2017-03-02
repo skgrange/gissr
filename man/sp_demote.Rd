@@ -22,4 +22,3 @@ sp_without_data <- sp_promote(sp_with_data)
 \author{
 Stuart K. Grange
 }
-

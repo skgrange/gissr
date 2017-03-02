@@ -69,11 +69,10 @@ sp_ridgeway <- sp_read(file, layer = "routes")
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{readOGR}}, \code{\link{sp_list_drivers}}, 
 \code{\link{sp_list_layers}}
 }
-
+\author{
+Stuart K. Grange
+}

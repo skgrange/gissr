@@ -40,9 +40,12 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
     addProviderTiles("Stamen.Toner", group = "Toner") %>%
     addProviderTiles("Stamen.TonerLite", group = "Toner lite") %>%
     # addProviderTiles("Stamen.Terrain", group = "Terrain") %>%
-    addProviderTiles("Thunderforest.Landscape", group = "Landscape") %>%
-    addProviderTiles("Thunderforest.TransportDark", group = "Transport dark") %>%
-    addProviderTiles("Thunderforest.Outdoors", group = "Outdoors") %>%
+    addProviderTiles("Thunderforest.Landscape", group = "Landscape",
+                     options = providerTileOptions(apikey = "25ef91f0102248f4a181998ec2b7a1ad")) %>%
+    addProviderTiles("Thunderforest.TransportDark", group = "Transport dark",
+                     options = providerTileOptions(apikey = "25ef91f0102248f4a181998ec2b7a1ad")) %>%
+    addProviderTiles("Thunderforest.Outdoors", group = "Outdoors",
+                     options = providerTileOptions(apikey = "25ef91f0102248f4a181998ec2b7a1ad")) %>%
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(
       baseGroups = c("OpenStreetMap", "Toner", "Toner lite", "Landscape", 

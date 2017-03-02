@@ -19,4 +19,3 @@ sp_list_drivers()
 \author{
 Stuart K. Grange
 }
-

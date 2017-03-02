@@ -22,4 +22,3 @@ Function to create a rectangular polygon envelope, usually used for filtering.
 \author{
 Stuart K. Grange
 }
-

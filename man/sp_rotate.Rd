@@ -15,10 +15,9 @@ direction.}
 \description{
 Function to rotate a spatial object.
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{elide}}
 }
-
+\author{
+Stuart K. Grange
+}

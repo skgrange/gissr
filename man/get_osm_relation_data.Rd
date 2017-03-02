@@ -27,4 +27,3 @@ get_osm_relation_data(6399292)
 \author{
 Stuart K. Grange
 }
-

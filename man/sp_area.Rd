@@ -39,4 +39,3 @@ sp_area(sp_built_up_london, unit = "km")
 \author{
 Stuart K. Grange
 }
-

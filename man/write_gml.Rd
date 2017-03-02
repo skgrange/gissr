@@ -30,4 +30,3 @@ write_gml(sp_zones, "~/Desktop/zone_polygons.gml", layer = "zones")
 \author{
 Stuart K. Grange
 }
-

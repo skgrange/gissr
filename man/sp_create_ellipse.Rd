@@ -25,4 +25,3 @@ filtering.
 \author{
 Stuart K. Grange
 }
-

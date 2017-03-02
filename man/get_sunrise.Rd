@@ -45,10 +45,9 @@ get_sunrise(latitude = 51.5072, longitude = 0.1275, json = TRUE)
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{sunriset}}
 }
-
+\author{
+Stuart K. Grange
+}

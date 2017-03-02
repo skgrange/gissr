@@ -18,4 +18,3 @@ Function to find the centroid of a spatial object.
 \author{
 Stuart K. Grange
 }
-

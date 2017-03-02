@@ -12,4 +12,3 @@ Function to randomly sample n features in a spatial object.
 \author{
 Stuart K. Grange
 }
-

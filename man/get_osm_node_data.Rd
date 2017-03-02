@@ -30,4 +30,3 @@ get_osm_node_data(c(312154686, 1018516271))
 \author{
 Stuart K. Grange
 }
-

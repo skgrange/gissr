@@ -30,4 +30,3 @@ sp_layer_info("../../data/points_and_lines.json", "OGRGeoJSON",
 \author{
 Stuart K. Grange
 }
-

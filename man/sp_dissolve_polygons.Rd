@@ -14,4 +14,3 @@ dropped when the polygons are united.
 \author{
 Stuart K. Grange
 }
-

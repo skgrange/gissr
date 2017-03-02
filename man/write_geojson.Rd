@@ -5,9 +5,9 @@
 \alias{write_geojson_js}
 \title{Functions to write GeoJSON files with usage analogous to \code{write.table}.}
 \usage{
-write_geojson(sp, file, pretty = TRUE)
+write_geojson(sp, file, pretty = TRUE, round = NA)
 
-write_geojson_js(sp, file, name = NA, pretty = TRUE)
+write_geojson_js(sp, file, name = NA, pretty = TRUE, round = NA)
 }
 \arguments{
 \item{sp}{Spatial object to be written as GeoJSON file.}
@@ -15,6 +15,9 @@ write_geojson_js(sp, file, name = NA, pretty = TRUE)
 \item{file}{File name of GeoJSON file.}
 
 \item{pretty}{Format the JSON for readability.}
+
+\item{round}{How many decimal points should the coordinate pairs be exported
+with? Default is maximum but \code{6} is common for spatial data.}
 
 \item{name}{Name of JavaScript object (only used in \code{write_geojson_js}).}
 }
@@ -25,6 +28,7 @@ objects easily.
 }
 \examples{
 \dontrun{
+
 # Export spatial object as GeoJSON file
 write_geojson(sp_thames_locks, "thames_locks.json", pretty = TRUE)
 
@@ -37,4 +41,3 @@ write_geojson(sp_thames_locks, "thames_locks.js", name = "data_locks")
 \author{
 Stuart K. Grange
 }
-

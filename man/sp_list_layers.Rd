@@ -22,4 +22,3 @@ sp_list_layers("../../data/points_and_lines.json")
 \author{
 Stuart K. Grange
 }
-

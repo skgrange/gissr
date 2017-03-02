@@ -18,4 +18,3 @@ Function to test if an R object is a Spatial* data-type.
 \author{
 Stuart K. Grange
 }
-

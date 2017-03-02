@@ -30,4 +30,3 @@ get_osm_way_data(c(52461049, 233498222))
 \author{
 Stuart K. Grange
 }
-

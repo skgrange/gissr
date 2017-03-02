@@ -40,4 +40,3 @@ bath abbey bath abbey, bath, bath and north east somerset ba1 1lt, uk 51.38148 -
 \author{
 Stuart K. Grange
 }
-

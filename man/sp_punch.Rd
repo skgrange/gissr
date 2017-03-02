@@ -41,4 +41,3 @@ plot(sp_uk_punch)
 \author{
 Stuart K. Grange
 }
-

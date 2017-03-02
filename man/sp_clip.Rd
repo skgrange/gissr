@@ -44,4 +44,3 @@ sp_road_clip <- sp_clip(sp_roads, envelope)
 \author{
 Stuart K. Grange
 }
-

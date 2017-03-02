@@ -19,4 +19,3 @@ Use \code{\link{sp_unite}} to create a single geometry from many.
 \author{
 Stuart K. Grange
 }
-

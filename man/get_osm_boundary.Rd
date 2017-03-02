@@ -33,4 +33,3 @@ sp_moors <- get_osm_boundary(409150)
 \author{
 Stuart K. Grange
 }
-

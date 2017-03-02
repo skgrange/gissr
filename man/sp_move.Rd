@@ -21,10 +21,9 @@ dimension.}
 \description{
 Function to move/shift a spatial object.
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{elide}}
 }
-
+\author{
+Stuart K. Grange
+}

@@ -15,4 +15,3 @@ Function to get ids from spatial objects.
 \author{
 Stuart K. Grange
 }
-

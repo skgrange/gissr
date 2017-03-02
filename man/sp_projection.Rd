@@ -15,4 +15,3 @@ Function to return a spatial object's projection system.
 \author{
 Stuart K. Grange
 }
-

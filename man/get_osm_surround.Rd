@@ -39,4 +39,3 @@ leaflet_plot(sp_new_york)
 \author{
 Stuart K. Grange
 }
-

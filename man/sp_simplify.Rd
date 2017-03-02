@@ -26,4 +26,3 @@ sp_simple <- sp_simplify(sp, 0.01)
 \author{
 Stuart K. Grange
 }
-

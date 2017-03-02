@@ -86,11 +86,10 @@ Charlbury 60.3
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{gDistance}}, \code{\link{sp_transform}}, 
 \code{\link{mclapply}}
 }
-
+\author{
+Stuart K. Grange
+}

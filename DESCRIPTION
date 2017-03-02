@@ -1,8 +1,8 @@
 Package: gissr
 Type: Package
 Title: Functions to make working with spatial data easier
-Version: 0.5.31
-Date: 2017-01-19
+Version: 0.5.33
+Date: 2017-03-02
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
 Description: A collection of spatial functions to make R a more effective GIS.
@@ -28,8 +28,9 @@ Imports:
     cleangeo,
     raster,
     testthat,
-    XML
+    XML,
+    magrittr
 Suggests:
     threadr
 LazyLoad: yes
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

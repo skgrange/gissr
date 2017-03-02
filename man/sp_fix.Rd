@@ -24,4 +24,3 @@ sp_clean <- sp_fix(sp_pm10)
 \author{
 Stuart K. Grange
 }
-

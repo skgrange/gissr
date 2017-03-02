@@ -10,12 +10,16 @@
 #' 
 #' @param name Name of JavaScript object (only used in \code{write_geojson_js}). 
 #' 
-#' @param pretty Format the JSON for readability.  
+#' @param pretty Format the JSON for readability. 
+#' 
+#' @param round How many decimal points should the coordinate pairs be exported
+#' with? Default is maximum but \code{6} is common for spatial data. 
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @examples
 #' \dontrun{
+#' 
 #' # Export spatial object as GeoJSON file
 #' write_geojson(sp_thames_locks, "thames_locks.json", pretty = TRUE)
 #' 
@@ -25,10 +29,10 @@
 #' }
 #' 
 #' @export 
-write_geojson <- function(sp, file, pretty = TRUE) {
+write_geojson <- function(sp, file, pretty = TRUE, round = NA) {
   
   # Create
-  json <- create_geojson(sp, pretty)
+  json <- create_geojson(sp, pretty, round)
   
   # Write string to disk
   write(json, file)
@@ -39,13 +43,13 @@ write_geojson <- function(sp, file, pretty = TRUE) {
 #' @rdname write_geojson
 #' 
 #' @export 
-write_geojson_js <- function (sp, file, name = NA, pretty = TRUE) {
+write_geojson_js <- function(sp, file, name = NA, pretty = TRUE, round = NA) {
   
   # A name
   if (is.na(name[1])) name <- "spatial_object"
   
   # Create
-  json <- create_geojson(sp, pretty)
+  json <- create_geojson(sp, pretty, round)
   
   # Add the js formatting for an object
   json_js <- stringr::str_c("var ", name, " = [", json, "];")
@@ -57,12 +61,12 @@ write_geojson_js <- function (sp, file, name = NA, pretty = TRUE) {
 
 
 # No export
-create_geojson <- function(sp, pretty = TRUE) {
+create_geojson <- function(sp, pretty = TRUE, round = NA) {
   
   # Make json string, will also work for data frames sometimes but will give
   # message
   json <- suppressMessages(
-    geojsonio::geojson_json(sp)
+    geojsonio::geojson_json(sp, digits = round)
   )
   
   # Use jsonlite to do a better job of pretty printing, expensive though
@@ -70,7 +74,8 @@ create_geojson <- function(sp, pretty = TRUE) {
     
     # Max precision is needed here
     json <- jsonlite::fromJSON(json)
-    json <- jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE, digits = NA)
+    json <- jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE, 
+                             digits = NA)
     
   }
   

@@ -37,4 +37,3 @@ must use the elevation data to display on a Google Map.
 \author{
 Stuart K. Grange
 }
-

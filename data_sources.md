@@ -23,6 +23,7 @@
 ## New Zealand
 
   - [LINZ](https://data.linz.govt.nz/data/)
+  - [DOC](ftp://ftp.doc.govt.nz/Public/GIS/)
 
 ## Worldwide
   

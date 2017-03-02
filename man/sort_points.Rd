@@ -24,4 +24,3 @@ points.
 \author{
 Stuart K. Grange
 }
-

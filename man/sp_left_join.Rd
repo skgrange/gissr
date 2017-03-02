@@ -61,11 +61,10 @@ data_point_test$name
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{sp_transform}}, \code{\link{over}}, \code{\link{merge}},
 \code{\link{sp_from_data_frame}}
 }
-
+\author{
+Stuart K. Grange
+}

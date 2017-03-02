@@ -18,10 +18,9 @@ considered sub-geometries.
 \details{
 For binding different spatial objects together, use \code{\link{sp_bind}}.
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{gUnion}}, \code{\link{sp_bind}}
 }
-
+\author{
+Stuart K. Grange
+}

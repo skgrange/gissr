@@ -21,4 +21,3 @@ Function to include or exclude an area of a spatial object.
 \author{
 Stuart K. Grange
 }
-

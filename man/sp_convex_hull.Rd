@@ -26,4 +26,3 @@ sp_boundary_polygon <- sp_convex_hull(sp_points)
 \author{
 Stuart K. Grange
 }
-

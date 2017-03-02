@@ -34,4 +34,3 @@ sp_zones <- sp_reset_feature_ids(sp_zones)
 \author{
 Stuart K. Grange
 }
-

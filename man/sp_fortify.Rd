@@ -20,10 +20,9 @@ Data frame
 Function to wrap ggplot2::fortify which transforms geometries to data frames
 (tables).
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{fortify}}
 }
-
+\author{
+Stuart K. Grange
+}

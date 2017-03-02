@@ -28,4 +28,3 @@ write_shapefile(sp_county, "~/Desktop/county_spatial_data")
 \author{
 Stuart K. Grange
 }
-

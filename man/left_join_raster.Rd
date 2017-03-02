@@ -55,4 +55,3 @@ data_select <- left_join_raster(data_select, raster = raster_ozone,
 \author{
 Stuart K. Grange
 }
-

@@ -40,6 +40,7 @@ To overcome these points, I have written wrappers for many geographical function
     - `transform_coordinates` does a similar thing, but for data frames.
   - Transform data frames (tables) to spatial points, lines, or polygons with `sp_from_data_frame`. 
   - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
+  - Transform JavaScript coordinate arrays (for example: [[54.35221,-0.88518],[54.35237,-0.88544]]) into spatial objects with `sp_from_js_array`. 
   - Bind/combine different spatial objects with `sp_bind`. 
   - Unite spatial objects with `sp_unite` and do the opposite with `sp_disaggregate`. 
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
@@ -59,7 +60,7 @@ To overcome these points, I have written wrappers for many geographical function
   - Calculate distances among spatial objects with `sp_distance`.
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
   - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
-  - Parse vectors of degrees, minutes, and seconds into decimal degress with `dms_to_decimal`. 
+  - Parse vectors of degrees, minutes, and seconds into decimal degrees with `dms_to_decimal`. 
   - Sort/arrange points in a clockwise order with `sort_points`. 
   - Export spatial objects to spatial data files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
 

@@ -69,10 +69,9 @@ data_air <- plyr::arrange(data_air, distance)
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 See \code{\link{gDistance}}
 }
-
+\author{
+Stuart K. Grange
+}

@@ -13,10 +13,9 @@ sp_disaggregate(sp)
 \code{sp_disaggregate} will break apart multi-polygons to create many 
 polygons and is a simple wrapper for \code{\link{sp::disaggregate}}.
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{sp_unite}}
 }
-
+\author{
+Stuart K. Grange
+}

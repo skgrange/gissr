@@ -48,10 +48,9 @@ sp_bound <- sp_bind(sp_list)
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{sp_unite}}
 }
-
+\author{
+Stuart K. Grange
+}

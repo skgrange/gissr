@@ -26,4 +26,3 @@ containing a WKT variable.
 \author{
 Stuart K. Grange
 }
-

@@ -28,4 +28,3 @@ Grid; both of which have metre units (\code{+units=m}).
 \author{
 Stuart K. Grange
 }
-

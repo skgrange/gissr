@@ -53,10 +53,9 @@ sp_polygons <- sp_from_data_frame(data_drawn, type = "polygons", id = "name")
 }
 
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{sp_from_wkt}}
 }
-
+\author{
+Stuart K. Grange
+}

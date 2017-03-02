@@ -15,4 +15,3 @@ Function to print projections supported by R.
 \author{
 StuartK. Grange
 }
-

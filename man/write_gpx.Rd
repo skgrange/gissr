@@ -33,4 +33,3 @@ write_gpx(sp_gpx_track, "~/Desktop/drive_to_bath.gpx")
 \author{
 Stuart K. Grange
 }
-

@@ -16,10 +16,9 @@ sp_reflect(sp, x = FALSE, y = FALSE)
 \description{
 Function to reflect/reverse a spatial object.
 }
-\author{
-Stuart K. Grange
-}
 \seealso{
 \code{\link{elide}}
 }
-
+\author{
+Stuart K. Grange
+}
