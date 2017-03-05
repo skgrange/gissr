@@ -22,6 +22,9 @@
 #' @export
 get_osm_node_data <- function(id) {
   
+  # Parse id
+  id <- stringr::str_replace(id, "^n", "")
+  
   # Build urls
   url <- stringr::str_c("http://www.openstreetmap.org/api/0.6/node/", id)
   
@@ -176,6 +179,9 @@ extract_osm_tags <- function(x) {
 #' @export
 get_osm_way_data <- function(id, progress = "none") {
   
+  # Parse id
+  id <- stringr::str_replace(id, "^w", "")
+  
   if (length(id) == 1) {
     
     list_way <- get_osm_way_data_worker(id)
@@ -259,6 +265,9 @@ get_osm_way_data_worker <- function(id) {
 #' 
 #' @export
 get_osm_relation_data <- function(id) {
+  
+  # Parse id
+  id <- stringr::str_replace(id, "^r", "")
   
   # Build url
   url <- stringr::str_c("http://www.openstreetmap.org/api/0.6/relation/", id)

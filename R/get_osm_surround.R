@@ -7,6 +7,8 @@
 #' \code{"lines"}, \code{"polygons"}, or \code{"data"}. If \code{"data"},
 #' a data frame will be returned rather than spatial data. 
 #' 
+#' @param progress Type of progress bar to display. 
+#' 
 #' @return Spatial data or data frame. 
 #' 
 #' @examples 
@@ -26,19 +28,21 @@
 #' @author Stuart K. Grange
 #' 
 #' @export
-get_osm_surround <- function(id, type = "data") {
+get_osm_surround <- function(id, type = "data", progress = "none") {
   
   if (type == "data") {
     
     # Get all ids as data frames
-    df <- plyr::ldply(id, get_osm_surround_worker, type = type)
+    df <- plyr::ldply(id, get_osm_surround_worker, type = type, 
+                      .progress = progress)
     
     return(df)
     
   } else {
     
     # Get all ids as spatial objects
-    sp <- plyr::llply(id, get_osm_surround_worker, type = type)
+    sp <- plyr::llply(id, get_osm_surround_worker, type = type,
+                      .progress = progress)
     
     # Single object bitte
     sp <- sp_bind(sp)

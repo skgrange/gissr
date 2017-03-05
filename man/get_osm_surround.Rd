@@ -5,7 +5,7 @@
 \title{Function to get points, lines, or polygons from OpenStreetMap using 
 \code{ra.osmsurround.org}.}
 \usage{
-get_osm_surround(id, type = "data")
+get_osm_surround(id, type = "data", progress = "none")
 }
 \arguments{
 \item{id}{A vector of OpenStreetMap IDs.}
@@ -13,6 +13,8 @@ get_osm_surround(id, type = "data")
 \item{type}{Type of data to return. Can be one of \code{"points"}, 
 \code{"lines"}, \code{"polygons"}, or \code{"data"}. If \code{"data"},
 a data frame will be returned rather than spatial data.}
+
+\item{progress}{Type of progress bar to display.}
 }
 \value{
 Spatial data or data frame.

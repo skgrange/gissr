@@ -17,7 +17,9 @@ write_geojson_js(sp, file, name = NA, pretty = TRUE, round = NA)
 \item{pretty}{Format the JSON for readability.}
 
 \item{round}{How many decimal points should the coordinate pairs be exported
-with? Default is maximum but \code{6} is common for spatial data.}
+with? Default is maximum but \code{6} is common for spatial data. This argument
+is currently ignored due to an error with \code{geojsonio::geojson_json}, 
+to-do: fix when I can.}
 
 \item{name}{Name of JavaScript object (only used in \code{write_geojson_js}).}
 }
