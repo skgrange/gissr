@@ -5,16 +5,25 @@
 \title{Function to find latitude and longitude pairs from an address-string using 
 Google Maps API.}
 \usage{
-google_geocode(input, source = "google", override_limit = TRUE)
+google_geocode(input, source = "google", override_limit = TRUE,
+  wkt = FALSE, verbose = TRUE)
 }
 \arguments{
+\item{input}{The input to transform to latitude and longitude pairs.}
+
 \item{source}{What API should \code{google_geocode} access? Options are 
 "google" or "dsk" and the default is "google".}
 
 \item{override_limit}{Should the function attempt to override the 2500 queries
 a day limit? This does not always work.}
 
-\item{string}{The address string to transform to latitude and longitude pairs.}
+\item{wkt}{Should the return be a vector of WKT (well known text)? This is 
+useful for when transforming a data frame.}
+
+\item{verbose}{Should the functions give messages?}
+}
+\value{
+Data frame or character vector.
 }
 \description{
 The Google Maps API is not open-source, therefore check the licensing 
@@ -30,9 +39,14 @@ address elements such as postcodes can also be transformed successfully.
 \examples{
 \dontrun{
 
+# Return data frame
 google_geocode("bath abbey")
 string     address                                                    latitude longitude
 bath abbey bath abbey, bath, bath and north east somerset ba1 1lt, uk 51.38148 -2.358735
+
+# Only a vector
+google_geocode("york minster", verbose = FALSE, wkt = TRUE)
+POINT (-1.0819205 53.9623292)
 
 }
 

@@ -4,8 +4,8 @@
 \alias{sp_from_wkt}
 \title{Function to parse a data frame containing WKT strings to a spatial object.}
 \usage{
-sp_from_wkt(df, wkt = "geom", data = TRUE, projection = NA,
-  verbose = FALSE)
+sp_from_wkt(df, wkt = "geom", data = TRUE, keep = FALSE,
+  projection = NA, verbose = FALSE)
 }
 \arguments{
 \item{df}{Data frame containing a WKT string variable. \code{df} can also be
@@ -15,6 +15,8 @@ a vector of WKT strings.}
 
 \item{data}{Should variables other than \code{wkt} be added to the spatial 
 object's data-slot? I.e. create a spatial data frame.}
+
+\item{keep}{Should the \code{wkt} be kept in the returned spatial object?}
 
 \item{projection}{A proj4 string to force the projection system after the WKT
 strings have been parsed. Default is \code{NA}.}

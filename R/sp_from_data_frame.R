@@ -3,6 +3,9 @@
 #' 
 #' @param df Data frame to be converted into spatial data frame.  
 #' 
+#' @param type Type of geomerty. Type must be one of \code{"points"}, 
+#' \code{"lines"}, or \code{"polygons"} and there is no default. 
+#' 
 #' @param latitude \code{df}'s latitude variable name. 
 #' 
 #' @param longitude \code{df}'s longitude variable name.
@@ -13,9 +16,6 @@
 #' @param id Variable in \code{df} which codes for spatial object's id. This is
 #' used when a data frame contains many seperate geometries. \code{id} is not 
 #' used for points because each point is a seperate geometry. 
-#' 
-#' @param type Type of geomerty. Type must be one of \code{"points"}, 
-#' \code{"lines"}, or \code{"polygons"} and there is no default. 
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -44,16 +44,16 @@
 #' }
 #' 
 #' @export
-sp_from_data_frame <- function(df, latitude = "latitude", 
+sp_from_data_frame <- function(df, type, latitude = "latitude", 
                                longitude = "longitude", 
-                               projection = "+proj=longlat +datum=WGS84 +no_defs",
-                               id = NA,
-                               type) {
+                               projection = projection_wgs84(),
+                               id = NA) {
   
   #  Check and parse
   if (length(type) != 1) stop("'type' must have a length of one. ", call. = FALSE)
   
   # Make plurals
+  type <- stringr::str_trim(type)
   type <- stringr::str_to_lower(type)
   type <- ifelse(type == "point", "points", type)
   type <- ifelse(type == "line", "lines", type)
@@ -99,11 +99,27 @@ data_frame_to_points <- function(df, latitude, longitude, projection) {
     
   }
   
+  # # Store vectors before promoting
+  # if (keep) {
+  #   
+  #   latitude_vector <- df[, latitude]
+  #   longitude_vector <- df[, longitude]
+  # 
+  # }
+  
   # Make sp points object
   sp::coordinates(df) <- c(longitude, latitude)
   
   # Reassign
   sp <- df
+  
+  # # Add to data slot
+  # if (keep) {
+  #   
+  #   sp@data[, latitude] <- latitude_vector
+  #   sp@data[, longitude] <- longitude_vector
+  #   
+  # }
   
   # Give the object a projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)

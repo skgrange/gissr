@@ -13,6 +13,8 @@
 #' @param data Should variables other than \code{wkt} be added to the spatial 
 #' object's data-slot? I.e. create a spatial data frame.
 #' 
+#' @param keep Should the \code{wkt} be kept in the returned spatial object? 
+#' 
 #' @param projection A proj4 string to force the projection system after the WKT
 #' strings have been parsed. Default is \code{NA}. 
 #' 
@@ -32,8 +34,8 @@
 #' }
 #' 
 #' @export
-sp_from_wkt <- function(df, wkt = "geom", data = TRUE, projection = NA, 
-                        verbose = FALSE) {
+sp_from_wkt <- function(df, wkt = "geom", data = TRUE, keep = FALSE, 
+                        projection = NA, verbose = FALSE) {
   
   # Catch dplyr's table data frame
   df <- threadr::base_df(df)
@@ -67,7 +69,8 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, projection = NA,
   }
   
   # Check 
-  if (length(wkt_vector) == 0) stop("There are no valid WKT strings.", call. = FALSE)
+  if (length(wkt_vector) == 0) 
+    stop("There are no valid WKT strings.", call. = FALSE)
   
   # Store data
   if (data) {
@@ -126,6 +129,10 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, projection = NA,
   
   if (data & grepl("points", class(sp), ignore.case = TRUE))
     sp <- sp::SpatialPointsDataFrame(sp, data = df_data, match.ID = FALSE)
+  
+  # Add wkt vector again
+  if (data & keep) 
+    sp@data[, wkt] <- wkt_vector
   
   # Add projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)

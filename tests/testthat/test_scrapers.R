@@ -2,7 +2,7 @@ context("Testing scrapers")
 
 test_that("Test `sp_from_js_array`", {
   
-  url <- "http://skgrange.github.io/www/maps/running_tracks/data/running_tracks_polylines.js"
+  url <- "http://skgrange.github.io/www/maps/running_tracks/data/running_tracks_north_england_polylines.js"
   
   text <- readLines(url, warn = FALSE)
   
