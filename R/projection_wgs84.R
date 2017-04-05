@@ -40,3 +40,9 @@ projection_antarctic <- function()
 #' @export
 projection_norway <- function() 
   "+proj=stere +lat_0=90 +lat_ts=90 +lon_0=18 +k=0.994 +x_0=2000000 +y_0=2000000 +datum=WGS84 +units=m +no_defs"
+
+
+#' @rdname projection_wgs84
+#' @export
+projection_lcc <- function()
+  "+proj=lcc +lat_1=33 +lat_2=45 +lat_0=40 +lon_0=-97 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"

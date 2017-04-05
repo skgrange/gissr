@@ -8,6 +8,7 @@
 \alias{projection_us_albers}
 \alias{projection_antarctic}
 \alias{projection_norway}
+\alias{projection_lcc}
 \title{Functions to wrap common projection (PROJ.4) strings.}
 \usage{
 projection_wgs84()
@@ -23,6 +24,8 @@ projection_us_albers()
 projection_antarctic()
 
 projection_norway()
+
+projection_lcc()
 }
 \description{
 Functions to wrap common projection (PROJ.4) strings.
