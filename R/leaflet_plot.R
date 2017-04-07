@@ -39,13 +39,21 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
     addTiles(group = "OpenStreetMap") %>%
     addProviderTiles("Stamen.Toner", group = "Toner") %>%
     addProviderTiles("Stamen.TonerLite", group = "Toner lite") %>%
-    # addProviderTiles("Stamen.Terrain", group = "Terrain") %>%
-    addProviderTiles("Thunderforest.Landscape", group = "Landscape",
-                     options = providerTileOptions(apikey = "25ef91f0102248f4a181998ec2b7a1ad")) %>%
-    addProviderTiles("Thunderforest.TransportDark", group = "Transport dark",
-                     options = providerTileOptions(apikey = "25ef91f0102248f4a181998ec2b7a1ad")) %>%
-    addProviderTiles("Thunderforest.Outdoors", group = "Outdoors",
-                     options = providerTileOptions(apikey = "25ef91f0102248f4a181998ec2b7a1ad")) %>%
+    addTiles(
+      urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
+      attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+      options = tileOptions(variant = "landscape", apikey = "25ef91f0102248f4a181998ec2b7a1ad"),
+      group = "Landscape") %>% 
+    addTiles(
+      urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
+      attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+      options = tileOptions(variant = "transport-dark", apikey = "25ef91f0102248f4a181998ec2b7a1ad"),
+      group = "Transport dark") %>% 
+    addTiles(
+      urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
+      attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+      options = tileOptions(variant = "outdoors", apikey = "25ef91f0102248f4a181998ec2b7a1ad"),
+      group = "Outdoors") %>% 
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(
       baseGroups = c("OpenStreetMap", "Toner", "Toner lite", "Landscape", 

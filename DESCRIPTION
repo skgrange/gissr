@@ -1,8 +1,8 @@
 Package: gissr
 Type: Package
 Title: Functions to make working with spatial data easier
-Version: 0.5.37
-Date: 2017-04-04
+Version: 0.5.38
+Date: 2017-04-07
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
 Description: A collection of spatial functions to make R a more effective GIS.
