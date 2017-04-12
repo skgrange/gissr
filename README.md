@@ -1,7 +1,5 @@
 # **gissr**
 
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://github.com/skgrange/gissr)
-
 **gissr** is a collection of R functions which make working with spatial data easier.
 
 ## Installation
