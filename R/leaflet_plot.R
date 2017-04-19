@@ -36,7 +36,9 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   
   # Create map
   map <- leaflet(sp) %>%
-    addTiles(group = "OpenStreetMap") %>%
+    addTiles(
+      group = "OpenStreetMap", 
+      urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") %>%
     addProviderTiles("Stamen.Toner", group = "Toner") %>%
     addProviderTiles("Stamen.TonerLite", group = "Toner lite") %>%
     addTiles(

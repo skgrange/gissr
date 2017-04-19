@@ -88,7 +88,7 @@ data_frame_to_points <- function(df, latitude, longitude, projection) {
   if (any(is.na(c(df[, latitude], df[, longitude])))) {
     
     # Remove NAs
-    df <- df[!(is.na(df[, latitude]) & is.na(df[, longitude])), ]
+    df <- df[!(is.na(df[, latitude]) | is.na(df[, longitude])), ]
     
     # Raise warning
     warning("Missing coordinates were detected and have been removed.", 
@@ -99,27 +99,11 @@ data_frame_to_points <- function(df, latitude, longitude, projection) {
     
   }
   
-  # # Store vectors before promoting
-  # if (keep) {
-  #   
-  #   latitude_vector <- df[, latitude]
-  #   longitude_vector <- df[, longitude]
-  # 
-  # }
-  
   # Make sp points object
   sp::coordinates(df) <- c(longitude, latitude)
   
   # Reassign
   sp <- df
-  
-  # # Add to data slot
-  # if (keep) {
-  #   
-  #   sp@data[, latitude] <- latitude_vector
-  #   sp@data[, longitude] <- longitude_vector
-  #   
-  # }
   
   # Give the object a projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)

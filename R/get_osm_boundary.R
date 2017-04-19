@@ -23,6 +23,9 @@
 #' @export
 get_osm_boundary <- function(id, print_query = FALSE, progress = "none") {
   
+  # Parse
+  id <- stringr::str_trim(id)
+  
   # Vectorise function
   sp_list <- plyr::llply(id, osm_boundary_worker, print_query = print_query, 
                          .progress = progress)
@@ -38,6 +41,7 @@ get_osm_boundary <- function(id, print_query = FALSE, progress = "none") {
   
 }
 
+
 # No export
 osm_boundary_worker <- function(id, print_query) {
   
@@ -49,7 +53,23 @@ osm_boundary_worker <- function(id, print_query) {
   if (print_query) message(url)
   
   # Get wkt
-  text <- readLines(url, warn = FALSE)
+  text <- tryCatch({
+    
+    # Read text
+    suppressWarnings(
+      readLines(url, warn = FALSE)
+    )
+    
+  }, error = function(e) {
+    
+    # If error return null
+    message(stringr::str_c("'id' ", id, " not found..."))
+    NULL
+    
+  })
+  
+  # If null then return now
+  if (is.null(text)) return(NULL)
   
   # Drop preamble/projection infomation
   text <- stringr::str_replace(text, "SRID=4326;", "")
@@ -66,7 +86,6 @@ osm_boundary_worker <- function(id, print_query) {
   # Add open street map id to data slot
   sp@data$osm_id <- id
   
-  # Return
-  sp
+  return(sp)
   
 }

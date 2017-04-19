@@ -9,6 +9,7 @@
     - Output areas
     - Built-up areas
   - [Spatial Data Catalogue](http://environment.data.gov.uk/ds/catalogue/index.jsp#/catalogue)
+  - [Northern Ireland open data](https://www.opendatani.gov.uk/)
   
 ### London 
 
