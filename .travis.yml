@@ -8,6 +8,7 @@ r_binary_packages:
   
 # System dependencies for rgdal and V8
 apt_packages:
+  - r-cran-rgdal
   - libgeos-dev
   - libgdal1-dev 
   - libproj-dev
@@ -17,4 +18,3 @@ apt_packages:
 # Install development package
 r_github_packages:
   - skgrange/threadr
-

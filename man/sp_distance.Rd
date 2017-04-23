@@ -2,21 +2,20 @@
 % Please edit documentation in R/sp_distance.R
 \name{sp_distance}
 \alias{sp_distance}
-\title{Function to find distances between two spatial objects in metres or 
-kilometres.}
+\title{Function to find distances between two spatial objects.}
 \usage{
-sp_distance(sp_1, sp_2, cores = 1, unit = "m")
+sp_distance(sp_1, sp_2, features = FALSE, unit = "m")
 }
 \arguments{
 \item{sp_1}{Spatial object one.}
 
 \item{sp_2}{Spatial object two.}
 
-\item{cores}{Number of cores for the function to use. Not available for 
-Windows systems.}
-
 \item{unit}{If \code{"km"}, the returned vector is returned in kilometres 
 rather than metres.}
+}
+\value{
+Numeric vector or matrix.
 }
 \description{
 \code{sp_distance} calculates the distance between a spatial object and 
@@ -27,30 +26,18 @@ far cities are away from the coast.
 \details{
 \code{sp_distance} uses \code{rgeos::gDistance} for the distance calculations.
 This function returns distances based on the unit of the projection system 
-contained within the spatial objects. When spatial objects are used with 
-\code{sp_distance} which have projection systems without metre units (such as 
-WGS84), the Mollweide projection system is used by default. The Mollweide 
-projection is applicable in any location on Earth, but the accuracy of the 
-returned values is dependent on location.
-
-If the spatial objects are located in a zone which has a more appropriate 
-projection system, it is highly recommended that this is used. For example, 
-spatial data in New Zealand should be projected in the New Zealand Transverse 
-Mercator 2000 while data in the UK should be projected in British National 
-Grid; both of which have metre units (\code{+units=m}).
-
-\code{sp_distance} supports parallel processing by forking the 
-\code{rgeos::gDistance} function across multiple cores. This can make the 
-distance calculations faster.
+contained within the spatial objects and both geometries' projection must be
+identical.
 }
 \examples{
 \dontrun{
+
 # Simple usage
 # Calculate the distances of places from the coastline
 distances <- sp_distance(sp_places, sp_coast_line, unit = "km")
 
 # Speed the function up by using multiple system cores
-distances <- sp_distance(sp_places, sp_coast_line, unit = "km", cores = 4)
+distances <- sp_distance(sp_places, sp_coast_line, unit = "km")
 
 
 # Usage for transforming a data frame
@@ -69,8 +56,7 @@ data_places <- sp_places@data
 # projection system
 
 # Apply parallel function and add variable to data frame
-data_places$distance <- sp_distance(sp_places, sp_coast_line, unit = "km", 
-                                    cores = 4)
+data_places$distance <- sp_distance(sp_places, sp_coast_line, unit = "km")
 
 # Have a look
 head(data_places)
@@ -83,12 +69,12 @@ Charlbury 60.3
 
 # London will be dependent on where the coastline is set after the River
 # Thames's mouth. 
+
 }
 
 }
 \seealso{
-\code{\link{gDistance}}, \code{\link{sp_transform}}, 
-\code{\link{mclapply}}
+\code{\link{gDistance}}, \code{\link{sp_transform}}
 }
 \author{
 Stuart K. Grange

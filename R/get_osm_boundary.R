@@ -84,7 +84,7 @@ osm_boundary_worker <- function(id, print_query) {
   sp <- sp_promote(sp)
   
   # Add open street map id to data slot
-  sp@data$osm_id <- id
+  sp@data$id_osm <- as.integer(id)
   
   return(sp)
   
