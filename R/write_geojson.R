@@ -13,9 +13,7 @@
 #' @param pretty Format the JSON for readability. 
 #' 
 #' @param round How many decimal points should the coordinate pairs be exported
-#' with? Default is maximum but \code{6} is common for spatial data. This argument
-#' is currently ignored due to an error with \code{geojsonio::geojson_json}, 
-#' to-do: fix when I can. 
+#' with? Default is maximum but \code{6} is common for spatial data.
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -63,22 +61,23 @@ write_geojson_js <- function(sp, file, name = NA, pretty = TRUE, round = NA) {
 
 
 # No export
-create_geojson <- function(sp, pretty = TRUE, round = NA) {
+create_geojson <- function(sp, pretty, round) {
   
   # Make json string, will also work for data frames sometimes but will give
   # message
-  # , digits = round, removed, bug in geojson_json parsing the argument
   json <- suppressMessages(
     geojsonio::geojson_json(sp)
   )
   
   # Use jsonlite to do a better job of pretty printing, expensive though
-  if (pretty) {
+  if (pretty | !is.na(round)) {
+    
+    # Parse again
+    json <- jsonlite::fromJSON(json)
     
     # Max precision is needed here
-    json <- jsonlite::fromJSON(json)
     json <- jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE, 
-                             digits = NA)
+                             digits = round)
     
   }
   
