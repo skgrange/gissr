@@ -13,6 +13,7 @@ apt_packages:
   - libproj-dev
   - libv8-dev
   - libgdal-dev # other packages from here
+  - libhdf5-serial-dev
   
 # Install development package
 r_github_packages:
