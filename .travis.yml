@@ -8,13 +8,11 @@ r_binary_packages:
   
 # System dependencies for rgdal and V8
 apt_packages:
-  - r-cran-rgdal
   - libgeos-dev
   - libgdal1-dev 
   - libproj-dev
   - libv8-dev
   - libgdal-dev # other packages from here
-  - libgdal1i
   
 # Install development package
 r_github_packages:
