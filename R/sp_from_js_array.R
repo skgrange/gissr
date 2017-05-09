@@ -5,12 +5,33 @@
 #' 
 #' @param file File, url, or character vector containing a JavaScript array. 
 #' @param type Spatial data type. Default is \code{"points"}. 
+#' @param projection Projection string. 
 #' 
 #' @author Stuart K. Grange
 #' 
 #' @export
 sp_from_js_array <- function(text, type = "points", 
                              projection = projection_wgs84()) {
+  
+  # Vectorise the worker
+  list_sp <- plyr::llply(text, function(x) sp_from_js_array_worker(x, type))
+  
+  # Bind objects
+  sp <- sp_bind(list_sp)
+  
+  # Drop data slot
+  sp <- sp_demote(sp)
+  
+  # Force projection
+  if (!is.na(projection)) sp <- sp_transform(sp, to = projection, warn = FALSE)
+  
+  # Return
+  sp
+  
+}
+
+
+sp_from_js_array_worker <- function(text, type) {
 
   # Do the string processing
   text_clean <- stringr::str_replace_all(text, " ", "")
@@ -27,11 +48,8 @@ sp_from_js_array <- function(text, type = "points",
     stringsAsFactors = FALSE
   )
   
-  # Promote
-  sp <- sp_from_data_frame(df, type = type, projection = projection)
-  
-  # Demote
-  sp <- sp_demote(sp)
+  # Promote to spatial data
+  sp <- sp_from_data_frame(df, type = type, projection = NA)
   
   # Return
   sp

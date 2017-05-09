@@ -9,6 +9,8 @@ sp_from_js_array(text, type = "points", projection = projection_wgs84())
 \arguments{
 \item{type}{Spatial data type. Default is \code{"points"}.}
 
+\item{projection}{Projection string.}
+
 \item{file}{File, url, or character vector containing a JavaScript array.}
 }
 \description{
