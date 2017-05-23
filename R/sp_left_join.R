@@ -77,7 +77,6 @@ sp_left_join <- function(sp_points, sp_polygons, check = TRUE) {
   
   # The point in polygon function, returns data frame
   df_sp <- sp::over(sp_points, sp_polygons, fn = NULL)
-  # df_sp <- dplyr::bind_rows(df_sp) returnList = TRUE
   
   if (grepl("data", sp_class(sp_points), ignore.case = TRUE))  {
     
