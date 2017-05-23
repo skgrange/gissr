@@ -1,5 +1,7 @@
 # **gissr**
 
+![](inst/extdata/images/icon_small.png)
+
 **gissr** is a collection of R functions which make working with spatial data easier.
 
 ## Installation
