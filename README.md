@@ -47,7 +47,7 @@ To overcome these points, I have written wrappers for many geographical function
   - Unite spatial objects with `sp_unite` and do the opposite with `sp_disaggregate`. 
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
   - Clip or crop a spatial object to an rectangular envelope with `sp_clip`. 
-    - To filter objects by other polygons, use `[` subsetting. 
+    - To filter objects by other polygons, use `[` subsetting (or `sp_filter`). 
     - Rectangular or elliptical polygons can be created with `sp_create_envelope` and `sp_ellipse` for this purpose too. 
   - Do simple transformations to spatial objects with `sp_move`, `sp_flip`, `sp_reflect`, and `sp_rotate`. 
   - Simplify spatial objects with `sp_simplify`.
