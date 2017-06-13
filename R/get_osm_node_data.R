@@ -4,8 +4,6 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @import dplyr
-#' 
 #' @return Named list. 
 #' 
 #' @examples 
@@ -50,8 +48,7 @@ get_osm_node_data <- function(id) {
            -lon) %>% 
     data.frame()
   
-  # Return
-  list_return
+  return(list_return)
   
 }
 
@@ -70,16 +67,19 @@ get_osm_node_data_worker <- function(url) {
   # Get attributes
   if (!is.list(list_xml_content)) {
     
-    df_attributes <- as.data.frame(t(list_xml_content), 
-                                   stringsAsFactors = FALSE)
-    
+    df_attributes <- as.data.frame(
+      t(list_xml_content), 
+      stringsAsFactors = FALSE
+    )
     
     df <- data.frame()
     
   } else {
     
-    df_attributes <- as.data.frame(t(list_xml_content$.attrs), 
-                                   stringsAsFactors = FALSE)
+    df_attributes <- as.data.frame(
+      t(list_xml_content$.attrs), 
+      stringsAsFactors = FALSE
+    )
     
     # Extract data from list
     list_tidy <- lapply(list_xml_content, extract_osm_tags)
@@ -107,9 +107,7 @@ get_osm_node_data_worker <- function(url) {
     
   }
   
-  
-  # Return
-  list_return
+  return(list_return)
   
 }
 
@@ -131,7 +129,10 @@ extract_osm_tags <- function(x) {
     
   } else if (names[1] == "ref") {
     
-    df <- data.frame(reference = as.numeric(unname(x)), stringsAsFactors = FALSE)
+    df <- data.frame(
+      reference = as.numeric(unname(x)),
+      stringsAsFactors = FALSE
+    )
     
   } else if (names[1] == "type" & names[2] == "ref" & names[3] == "role") {
     
@@ -139,7 +140,8 @@ extract_osm_tags <- function(x) {
       reference = as.numeric(unname(x[2])),
       type = unname(x[1]),
       role = unname(x[3]),
-      stringsAsFactors = FALSE)
+      stringsAsFactors = FALSE
+    )
     
   } else {
     
@@ -148,8 +150,7 @@ extract_osm_tags <- function(x) {
     
   }
   
-  # Return
-  df
+  return(df)
   
 }
 
@@ -160,8 +161,6 @@ extract_osm_tags <- function(x) {
 #' @param id A vector os OpenStreetMap way IDs. 
 #' 
 #' @author Stuart K. Grange
-#' 
-#' @import dplyr
 #' 
 #' @return Named list or a list of named lists. 
 #' 
@@ -188,12 +187,15 @@ get_osm_way_data <- function(id, progress = "none") {
     
   } else {
     
-    list_way <- plyr::llply(id, get_osm_way_data_worker, .progress = progress)
+    list_way <- plyr::llply(
+      id, 
+      get_osm_way_data_worker, 
+      .progress = progress
+    )
     
   }
   
-  # Return
-  list_way
+  return(list_way)
   
 }
 
@@ -213,8 +215,10 @@ get_osm_way_data_worker <- function(id) {
   list_xml_content <- list_xml$way
   
   # Get attributes
-  df_attributes <- as.data.frame(t(list_xml_content$.attrs), 
-                                 stringsAsFactors = FALSE)
+  df_attributes <- as.data.frame(
+    t(list_xml_content$.attrs), 
+    stringsAsFactors = FALSE
+  )
   
   # Extract data from list
   list_tidy <- lapply(list_xml_content, extract_osm_tags)
@@ -238,8 +242,7 @@ get_osm_way_data_worker <- function(id) {
     relations = relations
   )
   
-  # Return
-  list_return
+  return(list_return)
   
 }
 
@@ -249,9 +252,9 @@ get_osm_way_data_worker <- function(id) {
 #' 
 #' @param id OpenStreetMap relation ID. 
 #' 
-#' @author Stuart K. Grange
+#' @param progress Type of progress bar to display.
 #' 
-#' @import dplyr
+#' @author Stuart K. Grange
 #' 
 #' @return Named list. 
 #' 
@@ -264,10 +267,34 @@ get_osm_way_data_worker <- function(id) {
 #' }
 #' 
 #' @export
-get_osm_relation_data <- function(id) {
+get_osm_relation_data <- function(id, progress = "none") {
   
   # Parse id
   id <- stringr::str_replace(id, "^r", "")
+  
+  if (length(id) == 1) {
+    
+    list_relation <- get_osm_relation_data_worker(id)
+    
+  } else {
+    
+    list_relation <- plyr::llply(
+      id, 
+      get_osm_relation_data_worker, 
+      .progress = progress
+    )
+    
+    # Give names
+    names(list_relation) <- id
+    
+  }
+  
+  return(list_relation)
+  
+}
+
+
+get_osm_relation_data_worker <- function(id) {
   
   # Build url
   url <- stringr::str_c("http://www.openstreetmap.org/api/0.6/relation/", id)
@@ -282,8 +309,10 @@ get_osm_relation_data <- function(id) {
   list_xml_content <- list_xml$relation
   
   # Get attributes
-  df_attributes <- as.data.frame(t(list_xml_content$.attrs), 
-                                 stringsAsFactors = FALSE)
+  df_attributes <- as.data.frame(
+    t(list_xml_content$.attrs), 
+    stringsAsFactors = FALSE
+  )
   
   # Extract data from list
   list_tidy <- lapply(list_xml_content, extract_osm_tags)
@@ -307,7 +336,6 @@ get_osm_relation_data <- function(id) {
     members = df_members
   )
   
-  # Return
-  list_return
+  return(list_return)
   
 }

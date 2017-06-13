@@ -4,10 +4,12 @@
 \alias{get_osm_relation_data}
 \title{Function to scrape OpenStreetMap's relation XML documents for data.}
 \usage{
-get_osm_relation_data(id)
+get_osm_relation_data(id, progress = "none")
 }
 \arguments{
 \item{id}{OpenStreetMap relation ID.}
+
+\item{progress}{Type of progress bar to display.}
 }
 \value{
 Named list.
