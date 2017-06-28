@@ -26,8 +26,17 @@ sp_fortify <- function(sp, rename = TRUE) {
     if (rename) {
       
       # Rename variables
-      names(df) <- ifelse(names(df) == "x", "longitude", names(df))
-      names(df) <- ifelse(names(df) == "y", "latitude", names(df))
+      names(df) <- ifelse(
+        names(df) %in% c("x", "coords.x1"), 
+        "longitude", 
+        names(df)
+      )
+      
+      names(df) <- ifelse(
+        names(df) %in% c("y", "coords.x2"),
+        "latitude", 
+        names(df)
+      )
       
       # Arrange variables
       df <- threadr::arrange_left(df, c("latitude", "longitude"))
