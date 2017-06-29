@@ -9,8 +9,10 @@
 #' 
 #' @examples 
 #' \dontrun{
+#' 
 #' # Promote to spatial data frame
 #' sp_with_data <- sp_promote(sp)
+#' 
 #' }
 #'
 #' @export
@@ -27,28 +29,48 @@ sp_promote <- function(sp) {
     # Points
     if (sp_class == "SpatialPoints") {
       
-      sp <- sp::SpatialPointsDataFrame(sp, data = data.frame(id = id_vector),
-                                       match.ID = FALSE)
+      sp <- sp::SpatialPointsDataFrame(
+        sp, 
+        data = data.frame(
+          id = id_vector, 
+          stringsAsFactors = FALSE
+        ),
+        match.ID = FALSE
+      )
+      
     }
     
     # Lines
     if (sp_class == "SpatialLines") {
       
-      sp <- sp::SpatialLinesDataFrame(sp, data = data.frame(id = id_vector),
-                                      match.ID = FALSE)
+      sp <- sp::SpatialLinesDataFrame(
+        sp, 
+        data = data.frame(
+          id = id_vector,
+          stringsAsFactors = FALSE
+        ),
+        match.ID = FALSE
+      )
+      
     }
     
     # Polygons
     if (sp_class == "SpatialPolygons") {
       
-      sp <- sp::SpatialPolygonsDataFrame(sp, data = data.frame(id = id_vector),
-                                         match.ID = FALSE)
+      sp <- sp::SpatialPolygonsDataFrame(
+        sp, 
+        data = data.frame(
+          id = id_vector,
+          stringsAsFactors = FALSE
+        ),
+        match.ID = FALSE
+      )
+      
     }
     
   }
   
-  # Return
-  sp
+  return(sp)
   
 }
 
@@ -90,7 +112,6 @@ sp_demote <- function(sp) {
     
   }
   
-  # Return
-  sp
+  return(sp)
   
 }

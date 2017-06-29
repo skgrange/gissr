@@ -15,8 +15,10 @@ of a geometry. \code{id} is a character vector.
 }
 \examples{
 \dontrun{
+
 # Promote to spatial data frame
 sp_with_data <- sp_promote(sp)
+
 }
 
 }
