@@ -18,7 +18,7 @@
 #' 
 #' @param layer Layer within \code{file} to read. Default is \code{NULL} and 
 #' should not be needed for shapefiles, Mapinfo TAB files, and GeoJSON files. 
-#' Default behaviour for GPX files is to attempt to read the \code{"routes"} 
+#' Default behaviour for GPX files is to attempt to read the \code{"tracks"} 
 #' layer. 
 #' 
 #' @param geom An override for when spatial data files contain more than one 
@@ -91,9 +91,14 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
     sp <- readRDS(file)
     
     # Warning to user
-    if (!is.sp(sp)) 
-      warning(".rds file has been loaded but it does not contain spatial data...", 
-              call. = FALSE)
+    if (!is.sp(sp)) {
+      
+      warning(
+        ".rds file has been loaded but it does not contain spatial data...", 
+        call. = FALSE
+      )
+      
+    }
     
     # Return here
     return(sp)
@@ -110,8 +115,8 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
       
     } else if (grepl(".gpx$", file, ignore.case = TRUE)) {
     
-      # Default to routes because this is what I seem to use most often
-      layer <- "routes"
+      # Default to tracks because this is what I seem to use most often
+      layer <- "tracks"
       
     } else {
     
@@ -137,8 +142,13 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
   if (!is.null(geom)) geom <- parse_geom(geom)
   
   # Read file with rgdal
-  sp <- rgdal::readOGR(file, layer, require_geomType = geom, verbose = verbose,
-                       stringsAsFactors = FALSE)
+  sp <- rgdal::readOGR(
+    file, 
+    layer, 
+    require_geomType = geom, 
+    verbose = verbose,
+    stringsAsFactors = FALSE
+  )
   
   # Message projection string
   if (verbose) cat(sp_projection(sp), "\n")
@@ -156,8 +166,7 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
     
   }
   
-  # Return
-  sp
+  return(sp)
   
 }
 

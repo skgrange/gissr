@@ -15,7 +15,7 @@ temporary directory and then loaded.}
 
 \item{layer}{Layer within \code{file} to read. Default is \code{NULL} and 
 should not be needed for shapefiles, Mapinfo TAB files, and GeoJSON files. 
-Default behaviour for GPX files is to attempt to read the \code{"routes"} 
+Default behaviour for GPX files is to attempt to read the \code{"tracks"} 
 layer.}
 
 \item{geom}{An override for when spatial data files contain more than one 
