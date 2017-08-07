@@ -10,6 +10,8 @@
 \alias{projection_norway}
 \alias{projection_lcc}
 \alias{projection_swiss}
+\alias{projection_slovenia}
+\alias{projection_utm}
 \title{Functions to wrap common projection (PROJ.4) strings.}
 \usage{
 projection_wgs84()
@@ -29,6 +31,10 @@ projection_norway()
 projection_lcc()
 
 projection_swiss()
+
+projection_slovenia()
+
+projection_utm()
 }
 \description{
 Functions to wrap common projection (PROJ.4) strings.
