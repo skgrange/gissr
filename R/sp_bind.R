@@ -59,8 +59,7 @@ sp_bind <- function(...) {
   # Bind
   sp_bind <- sp_bind_many(list_sp)
 
-  # Return
-  sp_bind
+  return(sp_bind)
   
 }
 
@@ -89,8 +88,7 @@ sp_bind_many <- function(sp_list) {
   
   }
   
-  # Return
-  sp_bind
+  return(sp_bind)
   
 }
 
@@ -138,7 +136,6 @@ sp_list_bind <- function(sp_list) {
     
   })
   
-  # Return
-  sp
+  return(sp)
 
 }

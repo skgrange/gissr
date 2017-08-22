@@ -4,10 +4,13 @@
 \alias{get_osm_boundary}
 \title{Function to get OpenStreetMap boundaries as spatial polygons.}
 \usage{
-get_osm_boundary(id, print_query = FALSE, progress = "none")
+get_osm_boundary(id, way = FALSE, print_query = FALSE, progress = "none")
 }
 \arguments{
 \item{id}{A vector of OpenStreetMap relations. An integer key.}
+
+\item{way}{Is \code{id} a way? If \code{TRUE}, a different method is needed
+which scrapes XML directly from OpenStreetMap for nodes and is a bit slow.}
 
 \item{print_query}{Should the query to the API be printed?}
 

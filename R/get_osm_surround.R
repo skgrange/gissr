@@ -33,16 +33,24 @@ get_osm_surround <- function(id, type = "data", progress = "none") {
   if (type == "data") {
     
     # Get all ids as data frames
-    df <- plyr::ldply(id, get_osm_surround_worker, type = type, 
-                      .progress = progress)
+    df <- plyr::ldply(
+      id, 
+      get_osm_surround_worker, 
+      type = type, 
+      .progress = progress
+    )
     
     return(df)
     
   } else {
     
     # Get all ids as spatial objects
-    sp <- plyr::llply(id, get_osm_surround_worker, type = type,
-                      .progress = progress)
+    sp <- plyr::llply(
+      id, 
+      get_osm_surround_worker, 
+      type = type,
+      .progress = progress
+    )
     
     # Single object bitte
     sp <- sp_bind(sp)
