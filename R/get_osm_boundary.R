@@ -8,8 +8,6 @@
 #' @param way Is \code{id} a way? If \code{TRUE}, a different method is needed
 #' which scrapes XML directly from OpenStreetMap for nodes and is a bit slow. 
 #' 
-#' @param print_query Should the query to the API be printed? 
-#' 
 #' @param progress Type of progress bar to display. Default is \code{"none"}
 #' 
 #' @return SpatialPolygonsDataFrame with WGS84 projection. 
@@ -26,7 +24,7 @@
 #' }
 #' 
 #' @export
-get_osm_boundary <- function(id, way = FALSE, print_query = FALSE, progress = "none") {
+get_osm_boundary <- function(id, way = FALSE, progress = "none") {
   
   # Parse
   id <- stringr::str_trim(id)
@@ -37,7 +35,6 @@ get_osm_boundary <- function(id, way = FALSE, print_query = FALSE, progress = "n
     sp_list <- plyr::llply(
       id, 
       osm_boundary_worker, 
-      print_query = print_query, 
       .progress = progress
     )
     
@@ -60,13 +57,17 @@ get_osm_boundary <- function(id, way = FALSE, print_query = FALSE, progress = "n
   } else {
     
     # Use osm functions to directly scrape
-    vector_nodes <- get_osm_way_data(id, progress = progress)$relations
+    sp_list <- plyr::llply(
+      id, 
+      osm_boundary_way_worker, 
+      .progress = progress
+    )
     
-    # Get nodes
-    df <- get_osm_node_data(vector_nodes)$attributes
+    # Bind list of spatial objects
+    sp <- sp_bind(sp_list)
     
-    # Promote
-    sp <- sp_from_data_frame(df, type = "polygon")
+    sp$id <- seq(1, length(sp))
+    sp$id_osm <- id
     
   }
   
@@ -75,8 +76,24 @@ get_osm_boundary <- function(id, way = FALSE, print_query = FALSE, progress = "n
 }
 
 
+osm_boundary_way_worker <- function(id) {
+  
+  # Get nodes
+  vector_nodes <- get_osm_way_data(id, progress = progress)$relations
+  
+  # Get nodes
+  df <- get_osm_node_data(vector_nodes)$attributes
+  
+  # Promote
+  sp <- sp_from_data_frame(df, type = "polygon")
+  
+  return(sp)
+  
+}
+
+
 # No export
-osm_boundary_worker <- function(id, print_query) {
+osm_boundary_worker <- function(id) {
   
   # Build query
   url <- stringr::str_c(
@@ -84,9 +101,6 @@ osm_boundary_worker <- function(id, print_query) {
     id, 
     "&params=0"
   )
-  
-  # Message
-  if (print_query) message(url)
   
   # Get wkt
   text <- tryCatch({
