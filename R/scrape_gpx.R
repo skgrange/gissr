@@ -1,29 +1,25 @@
-#' Function to read gpx files as a data frame from the GPX Logger Android phone
-#' app. 
+#' Function to read \code{GPX} files as a data frame from the GPX Logger Android
+#' phone app. 
 #' 
 #' @param file GPX file. 
+#' 
 #' @param transform Should latitude and longitude be used to calculate speed and
 #' distance too? 
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame with correct data types. 
-#' 
-#' @import XML
+#' @return Data frame.  
 #' 
 #' @export
 scrape_gpx <- function(file, transform = TRUE) {
   
   # Parse xml, to-do, find out why a html parser is needed. 
-  xml_tree <- htmlTreeParse(file, useInternalNodes = TRUE)
+  xml_tree <- XML::htmlTreeParse(file, useInternalNodes = TRUE)
   
   # Get variables
-  coordinates <- xpathSApply(xml_tree, path = "//trkpt", xmlAttrs)
-  elevation <- xpathSApply(xml_tree, path = "//trkpt/ele", xmlValue)
-  date <- xpathSApply(xml_tree, path = "//trkpt/time", xmlValue)
-  # XML::xpathSApply(xml_tree, path = "//trkpt/fix", XML::xmlValue)
-  # XML::xpathSApply(xml_tree, path = "//trkpt/sat", XML::xmlValue)
-  # XML::xpathSApply(xml_tree, path = "//trkpt/hdop", XML::xmlValue)
+  coordinates <- XML::xpathSApply(xml_tree, path = "//trkpt", XML::xmlAttrs)
+  elevation <- XML::xpathSApply(xml_tree, path = "//trkpt/ele", XML::xmlValue)
+  date <- XML::xpathSApply(xml_tree, path = "//trkpt/time", XML::xmlValue)
   
   # Ge latitude and longitude
   latitude <- coordinates["lat", ]
@@ -37,53 +33,24 @@ scrape_gpx <- function(file, transform = TRUE) {
   
   # Build data frame
   df <- data.frame(
+    file = basename(file),
     date, 
     elevation,
     latitude,
-    longitude
+    longitude,
+    stringsAsFactors = FALSE
   )
   
   # Calculate things
   if (transform) {
     
-    df$distance <- gissr::distance_by_haversine(df$latitude, df$longitude)
+    df$distance <- distance_by_haversine(df$latitude, df$longitude)
     df$speed <- df$distance * (df$date - dplyr::lag(df$date))
     df$speed <- as.numeric(df$speed)
     df$speed_km_h <- threadr::ms_to_km_h(df$speed)
     
   }
   
-  # Return
-  df
+  return(df)
   
 }
-
-
-#   # Read as text
-#   text <- readLines(file, warn = FALSE)
-#   
-#   # Parse xml
-#   xml <- XML::xmlTreeParse(text)
-#   
-#   # To list
-#   list <- XML::xmlToList(xml)
-#   
-#   # Get list element with the data
-#   df <- suppressWarnings(data.frame(t(list[[2]])))
-#   
-#   # Extract variable which contains a list of coordinates
-#   coordinates <- unlist(df$.attrs)
-#   
-#   # Filter named vectors
-#   longitude <- coordinates[ifelse(names(coordinates) == "trkpt.lon", TRUE, FALSE)]
-#   latitude <- coordinates[ifelse(names(coordinates) == "trkpt.lat", TRUE, FALSE)]
-#   
-#   # Build a data frame
-#   df_clean <- data.frame(date = unlist(df$time), 
-#                          elevation = unlist(df$ele),
-#                          latitude,
-#                          longitude)
-#   
-#   # Sort out data types
-#   df_clean$date <- lubridate::ymd_hms(df_clean$date, tz = "UTC")
-#   df_clean[, -1] <- lapply(df_clean[, -1], function (x) type.convert(as.character(x)))

@@ -2,8 +2,8 @@
 % Please edit documentation in R/scrape_gpx.R
 \name{scrape_gpx}
 \alias{scrape_gpx}
-\title{Function to read gpx files as a data frame from the GPX Logger Android phone
-app.}
+\title{Function to read \code{GPX} files as a data frame from the GPX Logger Android
+phone app.}
 \usage{
 scrape_gpx(file, transform = TRUE)
 }
@@ -14,11 +14,11 @@ scrape_gpx(file, transform = TRUE)
 distance too?}
 }
 \value{
-Data frame with correct data types.
+Data frame.
 }
 \description{
-Function to read gpx files as a data frame from the GPX Logger Android phone
-app.
+Function to read \code{GPX} files as a data frame from the GPX Logger Android
+phone app.
 }
 \author{
 Stuart K. Grange
