@@ -13,8 +13,24 @@
 #' @export
 scrape_gpx <- function(file, transform = TRUE) {
   
+  # Load file as text
+  text_gpx <- threadr::read_lines(file, warn = FALSE)
+  
+  # Get a few attribures
+  # attributes <- threadr::str_filter(head(text_gpx), "xmlns")
+  # 
+  # values <- stringr::str_extract_all(attributes, '"[^"]*"')[[1]]
+  # values <- stringr::str_replace_all(values, "\"", "")
+  # 
+  # variables <- stringr::str_split(attributes, "=")[[1]]
+  # variables <- variables[-length(variables)]
+  # variables <- stringr::str_replace(variables, ".* ", "")
+  # 
+  # # Give names
+  # list_attributes <- setNames(as.list(values), variables)
+  
   # Parse xml, to-do, find out why a html parser is needed. 
-  xml_tree <- XML::htmlTreeParse(file, useInternalNodes = TRUE)
+  xml_tree <- XML::htmlTreeParse(text_gpx, useInternalNodes = TRUE)
   
   # Get variables
   coordinates <- XML::xpathSApply(xml_tree, path = "//trkpt", XML::xmlAttrs)
@@ -33,7 +49,6 @@ scrape_gpx <- function(file, transform = TRUE) {
   
   # Build data frame
   df <- data.frame(
-    file = basename(file),
     date, 
     elevation,
     latitude,
@@ -50,6 +65,8 @@ scrape_gpx <- function(file, transform = TRUE) {
     df$speed_km_h <- threadr::ms_to_km_h(df$speed)
     
   }
+  
+  # attributes(df)$gpx <- list_attributes
   
   return(df)
   

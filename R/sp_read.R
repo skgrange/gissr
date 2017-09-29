@@ -71,11 +71,14 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
   # Download file if a url
   if (grepl("^http:|^https:", file)) {
     
-    # Download file
-    threadr:::download_to_temporary(file, quiet = !verbose)
+    # Build temp file name
+    file_local <- file.path(tempdir(), basename(file))
     
-    # Get downloaded file's new path
-    file <- file.path(tempdir(), basename(file))
+    # Download file
+    download.file(file, file_local, quiet = !verbose)
+    
+    # Switch file name after download
+    file <- file_local
     
   } else {
     
@@ -233,8 +236,7 @@ sp_layer_info <- function(file, layer, geom = NULL) {
   
   info <- rgdal::ogrInfo(file, layer, require_geomType = geom)
   
-  # Return
-  info
+  return(info)
   
 }
 
@@ -246,7 +248,7 @@ parse_geom <- function(geom) {
   geom <- ifelse(geom %in% c("point", "points"), "wkbPoint", geom)
   geom <- ifelse(geom %in% c("line", "lines"), "wkbLineString", geom)
   geom <- ifelse(geom %in% c("polygon", "polygons"), "wkbPolygon", geom)
-  geom
+  return(geom)
   
 }
 
@@ -273,7 +275,6 @@ drop_na_columns <- function(df) {
     
   }
   
-  # Return
-  df
+  return(df)
   
 }
