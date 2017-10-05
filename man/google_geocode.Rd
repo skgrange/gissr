@@ -5,17 +5,13 @@
 \title{Function to find latitude and longitude pairs from an address-string using 
 Google Maps API.}
 \usage{
-google_geocode(input, source = "google", override_limit = TRUE,
-  wkt = FALSE, verbose = TRUE)
+google_geocode(input, source = "google", wkt = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{input}{The input to transform to latitude and longitude pairs.}
 
 \item{source}{What API should \code{google_geocode} access? Options are 
 "google" or "dsk" and the default is "google".}
-
-\item{override_limit}{Should the function attempt to override the 2500 queries
-a day limit? This does not always work.}
 
 \item{wkt}{Should the return be a vector of WKT (well known text)? This is 
 useful for when transforming a data frame.}

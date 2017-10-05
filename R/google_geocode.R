@@ -15,9 +15,6 @@
 #' @param source What API should \code{google_geocode} access? Options are 
 #' "google" or "dsk" and the default is "google". 
 #' 
-#' @param override_limit Should the function attempt to override the 2500 queries
-#' a day limit? This does not always work. 
-#' 
 #' @param wkt Should the return be a vector of WKT (well known text)? This is 
 #' useful for when transforming a data frame. 
 #' 
@@ -40,11 +37,10 @@
 #' POINT (-1.0819205 53.9623292)
 #' 
 #' }
-#'
-#' @import dplyr
+#' 
 #' @export
-google_geocode <- function(input, source = "google", override_limit = TRUE,
-                           wkt = FALSE, verbose = TRUE) {
+google_geocode <- function(input, source = "google", wkt = FALSE, 
+                           verbose = TRUE) {
   
   # Catch factors
   if (is.factor(input)) input <- as.character(input)
@@ -52,12 +48,22 @@ google_geocode <- function(input, source = "google", override_limit = TRUE,
   # Geocode addresses
   if (verbose) {
     
-    df <- ggmap::geocode(input, source = source, output = "latlona")
+    df <- ggmap::geocode(
+      input, 
+      source = source, 
+      output = "latlona",
+      override_limit = TRUE
+    )
     
   } else {
     
     suppressMessages(
-      df <- ggmap::geocode(input, source = source, output = "latlona")
+      df <- ggmap::geocode(
+        input, 
+        source = source, 
+        output = "latlona",
+        override_limit = TRUE
+      )
     )
     
   }
@@ -76,7 +82,6 @@ google_geocode <- function(input, source = "google", override_limit = TRUE,
   # Make a vector, not a good name here
   if (wkt) df <- stringr::str_c("POINT (", df$longitude, " ", df$latitude, ")")
   
-  # Return
-  df
+  return(df)
   
 }
