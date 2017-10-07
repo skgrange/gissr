@@ -37,12 +37,9 @@ address elements such as postcodes can also be transformed successfully.
 
 # Return data frame
 google_geocode("bath abbey")
-string     address                                                    latitude longitude
-bath abbey bath abbey, bath, bath and north east somerset ba1 1lt, uk 51.38148 -2.358735
 
-# Only a vector
-google_geocode("york minster", verbose = FALSE, wkt = TRUE)
-POINT (-1.0819205 53.9623292)
+# Only a vector without messages
+google_geocode("york minster", verbose = FALSE, wkt = TRUE))
 
 }
 

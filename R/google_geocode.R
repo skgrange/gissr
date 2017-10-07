@@ -29,12 +29,9 @@
 #' 
 #' # Return data frame
 #' google_geocode("bath abbey")
-#' string     address                                                    latitude longitude
-#' bath abbey bath abbey, bath, bath and north east somerset ba1 1lt, uk 51.38148 -2.358735
 #' 
-#' # Only a vector
-#' google_geocode("york minster", verbose = FALSE, wkt = TRUE)
-#' POINT (-1.0819205 53.9623292)
+#' # Only a vector without messages
+#' google_geocode("york minster", verbose = FALSE, wkt = TRUE))
 #' 
 #' }
 #' 
@@ -57,30 +54,41 @@ google_geocode <- function(input, source = "google", wkt = FALSE,
     
   } else {
     
-    suppressMessages(
-      df <- ggmap::geocode(
-        input, 
-        source = source, 
-        output = "latlona",
-        override_limit = TRUE
+    suppressWarnings(
+      suppressMessages(
+        df <- ggmap::geocode(
+          input, 
+          source = source, 
+          output = "latlona",
+          override_limit = TRUE
+        )
       )
     )
     
   }
   
-  # Add if missing
-  if (!"address" %in% names(df)) df$address <- NA
-  
-  # Rename and add input string
-  df <- df %>% 
-    mutate(input = input) %>% 
-    select(input, 
-           address_geocode = address, 
-           latitude = lat, 
-           longitude = lon)
-  
-  # Make a vector, not a good name here
-  if (wkt) df <- stringr::str_c("POINT (", df$longitude, " ", df$latitude, ")")
+  if (class(df) == "data.frame") {
+    
+    # Add if missing
+    if (!"address" %in% names(df)) df$address <- NA
+    
+    # Rename and add input string
+    df <- df %>% 
+      mutate(input = input) %>% 
+      select(input, 
+             address_geocode = address, 
+             latitude = lat, 
+             longitude = lon)
+    
+    # Make a vector, not a good name here
+    if (wkt) df <- stringr::str_c("POINT (", df$longitude, " ", df$latitude, ")")
+    
+  } else {
+    
+    # Empty data frame
+    df <- data.frame()
+    
+  }
   
   return(df)
   
