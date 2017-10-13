@@ -6,6 +6,8 @@
 #' to remember the WGS84 proj4 string. \code{sp_transform} will force projections
 #' when the spatial object contains no projection information. 
 #' 
+#' \code{sp_transform} will also work for raster layers. 
+#' 
 #' @param sp Spatial object which is to be transformed.
 #' 
 #' @param to A proj4 string for the projection-transformation. Default is the 
@@ -46,28 +48,35 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
   # Default
   if (is.na(to)) to <- projection_wgs84()
   
-  # If no projection
-  if (is.na(sp_projection(sp))) {
+  if (!grepl("raster", class(sp), ignore.case = TRUE)) {
     
-    # Warn
-    if (warn) {
+    # If no projection
+    if (is.na(sp_projection(sp))) {
       
-      warning("Spatial object had no projection. The projection has been forced.",
-              call. = FALSE)
+      # Warn
+      if (warn) {
+        
+        warning("Spatial object had no projection. The projection has been forced.",
+                call. = FALSE)
+        
+      }
+      
+      # Now force
+      sp::proj4string(sp) <- to
+      
+    } else {
+      
+      # Otherwise convert projection system
+      sp <- sp::spTransform(sp, CRS(to))
       
     }
     
-    # Now force
-    sp::proj4string(sp) <- to
-    
   } else {
     
-    # Otherwise convert projection system
-    sp <- sp::spTransform(sp, CRS(to))
+    raster::crs(sp) <- to
     
   }
   
-  # Return
-  sp
+  return(sp)
   
 }

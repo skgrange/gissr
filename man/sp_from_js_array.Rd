@@ -13,6 +13,9 @@ sp_from_js_array(text, type = "points", projection = projection_wgs84())
 
 \item{file}{File, url, or character vector containing a JavaScript array.}
 }
+\value{
+Spatial object.
+}
 \description{
 JavaScript arrays take the form of:
 \code{[[54.35221,-0.88518],[54.35237,-0.88544]]}.

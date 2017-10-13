@@ -4,10 +4,14 @@
 #' \code{[[54.35221,-0.88518],[54.35237,-0.88544]]}.
 #' 
 #' @param file File, url, or character vector containing a JavaScript array. 
+#' 
 #' @param type Spatial data type. Default is \code{"points"}. 
+#' 
 #' @param projection Projection string. 
 #' 
 #' @author Stuart K. Grange
+#' 
+#' @return Spatial object. 
 #' 
 #' @export
 sp_from_js_array <- function(text, type = "points", 
@@ -25,8 +29,7 @@ sp_from_js_array <- function(text, type = "points",
   # Force projection
   if (!is.na(projection)) sp <- sp_transform(sp, to = projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }
 
@@ -51,7 +54,6 @@ sp_from_js_array_worker <- function(text, type) {
   # Promote to spatial data
   sp <- sp_from_data_frame(df, type = type, projection = NA)
   
-  # Return
-  sp
+  return(sp)
   
 }

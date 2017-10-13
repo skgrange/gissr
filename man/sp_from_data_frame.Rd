@@ -6,7 +6,7 @@
 SpatialLinesDataFrame, or SpatialPolygonsDataFrame.}
 \usage{
 sp_from_data_frame(df, type, latitude = "latitude", longitude = "longitude",
-  projection = projection_wgs84(), id = NA)
+  projection = projection_wgs84(), keep = FALSE, id = NA)
 }
 \arguments{
 \item{df}{Data frame to be converted into spatial data frame.}
@@ -20,6 +20,9 @@ sp_from_data_frame(df, type, latitude = "latitude", longitude = "longitude",
 
 \item{projection}{\code{df}'s latitude and longitude projection system. 
 Default is WGS84.}
+
+\item{keep}{For when type is \code{"points"}, should latitude and longitude
+be kept in the SpatialPointsDataFrame's data slot?}
 
 \item{id}{Variable in \code{df} which codes for spatial object's id. This is
 used when a data frame contains many seperate geometries. \code{id} is not 

@@ -21,6 +21,9 @@ been written so spatial objects can be transformed quickly without the need
 to remember the WGS84 proj4 string. \code{sp_transform} will force projections
 when the spatial object contains no projection information.
 }
+\details{
+\code{sp_transform} will also work for raster layers.
+}
 \examples{
 \dontrun{
 

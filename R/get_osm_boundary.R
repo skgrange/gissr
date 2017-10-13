@@ -40,7 +40,7 @@ get_osm_boundary <- function(id, way = FALSE, progress = "none") {
     
     class_sp <- sapply(sp_list, class)
     
-    if (length(class_sp) == 1 & class_sp == "NULL") {
+    if (length(class_sp) == 1 && class_sp == "NULL") {
       
       sp <- NULL
       
@@ -139,3 +139,4 @@ osm_boundary_worker <- function(id) {
   return(sp)
   
 }
+

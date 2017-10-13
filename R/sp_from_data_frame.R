@@ -13,6 +13,9 @@
 #' @param projection \code{df}'s latitude and longitude projection system. 
 #' Default is WGS84.
 #' 
+#' @param keep For when type is \code{"points"}, should latitude and longitude
+#' be kept in the SpatialPointsDataFrame's data slot? 
+#' 
 #' @param id Variable in \code{df} which codes for spatial object's id. This is
 #' used when a data frame contains many seperate geometries. \code{id} is not 
 #' used for points because each point is a seperate geometry. 
@@ -46,7 +49,8 @@
 #' @export
 sp_from_data_frame <- function(df, type, latitude = "latitude", 
                                longitude = "longitude", 
-                               projection = projection_wgs84(),
+                               projection = projection_wgs84(), 
+                               keep = FALSE,
                                id = NA) {
   
   #  Check and parse
@@ -65,7 +69,7 @@ sp_from_data_frame <- function(df, type, latitude = "latitude",
   
   # Promote to spatial data
   if (type == "points")
-    sp <- data_frame_to_points(df, latitude, longitude, projection)
+    sp <- data_frame_to_points(df, latitude, longitude, projection, keep)
   
   if (type == "lines")
     sp <- data_frame_to_lines(df, latitude, longitude, projection, id)
@@ -73,13 +77,13 @@ sp_from_data_frame <- function(df, type, latitude = "latitude",
   if (type == "polygons")
     sp <- data_frame_to_polygons(df, latitude, longitude, projection, id)
   
-  # Return
-  sp
+  return(sp)
   
 }
 
 
-data_frame_to_points <- function(df, latitude, longitude, projection) {
+data_frame_to_points <- function(df, latitude, longitude, projection, 
+                                 keep = FALSE) {
   
   # Catch for dplyr's data frame class
   df <- threadr::base_df(df)
@@ -90,26 +94,35 @@ data_frame_to_points <- function(df, latitude, longitude, projection) {
     # Remove NAs
     df <- df[!(is.na(df[, latitude]) | is.na(df[, longitude])), ]
     
-    # Raise warning
-    warning("Missing coordinates were detected and have been removed.", 
-            call. = FALSE)
+    # Raise a warning
+    warning(
+      "Missing coordinates were detected and have been removed.", 
+      call. = FALSE
+    )
     
     # Check 
     if (nrow(df) == 0) stop("There are no valid coordinates.", call. = FALSE)
     
   }
   
-  # Make sp points object
-  sp::coordinates(df) <- c(longitude, latitude)
-  
-  # Reassign
+  # Reassign, df can be used again
   sp <- df
+  
+  # Make sp points object
+  sp::coordinates(sp) <- c(longitude, latitude)
+  
+  # Put vectors back in data slot
+  if (keep) {
+    
+    sp@data[, latitude] <- df[, latitude]
+    sp@data[, longitude] <- df[, longitude]
+    
+  }
   
   # Give the object a projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }
 
@@ -142,8 +155,11 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
   # http://stackoverflow.com/questions/24284356/convert-spatialpointsdataframe-
   # to-spatiallinesdataframe-in-r
   # Generate lines for each id
-  lines <- lapply(split(sp_object, sp_object$id), function(x) 
-    Lines(list(Line(sp::coordinates(x))), x$id[1L]))
+  lines <- lapply(
+    split(sp_object, sp_object$id), 
+    function(x) 
+      Lines(list(Line(sp::coordinates(x))), x$id[1L])
+  )
   
   # Drop
   if (!is.na(id)) data_extras[, "id"] <- NULL
@@ -157,8 +173,7 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
   # Give the object a projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }
 
@@ -189,12 +204,19 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {
   
   # A list element will represent each group within a feature 
   # Long-lat order is important
-  coordinates <- plyr::dlply(df, "id", function(x) 
-    data.matrix(x[, c(longitude, latitude)]))
+  coordinates <- plyr::dlply(
+    df, 
+    "id", 
+    function(x) 
+      data.matrix(x[, c(longitude, latitude)])
+  )
   
   # Make polygons
-  sp <- lapply(seq_along(coordinates), function(x) 
-    matrix_to_sp_polygon(coordinates[x], x))
+  sp <- lapply(
+    seq_along(coordinates), 
+    function(x) 
+      matrix_to_sp_polygon(coordinates[x], x)
+  )
   
   # Bind geometries
   sp <- do.call(rbind, sp)
@@ -205,8 +227,7 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {
   # Give the object a projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }
 
@@ -223,7 +244,6 @@ matrix_to_sp_polygon <- function(matrix, id) {
   # To spatial polygons
   sp <- sp::SpatialPolygons(list(polygon))
   
-  # Return
-  sp
+  return(sp)
   
 }
