@@ -70,18 +70,21 @@ create_geojson <- function(sp, pretty, round) {
   )
   
   # Use jsonlite to do a better job of pretty printing, expensive though
-  if (pretty | !is.na(round)) {
+  if (pretty || !is.na(round)) {
     
     # Parse again
     json <- jsonlite::fromJSON(json)
     
     # Max precision is needed here
-    json <- jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE, 
-                             digits = round)
+    json <- jsonlite::toJSON(
+      json, 
+      pretty = TRUE, 
+      auto_unbox = TRUE, 
+      digits = round
+    )
     
   }
   
-  # Return
-  json
+  return(json)
   
 }

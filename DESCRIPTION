@@ -1,8 +1,8 @@
 Package: gissr
 Type: Package
 Title: Functions to make working with spatial data easier
-Version: 0.5.61
-Date: 2017-10-13
+Version: 0.6.0
+Date: 2017-11-18
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
 Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
@@ -20,6 +20,7 @@ Imports:
     leaflet,
     jsonlite,
     geojsonio,
+    geojsonlint,
     ggplot2,
     ggmap,
     rgdal,
