@@ -28,8 +28,17 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   if (grepl("data", sp_class, ignore.case = TRUE))
     if (is.null(popup) & "name" %in% names(sp@data)) popup <- "name"
   
-  # Parse
-  if (!is.null(popup)) popup <- as.formula(stringr::str_c("~ ", popup))
+  # Parse, allow mutiple fields
+  if (!is.null(popup)) {
+      
+      list_popups <- lapply(popup, 
+                            function(x) paste0(x, ": ", sp@data[[x]], "<br>"))
+      
+      list_popups_transpose <- lapply(1:length(popup), function(x) sapply(list_popups, `[`, x))
+      
+      popup <- sapply(list_popups_transpose, paste0, collapse = "")
+      
+  }
   
   # Projection force
   if (force) sp <- sp_transform(sp, warn = FALSE)
