@@ -32,8 +32,11 @@
 #' # I am in London, I know my latitude and longitude. Which borough am I in? 
 #' 
 #' # Load geojson containing the London boroughs
-#' sp_london <- sp_read("http://skgrange.github.io/www/data/london_sport.json",
-#'                       verbose = FALSE)
+#' sp_london <- sp_read(
+#'   "http://skgrange.github.io/www/data/london_sport.json",
+#'   verbose = FALSE
+#' ) %>% 
+#'   sp_transform()
 #' 
 #' # Make latitude and longitude a data frame, observation is optional
 #' data_points <- data.frame(
