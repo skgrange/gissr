@@ -9,6 +9,10 @@ sp_tessellation_polygons(sp)
 \arguments{
 \item{sp}{Spatial points object.}
 }
+\value{
+Spatial polygons or spatial polygons data frame depending on 
+\code{sp}.
+}
 \description{
 Tessellation polygons have no gaps and the Dirichlet tessellation method is
 used.

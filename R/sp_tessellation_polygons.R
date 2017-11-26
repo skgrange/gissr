@@ -7,6 +7,9 @@
 #' 
 #' @author Stuart K. Grange
 #' 
+#' @return Spatial polygons or spatial polygons data frame depending on 
+#' \code{sp}.
+#' 
 #' @export
 sp_tessellation_polygons <- function(sp) {
   
