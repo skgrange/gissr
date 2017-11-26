@@ -1,7 +1,7 @@
 Package: gissr
 Type: Package
 Title: Functions to make working with spatial data easier
-Version: 0.6.3
+Version: 0.7.0
 Date: 2017-11-26
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
@@ -32,7 +32,8 @@ Imports:
     testthat,
     XML,
     magrittr,
-    spatstat
+    spatstat,
+    gstat
 Suggests:
     threadr
 LazyLoad: yes
