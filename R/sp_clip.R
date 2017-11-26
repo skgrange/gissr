@@ -18,9 +18,12 @@
 #' \code{rgeos::gIntersection} could be used if prefered. \code{method} can be
 #' \code{"raster"} or \code{"rgeos"}
 #' 
+#' @seealso \code{\link{sp_filter}}, \code{\link{sp_intersect}}
+#' 
 #' @examples 
 #' 
 #' \dontrun{
+#' 
 #' # Clip a spatial lines object which contains roads in Saudi Arabia
 #' 
 #' # Build envelope
@@ -51,8 +54,7 @@ sp_clip <- function(sp, envelope, method = "raster") {
     
   }
   
-  # Return
-  sp
+  return(sp)
   
 }
 

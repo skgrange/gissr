@@ -137,7 +137,6 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, keep = FALSE,
   # Add projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
   
-  # Return 
-  sp
+  return(sp)
   
 }

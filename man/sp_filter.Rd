@@ -20,7 +20,7 @@ Filtered version of \code{sp}.
 Both spatial objects must have identical projection systems.
 }
 \seealso{
-\code{\link{sp_crop}}
+\code{\link{sp_crop}}, \code{\link{sp_intersect}}
 }
 \author{
 Stuart K. Grange

@@ -4,7 +4,7 @@
 \alias{sp_left_join}
 \title{Function for point-in-polygon tests.}
 \usage{
-sp_left_join(sp_points, sp_polygons, check = TRUE)
+sp_left_join(sp_points, sp_polygons)
 }
 \arguments{
 \item{sp_points}{Spatial points object. Spatial points will usually have a 
@@ -13,9 +13,6 @@ data slot but \code{sp_left_join} does not require this.}
 \item{sp_polygons}{Spatial polygons object. \code{sp_polygons} will have a 
 data slot (\emph{i.e.} it will be a \code{SpatialPolygonsDataFrame}) because
 this is what is joined.}
-
-\item{check}{Should \code{sp_points} and \code{sp_polygons} be checked for 
-data types?}
 }
 \value{
 Note, a data frame, not a spatial object.
