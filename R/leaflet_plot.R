@@ -77,25 +77,30 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       addCircleMarkers(popup = popup, color = colour, opacity = opacity,
                        fillOpacity = fill_opacity)
     
-  }
-  
-  if (grepl("lines", sp_class, ignore.case = TRUE)) {
+  } else if (grepl("lines", sp_class, ignore.case = TRUE)) {
     
     map <- map %>% 
       addPolylines(popup = popup, color = colour, opacity = opacity,
                    fillOpacity = fill_opacity)
     
-  }
-  
-  if (grepl("polygons", sp_class, ignore.case = TRUE)) {
+  } else if (grepl("polygons", sp_class, ignore.case = TRUE)) {
     
     map <- map %>% 
       addPolygons(popup = popup, color = colour, opacity = opacity,
                   fillOpacity = fill_opacity)
     
+  } else if (sp_class == "RasterLayer") {
+    
+    # Just a first step, raster and layer control has some issues
+    map <- leaflet() %>% 
+      addTiles(
+        group = "OpenStreetMap", 
+        urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      ) %>% 
+      addRasterImage(sp, colors = "viridis")
+    
   }
   
-  # Return
-  map
+  return(map)
   
 }

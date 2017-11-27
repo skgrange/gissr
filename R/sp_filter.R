@@ -12,7 +12,7 @@
 #' 
 #' @return Filtered version of \code{sp}.
 #' 
-#' @seealso \code{\link{sp_crop}}
+#' @seealso \code{\link{sp_crop}}, \code{\link{sp_intersect}}
 #'
 #' @export
 sp_filter <- function(sp, sp_boundary) {

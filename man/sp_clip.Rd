@@ -30,6 +30,7 @@ keep the data slot in the spatial object intact at times.
 \examples{
 
 \dontrun{
+
 # Clip a spatial lines object which contains roads in Saudi Arabia
 
 # Build envelope
@@ -40,6 +41,9 @@ sp_road_clip <- sp_clip(sp_roads, envelope)
 
 }
 
+}
+\seealso{
+\code{\link{sp_filter}}, \code{\link{sp_intersect}}
 }
 \author{
 Stuart K. Grange
