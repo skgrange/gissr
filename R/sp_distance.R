@@ -18,6 +18,8 @@
 #' 
 #' @param sp_2 Spatial object two. 
 #' 
+#' @param features Logical vector passed to \code{byid} in \code{\link[rgeos]{gDistance}}.
+#' 
 #' @param unit If \code{"km"}, the returned vector is returned in kilometres 
 #' rather than metres. 
 #' 
