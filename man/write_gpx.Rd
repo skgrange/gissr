@@ -12,7 +12,10 @@ write_gpx(sp, file, force = TRUE)
 \item{file}{File name of GPX file.}
 
 \item{force}{Should the projection be forced to WGS84? Default is \code{TRUE}
-because this is generally the standard for GPX files.}
+because this is the standard for GPX files.}
+}
+\value{
+Invisible.
 }
 \description{
 \code{write_gpx} uses \code{rgdal::writeOGR} as the GPX writer. GPX files do 
