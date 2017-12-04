@@ -34,7 +34,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       list_popups <- lapply(popup, 
                             function(x) paste0(x, ": ", sp@data[[x]], "<br>"))
       
-      list_popups_transpose <- lapply(1:length(popup), function(x) sapply(list_popups, `[`, x))
+      list_popups_transpose <- lapply(1:nrow(sp@data), function(x) sapply(list_popups, `[`, x))
       
       popup <- sapply(list_popups_transpose, paste0, collapse = "")
       
