@@ -8,9 +8,11 @@
 #' @param file File name of GPX file.
 #' 
 #' @param force Should the projection be forced to WGS84? Default is \code{TRUE}
-#' because this is generally the standard for GPX files. 
+#' because this is the standard for GPX files. 
 #' 
 #' @author Stuart K. Grange
+#' 
+#' @return Invisible. 
 #' 
 #' @examples
 #' \dontrun{
@@ -33,20 +35,24 @@ write_gpx <- function(sp, file, force = TRUE) {
   sp <- sp_promote(sp)
   
   # Get class of object
-  sp_class <- class(sp)[1]
+  sp_class <- sp_class(sp)
   
   # Points
-  if (sp_class == "SpatialPointsDataFrame") layer <- "points"
-
-  # Lines
-  if (sp_class == "SpatialLinesDataFrame") layer <- "tracks"
-  
-  # Polygons, not supported by gpx
-  if (sp_class == "SpatialPolygonsDataFrame") {
+  if (sp_class == "SpatialPointsDataFrame") {
+    
+    layer <- "points"
+    
+  } else if (sp_class == "SpatialLinesDataFrame") {
+    
+    layer <- "tracks"
+    
+  } else if (sp_class == "SpatialPolygonsDataFrame") {
     
     # Polygons are not supported by gpx files, coerce to lines
-    warning("Polygons are not supported by GPX, polygons have been coerced to lines.", 
-            call. = FALSE)
+    warning(
+      "Polygons are not supported by GPX, polygons have been coerced to lines...", 
+      call. = FALSE
+    )
     
     # Change data type
     sp <- as(sp, "SpatialLinesDataFrame")
@@ -64,7 +70,16 @@ write_gpx <- function(sp, file, force = TRUE) {
   if (file.exists(file)) file.remove(file)
   
   # Export file
-  rgdal::writeOGR(sp, file, layer = layer, driver = "GPX", 
-                  dataset_options = "GPX_USE_EXTENSIONS=yes")
+  suppressWarnings(
+    rgdal::writeOGR(
+      sp, 
+      file, 
+      layer = layer, 
+      driver = "GPX", 
+      dataset_options = "GPX_USE_EXTENSIONS=yes"
+    )
+  )
+  
+  # No return
   
 }
