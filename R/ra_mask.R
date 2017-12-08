@@ -1,4 +1,4 @@
-#' Function 
+#' Function to mask/filter/crop a raster object to a spatial polygon. 
 #' 
 #' @param ra Raster object to be masked/filtered. 
 #' 

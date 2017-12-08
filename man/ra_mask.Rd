@@ -2,7 +2,7 @@
 % Please edit documentation in R/ra_mask.R
 \name{ra_mask}
 \alias{ra_mask}
-\title{Function}
+\title{Function to mask/filter/crop a raster object to a spatial polygon.}
 \usage{
 ra_mask(ra, sp_polygon)
 }
@@ -12,7 +12,7 @@ ra_mask(ra, sp_polygon)
 \item{sp_polygon}{Spatial polygon to be used as the filter.}
 }
 \description{
-Function
+Function to mask/filter/crop a raster object to a spatial polygon.
 }
 \author{
 Stuart K. Grange
