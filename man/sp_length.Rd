@@ -6,6 +6,13 @@
 \usage{
 sp_length(sp, unit = "m", features = TRUE)
 }
+\arguments{
+\item{sp}{Spatial object.}
+
+\item{unit}{Distance unit to use.}
+
+\item{features}{Should the function be applied to all features in \code{sp}?}
+}
 \description{
 \code{sp_length} is a wrapper for \code{rgeos::gLength} and calculates the 
 lengths of spatial lines or polygons. If \code{sp_length} is used with 

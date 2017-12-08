@@ -19,7 +19,10 @@ Holes will appear between the geometries at times.
 }
 \examples{
 \dontrun{
+
+# Simplify an object
 sp_simple <- sp_simplify(sp, 0.01)
+
 }
 
 }

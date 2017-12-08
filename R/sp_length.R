@@ -17,6 +17,12 @@
 #' Mercator 2000 while data in the UK should be projected in British National 
 #' Grid; both of which have metre units (\code{+units=m}).
 #' 
+#' @param sp Spatial object. 
+#' 
+#' @param unit Distance unit to use. 
+#' 
+#' @param features Should the function be applied to all features in \code{sp}? 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @export
@@ -31,10 +37,13 @@ sp_length <- function(sp, unit = "m", features = TRUE) {
     
     # Transform projection to Mollweide projection/ESRI:54009, a worldwide 
     # projection with metre units
-    sp <- sp_transform(sp, "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
+    sp <- sp_transform(
+      sp, 
+      "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    )
     
     # Give a message
-    message("The projection system was temporarily transformed for calculation.")
+    message("The projection system was temporarily transformed for calculation...")
     
   }
   
@@ -49,7 +58,6 @@ sp_length <- function(sp, unit = "m", features = TRUE) {
   # Transform unit
   if (unit == "km") vector <- vector / 1000
   
-  # Return
-  vector
+  return(vector)
   
 }

@@ -10,7 +10,7 @@ leaflet_plot(sp, popup = NULL, force = TRUE, colour = "#03F",
 \arguments{
 \item{sp}{Spatial object to be plotted.}
 
-\item{popup}{Popup variable to add to map.}
+\item{popup}{Vector of variables to be used as a popup on the map.}
 
 \item{force}{Should the projection be forced to WGS84? Default is \code{TRUE}.}
 

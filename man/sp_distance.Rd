@@ -11,6 +11,9 @@ sp_distance(sp_1, sp_2, features = FALSE, unit = "m")
 
 \item{sp_2}{Spatial object two.}
 
+\item{features}{Should the function be applied to all features in 
+\code{sp_1}?}
+
 \item{unit}{If \code{"km"}, the returned vector is returned in kilometres 
 rather than metres.}
 }

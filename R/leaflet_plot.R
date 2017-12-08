@@ -2,7 +2,7 @@
 #' 
 #' @param sp Spatial object to be plotted. 
 #'
-#' @param popup Popup variable to add to map. 
+#' @param popup Vector of variables to be used as a popup on the map. 
 #'
 #' @param force Should the projection be forced to WGS84? Default is \code{TRUE}.
 #' 
@@ -29,7 +29,27 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
     if (is.null(popup) & "name" %in% names(sp@data)) popup <- "name"
   
   # Parse
-  if (!is.null(popup)) popup <- as.formula(stringr::str_c("~ ", popup))
+  if (!is.null(popup)) {
+    
+    # Select variables in data slot, no comma to keep data frame structure
+    df_sp <- sp@data[popup]
+    
+    # Get variable names
+    names <- names(df_sp)
+    
+    # Give names column-wise 
+    popup_string <- apply(df_sp, 1, collapse_values_with_name, name = names)
+    
+    # Collapse row-wise, now just a vector
+    if (class(popup_string) == "matrix") 
+      popup_string <- apply(popup_string, 2, stringr::str_c, collapse = "<br>")
+    
+    # Reassign
+    popup <- popup_string
+    
+    # popup <- as.formula(stringr::str_c("~ ", popup))
+    
+  }
   
   # Projection force
   if (force) sp <- sp_transform(sp, warn = FALSE)
@@ -95,3 +115,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   return(map)
   
 }
+
+
+collapse_values_with_name <- function(x, name, sep = ": ") 
+  stringr::str_c(name, sep, x)

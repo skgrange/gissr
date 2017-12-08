@@ -13,7 +13,10 @@
 #' 
 #' @examples
 #' \dontrun{
+#' 
+#' # Simplify an object
 #' sp_simple <- sp_simplify(sp, 0.01)
+#' 
 #' }
 #' 
 #' @export
@@ -39,7 +42,6 @@ sp_simplify <- function(sp, tolerance, preserve = TRUE) {
   #   
   # }
   
-  # Return
-  sp
+  return(sp)
   
 }
