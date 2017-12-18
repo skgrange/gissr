@@ -4,8 +4,7 @@
 \alias{sp_create_envelope}
 \title{Function to create a rectangular polygon envelope, usually used for filtering.}
 \usage{
-sp_create_envelope(envelope,
-  projection = "+proj=longlat +datum=WGS84 +no_defs")
+sp_create_envelope(envelope, projection = projection_wgs84())
 }
 \arguments{
 \item{envelope}{A vector with the length of 4 containing the extent of the 
@@ -13,8 +12,10 @@ envelope to be used as a bounding box. The order is: xmin, xmax, ymin, ymax.
 Watch out when using latitude and longitude, the order is longitude, 
 longitude, then latitude, latitude.}
 
-\item{projection}{A proj4 string for the projection-transformation. Default 
-is the WGS84 string.}
+\item{projection}{A proj4 string. Default is the WGS84 string.}
+}
+\value{
+Spatial polygon.
 }
 \description{
 Function to create a rectangular polygon envelope, usually used for filtering.
