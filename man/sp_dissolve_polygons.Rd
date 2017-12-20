@@ -5,7 +5,15 @@
 \title{Function to unite polygons together and create a single spatial object, 
 \emph{i.e.} disolve.}
 \usage{
-sp_dissolve_polygons(sp, feature = NULL)
+sp_dissolve_polygons(sp, features = NULL)
+}
+\arguments{
+\item{sp}{Spatial polygons.}
+
+\item{features}{Should features within \code{sp} attempted to be preserved?}
+}
+\value{
+Spatial polygons.
 }
 \description{
 If the individual polygons have data associated with them, it will be 
