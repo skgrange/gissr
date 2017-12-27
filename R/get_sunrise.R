@@ -9,17 +9,11 @@
 #' 
 #' @param start Start date.
 #' 
-#' @param end End date
-#' 
-#' @param json Should the return be a json string rather than a data frame? 
-#' Useful for single observations.
-#' 
-#' @param round Should dates be rounded to the nearest second? Default is 
-#' \code{FALSE}. 
+#' @param end End date.
 #'
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame or pretty printed JSON.
+#' @return Data frame.
 #' 
 #' @seealso \code{\link{sunriset}}
 #' 
@@ -32,22 +26,20 @@
 #' # Or specify dates
 #' get_sunrise(latitude = 51.5072, longitude = 0.1275, start = "2015-12-01", 
 #'   end = "2015-12-31")
-#'   
-#' # Or as json
-#' get_sunrise(latitude = 51.5072, longitude = 0.1275, json = TRUE)
 #' 
 #' }
 #'
 #' @export
-get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE, 
-                        round = FALSE) {
+get_sunrise <- function(latitude, longitude, start = NA, end = NA) {
   
   # Make spatial points, assumes latitude and longitude
   sp <- sp_from_data_frame(
     data.frame(
       latitude, 
       longitude
-    ), type = "points")
+    ), 
+    type = "points"
+  )
   
   # Catch dates
   if (is.na(start)) start <- Sys.Date()
@@ -71,14 +63,6 @@ get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE,
   sunset <- maptools::sunriset(sp, date, direction = "sunset", POSIXct.out = TRUE)
   sunset <- sunset[, 2]
   
-  # Round dates
-  if (round) {
-    
-    sunset <- lubridate::round_date(sunset, "second")
-    sunrise <- lubridate::round_date(sunrise, "second")
-    
-  } 
-  
   # Build data frame
   df <- data.frame(
     date, 
@@ -100,9 +84,6 @@ get_sunrise <- function(latitude, longitude, start = NA, end = NA, json = FALSE,
   df$time_sunset <- stringr::str_split_fixed(df$date_sunset, " ", 2)[, 2]
   df$time_sunset <- lubridate::parse_date_time(df$time_sunset, "HMS")
   
-  if (json) df <- jsonlite::toJSON(df, pretty = TRUE)
-  
-  # Return
-  df
+  return(df)
   
 }

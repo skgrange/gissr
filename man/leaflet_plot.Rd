@@ -5,7 +5,7 @@
 \title{Convenience function to quickly plot geometries on a leaflet map.}
 \usage{
 leaflet_plot(sp, popup = NULL, force = TRUE, colour = "#03F",
-  color = colour, opacity = 0.5, fill_opacity = 0.2)
+  opacity = 0.5, fill_opacity = 0.2)
 }
 \arguments{
 \item{sp}{Spatial object to be plotted.}
@@ -19,6 +19,9 @@ leaflet_plot(sp, popup = NULL, force = TRUE, colour = "#03F",
 \item{opacity}{Opacity of the edge of the geometry.}
 
 \item{fill_opacity}{Internal opacity of the geometry.}
+}
+\value{
+Invisible, a leaflet map.
 }
 \description{
 Convenience function to quickly plot geometries on a leaflet map.

@@ -4,8 +4,7 @@
 \alias{get_sunrise}
 \title{Function to calculate sunrise and sunset dates and times for a location.}
 \usage{
-get_sunrise(latitude, longitude, start = NA, end = NA, json = FALSE,
-  round = FALSE)
+get_sunrise(latitude, longitude, start = NA, end = NA)
 }
 \arguments{
 \item{latitude}{Latitude of a location.}
@@ -14,16 +13,10 @@ get_sunrise(latitude, longitude, start = NA, end = NA, json = FALSE,
 
 \item{start}{Start date.}
 
-\item{end}{End date}
-
-\item{json}{Should the return be a json string rather than a data frame? 
-Useful for single observations.}
-
-\item{round}{Should dates be rounded to the nearest second? Default is 
-\code{FALSE}.}
+\item{end}{End date.}
 }
 \value{
-Data frame or pretty printed JSON.
+Data frame.
 }
 \description{
 \code{get_sunrise} uses \code{\link{sunriset}} for the calculation of dates
@@ -38,9 +31,6 @@ get_sunrise(latitude = 51.5072, longitude = 0.1275)
 # Or specify dates
 get_sunrise(latitude = 51.5072, longitude = 0.1275, start = "2015-12-01", 
   end = "2015-12-31")
-  
-# Or as json
-get_sunrise(latitude = 51.5072, longitude = 0.1275, json = TRUE)
 
 }
 
