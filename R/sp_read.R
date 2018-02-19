@@ -114,7 +114,9 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
     # No period because could be geojson too
     if (grepl("json$", file, ignore.case = TRUE)) {
     
-      layer <- "OGRGeoJSON"
+      # File name with no extension
+      layer <- basename(file)
+      layer <- stringr::str_split_fixed(layer, "\\.", 2)[, 1]
       
     } else if (grepl(".gpx$", file, ignore.case = TRUE)) {
     
