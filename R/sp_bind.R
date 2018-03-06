@@ -48,6 +48,9 @@ sp_bind <- function(...) {
   # Get input
   list_sp <- list(...)
   
+  # Drop null objects in list
+  list_sp <- purrr::discard(list_sp, ~ length(.x) == 0 | is.null(.x))
+  
   # When input is already a list the ... makes a list of a list
   if (length(list_sp) == 1 & sapply(list_sp[1], class) == "list")
     list_sp <- unlist(list_sp)
