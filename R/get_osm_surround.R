@@ -69,6 +69,8 @@ get_osm_surround_worker <- function(id, type = "data") {
   id <- as.numeric(id)
   type <- stringr::str_to_lower(type)
   
+  # message(id)
+  
   # Build url string
   url_base <- "http://ra.osmsurround.org/exportRelation/json?relationId="
   url <- stringr::str_c(url_base, id)
@@ -93,14 +95,18 @@ get_osm_surround_worker <- function(id, type = "data") {
   # Extract coordinates
   df <- json$features$geometry$coordinates[[1]][[1]]
   
-  # Check
-  if (is.null(df)) 
-    stop("API returned data, but it contains no features.", call. = FALSE)
+  # If no features return null
+  if (is.null(df)) {
+    
+    warning("API returned data, but it contains no features.", call. = FALSE)
+    return(NULL)
+    
+  }
   
   # Drop
   df$altitude <- NULL
   
-  # Add
+  # Add open street map id
   df$id <- id
   
   # Arrange

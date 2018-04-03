@@ -71,7 +71,7 @@ sp_bind <- function(...) {
 sp_bind_many <- function(sp_list) {
   
   # Class check
-  if (!is.list(sp_list)) stop("Input must be list.", .call = FALSE)
+  if (!is.list(sp_list)) stop("Input must be list...", .call = FALSE)
   
   # Points can be easily bound with do.call
   if (grepl("point", class(sp_list[[1]]), ignore.case = TRUE)) {
