@@ -5,7 +5,8 @@
 \title{Convenience function to quickly plot geometries on a leaflet map.}
 \usage{
 leaflet_plot(sp, popup = NULL, force = TRUE, colour = "#03F",
-  opacity = 0.5, fill_opacity = 0.2)
+  col_group = NULL, n = 7, palette = "viridis", legend_pos = "topright",
+  legend_title = NULL, opacity = 0.5, fill_opacity = 0.2)
 }
 \arguments{
 \item{sp}{Spatial object to be plotted.}
@@ -16,9 +17,21 @@ leaflet_plot(sp, popup = NULL, force = TRUE, colour = "#03F",
 
 \item{colour}{Colour of geometry.}
 
+\item{col_group}{If the colour mapped on a numeric vector, how should the colours be grouped. 
+Default is \code{NULL}. Can be "bin" or "quantile".}
+
+\item{n}{If the \code{col_group} is not \code{NULL}, how many different of colours should be plotted.}
+
+\item{palette}{Colour pallette options passed to \code{\link[leaflet]{colorNumeric}}.}
+
+\item{legend_pos}{Legend position. Accepts \code{c("topright", "bottomright", "bottomleft", 
+"topleft")}}
+
+\item{legend_title}{Legend title.}
+
 \item{opacity}{Opacity of the edge of the geometry.}
 
-\item{fill_opacity}{Internal opacity of the geometry.}
+\item{fill_opacity}{Internal opacity of the geometry.#'}
 }
 \value{
 Invisible, a leaflet map.
