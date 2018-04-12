@@ -146,7 +146,7 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
   }
   
   # Get data part for the SpatialLinesDataFrame
-  data_extras <- dplyr::distinct(df, id)
+  data_extras <- dplyr::distinct(df, id, .keep_all = TRUE)
   
   # Make sp points object
   sp_object <- data_frame_to_points(df, latitude, longitude, projection)
