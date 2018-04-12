@@ -6,12 +6,24 @@
 #'
 #' @param force Should the projection be forced to WGS84? Default is \code{TRUE}.
 #' 
-#' @param colour Colour of geometry. 
+#' @param colour Colour of geometry.
+#'  
+#' @param col_group If the colour mapped on a numeric vector, how should the colours be grouped. 
+#'  Default is \code{NULL}. Can be "bin" or "quantile".
+#' 
+#' @param n If the \code{col_group} is not \code{NULL}, how many different of colours should be plotted.
+#' 
+#' @param palette Colour pallette options passed to \code{\link[leaflet]{colorNumeric}}.
+#'  
+#' @param legend_pos Legend position. Accepts \code{c("topright", "bottomright", "bottomleft", 
+#' "topleft")}
+#' 
+#' @param legend_title Legend title.
 #' 
 #' @param opacity Opacity of the edge of the geometry.
 #' 
-#' @param fill_opacity Internal opacity of the geometry.
-#' 
+#' @param fill_opacity Internal opacity of the geometry.#' 
+#'  
 #' @author Stuart K. Grange
 #' 
 #' @return Invisible, a leaflet map. 
@@ -20,6 +32,8 @@
 #' 
 #' @export
 leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F", 
+                         col_group = NULL, n = 7, palette = "viridis",
+                         legend_pos = "topright", legend_title = NULL,
                          opacity = 0.5, fill_opacity = 0.2) {
   
   # Find geom type
@@ -91,6 +105,52 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       baseGroups = c("OpenStreetMap", "Toner", "Toner lite", "Landscape", 
                      "Transport dark", "Outdoors", "Images"))
   
+  # sort out colours
+  # colour is a column name in the data
+  if (colour %in% names(sp)) {
+      
+      # keep a record of the name of the column for colour mapping
+      colour_col <- colour
+      
+      # colour is numeric 
+      if (is.numeric(sp[[colour]])) {
+          if (is.null(col_group)) {
+              
+              pal <- colorNumeric(palette, domain = sp[[colour]])
+              
+          } else if (col_group == "bin") {
+              
+              pal <- colorBin(palette, domain = sp[[colour]], bins = n)
+              
+          } else if (col_group == "quantile") {
+              
+              pal <- colorQuantile(palette, domain = sp[[colour]], n = n)
+              
+          }
+          
+          colour <- pal(sp[[colour]])
+          
+      } else {
+          
+          # colour is character, change to factor
+          if (is.character(sp[[colour]])) {
+              
+              sp[[colour]] <- factor(sp[[colour]])
+              
+          } 
+          
+          # colour is factor
+          if (is.factor(sp[[colour]])) {
+              
+              pal <- colorFactor(palette, domain = sp[[colour]])
+              
+              colour <- pal(sp[[colour]])
+          }
+          
+      }
+ 
+  }
+  
   # Add layers
   if (grepl("points", sp_class, ignore.case = TRUE)) {
     
@@ -132,6 +192,17 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       ) %>% 
       addRasterImage(sp, colors = "viridis", opacity = opacity)
     
+  }
+  
+  # Add legend
+  if (length(colour) > 1) {
+      
+      map <- map %>%
+          addLegend(legend_pos, 
+                    pal = pal, 
+                    values = sp[[colour_col]],
+                    title = legend_title)
+      
   }
   
   return(map)
