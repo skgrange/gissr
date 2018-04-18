@@ -87,7 +87,8 @@ get_osm_node_data_worker <- function(url) {
     # Make tidy data frame
     df <- bind_rows(list_tidy) %>% 
       mutate(id = as.numeric(df_attributes$id)) %>% 
-      threadr::arrange_left("id")
+      select("id",
+             everything())
     
   }
   
@@ -233,7 +234,8 @@ get_osm_way_data_worker <- function(id) {
   # Make tidy data frame
   df <- bind_rows(list_tidy) %>% 
     mutate(id = as.numeric(df_attributes$id)) %>% 
-    threadr::arrange_left("id")
+    select("id",
+           everything())
   
   # Create list
   list_return <- list(
@@ -327,7 +329,8 @@ get_osm_relation_data_worker <- function(id) {
   # Make tidy data frame
   df <- bind_rows(list_tidy) %>% 
     mutate(id = as.numeric(df_attributes$id)) %>% 
-    threadr::arrange_left("id")
+    select("id",
+           everything())
   
   # Create list
   list_return <- list(

@@ -50,8 +50,7 @@
 sp_from_data_frame <- function(df, type, latitude = "latitude", 
                                longitude = "longitude", 
                                projection = projection_wgs84(), 
-                               keep = FALSE,
-                               id = NA) {
+                               keep = FALSE, id = NA) {
   
   #  Check and parse
   if (length(type) != 1) stop("'type' must have a length of one. ", call. = FALSE)
@@ -96,12 +95,12 @@ data_frame_to_points <- function(df, latitude, longitude, projection,
     
     # Raise a warning
     warning(
-      "Missing coordinates were detected and have been removed.", 
+      "Missing coordinates were detected and have been removed...", 
       call. = FALSE
     )
     
     # Check 
-    if (nrow(df) == 0) stop("There are no valid coordinates.", call. = FALSE)
+    if (nrow(df) == 0) stop("There are no valid coordinates...", call. = FALSE)
     
   }
   
@@ -146,7 +145,10 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
   }
   
   # Get data part for the SpatialLinesDataFrame
-  data_extras <- dplyr::distinct(df, id)
+  data_extras <- dplyr::distinct(df, id, .keep_all = TRUE)
+  
+  # Drop the coordinates from extra data frame
+  data_extras[, c(latitude, longitude)] <- NULL
   
   # Make sp points object
   sp_object <- data_frame_to_points(df, latitude, longitude, projection)
@@ -157,8 +159,7 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
   # Generate lines for each id
   lines <- lapply(
     split(sp_object, sp_object$id), 
-    function(x) 
-      Lines(list(Line(sp::coordinates(x))), x$id[1L])
+    function(x) sp::Lines(list(Line(sp::coordinates(x))), x$id[1L])
   )
   
   # Drop
@@ -197,7 +198,10 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {
   }
   
   # Get data part for the SpatialLinesDataFrame
-  data_extras <- dplyr::distinct(df, id)
+  data_extras <- dplyr::distinct(df, id, .keep_all = TRUE)
+  
+  # Drop the coordinates from extra data frame
+  data_extras[, c(latitude, longitude)] <- NULL
   
   # Make sp points object
   sp <- data_frame_to_points(df, latitude, longitude, projection)
@@ -236,10 +240,10 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {
 matrix_to_sp_polygon <- function(matrix, id) {
   
   # Matix to polygon
-  polygon <- Polygon(matrix)
+  polygon <- sp::Polygon(matrix)
   
   # Polygon to polygons
-  polygon <- Polygons(list(polygon), id)
+  polygon <- sp::Polygons(list(polygon), id)
   
   # To spatial polygons
   sp <- sp::SpatialPolygons(list(polygon))

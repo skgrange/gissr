@@ -15,10 +15,13 @@ transform_coordinates(df, latitude = "latitude", longitude = "longitude",
 \item{longitude}{Name of longitude/x variable.}
 
 \item{from}{A proj4 string which represents what coordinate system the
-data frame is within.}
+data frame's coordinates are in.}
 
 \item{to}{A proj4 string which represents what coordinate system the 
 converted coordinates will be converted to.}
+}
+\value{
+Data frame.
 }
 \description{
 \code{transform_coordinates} converts coordinate pairs from one projection 
@@ -43,11 +46,12 @@ WGS 84/EPSG:4326 (\code{+proj=longlat +datum=WGS84}).
 # Convert British National Grid/Ordnance Survey National Grid/OSGB36/EPSG:7405
 # to latitude and longitude (WGS 84/EPSG:4326)
 
-# The proj4 string for British National Grid (very long string!)
-bng <- "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +units=m +no_defs"
-
 data_oxford_transform <- transform_coordinates(
-  data_oxford, latitude = "latitude", longitude = "longitude", from = bng)
+  data_oxford, 
+  latitude = "latitude", 
+  longitude = "longitude", 
+  from = projection_bng()
+)
   
 }
 
