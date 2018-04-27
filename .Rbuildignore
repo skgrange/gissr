@@ -1,6 +1,2 @@
 ## Ignore travis config file
 ^\.travis\.yml$
-
-# Other documents
-data_sources.md
-

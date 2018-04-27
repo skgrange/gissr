@@ -24,6 +24,8 @@ wgs84_to_nztm(y, x)
 \item{x}{Coordinate component in the x-dimension.}
 
 \item{string}{Should the return be a string rather than a data frame?}
+
+\item{grid_reference}{UK grid reference.}
 }
 \value{
 Data frame or character vector.

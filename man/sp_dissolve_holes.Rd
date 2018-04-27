@@ -6,6 +6,12 @@
 \usage{
 sp_dissolve_holes(sp)
 }
+\arguments{
+\item{sp}{Spatial polygon object.}
+}
+\value{
+Spatial polygon.
+}
 \description{
 \code{sp_dissolve_holes} is useful when polygons contain holes but only the 
 outer boundary is desired.

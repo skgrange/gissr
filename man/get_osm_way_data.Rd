@@ -8,6 +8,8 @@ get_osm_way_data(id, progress = "none")
 }
 \arguments{
 \item{id}{A vector os OpenStreetMap way IDs.}
+
+\item{progress}{Type of progress bar to display.}
 }
 \value{
 Named list or a list of named lists.

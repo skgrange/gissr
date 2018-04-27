@@ -7,10 +7,10 @@
 is.sp(x)
 }
 \arguments{
-\item{Object}{to be tested.}
+\item{x}{Object to be tested.}
 }
 \value{
-Logical.
+Logical vector with length of 1.
 }
 \description{
 Function to test if an R object is a Spatial* data-type.

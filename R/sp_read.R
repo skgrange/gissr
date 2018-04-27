@@ -59,7 +59,7 @@
 #' sp_yemen <- sp_read("world.gdb", layer = "yemen", verbose = FALSE)
 #' 
 #' # Load a file by using a url
-#' file <- "http://www.gps-routes.co.uk/A55CD9/home.nsf/All/E03CB3E66AEAF5178025778200749F3F/$FILE/The%20Ridgeway.gpx"
+#' file <- "https://bit.ly/2FkUuAP"
 #' sp_ridgeway <- sp_read(file, layer = "routes") 
 #' 
 #' }

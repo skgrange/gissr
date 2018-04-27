@@ -3,9 +3,13 @@
 #' These functions use spatial libraries to do the coordinate conversion so the
 #' sometimes many-step calculations do not have to be maintained. 
 #' 
-#' @param x Coordinate component in the x-dimension. 
+#' @param x Coordinate component in the x-dimension.
+#' 
 #' @param y Coordinate component in the y-dimension. 
+#' 
 #' @param string Should the return be a string rather than a data frame? 
+#' 
+#' @param grid_reference UK grid reference. 
 #' 
 #' @return Data frame or character vector. 
 #' 
@@ -162,8 +166,7 @@ os_grid_to_osgb36 <- function(grid_reference) {
   # Rename
   df <- plyr::rename(df, c("Easting" = "x", "Northing" = "y"))
   
-  # Return
-  df
+  return(df)
   
 }
 

@@ -3,7 +3,7 @@
 #' JavaScript arrays take the form of:
 #' \code{[[54.35221,-0.88518],[54.35237,-0.88544]]}.
 #' 
-#' @param file File, url, or character vector containing a JavaScript array. 
+#' @param text Character vector, file, or url containing a JavaScript array. 
 #' 
 #' @param type Spatial data type. Default is \code{"points"}. 
 #' 

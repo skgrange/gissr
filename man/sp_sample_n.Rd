@@ -6,8 +6,16 @@
 \usage{
 sp_sample_n(sp, n)
 }
+\arguments{
+\item{sp}{Spatial object.}
+
+\item{n}{Number of features to sample.}
+}
 \description{
 Function to randomly sample n features in a spatial object.
+}
+\seealso{
+\code{\link{set.seed}}
 }
 \author{
 Stuart K. Grange

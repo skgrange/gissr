@@ -6,7 +6,11 @@
 #' If the individual polygons have data associated with them, it will be 
 #' dropped when the holes are dissolved. 
 #' 
+#' @param sp Spatial polygon object. 
+#' 
 #' @author Stuart K. Grange
+#' 
+#' @return Spatial polygon. 
 #'
 #' @export
 sp_dissolve_holes <- function(sp) {
@@ -19,17 +23,24 @@ sp_dissolve_holes <- function(sp) {
   projection <- sp_projection(sp)
   
   # http://stackoverflow.com/questions/12663263/dissolve-holes-in-polygon-in-r
-  list_outer <- Filter(function(f) { 
-    f@ringDir == 1
-    }, sp@polygons[[1]]@Polygons)
+  list_outer <- Filter(
+    
+    function(f) { 
+      
+      f@ringDir == 1
+      
+    }, 
+    
+    sp@polygons[[1]]@Polygons
+    
+  )
   
   # Promote
-  sp <- SpatialPolygons(list(Polygons(list_outer, ID = 1)))
+  sp <- sp::SpatialPolygons(list(Polygons(list_outer, ID = 1)))
   
   # Add projection again
   sp <- sp_transform(sp, to = projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }

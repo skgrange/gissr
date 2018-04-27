@@ -1,10 +1,10 @@
 language: r
 sudo: required
 warnings_are_errors: false
+cache: packages
 
-r_binary_packages:
-  - Rcpp
-  - testthat
+r_packages:
+  - devtools
   
 # System dependencies for rgdal and V8
 apt_packages:
@@ -18,3 +18,4 @@ apt_packages:
 # Install development package
 r_github_packages:
   - skgrange/threadr
+

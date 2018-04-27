@@ -161,6 +161,8 @@ extract_osm_tags <- function(x) {
 #' 
 #' @param id A vector os OpenStreetMap way IDs. 
 #' 
+#' @param progress Type of progress bar to display. 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @return Named list or a list of named lists. 

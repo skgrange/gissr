@@ -1,4 +1,10 @@
 #' Function to randomly sample n features in a spatial object. 
+#' 
+#' @param sp Spatial object.  
+#' 
+#' @param n Number of features to sample. 
+#' 
+#' @seealso \code{\link{set.seed}}
 #'
 #' @author Stuart K. Grange
 #'
