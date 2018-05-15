@@ -11,7 +11,7 @@ scrape_gpx(file, transform = TRUE)
 \item{file}{GPX file.}
 
 \item{transform}{Should latitude and longitude be used to calculate speed and
-distance too?}
+distance if the file contains the appropriate variables?}
 }
 \value{
 Data frame.
