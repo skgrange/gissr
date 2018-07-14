@@ -31,6 +31,11 @@ write_gpx <- function(sp, file, force = TRUE) {
   # Projection force
   if (force) sp <- sp_transform(sp)
   
+  # Drop data slot if contains no variables or observations, causes the writer
+  # to error
+  if (grepl("Data", sp_class(sp)) && nrow(sp@data) == 0 || ncol(sp@data) == 0)
+    sp <- sp_demote(sp)
+  
   # Promote
   sp <- sp_promote(sp)
   
@@ -73,7 +78,7 @@ write_gpx <- function(sp, file, force = TRUE) {
   suppressWarnings(
     rgdal::writeOGR(
       sp, 
-      file, 
+      dsn = file, 
       layer = layer, 
       driver = "GPX", 
       dataset_options = "GPX_USE_EXTENSIONS=yes"
