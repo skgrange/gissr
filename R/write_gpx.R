@@ -33,7 +33,7 @@ write_gpx <- function(sp, file, force = TRUE) {
   
   # Drop data slot if contains no variables or observations, causes the writer
   # to error
-  if (grepl("Data", sp_class(sp)) && nrow(sp@data) == 0 || ncol(sp@data) == 0)
+  if (grepl("Data", sp_class(sp)) && (nrow(sp@data) == 0 || ncol(sp@data) == 0))
     sp <- sp_demote(sp)
   
   # Promote
