@@ -1,8 +1,8 @@
 Package: gissr
 Type: Package
 Title: Tools To Make Working With R and Spatial Data Easier
-Version: 0.8.912
-Date: 2017-07-18
+Version: 0.8.913
+Date: 2018-07-29
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
 Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
@@ -15,9 +15,6 @@ Depends:
     R (>= 3.2.0),
     sp
 Imports:
-    methods, 
-    stats,
-    utils,
     stringr,
     lubridate,
     plyr,
@@ -25,7 +22,6 @@ Imports:
     leaflet,
     jsonlite,
     geojsonio,
-    geojsonlint,
     ggplot2,
     ggmap,
     rgdal,
@@ -35,7 +31,6 @@ Imports:
     geosphere,
     cleangeo,
     raster,
-    testthat,
     XML,
     magrittr,
     spatstat,
@@ -44,7 +39,8 @@ Imports:
     purrr
 Suggests:
     threadr,
+    testthat,
     tidyr
 LazyLoad: yes
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0

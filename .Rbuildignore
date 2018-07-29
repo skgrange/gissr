@@ -1,2 +1,7 @@
-## Ignore travis config file
+# Ignore travis config file
 ^\.travis\.yml$
+
+inst/performance
+
+data_sources.md
+

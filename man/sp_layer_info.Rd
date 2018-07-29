@@ -19,14 +19,6 @@ geometry type in a layer. This is commonly found in GeoJSON and KML files.
 \description{
 Function to return layer information within a spatial data file.
 }
-\examples{
-\dontrun{
-# Get infomation of the lines geom within a layer in a GeoJSON file
-sp_layer_info("../../data/points_and_lines.json", "OGRGeoJSON", 
-              geom = "lines")
-}
-
-}
 \author{
 Stuart K. Grange
 }

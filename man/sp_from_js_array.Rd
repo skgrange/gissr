@@ -4,7 +4,8 @@
 \alias{sp_from_js_array}
 \title{Function to create spatial objects from JavaScript arrays.}
 \usage{
-sp_from_js_array(text, type = "points", projection = projection_wgs84())
+sp_from_js_array(text, type = "points",
+  projection = projection_wgs84())
 }
 \arguments{
 \item{text}{Character vector, file, or url containing a JavaScript array.}

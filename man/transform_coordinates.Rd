@@ -4,8 +4,8 @@
 \alias{transform_coordinates}
 \title{Function to convert coordinates within a data frame.}
 \usage{
-transform_coordinates(df, latitude = "latitude", longitude = "longitude",
-  from, to)
+transform_coordinates(df, latitude = "latitude",
+  longitude = "longitude", from, to)
 }
 \arguments{
 \item{df}{Data frame with coordinates to be transformed.}

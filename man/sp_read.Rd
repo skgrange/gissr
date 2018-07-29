@@ -4,7 +4,8 @@
 \alias{sp_read}
 \title{Function to read spatial data files in a consistent way.}
 \usage{
-sp_read(file, layer = NULL, geom = NULL, lower = TRUE, verbose = TRUE)
+sp_read(file, layer = NULL, geom = NULL, lower = TRUE,
+  verbose = TRUE)
 }
 \arguments{
 \item{file}{Spatial data file name. For shapefiles and Mapinfo TAB files, a
