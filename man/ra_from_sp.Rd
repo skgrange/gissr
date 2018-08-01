@@ -4,17 +4,25 @@
 \alias{ra_from_sp}
 \title{Function to create a raster object from a spatial (vector) object.}
 \usage{
-ra_from_sp(sp, resolution, drop_index = TRUE)
+ra_from_sp(sp, resolution, fun = mean, na.rm = TRUE, background = NA,
+  drop_index = TRUE)
 }
 \arguments{
 \item{sp}{Spatial object.}
 
 \item{resolution}{Resolution of the returned raster object.}
 
+\item{fun}{Function to determine how multiple observations in a single raster 
+cell are handled.}
+
+\item{na.rm}{For \code{fun}, should \code{NA}s be ignored?}
+
+\item{background}{Cell's default value when there are no data within the cell.}
+
 \item{drop_index}{Should the index be dropped from the raster return?}
 }
 \value{
-Raster layer or brick.
+Raster layer or raster brick.
 }
 \description{
 Function to create a raster object from a spatial (vector) object.
