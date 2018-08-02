@@ -79,7 +79,7 @@ get_osm_boundary <- function(id, way = FALSE, progress = "none") {
 osm_boundary_way_worker <- function(id) {
   
   # Get nodes
-  vector_nodes <- get_osm_way_data(id, progress = progress)$relations
+  vector_nodes <- get_osm_way_data(id)$relations
   
   # Get nodes
   df <- get_osm_node_data(vector_nodes)$attributes
@@ -113,7 +113,9 @@ osm_boundary_worker <- function(id) {
   }, error = function(e) {
     
     # If error return null
-    message(stringr::str_c("'id' ", id, " not found..."))
+    message("'id' ", id, " not found...")
+    
+    # Return
     NULL
     
   })
@@ -122,7 +124,7 @@ osm_boundary_worker <- function(id) {
   if (is.null(text)) return(NULL)
   
   # Drop preamble/projection infomation
-  text <- stringr::str_replace(text, "SRID=4326;", "")
+  text <- stringr::str_remove(text, "SRID=4326;")
   
   # Promote to spatial
   sp <- sp_from_wkt(text, verbose = FALSE)
@@ -139,4 +141,3 @@ osm_boundary_worker <- function(id) {
   return(sp)
   
 }
-

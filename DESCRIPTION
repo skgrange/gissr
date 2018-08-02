@@ -1,8 +1,8 @@
 Package: gissr
 Type: Package
 Title: Tools To Make Working With R and Spatial Data Easier
-Version: 0.8.914
-Date: 2018-08-01
+Version: 0.8.915
+Date: 2018-08-02
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"))
 Maintainer: Stuart K. Grange <s.k.grange@gmail.com>
@@ -15,6 +15,9 @@ Depends:
     R (>= 3.2.0),
     sp
 Imports:
+    methods,
+    stats,
+    utils,
     stringr,
     lubridate,
     plyr,
