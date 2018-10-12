@@ -68,28 +68,35 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   map <- leaflet(sp) %>%
     addTiles(
       group = "OpenStreetMap", 
-      urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") %>%
+      urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    ) %>%
     addProviderTiles("Stamen.Toner", group = "Toner") %>%
     addProviderTiles("Stamen.TonerLite", group = "Toner lite") %>%
     addTiles(
       urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
       attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
       options = tileOptions(variant = "landscape", apikey = "25ef91f0102248f4a181998ec2b7a1ad"),
-      group = "Landscape") %>% 
+      group = "Landscape"
+    ) %>% 
     addTiles(
       urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
       attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
       options = tileOptions(variant = "transport-dark", apikey = "25ef91f0102248f4a181998ec2b7a1ad"),
-      group = "Transport dark") %>% 
+      group = "Transport dark"
+    ) %>% 
     addTiles(
       urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
       attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
       options = tileOptions(variant = "outdoors", apikey = "25ef91f0102248f4a181998ec2b7a1ad"),
-      group = "Outdoors") %>% 
+      group = "Outdoors"
+    ) %>% 
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(
-      baseGroups = c("OpenStreetMap", "Toner", "Toner lite", "Landscape", 
-                     "Transport dark", "Outdoors", "Images"))
+      baseGroups = c(
+        "OpenStreetMap", "Toner", "Toner lite", "Landscape", "Transport dark", 
+        "Outdoors", "Images"
+      )
+    )
   
   # Add layers
   if (grepl("points", sp_class, ignore.case = TRUE)) {
