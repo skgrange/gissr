@@ -16,7 +16,7 @@ get_sunrise(latitude, longitude, start = NA, end = NA)
 \item{end}{End date.}
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 \code{get_sunrise} uses \code{\link{sunriset}} for the calculation of dates
@@ -25,12 +25,17 @@ and times.
 \examples{
 
 \dontrun{
+
 # Get sunrise and sunset dates for London for the current year
 get_sunrise(latitude = 51.5072, longitude = 0.1275)
 
 # Or specify dates
-get_sunrise(latitude = 51.5072, longitude = 0.1275, start = "2015-12-01", 
-  end = "2015-12-31")
+get_sunrise(
+  latitude = 51.5072, 
+  longitude = 0.1275, 
+  start = "2015-12-01", 
+  end = "2015-12-31"
+)
 
 }
 
