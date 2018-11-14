@@ -70,3 +70,9 @@ projection_utm <- function()
 #' @export
 projection_madrid <- function()
   "+proj=lcc +lat_1=40 +lat_0=40 +lon_0=0 +k_0=0.9988085293 +x_0=600000 +y_0=600000 +a=6378298.3 +b=6356657.142669561 +pm=madrid +units=m +no_defs"
+
+
+#' @rdname projection_wgs84
+#' @export
+projection_mollweide <- function() 
+  "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"

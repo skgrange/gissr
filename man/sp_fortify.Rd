@@ -11,10 +11,10 @@ sp_fortify(sp, rename = TRUE)
 \item{sp}{Spatial object to be reformatted into tabular data.}
 
 \item{rename}{Should \code{lat} and \code{long} be renamed to \code{latitude} 
-and \code{longitude}? Default is \code{TRUE}.}
+and \code{longitude}?}
 }
 \value{
-Data frame
+Tibble.
 }
 \description{
 Function to wrap ggplot2::fortify which transforms geometries to data frames

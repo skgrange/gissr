@@ -13,6 +13,7 @@
 \alias{projection_slovenia}
 \alias{projection_utm}
 \alias{projection_madrid}
+\alias{projection_mollweide}
 \title{Functions to wrap common projection (PROJ.4) strings.}
 \usage{
 projection_wgs84()
@@ -38,6 +39,8 @@ projection_slovenia()
 projection_utm()
 
 projection_madrid()
+
+projection_mollweide()
 }
 \description{
 Functions to wrap common projection (PROJ.4) strings.
