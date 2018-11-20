@@ -10,7 +10,7 @@ ra_forify(ra)
 \item{ra}{Raster object.}
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to transform a raster object to a data frame (a table).

@@ -6,4 +6,6 @@
 #' 
 #' @importFrom utils download.file read.csv
 #' 
+#' @import sp
+#' 
 NULL

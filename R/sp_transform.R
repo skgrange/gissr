@@ -38,8 +38,6 @@
 #' 
 #' }
 #' 
-#' @import sp
-#' 
 #' @export
 sp_transform <- function(sp, to = NA, warn = TRUE) {
   
@@ -71,7 +69,7 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
     
   } else {
     
-    raster::crs(sp) <- to
+    sp <- raster::projectRaster(sp, crs = to) 
     
   }
   

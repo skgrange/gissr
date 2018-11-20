@@ -4,7 +4,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble.
 #' 
 #' @export
 ra_forify <- function(ra) {
@@ -14,6 +14,9 @@ ra_forify <- function(ra) {
   
   # To data frame
   df <- data.frame(sp)
+  
+  # To tibble
+  df <- as_tibble(df)
   
   # Give names, to-do enhance
   names(df) <- c("value", "x", "y")

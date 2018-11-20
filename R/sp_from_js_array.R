@@ -18,7 +18,7 @@ sp_from_js_array <- function(text, type = "points",
                              projection = projection_wgs84()) {
   
   # Vectorise the worker
-  list_sp <- plyr::llply(text, function(x) sp_from_js_array_worker(x, type))
+  list_sp <- purrr::map(text, sp_from_js_array_worker, type = type)
   
   # Bind objects
   sp <- sp_bind(list_sp)
@@ -45,10 +45,9 @@ sp_from_js_array_worker <- function(text, type) {
   matrix <- jsonlite::fromJSON(text_clean)
 
   # Build data frame
-  df <- data.frame(
+  df <- data_frame(
     latitude = matrix[, 1],
-    longitude = matrix[, 2],
-    stringsAsFactors = FALSE
+    longitude = matrix[, 2]
   )
   
   # Promote to spatial data

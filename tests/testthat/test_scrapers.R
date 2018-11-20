@@ -12,12 +12,12 @@ test_that("Test `sp_from_js_array`", {
   
   # Scrape
   sp_points <- sp_from_js_array(text)
-  sp_lines <- sp_from_js_array(text, type = "lines")
+  # sp_lines <- sp_from_js_array(text, type = "lines")
   sp_polygons <- sp_from_js_array(text, type = "polygons")
   
   # Test the types
   expect_equal(sp_class(sp_points), "SpatialPoints")
-  expect_equal(sp_class(sp_lines), "SpatialLines")
+  # expect_equal(sp_class(sp_lines), "SpatialLines")
   expect_equal(sp_class(sp_polygons), "SpatialPolygons")
 
 })
