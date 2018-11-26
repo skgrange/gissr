@@ -6,7 +6,7 @@ if (getRversion() >= "2.15.1") {
   variables <- c(
     "lat", "lon", "changeset", "uid", "visible", "location.lat", "location.lng",
     ".", "address", "elevation", "latitude", "longitude", "resolution", "x", "y",
-    "date_sunrise", "date_sunset"
+    "date_sunrise", "date_sunset", "value", "variable"
   )
   
   # Squash the note

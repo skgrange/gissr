@@ -94,7 +94,7 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
     sp <- readRDS(file)
     
     # Warning to user
-    if (!is.sp(sp)) {
+    if (!is.sp(sp) && !is.ra(sp)) {
       
       warning(
         ".rds file has been loaded but it does not contain spatial data...", 
