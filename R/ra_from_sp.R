@@ -1,8 +1,8 @@
 #' Function to create a raster object from a spatial (vector) object. 
 #' 
-#' @param sp Spatial object. 
+#' @param sp Spatial object with a data slot. 
 #' 
-#' @param resolution Resolution of the returned raster object.  
+#' @param resolution Resolution of the returned raster object, optional. 
 #' 
 #' @param fun Function to determine how multiple observations in a single raster 
 #' cell are handled. 
@@ -22,6 +22,24 @@
 #' @export
 ra_from_sp <- function(sp, resolution, fun = mean, na.rm = TRUE,
                        background = NA, drop_index = TRUE) {
+  
+  # Check spatial object for non-numeric variables
+  if (grepl("Data", sp_class(sp))) {
+    
+    # Get classes
+    classes <- purrr::map_lgl(sp@data, is.numeric)
+    
+    # Any non-numeric variables need to be dropped for raster object
+    # Modify data slot
+    if (any(!classes)) sp@data <- sp@data[classes]
+    
+    # Raise a warning
+    warning(
+      "Raster objects can only contain numeric values, non-numeric variables dropped...",
+      call. = FALSE
+    )
+    
+  }
   
   # Create blank raster
   ra_blank <- ra_create(sp, resolution)

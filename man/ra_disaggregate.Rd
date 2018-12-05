@@ -27,6 +27,9 @@ ra_countries_smooth <- ra_disaggregate(ra_countries, factor = 5)
 }
 
 }
+\seealso{
+\code{\link{disaggregate}}
+}
 \author{
 Stuart K. Grange
 }

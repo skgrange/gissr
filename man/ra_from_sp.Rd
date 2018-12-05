@@ -8,9 +8,9 @@ ra_from_sp(sp, resolution, fun = mean, na.rm = TRUE, background = NA,
   drop_index = TRUE)
 }
 \arguments{
-\item{sp}{Spatial object.}
+\item{sp}{Spatial object with a data slot.}
 
-\item{resolution}{Resolution of the returned raster object.}
+\item{resolution}{Resolution of the returned raster object, optional.}
 
 \item{fun}{Function to determine how multiple observations in a single raster 
 cell are handled.}

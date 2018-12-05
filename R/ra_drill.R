@@ -15,7 +15,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @seealso \code{\link{extract}}
+#' @seealso \code{\link{extract}}, \code{\link{tidy_ra_drill}}
 #' 
 #' @return Tibble. 
 #' 
@@ -51,7 +51,7 @@ ra_drill <- function(ra, sp, method = "simple", fun = mean, na.rm = TRUE) {
   names(df) <- ifelse(names(df) == "ID", "id_sp", names(df))
   names(df) <- ifelse(names(df) == "cells", "cell_raster", names(df))
   
-  # Doubles to intergers
+  # Doubles to integers
   df <- dplyr::mutate_if(df, is.numeric, type.convert, as.is = TRUE)
   
   return(df)
@@ -59,7 +59,7 @@ ra_drill <- function(ra, sp, method = "simple", fun = mean, na.rm = TRUE) {
 }
 
 
-#' Function to reshape the 
+#' Function to reshape the return from \code{\link{ra_drill}} to be "tidy-data".
 #' 
 #' @param df Data frame/tibble from \code{\link{ra_drill}}
 #' 

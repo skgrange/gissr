@@ -10,6 +10,8 @@
 #' 
 #' @return Raster object. 
 #' 
+#' @seealso \code{\link{disaggregate}}
+#' 
 #' @examples 
 #' \dontrun{
 #' 

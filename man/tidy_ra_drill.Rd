@@ -2,7 +2,7 @@
 % Please edit documentation in R/ra_drill.R
 \name{tidy_ra_drill}
 \alias{tidy_ra_drill}
-\title{Function to reshape the}
+\title{Function to reshape the return from \code{\link{ra_drill}} to be "tidy-data".}
 \usage{
 tidy_ra_drill(df)
 }
@@ -13,7 +13,7 @@ tidy_ra_drill(df)
 Tibble.
 }
 \description{
-Function to reshape the
+Function to reshape the return from \code{\link{ra_drill}} to be "tidy-data".
 }
 \seealso{
 \code{\link{ra_drill}}
