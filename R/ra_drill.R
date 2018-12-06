@@ -15,7 +15,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @seealso \code{\link{extract}}, \code{\link{tidy_ra_drill}}
+#' @seealso \code{\link[raster]{extract}}, \code{\link{tidy_ra_drill}}
 #' 
 #' @return Tibble. 
 #' 

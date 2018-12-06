@@ -14,6 +14,7 @@
 \alias{projection_utm}
 \alias{projection_madrid}
 \alias{projection_mollweide}
+\alias{projection_china}
 \title{Functions to wrap common projection (PROJ.4) strings.}
 \usage{
 projection_wgs84()
@@ -41,9 +42,17 @@ projection_utm()
 projection_madrid()
 
 projection_mollweide()
+
+projection_china()
+}
+\value{
+Character vector with length of 1.
 }
 \description{
 Functions to wrap common projection (PROJ.4) strings.
+}
+\seealso{
+\href{http://spatialreference.org/}{spatialreference.org}
 }
 \author{
 Stuart K.Grange

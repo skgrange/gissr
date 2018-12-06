@@ -9,7 +9,8 @@ ra_disaggregate(ra, factor, method = "bilinear")
 \arguments{
 \item{ra}{Raster object.}
 
-\item{factor}{Amount of disaggregation in number of cells.}
+\item{factor}{Amount of disaggregation in number of cells or as a multiplier 
+to increase \code{ra}'s current resolution.}
 
 \item{method}{Method to use for interpolation.}
 }
@@ -22,6 +23,7 @@ Function to create a higher resolution ("disaggregate") raster layer.
 \examples{
 \dontrun{
 
+# Increase a raster layer's resolution by five times
 ra_countries_smooth <- ra_disaggregate(ra_countries, factor = 5)
 
 }
