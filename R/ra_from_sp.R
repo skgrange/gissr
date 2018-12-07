@@ -30,14 +30,18 @@ ra_from_sp <- function(sp, resolution, fun = mean, na.rm = TRUE,
     classes <- purrr::map_lgl(sp@data, is.numeric)
     
     # Any non-numeric variables need to be dropped for raster object
-    # Modify data slot
-    if (any(!classes)) sp@data <- sp@data[classes]
-    
-    # Raise a warning
-    warning(
-      "Raster objects can only contain numeric values, non-numeric variables dropped...",
-      call. = FALSE
-    )
+    if (any(!classes)) {
+      
+      # Modify data slot
+      sp@data <- sp@data[classes]
+      
+      # Raise a warning
+      warning(
+        "Raster objects can only contain numeric values, non-numeric variables dropped...",
+        call. = FALSE
+      )
+      
+    }
     
   }
   
