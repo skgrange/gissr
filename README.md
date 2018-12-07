@@ -1,5 +1,7 @@
 # **gissr**
 
+[![Build Status](https://travis-ci.org/skgrange/gissr.svg?branch=master)](https://travis-ci.org/skgrange/gissr)
+
 ![](inst/extdata/images/icon_small.png)
 
 **gissr** is a collection of R functions which make working with spatial data easier.
@@ -14,14 +16,6 @@ devtools::install_github("skgrange/threadr")
 # Install gissr
 devtools::install_github("skgrange/gissr")
 ```
-
-## To-do
-
-  1. Travis builds are breaking because of the package's dependence on system-spatial packages; needs to be resolved. 
-  
-  2. Do some more unit testing
-  
-  3. Get package on CRAN
 
 ## Background
 
@@ -39,8 +33,8 @@ To overcome these points, I have written wrappers for many geographical function
 
 ## Utility functions
 
-  - Read shapefiles, GPX, GeoJSON, KML, GML, TAB, and File Geodatabases with `sp_read`, a wrapper for `rgdal::readOGR`.
-    - Also check spatial file and system things with `sp_list_drivers`, `sp_list_layers`, and `sp_layer_info`. 
+  - Easily read shapefiles, GPX, GeoJSON, KML, GML, TAB, and File Geodatabases with `sp_read`, a wrapper for `rgdal::readOGR`.
+    - Also check spatial files and system things with `sp_list_drivers`, `sp_list_layers`, and `sp_layer_info`. 
     
   - Transform projection systems with `sp_transform`.
     - `sp_transform` can also force projections when a spatial object has none.
@@ -49,8 +43,6 @@ To overcome these points, I have written wrappers for many geographical function
   - Transform data frames (tables) to spatial points, lines, or polygons with `sp_from_data_frame`. 
   
   - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
-  
-  - Transform JavaScript coordinate arrays (for example: [[54.35221,-0.88518],[54.35237,-0.88544]]) into spatial objects with `sp_from_js_array`. 
   
   - Bind/combine different spatial objects with `sp_bind`. 
   
@@ -86,6 +78,7 @@ To overcome these points, I have written wrappers for many geographical function
   
   - Calculate distances among spatial objects with `sp_distance`.
     - `distance_by_haversine` does the same thing, but with a different method, and for data frames.
+    
   - Fix issues with spatial objects with `sp_fix`. This function is a blatant wrap of [`cleangeo::clgeo_Clean`](https://github.com/eblondel/cleangeo). This function is a good piece of work so make sure you have a look at the **cleangeo** package.
   
   - Parse vectors of degrees, minutes, and seconds into decimal degrees with `dms_to_decimal`. 
@@ -96,6 +89,8 @@ To overcome these points, I have written wrappers for many geographical function
   
   - Export spatial objects to spatial data files with `write_gpx`, `write_geojson`, and `write_shapefile`. 
   
+  - Transform spatial objects to data frames with `sp_fortify`. 
+  
 ### Raster functions
 
   - Create a raster layer from spatial data with `ra_from_sp`. 
@@ -103,12 +98,30 @@ To overcome these points, I have written wrappers for many geographical function
   - Filter/crop/mask a raster layer with a spatial polygon with `ra_mask`. 
   
   - Interpolate a raster layer/surface with `ra_interpolate`. 
+  
+  - Increase a raster's resolution with `ra_disaggregate`. 
+  
+  - Smooth a raster's values with `ra_focal`.
+  
+  - Extract values from raster objects using spatial data types with `ra_drill` and then produce a "tidy data" version with `tidy_ra_drill`.
+  
+  - Transform raster objects to data frames with `ra_fortify`.
+  
+### OpenStreetMap data importers
+
+  - A collection of `get_osm_*` functions to import data from OpenStreetMap. 
 
 ## Things I want to do
 
   - Develop a function which can read *n* features in a spatial data file. This will be helpful when large data files are encountered and system memory is too small to load the entire file at once. 
+  
   - Get the interface between R and SpatiaLite sorted. 
   
   - Concave hull function *i.e.* find minimum area polygon.  
   
-  - Add support for WKB. 
+  - Add support for WKB (well-known binary). 
+
+## See also
+
+  - [**sf**](https://github.com/r-spatial/sf)
+  
