@@ -1,21 +1,27 @@
 language: r
+r: 
+  release
+
 sudo: required
-warnings_are_errors: false
+warnings_are_errors: true
 cache: packages
 
-r_packages:
-  - devtools
-  
-# System dependencies for rgdal and V8
-apt_packages:
-  - libgeos-dev
-  - libgdal1-dev 
-  - libproj-dev
-  - libv8-dev
-  - libgdal-dev # other packages from here
-  - libhdf5-serial-dev
-  
-# Install development package
+# Install ubuntu's more up to date spatial libraries
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
+    packages:
+      - libgdal-dev
+      - libudunits2-dev
+      - libprotobuf-dev
+      - protobuf-compiler
+      - libjq-dev
+      - libv8-3.14-dev
+      - gdal-bin
+      - libgeos++-dev
+
+# Install development package which gissr requires
 r_github_packages:
   - skgrange/threadr
 
