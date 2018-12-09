@@ -26,9 +26,9 @@ sp_fortify <- function(sp, rename = TRUE) {
     
     if (rename) {
       
-      # Remove variables if they already exist, they will be overwritten
-      if ("latitude" %in% names(df)) df$latitude <- NULL
-      if ("longitude" %in% names(df)) df$longitude <- NULL
+      # # Remove variables if they already exist, they will be overwritten
+      # if ("latitude" %in% names(df)) df$latitude <- NULL
+      # if ("longitude" %in% names(df)) df$longitude <- NULL
       
       # Rename variables
       names(df) <- ifelse(

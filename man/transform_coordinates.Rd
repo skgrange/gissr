@@ -21,7 +21,7 @@ data frame's coordinates are in.}
 converted coordinates will be converted to.}
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 \code{transform_coordinates} converts coordinate pairs from one projection 

@@ -6,7 +6,7 @@ sudo: required
 warnings_are_errors: true
 cache: packages
 
-# Install ubuntu's more up to date spatial libraries
+# Install Ubuntu's more up to date spatial libraries
 addons:
   apt:
     sources:

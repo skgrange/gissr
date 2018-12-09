@@ -2,18 +2,19 @@
 % Please edit documentation in R/sp_bounding_box.R
 \name{sp_bounding_box}
 \alias{sp_bounding_box}
-\title{Function to extract bounding box from a spatial object.}
+\title{Function to extract bounding box from a spatial or raster object.}
 \usage{
-sp_bounding_box(sp, vector = TRUE)
+sp_bounding_box(sp)
 }
 \arguments{
-\item{sp}{Spatial object.}
-
-\item{vector}{Should the bounding box be returned as a vector with the order
-xmin, xmax, ymin, ymax? Default is \code{TRUE}.}
+\item{sp}{Spatial or raster object object.}
+}
+\value{
+Numeric vector with length of four. Coordinates order is: xmin, xmax, 
+ymin, ymax.
 }
 \description{
-Function to extract bounding box from a spatial object.
+Function to extract bounding box from a spatial or raster object.
 }
 \author{
 Stuart K. Grange

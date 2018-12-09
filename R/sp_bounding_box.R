@@ -1,25 +1,36 @@
-#' Function to extract bounding box from a spatial object. 
+#' Function to extract bounding box from a spatial or raster object. 
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @param sp Spatial object. 
-#' @param vector Should the bounding box be returned as a vector with the order
-#' xmin, xmax, ymin, ymax? Default is \code{TRUE}. 
+#' @param sp Spatial or raster object object. 
+#' 
+#' @return Numeric vector with length of four. Coordinates order is: xmin, xmax, 
+#' ymin, ymax. 
 #' 
 #' @export
-sp_bounding_box <- function(sp, vector = TRUE) {
+sp_bounding_box <- function(sp) {
   
-  # Get bounding box
-  box <- sp@bbox
-  
-  if (vector) {
+  # Extents will be different type of objects for the different 
+  if (is.sp(sp)) {
+    
+    # Get boundary
+    x <- sp@bbox
     
     # Make a vector, xmin, xmax, ymin, ymax
-    box <-  c(box[1, 1], box[1, 2], box[2, 1], box[2, 2])
+    x <-  c(x[1, 1], x[1, 2], x[2, 1], x[2, 2])
+    
+  } else if (is.ra(sp)) {
+    
+    # Get boundary and make vector
+    x <- raster::extent(sp)
+    x <- as.vector(x)
+    
+  } else {
+    
+    stop("Data type not recognised...", call. = FALSE)
     
   }
   
-  # Return
-  box
+  return(x)
   
 }

@@ -30,7 +30,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame. 
+#' @return Tibble. 
 #' 
 #' @examples 
 #' 
@@ -75,6 +75,9 @@ transform_coordinates <- function(df, latitude = "latitude",
   
   # Arrange variables in original order
   df <- select(df, !!variables)
+  
+  # And as tibble
+  df <- as_tibble(df)
   
   return(df)
   

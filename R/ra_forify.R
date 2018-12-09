@@ -18,8 +18,18 @@ ra_forify <- function(ra) {
   # To tibble
   df <- as_tibble(df)
   
-  # Give names, to-do enhance
-  names(df) <- c("value", "x", "y")
+  # Make good names
+  if (dim(ra)[3] == 1) {
+    
+    # Give names
+    names(df) <- c("value", "x", "y")
+    
+  } else {
+    
+    # Use variable names
+    df <- tidyr::gather(df, variable, value, -c(x, y))
+    
+  }
   
   return(df)
   

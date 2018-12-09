@@ -86,3 +86,9 @@ projection_mollweide <- function()
 #' @export
 projection_china <- function() 
   "+proj=aea +lat_1=25 +lat_2=47 +lat_0=30 +lon_0=105 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+
+
+#' @rdname projection_wgs84
+#' @export
+projection_beijing <- function()
+  "+proj=lcc +lat_1=20 +lat_2=50 +lat_0=35 +lon_0=110 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs"
