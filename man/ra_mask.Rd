@@ -11,9 +11,12 @@ ra_mask(ra, sp_polygon)
 
 \item{sp_polygon}{Spatial polygon to be used as the filter.}
 }
+\value{
+Raster object.
+}
 \description{
 Function to mask/filter/crop a raster object to a spatial polygon.
 }
 \author{
-Stuart K. Grange
+Stuart K. Grange.
 }
