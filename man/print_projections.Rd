@@ -9,9 +9,12 @@ print_projections()
 
 sp_all_projections()
 }
+\value{
+Data frame.
+}
 \description{
 Function to print projections supported by R.
 }
 \author{
-StuartK. Grange
+Stuart K. Grange
 }

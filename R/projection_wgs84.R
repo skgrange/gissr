@@ -91,4 +91,6 @@ projection_china <- function()
 #' @rdname projection_wgs84
 #' @export
 projection_beijing <- function()
-  "+proj=lcc +lat_1=20 +lat_2=50 +lat_0=35 +lon_0=110 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs"
+  # "+proj=lcc +lat_1=20 +lat_2=50 +lat_0=35 +lon_0=110 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs"
+  "+proj=lcc +lat_1=20 +lat_2=50 +lat_0=39.51775 +lon_0=110 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs"
+  
