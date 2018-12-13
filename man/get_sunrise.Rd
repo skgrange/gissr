@@ -24,9 +24,7 @@ and times.
 }
 \examples{
 
-\dontrun{
-
-# Get sunrise and sunset dates for London for the current year
+# Get sunrise and sunset dates for London for today
 get_sunrise(latitude = 51.5072, longitude = 0.1275)
 
 # Or specify dates
@@ -36,8 +34,6 @@ get_sunrise(
   start = "2015-12-01", 
   end = "2015-12-31"
 )
-
-}
 
 }
 \seealso{

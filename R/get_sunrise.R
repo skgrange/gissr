@@ -19,9 +19,7 @@
 #' 
 #' @examples 
 #' 
-#' \dontrun{
-#' 
-#' # Get sunrise and sunset dates for London for the current year
+#' # Get sunrise and sunset dates for London for today
 #' get_sunrise(latitude = 51.5072, longitude = 0.1275)
 #' 
 #' # Or specify dates
@@ -31,8 +29,6 @@
 #'   start = "2015-12-01", 
 #'   end = "2015-12-31"
 #' )
-#' 
-#' }
 #'
 #' @export
 get_sunrise <- function(latitude, longitude, start = NA, end = NA) {
@@ -95,9 +91,13 @@ get_sunrise <- function(latitude, longitude, start = NA, end = NA) {
 
 date_to_hms <- function(x) {
   
-  x %>% 
-    stringr::str_split_fixed(" ", 2) %>% 
-    .[, 2] %>% 
-    hms::as.hms()
+  # x %>% 
+  #   stringr::str_split_fixed(" ", 2) %>% 
+  #   .[, 2] %>% 
+  #   hms::as.hms()
+  
+  x <- as.numeric(x) - as.numeric(lubridate::floor_date(x, "day")) 
+  x <- hms::as.hms(x)
+  return(x)
   
 }
