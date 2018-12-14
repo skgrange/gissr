@@ -81,6 +81,7 @@ get_sunrise <- function(latitude, longitude, start = NA, end = NA) {
     date_sunset = sunset
   ) %>% 
     mutate(daylight = as.numeric(date_sunset) - as.numeric(date_sunrise),
+           daylight = hms::as.hms(daylight),
            sunrise = date_to_hms(sunrise),
            sunset = date_to_hms(sunset))
 
