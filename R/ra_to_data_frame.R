@@ -11,6 +11,8 @@
 #' @export
 ra_to_data_frame <- function(ra, rename = FALSE) {
   
+  .Deprecated("ra_forify", package = "gissr")
+  
   # To data frame
   df <- data.frame(raster::rasterToPoints(ra, spatial = FALSE))
   
