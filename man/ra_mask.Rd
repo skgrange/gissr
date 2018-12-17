@@ -4,12 +4,14 @@
 \alias{ra_mask}
 \title{Function to mask/filter/crop a raster object to a spatial polygon.}
 \usage{
-ra_mask(ra, sp_polygon)
+ra_mask(ra, sp_polygon, inverse = FALSE)
 }
 \arguments{
 \item{ra}{Raster object to be masked/filtered.}
 
 \item{sp_polygon}{Spatial polygon to be used as the filter.}
+
+\item{inverse}{Should an inverse/punch/erase mask be conducted?}
 }
 \value{
 Raster object.

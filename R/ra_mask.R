@@ -4,9 +4,12 @@
 #' 
 #' @param sp_polygon Spatial polygon to be used as the filter. 
 #' 
+#' @param inverse Should an inverse/punch/erase mask be conducted? 
+#' 
 #' @author Stuart K. Grange.
 #' 
-#' @return Raster object. 
+#' @return Raster object.
 #' 
 #' @export
-ra_mask <- function(ra, sp_polygon) raster::mask(ra, sp_polygon)
+ra_mask <- function(ra, sp_polygon, inverse = FALSE) 
+  raster::mask(ra, sp_polygon, inverse = inverse)
