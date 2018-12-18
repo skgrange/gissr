@@ -15,7 +15,7 @@ data slot (\emph{i.e.} it will be a \code{SpatialPolygonsDataFrame}) because
 this is what is joined.}
 }
 \value{
-Note, a data frame, not a spatial object.
+A tibble, not a spatial object.
 }
 \description{
 \code{sp_left_join} tests if a point is within a polygon and joins data from
@@ -29,6 +29,7 @@ spatial objects. If variable names collide, they will be suffixed with
 systems must be identical for the two geometries.
 }
 \examples{
+
 \dontrun{
 
 # I am in London, I know my latitude and longitude. Which borough am I in? 

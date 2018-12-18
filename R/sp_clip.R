@@ -98,3 +98,9 @@ sp_clip <- function(sp, envelope, sp_polygon = NULL, method = "raster") {
 #' 
 #' @export
 sp_crop <- sp_clip
+
+
+#' @rdname sp_clip
+#' 
+#' @export
+ra_crop <- sp_clip

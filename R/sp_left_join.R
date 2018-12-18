@@ -21,9 +21,10 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Note, a data frame, not a spatial object. 
+#' @return A tibble, not a spatial object. 
 #' 
 #' @examples 
+#' 
 #' \dontrun{
 #' 
 #' # I am in London, I know my latitude and longitude. Which borough am I in? 
@@ -60,7 +61,7 @@ sp_left_join <- function(sp_points, sp_polygons) {
   
   # Check the spatial objects 
   if (!grepl("points", sp_class(sp_points), ignore.case = TRUE))
-    stop("Spatial-points must be defined in the 'sp_points' argument.", 
+    stop("Spatial points must be defined in the 'sp_points' argument.", 
          call. = FALSE)
   
   if (!grepl("polygon", sp_class(sp_polygons), ignore.case = TRUE))
@@ -94,6 +95,9 @@ sp_left_join <- function(sp_points, sp_polygons) {
     df <- df_sp
     
   }
+  
+  # To tibble
+  df <- as_tibble(df)
   
   return(df)
   
