@@ -2,29 +2,20 @@
 % Please edit documentation in R/map_to_sp.R
 \name{map_to_sp}
 \alias{map_to_sp}
-\title{Function to convert map database objects to spatial data.}
+\title{Function to convert the map database object to spatial polygons.}
 \usage{
-map_to_sp(map = "world")
-}
-\arguments{
-\item{map}{Map database to turn into spatial data. \code{map} can be either
-\code{"map"} or \code{"world_hires"}.}
+map_to_sp()
 }
 \value{
-SpatialPolygonsDataFrame with \code{id} and \code{name} variables.
+SpatialPolygonsDataFrame.
 }
 \description{
-Function to convert map database objects to spatial data.
+Function to convert the map database object to spatial polygons.
 }
 \examples{
-\dontrun{
-# Lower resolution
-sp_map <- map_to_sp(map = "world")
 
-#
-sp_map_better <- map_to_sp(map = "world_hires")
-
-}
+# Import the mapping data as spatial polyogons
+sp_map <- map_to_sp()
 
 }
 \author{

@@ -16,6 +16,7 @@
 \alias{projection_mollweide}
 \alias{projection_china}
 \alias{projection_beijing}
+\alias{projection_etr89}
 \title{Functions to wrap common projection (PROJ.4) strings.}
 \usage{
 projection_wgs84()
@@ -47,6 +48,8 @@ projection_mollweide()
 projection_china()
 
 projection_beijing()
+
+projection_etr89()
 }
 \value{
 Character vector with length of 1.

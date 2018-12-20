@@ -1,36 +1,19 @@
-#' Function to convert map database objects to spatial data. 
-#' 
-#' @param map Map database to turn into spatial data. \code{map} can be either
-#' \code{"map"} or \code{"world_hires"}. 
-#' 
-#' @return SpatialPolygonsDataFrame with \code{id} and \code{name} variables. 
+#' Function to convert the map database object to spatial polygons.  
 #' 
 #' @examples 
-#' \dontrun{
-#' # Lower resolution
-#' sp_map <- map_to_sp(map = "world")
 #' 
-#' #
-#' sp_map_better <- map_to_sp(map = "world_hires")
-#' 
-#' }
+#' # Import the mapping data as spatial polyogons
+#' sp_map <- map_to_sp()
 #' 
 #' @author Stuart K. Grange
+#' 
+#' @return SpatialPolygonsDataFrame.
 #'
 #' @export
-map_to_sp <- function(map = "world") {
-  
-  # Parse arguments
-  map <- stringr::str_to_lower(map)
-  map <- stringr::str_replace(map, "world.hires|world_hires|world_highres|world_high", 
-                              "worldHires")
-  
-  map_allowed <- c("world", "worldHires")
-  
-  if (!map %in% map_allowed) stop("'map' not recognised.", call. = FALSE)
+map_to_sp <- function() {
   
   # Get polygons
-  map_data <- maps::map(map, fill = TRUE, plot = FALSE)
+  map_data <- maps::map("world", fill = TRUE, plot = FALSE)
   
   # Get id vector, uses names
   id <- sapply(strsplit(map_data$names, ":"), function(x) x[1])
@@ -52,7 +35,6 @@ map_to_sp <- function(map = "world") {
   # Give another id
   sp@data$name <- sp_feature_ids(sp)
   
-  # Return
-  sp
+  return(sp)
   
 }
