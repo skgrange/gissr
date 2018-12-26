@@ -7,8 +7,19 @@
 #' @export
 ra_load <- function(ra) {
   
+  # Check object
   stopifnot(is.ra(ra))
-  ra <- raster::readAll(ra)
+  
+  if (ra@data@inmemory) {
+    
+    message("Raster object already in memory...")
+    
+  } else {
+    
+    ra <- raster::readAll(ra)
+    
+  }
+  
   return(ra)
   
 }

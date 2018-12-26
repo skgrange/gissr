@@ -52,8 +52,10 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
       # Warn
       if (warn) {
         
-        warning("Spatial object had no projection. The projection has been forced.",
-                call. = FALSE)
+        warning(
+          "Spatial object has no projection, the projection has been forced...",
+          call. = FALSE
+        )
         
       }
       
@@ -63,14 +65,33 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
     } else {
       
       # Otherwise convert projection system
-      sp <- sp::spTransform(sp, CRS(to))
+      sp <- sp::spTransform(sp, sp::CRS(to))
       
     }
     
   } else {
     
-    sp <- raster::projectRaster(sp, crs = to) 
-    
+    # When no projection is present
+    if (is.na(sp@crs)) {
+      
+      if (warn) {
+        
+        warning(
+          "Raster object has no projection, the projection has been forced...",
+          call. = FALSE
+        )
+        
+      }
+      
+      raster::crs(sp) <- to
+      
+    } else {
+      
+      # Transform projection system
+      sp <- raster::projectRaster(sp, crs = to)
+      
+    }
+
   }
   
   return(sp)
