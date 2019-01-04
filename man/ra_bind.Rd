@@ -4,15 +4,15 @@
 \alias{ra_bind}
 \title{Function to bind multiple raster objects together.}
 \usage{
-ra_bind(..., tolerance = 0.05)
+ra_bind(list_ra, tolerance = 0.05)
 }
 \arguments{
-\item{...}{Raster objects.}
+\item{list_ra}{A list of RasterLayer objects.}
 
 \item{tolerance}{Permissible difference in origin.}
 }
 \value{
-Raster object.
+RasterLayer.
 }
 \description{
 Function to bind multiple raster objects together.
