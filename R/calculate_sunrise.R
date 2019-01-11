@@ -44,7 +44,7 @@ calculate_sunrise <- function(latitude, longitude, start = NA, end = NA,
   
   # Make spatial points, assumes latitude and longitude
   sp <- sp_from_data_frame(
-    data_frame(
+    tibble(
       latitude, 
       longitude
     ), 
@@ -90,7 +90,7 @@ calculate_sunrise <- function(latitude, longitude, start = NA, end = NA,
   }
   
   # Build data frame and add extras
-  df <- data_frame(
+  df <- tibble(
     date, 
     latitude, 
     longitude, 

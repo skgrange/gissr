@@ -35,5 +35,11 @@ ra_bind <- function(list_ra, tolerance = 0.05) {
 }
 
 
-ra_bind_reduce <- function(list_ra, tolerance)
-  Reduce(function(...) raster::merge(..., tolerance = tolerance), list_ra)
+ra_bind_reduce <- function(list_ra, tolerance) {
+  
+  Reduce(
+    function(...) raster::merge(..., tolerance = tolerance), 
+    list_ra
+  )
+  
+}

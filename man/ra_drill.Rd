@@ -25,7 +25,8 @@ Tibble.
 \code{ra_drill} wraps the \code{\link{extract}} raster function.
 }
 \seealso{
-\code{\link[raster]{extract}}, \code{\link{tidy_ra_drill}}
+\code{\link[raster]{extract}}, \code{\link{tidy_ra_drill}}, 
+\code{\link{ra_drill_with_cell_number}}
 }
 \author{
 Stuart K. Grange

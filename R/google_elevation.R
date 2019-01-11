@@ -47,8 +47,7 @@ google_elevation <- function(latitude, longitude, key, round = NA, vector = TRUE
   # Get only the elevation vector, not a good object name here
   if (vector) df <- df$elevation
   
-  # Return
-  df
+  return(df)
   
 }
 
@@ -77,7 +76,7 @@ google_elevation_worker <- function(url) {
   } else {
     
     # An empty data frame
-    df <- data_frame(
+    df <- tibble(
       latitude = NA, 
       longitude = NA,
       elevation = NA, 
@@ -86,7 +85,6 @@ google_elevation_worker <- function(url) {
     
   }
   
-  # Return
-  df
+  return(df)
   
 }

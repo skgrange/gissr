@@ -25,7 +25,7 @@ Function to create a lower resolution (aggregated) raster layer.
 \examples{
 \dontrun{
 
-# Increase a raster layer's resolution by five times
+# Decrease a raster layer's resolution by five times
 ra_countries_rough <- ra_aggregate(ra_countries, factor = 5)
 
 }

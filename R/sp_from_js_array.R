@@ -44,8 +44,8 @@ sp_from_js_array_worker <- function(text, type) {
   # Parse
   matrix <- jsonlite::fromJSON(text_clean)
 
-  # Build data frame
-  df <- data_frame(
+  # Build tibble
+  df <- tibble(
     latitude = matrix[, 1],
     longitude = matrix[, 2]
   )
