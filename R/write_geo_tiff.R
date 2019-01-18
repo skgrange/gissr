@@ -10,6 +10,17 @@
 #' 
 #' @return Invisible, raster object. 
 #' 
+#' @examples 
+#' \dontrun{
+#' 
+#' # Export raster object as geo tiff 
+#' write_geo_tiff(raster_temperature, "temperature_raster_object.tif")
+#' 
+#' # Or text file
+#' write_esri_grid_ascii(raster_temperature, "temperature_raster_object.grd")
+#' 
+#' }
+#' 
 #' @export
 write_geo_tiff <- function(ra, file) {
   

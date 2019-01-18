@@ -1,8 +1,15 @@
-#' Function to mask/filter/crop a raster object to a spatial polygon. 
+#' Function to mask/filter a raster object to a spatial polygon. 
+#' 
+#' Masking a raster object will filter the object to a spatial polygon with 
+#' potentially complicated geometries while \code{\link{ra_crop}} will crop the 
+#' object to a rectangular extent. 
 #' 
 #' @param ra Raster object to be masked/filtered. 
 #' 
 #' @param sp_polygon Spatial polygon to be used as the filter. 
+#' 
+#' @param pre_crop Should the raster object be cropped before being masked? This
+#' can speed the function up. 
 #' 
 #' @param inverse Should an inverse/punch/erase mask be conducted? 
 #' 
@@ -10,6 +17,17 @@
 #' 
 #' @return Raster object.
 #' 
+#' @seealso \code{\link{ra_crop}}
+#' 
 #' @export
-ra_mask <- function(ra, sp_polygon, inverse = FALSE) 
-  raster::mask(ra, sp_polygon, inverse = inverse)
+ra_mask <- function(ra, sp_polygon, pre_crop = FALSE, inverse = FALSE) {
+  
+  # Crop, use extent of polygon here
+  if (pre_crop) ra <- ra_crop(ra, envelope = sp_polygon)
+  
+  # Mask
+  ra <- raster::mask(ra, sp_polygon, inverse = inverse)
+  
+  return(ra)
+  
+}

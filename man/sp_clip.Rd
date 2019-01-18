@@ -4,8 +4,8 @@
 \alias{sp_clip}
 \alias{sp_crop}
 \alias{ra_crop}
-\title{Function to clip spatial objects by a rectangular envelope or a spatial 
-polygon.}
+\title{Function to clip spatial (or raster) objects by a rectangular envelope or a 
+spatial polygon.}
 \usage{
 sp_clip(sp, envelope, sp_polygon = NULL, method = "raster")
 

@@ -2,14 +2,17 @@
 % Please edit documentation in R/ra_mask.R
 \name{ra_mask}
 \alias{ra_mask}
-\title{Function to mask/filter/crop a raster object to a spatial polygon.}
+\title{Function to mask/filter a raster object to a spatial polygon.}
 \usage{
-ra_mask(ra, sp_polygon, inverse = FALSE)
+ra_mask(ra, sp_polygon, pre_crop = FALSE, inverse = FALSE)
 }
 \arguments{
 \item{ra}{Raster object to be masked/filtered.}
 
 \item{sp_polygon}{Spatial polygon to be used as the filter.}
+
+\item{pre_crop}{Should the raster object be cropped before being masked? This
+can speed the function up.}
 
 \item{inverse}{Should an inverse/punch/erase mask be conducted?}
 }
@@ -17,7 +20,12 @@ ra_mask(ra, sp_polygon, inverse = FALSE)
 Raster object.
 }
 \description{
-Function to mask/filter/crop a raster object to a spatial polygon.
+Masking a raster object will filter the object to a spatial polygon with 
+potentially complicated geometries while \code{\link{ra_crop}} will crop the 
+object to a rectangular extent.
+}
+\seealso{
+\code{\link{ra_crop}}
 }
 \author{
 Stuart K. Grange.

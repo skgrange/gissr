@@ -22,6 +22,18 @@ Invisible, raster object.
 \description{
 Functions to export raster objects.
 }
+\examples{
+\dontrun{
+
+# Export raster object as geo tiff 
+write_geo_tiff(raster_temperature, "temperature_raster_object.tif")
+
+# Or text file
+write_esri_grid_ascii(raster_temperature, "temperature_raster_object.grd")
+
+}
+
+}
 \author{
 Stuart K. Grange
 }

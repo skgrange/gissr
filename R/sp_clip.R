@@ -1,5 +1,5 @@
-#' Function to clip spatial objects by a rectangular envelope or a spatial 
-#' polygon.  
+#' Function to clip spatial (or raster) objects by a rectangular envelope or a 
+#' spatial polygon.  
 #' 
 #' \code{sp_clip} uses \code{raster::crop} by default if an envelope is used 
 #' rather than \code{rgeos::gIntersection} because the \code{crop} method can 
