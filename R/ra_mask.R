@@ -22,8 +22,16 @@
 #' @export
 ra_mask <- function(ra, sp_polygon, pre_crop = FALSE, inverse = FALSE) {
   
-  # Crop, use extent of polygon here
-  if (pre_crop) ra <- ra_crop(ra, envelope = sp_polygon)
+  if (pre_crop) {
+    
+    # Crop, use extent of polygon here
+    ra <- ra_crop(ra, envelope = sp_polygon)
+    
+    # Sometimes the mask function errors with a raster brick
+    # Switch to stack
+    if (class(ra) == "RasterBrick") ra <- raster::stack(ra)
+    
+  }
   
   # Mask
   ra <- raster::mask(ra, sp_polygon, inverse = inverse)

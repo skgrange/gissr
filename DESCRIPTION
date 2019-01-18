@@ -1,7 +1,7 @@
 Package: gissr
 Type: Package
 Title: Tools To Make Working With R and Spatial Data Easier
-Version: 0.8.941
+Version: 0.8.942
 Date: 2019-01-18
 Authors@R: person("Stuart", "Grange", email = "s.k.grange@gmail.com", 
     role = c("cre", "aut"), comment = c(ORCID = "0000-0003-4093-3596"))
