@@ -43,6 +43,9 @@ sp_fortify <- function(sp, rename = TRUE) {
         names(df)
       )
       
+      # Arrange variables
+      df <- select(df, latitude, longitude, everything())
+      
     }
     
   } else {
@@ -58,12 +61,12 @@ sp_fortify <- function(sp, rename = TRUE) {
       names(df) <- ifelse(names(df) == "lat", "latitude", names(df))
       names(df) <- ifelse(names(df) == "long", "longitude", names(df))
       
+      # Arrange variables
+      df <- select(df, latitude, longitude, everything())
+      
     }
     
   }
-  
-  # Arrange variables
-  df <- select(df, latitude, longitude, everything())
   
   # To tibble
   df <- as_tibble(df)
