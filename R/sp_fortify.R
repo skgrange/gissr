@@ -21,7 +21,10 @@ sp_fortify <- function(sp, rename = TRUE) {
     # To data frame
     df <- data.frame(sp, stringsAsFactors = FALSE)
     
-    # Drop optional if it exists, why is this here? 
+    # Factors still present, fix
+    df <- dplyr::mutate_if(df, is.factor, as.character)
+    
+    # Drop optional if it exists
     if (any(grepl("optional", names(df)))) df$optional <- NULL
     
     if (rename) {
