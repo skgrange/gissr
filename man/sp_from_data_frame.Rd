@@ -5,15 +5,15 @@
 \title{Function to promoting a data frame to a SpatialPointsDataFrame, 
 SpatialLinesDataFrame, or SpatialPolygonsDataFrame.}
 \usage{
-sp_from_data_frame(df, type, latitude = "latitude",
+sp_from_data_frame(df, type = "points", latitude = "latitude",
   longitude = "longitude", projection = projection_wgs84(),
-  keep = FALSE, id = NA)
+  keep = FALSE, id = NA, warn = TRUE)
 }
 \arguments{
 \item{df}{Data frame to be converted into spatial data frame.}
 
 \item{type}{Type of geomerty. Type must be one of \code{"points"}, 
-\code{"lines"}, or \code{"polygons"} and there is no default.}
+\code{"lines"}, or \code{"polygons"}.}
 
 \item{latitude}{\code{df}'s latitude variable name.}
 
@@ -28,6 +28,9 @@ be kept in the SpatialPointsDataFrame's data slot?}
 \item{id}{Variable in \code{df} which codes for spatial object's id. This is
 used when a data frame contains many seperate geometries. \code{id} is not 
 used for points because each point is a seperate geometry.}
+
+\item{warn}{Should the function raise a warning when observations are 
+removed?}
 }
 \value{
 A SpatialPointsDataFrame, SpatialLinesDataFrame, or 

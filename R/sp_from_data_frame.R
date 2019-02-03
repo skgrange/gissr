@@ -4,7 +4,7 @@
 #' @param df Data frame to be converted into spatial data frame.  
 #' 
 #' @param type Type of geomerty. Type must be one of \code{"points"}, 
-#' \code{"lines"}, or \code{"polygons"} and there is no default. 
+#' \code{"lines"}, or \code{"polygons"}. 
 #' 
 #' @param latitude \code{df}'s latitude variable name. 
 #' 
@@ -19,6 +19,9 @@
 #' @param id Variable in \code{df} which codes for spatial object's id. This is
 #' used when a data frame contains many seperate geometries. \code{id} is not 
 #' used for points because each point is a seperate geometry. 
+#' 
+#' @param warn Should the function raise a warning when observations are 
+#' removed? 
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -47,10 +50,10 @@
 #' }
 #' 
 #' @export
-sp_from_data_frame <- function(df, type, latitude = "latitude", 
+sp_from_data_frame <- function(df, type = "points", latitude = "latitude", 
                                longitude = "longitude", 
                                projection = projection_wgs84(), 
-                               keep = FALSE, id = NA) {
+                               keep = FALSE, id = NA, warn = TRUE) {
   
   #  Check and parse
   if (length(type) != 1) stop("'type' must have a length of one. ", call. = FALSE)
@@ -58,23 +61,28 @@ sp_from_data_frame <- function(df, type, latitude = "latitude",
   # Make plurals
   type <- stringr::str_trim(type)
   type <- stringr::str_to_lower(type)
-  type <- ifelse(type == "point", "points", type)
-  type <- ifelse(type == "line", "lines", type)
-  type <- ifelse(type == "polygon", "polygons", type)
+  type <- if_else(type == "point", "points", type)
+  type <- if_else(type == "line", "lines", type)
+  type <- if_else(type == "polygon", "polygons", type)
   
   # Check
   if (!grepl("points|lines|polygons", type)) 
     stop("'type' must be one of 'points', 'lines', or 'polygons'.", call. = FALSE)
   
   # Promote to spatial data
-  if (type == "points")
-    sp <- data_frame_to_points(df, latitude, longitude, projection, keep)
-  
-  if (type == "lines")
-    sp <- data_frame_to_lines(df, latitude, longitude, projection, id)
-  
-  if (type == "polygons")
-    sp <- data_frame_to_polygons(df, latitude, longitude, projection, id)
+  if (type == "points") {
+    
+    sp <- data_frame_to_points(df, latitude, longitude, projection, keep, warn)
+    
+  } else if (type == "lines") {
+    
+    sp <- data_frame_to_lines(df, latitude, longitude, projection, id, warn)
+    
+  } else if (type == "polygons") {
+    
+    sp <- data_frame_to_polygons(df, latitude, longitude, projection, id, warn)
+    
+  }
   
   return(sp)
   
@@ -82,24 +90,25 @@ sp_from_data_frame <- function(df, type, latitude = "latitude",
 
 
 data_frame_to_points <- function(df, latitude, longitude, projection, 
-                                 keep = FALSE) {
-  
-  # Catch for dplyr's data frame class
-  df <- threadr::base_df(df)
+                                 keep = FALSE, warn) {
   
   # NA check, if NAs drop them
-  if (any(is.na(c(df[, latitude], df[, longitude])))) {
+  if (any(is.na(c(df[, latitude, drop = TRUE], df[, longitude, drop = TRUE])))) {
     
     # Remove NAs
     df <- df[!(is.na(df[, latitude]) | is.na(df[, longitude])), ]
     
     # Raise a warning
-    warning(
-      "Missing coordinates were detected and have been removed...", 
-      call. = FALSE
-    )
+    if (warn) {
+      
+      warning(
+        "Missing coordinates were detected and have been removed...", 
+        call. = FALSE
+      )
+      
+    }
     
-    # Check 
+    # Check if all observations have been lost
     if (nrow(df) == 0) stop("There are no valid coordinates...", call. = FALSE)
     
   }
@@ -126,10 +135,7 @@ data_frame_to_points <- function(df, latitude, longitude, projection,
 }
 
 
-data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
-  
-  # Catch for dplyr's data frame class
-  df <- threadr::base_df(df)
+data_frame_to_lines <- function(df, latitude, longitude, projection, id, warn) {
   
   # Make an identifier variable for lines
   if (is.na(id)) {
@@ -151,7 +157,14 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
   data_extras[, c(latitude, longitude)] <- NULL
   
   # Make sp points object
-  sp_object <- data_frame_to_points(df, latitude, longitude, projection)
+  sp_object <- data_frame_to_points(
+    df, 
+    latitude, 
+    longitude, 
+    projection,
+    keep = FALSE,
+    warn = warn
+  )
   
   # From
   # http://stackoverflow.com/questions/24284356/convert-spatialpointsdataframe-
@@ -179,10 +192,8 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id) {
 }
 
 
-data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {
-  
-  # Catch for dplyr's data frame class
-  df <- threadr::base_df(df)
+data_frame_to_polygons <- function(df, latitude, longitude, projection, id,
+                                   warn) {
   
   # Make an identifier variable for lines
   if (is.na(id)) {
@@ -204,22 +215,27 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {
   data_extras[, c(latitude, longitude)] <- NULL
   
   # Make sp points object
-  sp <- data_frame_to_points(df, latitude, longitude, projection)
+  sp <- data_frame_to_points(
+    df, 
+    latitude, 
+    longitude, 
+    projection,
+    keep = FALSE,
+    warn = warn
+  )
   
   # A list element will represent each group within a feature 
-  # Long-lat order is important
+  # Longitude latitude order is important
   coordinates <- plyr::dlply(
     df, 
     "id", 
-    function(x) 
-      data.matrix(x[, c(longitude, latitude)])
+    function(x) data.matrix(x[, c(longitude, latitude)])
   )
   
   # Make polygons
   sp <- lapply(
     seq_along(coordinates), 
-    function(x) 
-      matrix_to_sp_polygon(coordinates[x], x)
+    function(x) matrix_to_sp_polygon(coordinates[x], x)
   )
   
   # Bind geometries
@@ -236,7 +252,6 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id) {
 }
 
 
-# No export
 matrix_to_sp_polygon <- function(matrix, id) {
   
   # Matix to polygon
