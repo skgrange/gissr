@@ -10,6 +10,9 @@ sp_reset_feature_ids(sp)
 \item{sp}{A spatial object. \code{sp} can also be a list containing many 
 spatial objects.}
 }
+\value{
+Spatial object.
+}
 \description{
 \code{sp_reset_feature_ids} will reset the feature IDs in a spatial object to
 sequential integers (beginning at 1), but these will be stored as a characters.

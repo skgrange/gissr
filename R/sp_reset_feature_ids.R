@@ -8,6 +8,10 @@
 #' @param sp A spatial object. \code{sp} can also be a list containing many 
 #' spatial objects. 
 #' 
+#' @author Stuart K. Grange
+#' 
+#' @return Spatial object. 
+#' 
 #' @examples 
 #' \dontrun{
 #' 
@@ -21,8 +25,6 @@
 #' sp_zones <- sp_reset_feature_ids(sp_zones)
 #' 
 #' }
-#' 
-#' @author Stuart K. Grange
 #' 
 #' @export
 sp_reset_feature_ids <- function(sp) {
@@ -46,8 +48,7 @@ sp_reset_feature_ids <- function(sp) {
     
   }
   
-  # Return
-  sp
+  return(sp)
   
 }
 
@@ -70,8 +71,7 @@ resetter <- function(sp, uuid = FALSE) {
     
   }
   
-  # Return
-  sp
+  return(sp)
   
 }
 
@@ -82,7 +82,6 @@ reset_data_slot <- function(sp) {
   # Only if object has a data slot
   if (grepl("data", sp_class(sp), ignore.case = TRUE)) row.names(sp@data) <- NULL
   
-  # Return
-  sp
+  return(sp)
   
 }
