@@ -85,11 +85,8 @@ sp_from_data_frame <- function(df, type = "points", latitude = "latitude",
   }
   
   # Ensure data slot is a data.frame, not a tibble
-  if (grepl("Data", sp_class(sp))) {
-    
-    # Drop tibble
-    if (tibble::is_tibble(sp@data)) sp@data <- data.frame(sp@data)
-    
+  if (grepl("Data", sp_class(sp)) && tibble::is_tibble(sp@data)) {
+    sp@data <- data.frame(sp@data)
   }
   
   return(sp)
