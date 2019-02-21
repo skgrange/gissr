@@ -10,6 +10,23 @@
 #' @param width Width of buffer. \code{width}'s units is in \code{sp}'s 
 #' projection system.
 #' 
+#' @param end_style End style of the buffered geometry, one of \code{"round"}, 
+#' \code{"flat"}, or \code{"square"}. 
+#' 
+#' @return Spatial object. 
+#' 
 #' @export
-sp_buffer <- function(sp, features = TRUE, width)
-  rgeos::gBuffer(sp, byid = features, width = width)
+sp_buffer <- function(sp, features = TRUE, width = 1, end_style = "round") {
+  
+  # Parse
+  end_style <- stringr::str_to_upper(end_style)
+  stopifnot(end_style %in% c("ROUND", "FLAT", "SQUARE"))
+  
+  # Warning suppression for when non-metric projections used
+  sp <- suppressWarnings(
+    rgeos::gBuffer(sp, byid = features, width = width, capStyle = end_style)
+  )
+  
+  return(sp)
+  
+}

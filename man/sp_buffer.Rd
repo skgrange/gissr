@@ -4,7 +4,7 @@
 \alias{sp_buffer}
 \title{Function to include or exclude an area of a spatial object.}
 \usage{
-sp_buffer(sp, features = TRUE, width)
+sp_buffer(sp, features = TRUE, width = 1, end_style = "round")
 }
 \arguments{
 \item{sp}{Spatial object.}
@@ -14,6 +14,12 @@ buffered? Default is \code{TRUE}.}
 
 \item{width}{Width of buffer. \code{width}'s units is in \code{sp}'s 
 projection system.}
+
+\item{end_style}{End style of the buffered geometry, one of \code{"round"}, 
+\code{"flat"}, or \code{"square"}.}
+}
+\value{
+Spatial object.
 }
 \description{
 Function to include or exclude an area of a spatial object.
