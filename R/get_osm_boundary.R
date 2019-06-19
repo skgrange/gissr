@@ -8,7 +8,7 @@
 #' @param way Is \code{id} a way? If \code{TRUE}, a different method is needed
 #' which scrapes XML directly from OpenStreetMap for nodes and is a bit slow. 
 #' 
-#' @param progress Type of progress bar to display. Default is \code{"none"}
+#' @param verbose Should the function give messages? 
 #' 
 #' @return SpatialPolygonsDataFrame with WGS84 projection. 
 #' 
@@ -16,28 +16,21 @@
 #' 
 #' @examples 
 #' 
-#' \dontrun{
-#' 
 #' # Get North York Moors National Park boundary
 #' sp_moors <- get_osm_boundary(409150)
 #' 
-#' }
-#' 
 #' @export
-get_osm_boundary <- function(id, way = FALSE, progress = "none") {
+get_osm_boundary <- function(id, way = FALSE, verbose = FALSE) {
   
   # Parse
   id <- stringr::str_trim(id)
   
   if (!way) {
     
-    # Vectorise function to interact with an api service
-    sp_list <- plyr::llply(
-      id, 
-      osm_boundary_worker, 
-      .progress = progress
-    )
+    # Do
+    sp_list <- purrr::map(id, ~osm_boundary_worker(., verbose = verbose))
     
+    # Check types
     class_sp <- sapply(sp_list, class)
     
     if (length(class_sp) == 1 && class_sp == "NULL") {
@@ -57,11 +50,7 @@ get_osm_boundary <- function(id, way = FALSE, progress = "none") {
   } else {
     
     # Use osm functions to directly scrape
-    sp_list <- plyr::llply(
-      id, 
-      osm_boundary_way_worker, 
-      .progress = progress
-    )
+      sp_list <- purrr::map(id, ~osm_boundary_way_worker(., verbose = verbose))
     
     # Bind list of spatial objects
     sp <- sp_bind(sp_list)
@@ -76,7 +65,10 @@ get_osm_boundary <- function(id, way = FALSE, progress = "none") {
 }
 
 
-osm_boundary_way_worker <- function(id) {
+osm_boundary_way_worker <- function(id, verbose) {
+  
+  # Message for user
+  if (verbose) message(threadr::date_message(), "`", id, "`...")
   
   # Get nodes
   vector_nodes <- get_osm_way_data(id)$relations
@@ -92,8 +84,10 @@ osm_boundary_way_worker <- function(id) {
 }
 
 
-# No export
-osm_boundary_worker <- function(id) {
+osm_boundary_worker <- function(id, verbose) {
+  
+  # Message for user
+  if (verbose) message(threadr::date_message(), "`", id, "`...")
   
   # Build query
   url <- stringr::str_c(
