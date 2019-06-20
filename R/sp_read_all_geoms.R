@@ -14,6 +14,9 @@
 #' @export
 sp_read_all_geoms <- function(file, verbose = FALSE) {
   
+  # Check input
+  stopifnot(file.exists(file))
+  
   if (verbose) message(threadr::date_message(), "Reading points...")
   
   suppressMessages(
