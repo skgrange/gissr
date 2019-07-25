@@ -11,7 +11,8 @@
 \alias{projection_lcc}
 \alias{projection_swiss}
 \alias{projection_slovenia}
-\alias{projection_utm}
+\alias{projection_utm_32}
+\alias{projection_utm_33}
 \alias{projection_madrid}
 \alias{projection_mollweide}
 \alias{projection_china}
@@ -39,7 +40,9 @@ projection_swiss()
 
 projection_slovenia()
 
-projection_utm()
+projection_utm_32()
+
+projection_utm_33()
 
 projection_madrid()
 
