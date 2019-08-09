@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_to_wkt.R
 \name{sp_to_wkt}
 \alias{sp_to_wkt}
-\title{Function to convert a spatial object to a vector of WKT or a data frame 
+\title{Function to convert a spatial object to a vector of WKT or a tibble 
 containing a WKT variable.}
 \usage{
 sp_to_wkt(sp, features = TRUE, data = TRUE, wkt = "geom")
@@ -10,17 +10,19 @@ sp_to_wkt(sp, features = TRUE, data = TRUE, wkt = "geom")
 \arguments{
 \item{sp}{Spatial object to convert to WKT.}
 
-\item{features}{Should features within \code{sp} form different WKT strings?
-Default is \code{TRUE}.}
+\item{features}{Should features within \code{sp} form different WKT strings?}
 
 \item{data}{If \code{sp} contains a data slot, should a data frame be created
-with a WKT variable? Default is \code{TRUE}.}
+with a WKT variable?}
 
 \item{wkt}{Variable name of WKT strings in the returned data frame is 
-\code{data} is \code{TRUE}. Default is \code{"geom"}.}
+\code{data} is \code{TRUE}.}
+}
+\value{
+Tibble.
 }
 \description{
-Function to convert a spatial object to a vector of WKT or a data frame 
+Function to convert a spatial object to a vector of WKT or a tibble 
 containing a WKT variable.
 }
 \author{
