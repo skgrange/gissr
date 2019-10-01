@@ -83,10 +83,8 @@ calculate_sunrise <- function(latitude, longitude, start = NA, end = NA,
   
   # Change time zones
   if (tz != "UTC") {
-    
     sunrise <- lubridate::with_tz(sunrise, tzone = tz)
     sunset <- lubridate::with_tz(sunset, tzone = tz)
-    
   }
   
   # Build data frame and add extras
@@ -98,7 +96,7 @@ calculate_sunrise <- function(latitude, longitude, start = NA, end = NA,
     date_sunset = sunset
   ) %>% 
     mutate(daylight = as.numeric(date_sunset) - as.numeric(date_sunrise),
-           daylight = hms::as.hms(daylight),
+           daylight = hms::as_hms(daylight),
            sunrise = date_to_hms(sunrise),
            sunset = date_to_hms(sunset))
 
@@ -110,7 +108,7 @@ calculate_sunrise <- function(latitude, longitude, start = NA, end = NA,
 date_to_hms <- function(x) {
   
   x <- as.numeric(x) - as.numeric(lubridate::floor_date(x, "day")) 
-  x <- hms::as.hms(x)
+  x <- hms::as_hms(x)
   return(x)
   
 }
