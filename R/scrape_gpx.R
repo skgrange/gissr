@@ -8,13 +8,13 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Data frame.  
+#' @return Tibble. 
 #' 
 #' @export
 scrape_gpx <- function(file, transform = TRUE) {
   
   # Load file as text
-  text_gpx <- threadr::read_lines(file, warn = FALSE)
+  text_gpx <- readr::read_lines(file)
   
   # Parse xml, to-do, find out why a html parser is needed. 
   xml_tree <- XML::htmlTreeParse(text_gpx, useInternalNodes = TRUE)
@@ -34,37 +34,23 @@ scrape_gpx <- function(file, transform = TRUE) {
   longitude <- as.numeric(longitude)
   date <- lubridate::ymd_hms(date, tz = "UTC")
   
-  # Build data frame
   if (length(date) != 0) {
     
-    df <- data.frame(
-      date, 
-      elevation,
-      latitude,
-      longitude,
-      stringsAsFactors = FALSE
-    )
+    # Build tibble    
+    df <- tibble(date, elevation, latitude, longitude)
     
     # Calculate things, needs date
     if (transform) {
-      
-      df$distance <- distance_by_haversine(df$latitude, df$longitude)
-      df$speed <- df$distance * (df$date - dplyr::lag(df$date))
-      df$speed <- as.numeric(df$speed)
-      df$speed_km_h <- threadr::ms_to_km_h(df$speed)
-      
+      df <- df %>% 
+        mutate(distance = distance_by_haversine(latitude, longitude),
+               speed = distance * (date - dplyr::lag(date)),
+               speed = as.numeric(speed),
+               speed_km_h = threadr::ms_to_km_h(speed))
     }
     
   } else {
-    
-    # When the gpx file does not contain date
-    df <- data.frame(
-      elevation,
-      latitude,
-      longitude,
-      stringsAsFactors = FALSE
-    )
-    
+    # For when the gpx file does not contain date
+    df <- tibble(elevation, latitude, longitude)
   }
   
   return(df)

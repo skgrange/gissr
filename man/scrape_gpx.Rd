@@ -14,7 +14,7 @@ scrape_gpx(file, transform = TRUE)
 distance if the file contains the appropriate variables?}
 }
 \value{
-Data frame.
+Tibble.
 }
 \description{
 Function to read \code{GPX} files as a data frame from the GPX Logger Android
