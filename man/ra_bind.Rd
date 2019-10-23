@@ -4,12 +4,19 @@
 \alias{ra_bind}
 \title{Function to bind multiple raster objects together.}
 \usage{
-ra_bind(list_ra, tolerance = 0.05)
+ra_bind(list_ra, tolerance = 0.05, method = "do.call", file = NA)
 }
 \arguments{
 \item{list_ra}{A list of RasterLayer objects.}
 
 \item{tolerance}{Permissible difference in origin.}
+
+\item{method}{Method to bind the raster layers together with. The options are
+"do.call" and "reduce". "reduce" will be faster for two or three list elements
+while "do.call" is better for large number of elements and is more efficient.}
+
+\item{file}{If method is "do.call", file can be used as the temporary file
+when the function is binding the elements.}
 }
 \value{
 RasterLayer.
