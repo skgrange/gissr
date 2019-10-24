@@ -8,8 +8,8 @@
 #' 
 #' @param sp_polygon Spatial polygon to be used as the filter. 
 #' 
-#' @param pre_crop Should the raster object be cropped before being masked? This
-#' can speed the function up. 
+#' @param pre_crop Should the raster object be cropped before being masked? Note,
+#' the default is \code{TRUE}. 
 #' 
 #' @param inverse Should an inverse/punch/erase mask be conducted? 
 #' 
@@ -20,15 +20,14 @@
 #' @seealso \code{\link{ra_crop}}
 #' 
 #' @export
-ra_mask <- function(ra, sp_polygon, pre_crop = FALSE, inverse = FALSE) {
+ra_mask <- function(ra, sp_polygon, pre_crop = TRUE, inverse = FALSE) {
   
   if (pre_crop) {
     
     # Crop, use extent of polygon here
     ra <- ra_crop(ra, envelope = sp_polygon)
     
-    # Sometimes the mask function errors with a raster brick
-    # Switch to stack
+    # Sometimes the mask function errors with a raster brick, switch to stack
     if (class(ra) == "RasterBrick") ra <- raster::stack(ra)
     
   }
