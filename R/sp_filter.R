@@ -18,9 +18,10 @@
 sp_filter <- function(sp, sp_boundary) {
   
   # Check the projection systems
-  if (!identical(sp_projection(sp), sp_projection(sp_boundary)))
+  if (!identical(sp_projection(sp), sp_projection(sp_boundary))) {
     stop("Projection systems are not identical...", call. = FALSE)
-  
+  }
+
   # Filter
   sp <- sp[sp_boundary, ]
   
