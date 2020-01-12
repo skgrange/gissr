@@ -1,8 +1,7 @@
-# **gissr**
+# **gissr** <a href='https://github.com/skgrange/gissr'><img src='man/figures/logo.png' align="right" height="131.5" /></a>
 
 [![Build Status](https://travis-ci.org/skgrange/gissr.svg?branch=master)](https://travis-ci.org/skgrange/gissr)
-
-![](inst/extdata/images/icon_small.png)
+[![Lifecycle Status](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)
 
 **gissr** is a collection of R functions which make working with spatial data easier.
 
