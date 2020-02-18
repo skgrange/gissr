@@ -4,8 +4,14 @@
 \alias{ra_to_polygons}
 \title{Function to transform a raster object to spatial polygons.}
 \usage{
-ra_to_polygons(ra, n = 4, na.rm = TRUE, digits = 12,
-  dissolve = FALSE, data = TRUE)
+ra_to_polygons(
+  ra,
+  n = 4,
+  na.rm = TRUE,
+  digits = 12,
+  dissolve = FALSE,
+  data = TRUE
+)
 }
 \arguments{
 \item{ra}{Raster object.}

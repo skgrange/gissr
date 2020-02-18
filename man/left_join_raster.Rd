@@ -5,9 +5,14 @@
 \title{Function for extracting values from a raster object based on points contained
 within a data frame.}
 \usage{
-left_join_raster(df, latitude = "latitude", longitude = "longitude",
-  projection = "+proj=longlat +datum=WGS84 +no_defs", raster,
-  name = "raster_value")
+left_join_raster(
+  df,
+  latitude = "latitude",
+  longitude = "longitude",
+  projection = "+proj=longlat +datum=WGS84 +no_defs",
+  raster,
+  name = "raster_value"
+)
 }
 \arguments{
 \item{df}{Data frame containing latitude and longitude (or other coordinate
@@ -36,10 +41,10 @@ Points to be tested are generally stored in a data frame with latitude and
 longitude pairs (or any other projection system) and the raster object must 
 have the same projection system. The result is the input data frame, with
 the joined raster values. Observations which do not match are filled with 
-\code{NA}.
+\code{NA}. 
 
 Currently only one layer is used with no buffer. No interpolation or
-aggregation functions are used either.
+aggregation functions are used either. 
 
 \code{raster::extract} is used for the join.
 }

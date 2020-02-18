@@ -5,8 +5,14 @@
 \title{Function to find elevation from latitude and longitude coordinate pairs using
 Google Maps API.}
 \usage{
-google_elevation(latitude, longitude, key, round = NA, vector = TRUE,
-  progress = "none")
+google_elevation(
+  latitude,
+  longitude,
+  key,
+  round = NA,
+  vector = TRUE,
+  progress = "none"
+)
 }
 \arguments{
 \item{latitude}{Numeric vector of latitude values.}

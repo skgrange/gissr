@@ -4,8 +4,14 @@
 \alias{ra_from_sp}
 \title{Function to create a raster object from a spatial (vector) object.}
 \usage{
-ra_from_sp(sp, resolution, fun = mean, na.rm = TRUE, background = NA,
-  drop_index = TRUE)
+ra_from_sp(
+  sp,
+  resolution,
+  fun = mean,
+  na.rm = TRUE,
+  background = NA,
+  drop_index = TRUE
+)
 }
 \arguments{
 \item{sp}{Spatial object with a data slot.}

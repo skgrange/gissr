@@ -4,8 +4,14 @@
 \alias{leaflet_plot}
 \title{Convenience function to quickly plot geometries on a leaflet map.}
 \usage{
-leaflet_plot(sp, popup = NULL, force = TRUE, colour = "#03F",
-  opacity = 0.5, fill_opacity = 0.2)
+leaflet_plot(
+  sp,
+  popup = NULL,
+  force = TRUE,
+  colour = "#03F",
+  opacity = 0.5,
+  fill_opacity = 0.2
+)
 }
 \arguments{
 \item{sp}{Spatial object to be plotted.}

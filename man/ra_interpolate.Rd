@@ -4,8 +4,13 @@
 \alias{ra_interpolate}
 \title{Function to interpolate a raster object.}
 \usage{
-ra_interpolate(ra, variable = "value", sp,
-  method = "inverse_distance_weighted", n_max = Inf)
+ra_interpolate(
+  ra,
+  variable = "value",
+  sp,
+  method = "inverse_distance_weighted",
+  n_max = Inf
+)
 }
 \arguments{
 \item{ra}{Raster object to be interpolated.}

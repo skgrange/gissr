@@ -4,7 +4,7 @@
 \alias{sp_snap_points_to_lines}
 \title{Function to "snap" spatial points to the nearest spatial line.}
 \usage{
-sp_snap_points_to_lines(sp_points, sp_lines, max_distance = NA)
+sp_snap_points_to_lines(sp_points, sp_lines, max_distance = NA, id = NA)
 }
 \arguments{
 \item{sp_points}{Spatial points to be snapped.}
@@ -13,6 +13,9 @@ sp_snap_points_to_lines(sp_points, sp_lines, max_distance = NA)
 
 \item{max_distance}{The maximum distance to avoid snapping points that are 
 farther apart.}
+
+\item{id}{The variable in \code{sp_lines} which will be transferred to 
+\code{sp_points} to distinguish the line which each point was snapped to.}
 }
 \value{
 Spatial points with altered coordinates; all points will lie on lines
@@ -20,6 +23,9 @@ supplied for \code{sp_lines}.
 }
 \description{
 Function to "snap" spatial points to the nearest spatial line.
+}
+\seealso{
+\link{snapPointsToLines}
 }
 \author{
 Stuart K. Grange

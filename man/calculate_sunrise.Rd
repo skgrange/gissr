@@ -4,8 +4,7 @@
 \alias{calculate_sunrise}
 \title{Function to calculate sunrise and sunset dates and times for a location.}
 \usage{
-calculate_sunrise(latitude, longitude, start = NA, end = NA,
-  tz = "UTC", ...)
+calculate_sunrise(latitude, longitude, start = NA, end = NA, tz = "UTC", ...)
 }
 \arguments{
 \item{latitude}{Latitude of a location.}

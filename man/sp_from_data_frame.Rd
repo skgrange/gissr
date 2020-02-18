@@ -5,9 +5,16 @@
 \title{Function to promoting a data frame to a SpatialPointsDataFrame, 
 SpatialLinesDataFrame, or SpatialPolygonsDataFrame.}
 \usage{
-sp_from_data_frame(df, type = "points", latitude = "latitude",
-  longitude = "longitude", projection = projection_wgs84(),
-  keep = FALSE, id = NA, warn = TRUE)
+sp_from_data_frame(
+  df,
+  type = "points",
+  latitude = "latitude",
+  longitude = "longitude",
+  projection = projection_wgs84(),
+  keep = FALSE,
+  id = NA,
+  warn = TRUE
+)
 }
 \arguments{
 \item{df}{Data frame to be converted into spatial data frame.}

@@ -4,8 +4,13 @@
 \alias{transform_coordinates}
 \title{Function to convert coordinates within a data frame.}
 \usage{
-transform_coordinates(df, latitude = "latitude",
-  longitude = "longitude", from, to)
+transform_coordinates(
+  df,
+  latitude = "latitude",
+  longitude = "longitude",
+  from,
+  to
+)
 }
 \arguments{
 \item{df}{Data frame with coordinates to be transformed.}
@@ -33,7 +38,7 @@ are supplied and the coordinate system is different that what is desired.
 spatial object, applies \code{sp::spTransform} to convert the coordinates, 
 converts the spatial object back to a data frame and then returns the data 
 frame with the transformed coordinates. The transformed coordinates can be 
-optionally renamed and reordered.
+optionally renamed and reordered. 
 
 \code{transform_coordinates} requires a CRS projection string for the 
 \code{from} and \code{to} arguments. \code{to} by default is set as 

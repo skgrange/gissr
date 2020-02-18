@@ -5,8 +5,12 @@
 \title{Function to create a elliptical polygon from a point, usually used for 
 filtering.}
 \usage{
-sp_create_ellipse(latitude, longitude, width = 0.01,
-  projection = projection_wgs84())
+sp_create_ellipse(
+  latitude,
+  longitude,
+  width = 0.01,
+  projection = projection_wgs84()
+)
 }
 \arguments{
 \item{latitude}{Latitude of a point.}
