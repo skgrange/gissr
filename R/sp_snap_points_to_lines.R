@@ -25,7 +25,6 @@ sp_snap_points_to_lines <- function(sp_points, sp_lines, max_distance = NA,
     points = sp_points, 
     lines = sp_lines, 
     maxDist = max_distance, 
-    withAttrs = TRUE,
     idField = id
   )
   
