@@ -4,7 +4,7 @@
 #' 
 #' @importFrom stats as.formula
 #' 
-#' @importFrom utils download.file read.csv type.convert
+#' @importFrom utils download.file read.csv type.convert tail
 #' 
 #' @import sp
 #' 
