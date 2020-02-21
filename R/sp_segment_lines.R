@@ -17,6 +17,37 @@
 #' 
 #' @return SpatialLinesDataFrame with one \code{id} variable. 
 #' 
+#' @examples 
+#' 
+#' # Make a line, this is in Switzerland so am using the local, metric projection 
+#' # system
+#' sp_lines <- dplyr::tribble(
+#'   ~latitude,  ~longitude,
+#'   47.381114,  8.5769906, 
+#'   47.3839327, 8.5831275, 
+#'   47.3884799, 8.5849729, 
+#'   47.3902377, 8.5856166, 
+#'   47.3910512, 8.5865822, 
+#'   47.3930994, 8.5912171, 
+#'   47.3938402, 8.5924187, 
+#'   47.3951621, 8.5935345, 
+#'   47.3975152, 8.5952726, 
+#'   47.3993162, 8.5954228, 
+#'   47.4057356, 8.598856
+#' ) %>% 
+#'   sp_from_data_frame(type = "lines") %>% 
+#'   sp_transform(projection_swiss())
+#' 
+#' # Check length
+#' sp_length(sp_lines)
+#' 
+#' # Into 100 metre sections
+#' sp_lines_split <- sp_segment_lines(sp_lines, length = 100)
+#' 
+#' # Check lengths
+#' sp_length(sp_lines_split, features = TRUE)
+#' sp_length(sp_lines_split, features = FALSE)
+#' 
 #' @export
 sp_segment_lines <- function(sp, length, features = FALSE) {
   
