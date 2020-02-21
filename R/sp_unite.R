@@ -16,15 +16,13 @@
 #' @export
 sp_unite <- function(sp) {
   
-  # Lines
-  if (grepl("lines", class(sp), ignore.case = TRUE)) 
+  # Unite objects
+  if (stringr::str_detect(sp_class(sp), "Lines")) {
     sp <- rgeos::gLineMerge(sp)
-    
-  # Polygons
-  if (grepl("polygons", class(sp), ignore.case = TRUE)) 
+  } else if (stringr::str_detect(sp_class(sp), "Polygons")) {
     sp <- rgeos::gUnaryUnion(sp)
+  }
   
-  # Return
-  sp
+  return(sp)
   
 }
