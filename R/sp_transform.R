@@ -51,46 +51,44 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
       
       # Warn
       if (warn) {
-        
         warning(
           "Spatial object has no projection, the projection has been forced...",
           call. = FALSE
         )
-        
       }
       
       # Now force
       sp::proj4string(sp) <- to
       
     } else {
-      
       # Otherwise convert projection system
       sp <- sp::spTransform(sp, sp::CRS(to))
-      
     }
     
   } else {
+    
+    # Get z values, this is stripped when transforming projection
+    z_value <- raster::getZ(sp)
     
     # When no projection is present
     if (is.na(sp@crs)) {
       
       if (warn) {
-        
         warning(
           "Raster object has no projection, the projection has been forced...",
           call. = FALSE
         )
-        
       }
       
       raster::crs(sp) <- to
       
     } else {
-      
       # Transform projection system
       sp <- raster::projectRaster(sp, crs = to)
-      
     }
+    
+    # Add z value again
+    sp <- raster::setZ(sp, z_value, name = "date")
 
   }
   
