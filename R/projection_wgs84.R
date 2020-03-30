@@ -113,7 +113,6 @@ projection_china <- function() {
 #' @rdname projection_wgs84
 #' @export
 projection_beijing <- function() {
-  # "+proj=lcc +lat_1=20 +lat_2=50 +lat_0=35 +lon_0=110 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs"
   "+proj=lcc +lat_1=20 +lat_2=50 +lat_0=39.51775 +lon_0=110 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs"
 }
 
@@ -122,4 +121,11 @@ projection_beijing <- function() {
 #' @export
 projection_etr89 <- function() {
   "+proj=laea +lat_0=50 +lon_0=11 +x_0=5000000 +y_0=3200000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
+}
+
+
+#' @rdname projection_wgs84
+#' @export
+projection_italy <- function() {
+  "+proj=tmerc +lat_0=0 +lon_0=9 +k=0.9996 +x_0=1500000 +y_0=0 +ellps=intl +units=m +no_defs"
 }
