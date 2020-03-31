@@ -66,22 +66,17 @@ sp_from_data_frame <- function(df, type = "points", latitude = "latitude",
   type <- if_else(type == "polygon", "polygons", type)
   
   # Check
-  if (!grepl("points|lines|polygons", type)) 
-    stop("'type' must be one of 'points', 'lines', or 'polygons'.", call. = FALSE)
+  if (!grepl("points|lines|polygons", type)) {
+    stop("`type` must be one of `points`, `lines`, or `polygons`.", call. = FALSE)
+  }
   
   # Promote to spatial data
   if (type == "points") {
-    
     sp <- data_frame_to_points(df, latitude, longitude, projection, keep, warn)
-    
   } else if (type == "lines") {
-    
     sp <- data_frame_to_lines(df, latitude, longitude, projection, id, warn)
-    
   } else if (type == "polygons") {
-    
     sp <- data_frame_to_polygons(df, latitude, longitude, projection, id, warn)
-    
   }
   
   # Ensure data slot is a data.frame, not a tibble
@@ -101,16 +96,14 @@ data_frame_to_points <- function(df, latitude, longitude, projection,
   if (any(is.na(c(df[, latitude, drop = TRUE], df[, longitude, drop = TRUE])))) {
     
     # Remove NAs
-    df <- df[!(is.na(df[, latitude]) | is.na(df[, longitude])), ]
+    df <- df[!(is.na(df[, latitude, drop = TRUE]) | is.na(df[, longitude, drop = TRUE])), ]
     
     # Raise a warning
     if (warn) {
-      
       warning(
         "Missing coordinates were detected and have been removed...", 
         call. = FALSE
       )
-      
     }
     
     # Check if all observations have been lost
@@ -118,7 +111,7 @@ data_frame_to_points <- function(df, latitude, longitude, projection,
     
   }
   
-  # Reassign, df can be used again
+  # Reassign, df is used again
   sp <- df
   
   # Make sp points object
@@ -126,10 +119,8 @@ data_frame_to_points <- function(df, latitude, longitude, projection,
   
   # Put vectors back in data slot
   if (keep) {
-    
-    sp@data[, latitude] <- df[, latitude]
-    sp@data[, longitude] <- df[, longitude]
-    
+    sp@data[, latitude] <- df[, latitude, drop = TRUE]
+    sp@data[, longitude] <- df[, longitude, drop = TRUE]
   }
   
   # Give the object a projection
@@ -246,7 +237,7 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id,
   # Bind geometries
   sp <- do.call(rbind, sp)
   
-  # Make sp dataframe
+  # Make sp data frame
   sp <- sp::SpatialPolygonsDataFrame(sp, data_extras)
   
   # Give the object a projection
@@ -259,7 +250,7 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id,
 
 matrix_to_sp_polygon <- function(matrix, id) {
   
-  # Matix to polygon
+  # Matrix to polygon
   polygon <- sp::Polygon(matrix)
   
   # Polygon to polygons
