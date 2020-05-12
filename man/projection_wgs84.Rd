@@ -10,6 +10,7 @@
 \alias{projection_norway}
 \alias{projection_lcc}
 \alias{projection_swiss}
+\alias{projection_swiss_plus}
 \alias{projection_slovenia}
 \alias{projection_utm_32}
 \alias{projection_utm_33}
@@ -38,6 +39,8 @@ projection_norway()
 projection_lcc()
 
 projection_swiss()
+
+projection_swiss_plus()
 
 projection_slovenia()
 

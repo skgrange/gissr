@@ -70,6 +70,13 @@ projection_swiss <- function() {
 
 #' @rdname projection_wgs84
 #' @export
+projection_swiss_plus <- function() {
+  "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs"
+}
+
+
+#' @rdname projection_wgs84
+#' @export
 projection_slovenia <- function() {
   "+proj=tmerc +lat_0=0 +lon_0=15 +k=0.9999 +x_0=500000 +y_0=-5000000 +ellps=bessel +units=m +no_defs"
 }
