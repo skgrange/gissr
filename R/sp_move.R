@@ -12,6 +12,8 @@
 #' 
 #' @seealso \code{\link{elide}}
 #' 
+#' @return Spatial object.  
+#' 
 #' @export
 sp_move <- function(sp, x, y) {
   
@@ -24,14 +26,12 @@ sp_move <- function(sp, x, y) {
   # Add projection again
   sp <- sp_transform(sp, to = projection, warn = FALSE)
   
-  # Return
-  sp
-  
+  return(sp)
   
 }
 
 
-# Wrap
+# Wrap the function
 #' @rdname sp_move
 #' @export
 sp_shift <- sp_move

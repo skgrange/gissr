@@ -18,6 +18,9 @@ dimension.}
 \item{y}{Offset amount (in \code{sp} projection's units) in up-down 
 dimension.}
 }
+\value{
+Spatial object.
+}
 \description{
 Function to move/shift a spatial object.
 }

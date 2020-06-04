@@ -2,7 +2,7 @@
 % Please edit documentation in R/leaflet_plot.R
 \name{leaflet_plot}
 \alias{leaflet_plot}
-\title{Convenience function to quickly plot geometries on a leaflet map.}
+\title{Function to quickly plot spatial geometries on a leaflet map.}
 \usage{
 leaflet_plot(
   sp,
@@ -16,7 +16,7 @@ leaflet_plot(
 \arguments{
 \item{sp}{Spatial object to be plotted.}
 
-\item{popup}{Vector of variables to be used as a popup on the map.}
+\item{popup}{Vector of variables to be used as a pop-up on the map.}
 
 \item{force}{Should the projection be forced to WGS84? Default is \code{TRUE}.}
 
@@ -27,10 +27,10 @@ leaflet_plot(
 \item{fill_opacity}{Internal opacity of the geometry.}
 }
 \value{
-Invisible, a leaflet map.
+A leaflet map.
 }
 \description{
-Convenience function to quickly plot geometries on a leaflet map.
+Function to quickly plot spatial geometries on a leaflet map.
 }
 \author{
 Stuart K. Grange
