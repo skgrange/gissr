@@ -8,7 +8,7 @@
 #' @param width Width of radius. \code{"width"}'s unit is in the projection of
 #' \code{projection}. The default is 0.01 decimal degrees. 
 #'
-#' @param projection A proj4 string. Default is the WGS84 string. 
+#' @param projection A projection string. Default is the WGS84 string. 
 #' 
 #' @author Stuart K. Grange
 #'
@@ -17,7 +17,7 @@ sp_create_ellipse <- function(latitude, longitude, width = 0.01,
                               projection = projection_wgs84()) {
   
   # Create a point
-  sp_point <- sp::SpatialPoints(cbind(longitude, latitude))
+  sp_point <- SpatialPoints(cbind(longitude, latitude))
   
   # Give projection
   sp_point <- sp_transform(sp_point, projection, warn = FALSE)

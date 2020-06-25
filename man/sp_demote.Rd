@@ -14,8 +14,10 @@ sp_demote(sp)
 }
 \examples{
 \dontrun{
+
 # Drop data slot
 sp_without_data <- sp_promote(sp_with_data)
+
 }
 
 }

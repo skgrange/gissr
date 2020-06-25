@@ -6,8 +6,8 @@
 #' spatial objects. If variable names collide, they will be suffixed with 
 #' \code{"_polygons"}. 
 #' 
-#' \code{sp::over} is used for the point-in-polygon test and the projection 
-#' systems must be identical for the two geometries. 
+#' \code{over} is used for the point-in-polygon test and the projection systems
+#' must be identical for the two geometries. 
 #' 
 #' @param sp_points Spatial points object. Spatial points will usually have a 
 #' data slot but \code{sp_left_join} does not require this. 
@@ -60,20 +60,27 @@
 sp_left_join <- function(sp_points, sp_polygons) {
   
   # Check the spatial objects 
-  if (!grepl("points", sp_class(sp_points), ignore.case = TRUE))
-    stop("Spatial points must be defined in the 'sp_points' argument.", 
-         call. = FALSE)
+  if (!grepl("points", sp_class(sp_points), ignore.case = TRUE)) {
+    stop(
+      "Spatial points must be defined in the `sp_points` argument.", 
+      call. = FALSE
+    )
+  }
   
-  if (!grepl("polygon", sp_class(sp_polygons), ignore.case = TRUE))
-    stop("Spatial-polygons must be defined in the 'sp_polygons' argument.", 
-         call. = FALSE) 
+  if (!grepl("polygon", sp_class(sp_polygons), ignore.case = TRUE)) {
+    stop(
+      "Spatial-polygons must be defined in the `sp_polygons` argument.", 
+      call. = FALSE
+    )
+  }
   
   # Store data slot of points
-  if (grepl("data", sp_class(sp_points), ignore.case = TRUE)) 
+  if (grepl("data", sp_class(sp_points), ignore.case = TRUE)) {
     df <- sp_points@data
+  }
   
   # The point in polygon function, returns data frame
-  df_sp <- sp::over(sp_points, sp_polygons, fn = NULL)
+  df_sp <- over(sp_points, sp_polygons, fn = NULL)
   
   if (grepl("data", sp_class(sp_points), ignore.case = TRUE))  {
     
@@ -82,18 +89,14 @@ sp_left_join <- function(sp_points, sp_polygons) {
     
     # Check for unique names
     if (any(duplicated(names(df)))) {
-      
       # Unique names
       names(df) <- make.names(names(df), unique = TRUE)
       names(df) <- stringr::str_replace(names(df), ".1$", "_polygons")
-      
     } 
   
   } else {
-    
-    # Reasign sp:over return
+    # Reassign over return
     df <- df_sp
-    
   }
   
   # To tibble

@@ -57,18 +57,11 @@ sp_reset_feature_ids <- function(sp) {
 resetter <- function(sp, uuid = FALSE) {
   
   if (uuid) {
-    
-    # spChFIDs is not implemented for points
-    # if (grepl("points", sp_class(sp), ignore.case = TRUE)) 
-    
     # Use uuids to ensure unique-ness 
-    sp <- sp::spChFIDs(sp, replicate(length(sp), threadr::uuid()))
-  
+    sp <- spChFIDs(sp, replicate(length(sp), threadr::uuid()))
   } else {
-    
     # Otherwise, just a character sequence
-    sp <- sp::spChFIDs(sp, as.character(seq_along(sp)))
-    
+    sp <- spChFIDs(sp, as.character(seq_along(sp)))
   }
   
   return(sp)

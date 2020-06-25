@@ -126,8 +126,8 @@ sp_segment_lines_worker <- function(sp, length) {
   }
   
   # Back to spatial object
-  sp <- sp::SpatialLinesDataFrame(
-    sp::SpatialLines(lineslist), 
+  sp <- SpatialLinesDataFrame(
+    SpatialLines(lineslist), 
     data = data.frame(id = 0:(length(lineslist) - 1))
   )
   

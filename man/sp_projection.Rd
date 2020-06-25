@@ -9,6 +9,9 @@ sp_projection(sp)
 \arguments{
 \item{sp}{Spatial object}
 }
+\value{
+Character vector with length of 1.
+}
 \description{
 Function to return a spatial object's projection system.
 }

@@ -115,7 +115,7 @@ data_frame_to_points <- function(df, latitude, longitude, projection,
   sp <- df
   
   # Make sp points object
-  sp::coordinates(sp) <- c(longitude, latitude)
+  coordinates(sp) <- c(longitude, latitude)
   
   # Put vectors back in data slot
   if (keep) {
@@ -135,15 +135,11 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id, warn) {
   
   # Make an identifier variable for lines
   if (is.na(id)) {
-    
     # Single line object, no grouping
     df[, "id"] <- 1
-    
   } else {
-    
     # Use input variable
     df[, "id"] <- df[, id]
-    
   }
   
   # Get data part for the SpatialLinesDataFrame
@@ -168,17 +164,17 @@ data_frame_to_lines <- function(df, latitude, longitude, projection, id, warn) {
   # Generate lines for each id
   lines <- lapply(
     split(sp_object, sp_object$id), 
-    function(x) sp::Lines(list(Line(sp::coordinates(x))), x$id[1L])
+    function(x) Lines(list(Line(coordinates(x))), x$id[1L])
   )
   
   # Drop
   if (!is.na(id)) data_extras[, "id"] <- NULL
   
   # Create SpatialLines
-  sp <- sp::SpatialLines(lines)
+  sp <- SpatialLines(lines)
   
   # Make SpatialLinesDataFrame
-  sp <- sp::SpatialLinesDataFrame(sp, data_extras, match.ID = FALSE)
+  sp <- SpatialLinesDataFrame(sp, data_extras, match.ID = FALSE)
   
   # Give the object a projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
@@ -193,15 +189,11 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id,
   
   # Make an identifier variable for lines
   if (is.na(id)) {
-    
     # Single line object, no grouping
     df[, "id"] <- 1
-    
   } else {
-    
     # Use input variable
     df[, "id"] <- df[, id]
-    
   }
   
   # Get data part for the SpatialLinesDataFrame
@@ -238,7 +230,7 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id,
   sp <- do.call(rbind, sp)
   
   # Make sp data frame
-  sp <- sp::SpatialPolygonsDataFrame(sp, data_extras)
+  sp <- SpatialPolygonsDataFrame(sp, data_extras)
   
   # Give the object a projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)
@@ -251,13 +243,13 @@ data_frame_to_polygons <- function(df, latitude, longitude, projection, id,
 matrix_to_sp_polygon <- function(matrix, id) {
   
   # Matrix to polygon
-  polygon <- sp::Polygon(matrix)
+  polygon <- Polygon(matrix)
   
   # Polygon to polygons
-  polygon <- sp::Polygons(list(polygon), id)
+  polygon <- Polygons(list(polygon), id)
   
   # To spatial polygons
-  sp <- sp::SpatialPolygons(list(polygon))
+  sp <- SpatialPolygons(list(polygon))
   
   return(sp)
   

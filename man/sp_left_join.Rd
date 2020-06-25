@@ -25,8 +25,8 @@ spatial objects. If variable names collide, they will be suffixed with
 \code{"_polygons"}.
 }
 \details{
-\code{sp::over} is used for the point-in-polygon test and the projection 
-systems must be identical for the two geometries.
+\code{over} is used for the point-in-polygon test and the projection systems
+must be identical for the two geometries.
 }
 \examples{
 

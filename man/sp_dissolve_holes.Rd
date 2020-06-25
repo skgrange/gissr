@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_dissolve_holes.R
 \name{sp_dissolve_holes}
 \alias{sp_dissolve_holes}
-\title{Function to disolve/drop holes in a spatial polygon object.}
+\title{Function to dissolve/drop holes in a spatial polygon object.}
 \usage{
 sp_dissolve_holes(sp)
 }

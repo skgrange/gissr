@@ -14,21 +14,18 @@
 sp_tessellation_polygons <- function(sp) {
   
   # Check
-  if (!grepl("point", sp_class(sp), ignore.case = TRUE)) 
-    stop("Input must be spatial points...", call. = FALSE)
+  if (!grepl("point", sp_class(sp), ignore.case = TRUE)) {
+    stop("Input must be spatial points.", call. = FALSE)
+  }
   
   # Does the object have a data slot
   slot_data <- grepl("data", sp_class(sp), ignore.case = TRUE)
   
   # Create ppp object, there are other options here, but points only here
   if (slot_data) {
-    
     sp_ppp <- maptools::as.ppp.SpatialPointsDataFrame(sp)
-    
   } else {
-    
     sp_ppp <- maptools::as.ppp.SpatialPoints(sp)
-    
   }
   
   # Dirichlet tessellation of the ppp object
@@ -45,7 +42,7 @@ sp_tessellation_polygons <- function(sp) {
     
     if (identical(nrow(sp_ppp$marks), length(sp_polygons))) {
       
-      sp_polygons <- sp::SpatialPolygonsDataFrame(
+      sp_polygons <- SpatialPolygonsDataFrame(
         sp_polygons, 
         data = sp_ppp$marks, 
         match.ID = FALSE

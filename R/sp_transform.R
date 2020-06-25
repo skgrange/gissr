@@ -1,7 +1,7 @@
 #' Convenience function to transform a spatial object's projection system to 
 #' WGS84 latitude and longitude. 
 #' 
-#' \code{sp_transform} is a simple wrapper for \code{sp::spTransform} which has 
+#' \code{sp_transform} is a simple wrapper for \code{spTransform} which has 
 #' been written so spatial objects can be transformed quickly without the need 
 #' to remember the WGS84 proj4 string. \code{sp_transform} will force projections
 #' when the spatial object contains no projection information. 
@@ -58,11 +58,11 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
       }
       
       # Now force
-      sp::proj4string(sp) <- to
+      proj4string(sp) <- to
       
     } else {
       # Otherwise convert projection system
-      sp <- sp::spTransform(sp, sp::CRS(to))
+      sp <- spTransform(sp, CRS(to))
     }
     
   } else {

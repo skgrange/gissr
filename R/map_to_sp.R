@@ -22,7 +22,7 @@ map_to_sp <- function() {
   sp <- maptools::map2SpatialPolygons(map_data, IDs = id)
   
   # Give projection
-  sp@proj4string <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
+  sp@proj4string <- CRS("+proj=longlat +datum=WGS84 +no_defs")
   
   # Clean-up bad geometries
   suppressWarnings(

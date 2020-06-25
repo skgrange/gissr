@@ -20,7 +20,7 @@ sp_create_ellipse(
 \item{width}{Width of radius. \code{"width"}'s unit is in the projection of
 \code{projection}. The default is 0.01 decimal degrees.}
 
-\item{projection}{A proj4 string. Default is the WGS84 string.}
+\item{projection}{A projection string. Default is the WGS84 string.}
 }
 \description{
 Function to create a elliptical polygon from a point, usually used for 

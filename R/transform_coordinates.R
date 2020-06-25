@@ -5,7 +5,7 @@
 #' are supplied and the coordinate system is different that what is desired. 
 #' 
 #' \code{transform_coordinates} works by coercing the input data frame to a 
-#' spatial object, applies \code{sp::spTransform} to convert the coordinates, 
+#' spatial object, applies \code{spTransform} to convert the coordinates, 
 #' converts the spatial object back to a data frame and then returns the data 
 #' frame with the transformed coordinates. The transformed coordinates can be 
 #' optionally renamed and reordered. 
@@ -30,7 +30,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Tibble. 
+#' @return Tibble.
 #' 
 #' @examples 
 #' 
@@ -74,10 +74,9 @@ transform_coordinates <- function(df, latitude = "latitude",
   df$optional <- NULL
   
   # Arrange variables in original order
-  df <- select(df, !!variables)
-  
-  # And as tibble
-  df <- as_tibble(df)
+  df <- df %>% 
+    select(!!variables) %>% 
+    as_tibble()
   
   return(df)
   

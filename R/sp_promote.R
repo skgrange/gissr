@@ -29,7 +29,7 @@ sp_promote <- function(sp) {
     # Points
     if (sp_class == "SpatialPoints") {
       
-      sp <- sp::SpatialPointsDataFrame(
+      sp <- SpatialPointsDataFrame(
         sp, 
         data = data.frame(
           id = id_vector, 
@@ -43,7 +43,7 @@ sp_promote <- function(sp) {
     # Lines
     if (sp_class == "SpatialLines") {
       
-      sp <- sp::SpatialLinesDataFrame(
+      sp <- SpatialLinesDataFrame(
         sp, 
         data = data.frame(
           id = id_vector,
@@ -57,7 +57,7 @@ sp_promote <- function(sp) {
     # Polygons
     if (sp_class == "SpatialPolygons") {
       
-      sp <- sp::SpatialPolygonsDataFrame(
+      sp <- SpatialPolygonsDataFrame(
         sp, 
         data = data.frame(
           id = id_vector,
@@ -85,8 +85,10 @@ sp_promote <- function(sp) {
 #' 
 #' @examples 
 #' \dontrun{
+#' 
 #' # Drop data slot
 #' sp_without_data <- sp_promote(sp_with_data)
+#' 
 #' }
 #'
 #' @export
@@ -98,17 +100,13 @@ sp_demote <- function(sp) {
   # If contains data slot, drop it
   if (grepl("Data", sp_class)) {
     
-    # Points
-    if (sp_class == "SpatialPointsDataFrame")
+    if (sp_class == "SpatialPointsDataFrame") {
       sp <- as(sp, "SpatialPoints")
-
-    # Lines
-    if (sp_class == "SpatialLinesDataFrame")
+    } else if (sp_class == "SpatialLinesDataFrame") {
       sp <- as(sp, "SpatialLines")
-    
-    # Polygons
-    if (sp_class == "SpatialPolygonsDataFrame")
+    } else if (sp_class == "SpatialPolygonsDataFrame") {
       sp <- as(sp, "SpatialPolygons")
+    }
     
   }
   

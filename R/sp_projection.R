@@ -4,5 +4,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
+#' @return Character vector with length of 1. 
+#' 
 #' @export
-sp_projection <- function(sp) sp::proj4string(sp)
+sp_projection <- function(sp) proj4string(sp)

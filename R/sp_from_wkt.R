@@ -37,8 +37,8 @@
 sp_from_wkt <- function(df, wkt = "geom", data = TRUE, keep = FALSE, 
                         projection = NA, verbose = FALSE) {
   
-  # Catch dplyr's table data frame
-  df <- threadr::base_df(df)
+  # Drop tibble if input is a tibble
+  if ("tbl" %in% class(df)) df <- data.frame(df)
   
   # For vectors
   if (class(df) == "character") {
@@ -51,15 +51,17 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, keep = FALSE,
     
   } else {
     
-    # Check for missing wkt, sptatial data cannot be empty
+    # Check for missing wkt, spatial data cannot be empty
     if (any(is.na(df[, wkt]))) {
       
       # Remove NAs
       df <- df[!is.na(df[, wkt]), ]
       
       # Raise warning
-      warning("Missing WKT strings were detected and have been removed.", 
-              call. = FALSE)
+      warning(
+        "Missing WKT strings were detected and have been removed...", 
+        call. = FALSE
+      )
       
     }
     
@@ -69,8 +71,9 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, keep = FALSE,
   }
   
   # Check 
-  if (length(wkt_vector) == 0) 
+  if (length(wkt_vector) == 0) {
     stop("There are no valid WKT strings.", call. = FALSE)
+  }
   
   # Store data
   if (data) {
@@ -105,7 +108,7 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, keep = FALSE,
     row.names(sp) <- NULL
     
     # Promote matrix to sp
-    sp <- sp::SpatialPoints(sp)
+    sp <- SpatialPoints(sp)
     
   } else {
     
@@ -121,18 +124,20 @@ sp_from_wkt <- function(df, wkt = "geom", data = TRUE, keep = FALSE,
   }
 
   # Add data slots
-  if (data & grepl("polygon", class(sp), ignore.case = TRUE))
-    sp <- sp::SpatialPolygonsDataFrame(sp, data = df_data, match.ID = FALSE)
+  if (data & grepl("polygon", class(sp), ignore.case = TRUE)) {
+    sp <- SpatialPolygonsDataFrame(sp, data = df_data, match.ID = FALSE)
+  }
   
-  if (data & grepl("lines", class(sp), ignore.case = TRUE))
-    sp <- sp::SpatialLinesDataFrame(sp, data = df_data, match.ID = FALSE)
+  if (data & grepl("lines", class(sp), ignore.case = TRUE)) {
+    sp <- SpatialLinesDataFrame(sp, data = df_data, match.ID = FALSE)
+  }
   
-  if (data & grepl("points", class(sp), ignore.case = TRUE))
-    sp <- sp::SpatialPointsDataFrame(sp, data = df_data, match.ID = FALSE)
+  if (data & grepl("points", class(sp), ignore.case = TRUE)) {
+    sp <- SpatialPointsDataFrame(sp, data = df_data, match.ID = FALSE)
+  }
   
   # Add wkt vector again
-  if (data & keep) 
-    sp@data[, wkt] <- wkt_vector
+  if (data & keep) sp@data[, wkt] <- wkt_vector
   
   # Add projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)

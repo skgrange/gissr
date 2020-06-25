@@ -16,10 +16,10 @@ sp_make_grid <- function(sp, cellsize) {
   projection <- sp_projection(sp)
   
   # Make the grid
-  df <- sp::makegrid(sp, cellsize = cellsize) 
+  df <- makegrid(sp, cellsize = cellsize) 
   
   # Promote
-  sp <- sp::SpatialPoints(df)
+  sp <- SpatialPoints(df)
   
   # Give projection
   if (!is.na(projection)) sp <- sp_transform(sp, projection, warn = FALSE)

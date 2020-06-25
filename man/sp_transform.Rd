@@ -16,7 +16,7 @@ WGS84 string.}
 \item{warn}{Should the functions raise a warning when the projection is forced?}
 }
 \description{
-\code{sp_transform} is a simple wrapper for \code{sp::spTransform} which has 
+\code{sp_transform} is a simple wrapper for \code{spTransform} which has 
 been written so spatial objects can be transformed quickly without the need 
 to remember the WGS84 proj4 string. \code{sp_transform} will force projections
 when the spatial object contains no projection information.

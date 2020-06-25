@@ -23,7 +23,7 @@ wgs84_to_osgb36 <- function(y, x) {
   point <- cbind(x, y)
   
   # Spatial points
-  sp <- sp::SpatialPoints(point)
+  sp <- SpatialPoints(point)
   
   # Force sp projection to wgs84
   sp <- sp_transform(sp, warn = FALSE)
@@ -56,7 +56,7 @@ osgb36_to_wgs84 <- function(x, y, string = FALSE) {
   point <- cbind(x, y)
   
   # Spatial points
-  sp <- sp::SpatialPoints(point)
+  sp <- SpatialPoints(point)
   
   # Force sp projection to osgb36
   sp <- sp_transform(sp, projection_bng(), warn = FALSE)
@@ -75,11 +75,11 @@ osgb36_to_wgs84 <- function(x, y, string = FALSE) {
   
   row.names(coordinates) <- NULL
   
-  if (string)
+  if (string) {
     coordinates <- stringr::str_c(coordinates$latitude, ",", coordinates$longitude)
-    
-  # Return
-  coordinates
+  }
+  
+  return(coordinates)
   
 }
 
@@ -180,7 +180,7 @@ nztm_to_wgs84 <- function(x, y, string = FALSE) {
   point <- cbind(x, y)
   
   # Spatial points
-  sp <- sp::SpatialPoints(point)
+  sp <- SpatialPoints(point)
   
   # Force sp projection to nztm
   sp <- sp_transform(sp, projection_nztm(), warn = FALSE)
@@ -199,11 +199,11 @@ nztm_to_wgs84 <- function(x, y, string = FALSE) {
   
   row.names(coordinates) <- NULL
   
-  if (string)
+  if (string) {
     coordinates <- stringr::str_c(coordinates$latitude, ",", coordinates$longitude)
+  }
   
-  # Return
-  coordinates
+  return(coordinates)
   
 }
 
@@ -217,7 +217,7 @@ wgs84_to_nztm <- function(y, x) {
   point <- cbind(x, y)
   
   # Spatial points
-  sp <- sp::SpatialPoints(point)
+  sp <- SpatialPoints(point)
   
   # Force sp projection to wgs84
   sp <- sp_transform(sp, warn = FALSE)
@@ -235,7 +235,6 @@ wgs84_to_nztm <- function(y, x) {
   
   row.names(coordinates) <- NULL
   
-  # Return
-  coordinates
+  return(coordinates)
   
 }

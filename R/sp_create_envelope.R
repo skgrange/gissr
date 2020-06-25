@@ -37,10 +37,12 @@ sp_create_envelope <- function(envelope, projection = projection_wgs84()) {
   polygon <- Polygons(list(polygon), ID = "1")
   
   # Spatial class with projection
-  polygon <- sp::SpatialPolygons(list(polygon))
+  polygon <- SpatialPolygons(list(polygon))
   
   # Give projection
-  if (!is.na(projection)) polygon <- sp_transform(polygon, projection, warn = FALSE)
+  if (!is.na(projection)) {
+    polygon <- sp_transform(polygon, projection, warn = FALSE)
+  }
   
   # Return
   return(polygon)

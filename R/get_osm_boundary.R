@@ -50,7 +50,7 @@ get_osm_boundary <- function(id, way = FALSE, verbose = FALSE) {
   } else {
     
     # Use osm functions to directly scrape
-      sp_list <- purrr::map(id, ~osm_boundary_way_worker(., verbose = verbose))
+    sp_list <- purrr::map(id, ~osm_boundary_way_worker(., verbose = verbose))
     
     # Bind list of spatial objects
     sp <- sp_bind(sp_list)
@@ -98,12 +98,7 @@ osm_boundary_worker <- function(id, verbose) {
   
   # Get wkt
   text <- tryCatch({
-    
-    # Read text
-    suppressWarnings(
-      readLines(url, warn = FALSE)
-    )
-    
+    readr::read_lines(url)
   }, error = function(e) {
     
     # If error return null
@@ -117,7 +112,7 @@ osm_boundary_worker <- function(id, verbose) {
   # If null then return now
   if (is.null(text)) return(NULL)
   
-  # Drop preamble/projection infomation
+  # Drop preamble/projection information
   text <- stringr::str_remove(text, "SRID=4326;")
   
   # Promote to spatial

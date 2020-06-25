@@ -21,27 +21,5 @@
 #' 
 #' @export
 sp_simplify <- function(sp, tolerance, preserve = TRUE) {
-  
-  # If a spatial data object is given, store the data slot
-  # if (grepl("data", class(sp), ignore.case = TRUE)) df_from_sp <- sp@data
-  
-  # Simplify spatial object with rgeos library
-  sp <- rgeos::gSimplify(sp, tolerance, preserve)
-  
-  # # Add the data if necessary as gSimplify drops this
-  # # Will fail if geoms are lost in simplification process
-  # if (exists("df_from_sp")) {
-  #   
-  #   # Lines
-  #   if (class(sp)[1] == "SpatialLines")
-  #     sp <- sp::SpatialLinesDataFrame(sp, df_from_sp)
-  #   
-  #   # Polygons
-  #   if (class(sp)[1] == "SpatialPolygons")
-  #     sp <- sp::SpatialPolygonsDataFrame(sp, df_from_sp)
-  #   
-  # }
-  
-  return(sp)
-  
+  rgeos::gSimplify(sp, tolerance, preserve)
 }
