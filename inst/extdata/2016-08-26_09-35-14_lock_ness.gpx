@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="OSMTracker for Android™ - https://github.com/nguillaumin/osmtracker-android" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd ">
+	<wpt lat="57.17260321005888" lon="-4.641765635175405">
+		<ele>64.48531811878934</ele>
+		<time>2016-08-26T08:35:30Z</time>
+		<name><![CDATA[swim]]></name>
+		<sat>0</sat>
+	</wpt>
+	<trk>
+		<name><![CDATA[Tracked with OSMTracker for Android™]]></name>
+		<trkseg>
+			<trkpt lat="57.17251310765967" lon="-4.641772746700655">
+				<ele>53.51241314838909</ele>
+				<time>2016-08-26T08:35:16Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.172516921060414" lon="-4.64176832397496">
+				<ele>50.46502388624982</ele>
+				<time>2016-08-26T08:35:17Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.172520107973746" lon="-4.641760270265025">
+				<ele>49.96709928258988</ele>
+				<time>2016-08-26T08:35:18Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17252299533175" lon="-4.641755441088753">
+				<ele>50.72318379035353</ele>
+				<time>2016-08-26T08:35:19Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17252669665518" lon="-4.641747649836281">
+				<ele>52.43659135235246</ele>
+				<time>2016-08-26T08:35:20Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17253092140826" lon="-4.641748486230699">
+				<ele>55.84849466492805</ele>
+				<time>2016-08-26T08:35:21Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.172540020068425" lon="-4.641755484093403">
+				<ele>56.06150347274526</ele>
+				<time>2016-08-26T08:35:22Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17254475782196" lon="-4.641753268861119">
+				<ele>57.28302159363377</ele>
+				<time>2016-08-26T08:35:23Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17254788029983" lon="-4.6417559798438255">
+				<ele>57.621072458325735</ele>
+				<time>2016-08-26T08:35:24Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.1725542912425" lon="-4.641758716995793">
+				<ele>56.87539377784969</ele>
+				<time>2016-08-26T08:35:25Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.172558538795904" lon="-4.641768893367515">
+				<ele>56.39851709275279</ele>
+				<time>2016-08-26T08:35:26Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17256240169706" lon="-4.641776039015059">
+				<ele>56.63800107738881</ele>
+				<time>2016-08-26T08:35:27Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17257028478829" lon="-4.641770281999412">
+				<ele>57.20277336454352</ele>
+				<time>2016-08-26T08:35:28Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17259161257882" lon="-4.6417645697689345">
+				<ele>61.189512461680174</ele>
+				<time>2016-08-26T08:35:29Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17260321005888" lon="-4.641765635175405">
+				<ele>64.48531811878934</ele>
+				<time>2016-08-26T08:35:30Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17260813262483" lon="-4.641766718392022">
+				<ele>65.93335181844442</ele>
+				<time>2016-08-26T08:35:31Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17260933953804" lon="-4.641762861834888">
+				<ele>66.72801105127485</ele>
+				<time>2016-08-26T08:35:32Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.172609563706295" lon="-4.641756406701672">
+				<ele>66.95412909074363</ele>
+				<time>2016-08-26T08:35:33Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.172608323855755" lon="-4.641750966834724">
+				<ele>67.05392479408161</ele>
+				<time>2016-08-26T08:35:34Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17260751789629" lon="-4.641747954358368">
+				<ele>67.21441947750242</ele>
+				<time>2016-08-26T08:35:35Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17260486589776" lon="-4.641747582289312">
+				<ele>67.26652850913032</ele>
+				<time>2016-08-26T08:35:36Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+			<trkpt lat="57.17260486589776" lon="-4.641747582289312">
+				<ele>67.73544515385092</ele>
+				<time>2016-08-26T08:35:37Z</time>
+				<extensions>
+					<speed>0.0</speed>
+				</extensions>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>

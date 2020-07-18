@@ -2,23 +2,25 @@
 % Please edit documentation in R/scrape_gpx.R
 \name{scrape_gpx}
 \alias{scrape_gpx}
-\title{Function to read \code{GPX} files as a data frame from the GPX Logger Android
-phone app.}
+\title{Function to read \code{GPX} files as tabular data.}
 \usage{
-scrape_gpx(file, transform = TRUE)
+scrape_gpx(file, transform = TRUE, .id = NULL, verbose = FALSE)
 }
 \arguments{
-\item{file}{GPX file.}
+\item{file}{A vector of GPS file names.}
 
 \item{transform}{Should latitude and longitude be used to calculate speed and
 distance if the file contains the appropriate variables?}
+
+\item{.id}{Optional variable name for file name in the returned tibble.}
+
+\item{verbose}{Should the function give messages?}
 }
 \value{
 Tibble.
 }
 \description{
-Function to read \code{GPX} files as a data frame from the GPX Logger Android
-phone app.
+Function to read \code{GPX} files as tabular data.
 }
 \author{
 Stuart K. Grange
