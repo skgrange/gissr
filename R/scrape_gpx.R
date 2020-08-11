@@ -5,6 +5,8 @@
 #' @param transform Should latitude and longitude be used to calculate speed and
 #' distance if the file contains the appropriate variables? 
 #' 
+#' @param creator Should the \code{creator} variable be extracted from the file? 
+#' 
 #' @param .id Optional variable name for file name in the returned tibble.  
 #' 
 #' @param verbose Should the function give messages? 
@@ -14,24 +16,36 @@
 #' @return Tibble. 
 #' 
 #' @export
-scrape_gpx <- function(file, transform = TRUE, .id = NULL, verbose = FALSE) {
+scrape_gpx <- function(file, transform = TRUE, creator = FALSE, .id = NULL, 
+                       verbose = FALSE) {
   
   file %>% 
     purrr::set_names(.) %>% 
     purrr::map_dfr(
-      scrape_gpx_worker, transform = transform, verbose = verbose, .id = .id
+      scrape_gpx_worker, 
+      transform = transform, 
+      creator = creator,
+      verbose = verbose, 
+      .id = .id
     )
   
 }
 
 
-scrape_gpx_worker <- function(file, transform, verbose) {
+scrape_gpx_worker <- function(file, transform, creator, verbose) {
   
   # Message to user
   if (verbose) message(threadr::date_message(), "`", file, "`...")
   
   # Load file as text
   text_gpx <- readr::read_lines(file)
+  
+  # Scrape creator from file
+  if (creator) {
+    creator_string <- extract_creator_string(text_gpx)
+  } else {
+    creator_string <- NULL
+  }
   
   # Parse xml, to-do, find out why a html parser is needed
   xml_tree <- XML::htmlTreeParse(text_gpx, useInternalNodes = TRUE)
@@ -85,7 +99,11 @@ scrape_gpx_worker <- function(file, transform, verbose) {
   if (length(date) != 0) {
     
     # Build tibble
-    df <- tibble(date, elevation, latitude, longitude)
+    if (creator) {
+      df <- tibble(creator = creator_string, date, elevation, latitude, longitude)
+    } else {
+      df <- tibble(date, elevation, latitude, longitude)
+    }
     
     # Add extensions too
     if (gpx_extended) {
@@ -110,5 +128,45 @@ scrape_gpx_worker <- function(file, transform, verbose) {
   }
   
   return(df)
+  
+}
+
+
+extract_creator_string <- function(text, n = 10) {
+  
+  # Filter string
+  creator_string <- stringr::str_subset(text[1:n], "creator")
+  
+  # Get locations
+  index_creator <- stringr::str_locate(creator_string, "creator")[1]
+  index_version <- stringr::str_locate(creator_string, "version")[1]
+  
+  # A location switch based on order
+  if (stringr::str_detect(creator_string, "^<gpx creator")) {
+    # For garmin exports
+    index_creator_location <- 2L
+  } else {
+    index_creator_location <- if_else(index_creator < index_version, 3L, 4L)
+  }
+  
+  # Format
+  if (index_creator == 1L) {
+    
+    creator_string <- creator_string %>% 
+      stringr::str_remove_all('creator|=|"') %>% 
+      stringr::str_trim()
+    
+  } else {
+    
+    # Split and format
+    creator_string <- creator_string %>% 
+      stringr::str_split_fixed("creator|version|xmlns", n = 5) %>% 
+      .[, index_creator_location] %>% 
+      stringr::str_remove_all('=|"') %>% 
+      stringr::str_trim()
+    
+  }
+  
+  return(creator_string)
   
 }

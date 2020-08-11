@@ -4,13 +4,21 @@
 \alias{scrape_gpx}
 \title{Function to read \code{GPX} files as tabular data.}
 \usage{
-scrape_gpx(file, transform = TRUE, .id = NULL, verbose = FALSE)
+scrape_gpx(
+  file,
+  transform = TRUE,
+  creator = FALSE,
+  .id = NULL,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{file}{A vector of GPS file names.}
 
 \item{transform}{Should latitude and longitude be used to calculate speed and
 distance if the file contains the appropriate variables?}
+
+\item{creator}{Should the \code{creator} variable be extracted from the file?}
 
 \item{.id}{Optional variable name for file name in the returned tibble.}
 
