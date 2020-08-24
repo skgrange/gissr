@@ -113,12 +113,13 @@ scrape_gpx_worker <- function(file, transform, creator, verbose) {
     # Calculate things, needs date
     if (transform) {
       df <- df %>% 
-        mutate(time_elapsed = date - min(date),
-               time_elapsed = hms::as_hms(time_elapsed),
+        mutate(time = date - min(date),
+               time = hms::as_hms(time),
                distance = distance_by_haversine(latitude, longitude),
+               distance = if_else(is.na(distance), 0, distance),
                time_lag = threadr::lag_delta(as.numeric(date)),
                speed = distance / time_lag,
-               speed_km_h = threadr::ms_to_km_h(speed)) %>% 
+               distance = cumsum(distance)) %>% 
         select(-time_lag)
     }
     
