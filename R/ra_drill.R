@@ -37,18 +37,37 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, fun = mean,
   }
   
   # Extract values from the raster object
-  df <- raster::extract(
-    x = ra,
-    y = sp, 
-    method = method, 
-    fun = fun, 
-    na.rm = na.rm, 
-    cellnumbers = TRUE,
-    df = TRUE
-  ) %>% 
-    as_tibble() %>% 
-    rename(id_sp = ID,
-           cell_raster = cells)
+  if (stringr::str_detect(sp_class(sp), "Point")) {
+    
+    df <- raster::extract(
+      x = ra,
+      y = sp, 
+      method = method, 
+      fun = fun, 
+      na.rm = na.rm, 
+      cellnumbers = TRUE,
+      df = TRUE
+    ) %>% 
+      as_tibble() %>% 
+      rename(id_sp = ID,
+             cell_raster = cells)
+    
+  } else if (stringr::str_detect(sp_class(sp), "Line")) {
+    
+    df <- raster::extract(
+      x = ra,
+      y = sp, 
+      method = method, 
+      fun = NULL, 
+      na.rm = na.rm, 
+      cellnumbers = TRUE,
+      df = FALSE
+    ) %>% 
+      purrr::map_dfr(as_tibble, .id = "id_sp") %>% 
+      mutate(id_sp = as.integer(id_sp)) %>% 
+      rename(cell_raster = cell)
+    
+  } 
   
   # Doubles to integers
   if (convert) df <- dplyr::mutate_if(df, is.numeric, type.convert, as.is = TRUE)
