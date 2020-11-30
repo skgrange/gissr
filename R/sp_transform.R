@@ -57,12 +57,16 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
         )
       }
       
-      # Now force
-      proj4string(sp) <- to
+      # Now force, suppression is for "discarded datum" warning
+      suppressWarnings(
+        proj4string(sp) <- to
+      )
       
     } else {
       # Otherwise convert projection system
-      sp <- spTransform(sp, CRS(to))
+      suppressWarnings(
+        sp <- spTransform(sp, CRS(to))
+      )
     }
     
   } else {
@@ -80,11 +84,15 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
         )
       }
       
-      raster::crs(sp) <- to
+      suppressWarnings(
+        raster::crs(sp) <- to
+      )
       
     } else {
       # Transform projection system
-      sp <- raster::projectRaster(sp, crs = to)
+      suppressWarnings(
+        sp <- raster::projectRaster(sp, crs = to)
+      )
     }
     
     # Add z value again
