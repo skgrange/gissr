@@ -8,6 +8,9 @@
 #' @param way Is \code{id} a way? If \code{TRUE}, a different method is needed
 #' which scrapes XML directly from OpenStreetMap for nodes and is a bit slow. 
 #' 
+#' @param sleep Number of seconds between server querries. This is useful if 
+#' many large polygons are being requested. 
+#' 
 #' @param verbose Should the function give messages? 
 #' 
 #' @return SpatialPolygonsDataFrame with WGS84 projection. 
@@ -20,23 +23,23 @@
 #' sp_moors <- get_osm_boundary(409150)
 #' 
 #' @export
-get_osm_boundary <- function(id, way = FALSE, verbose = FALSE) {
+get_osm_boundary <- function(id, way = FALSE, sleep = 1, verbose = FALSE) {
   
-  # Parse
+  # Parse input
   id <- stringr::str_trim(id)
   
   if (!way) {
     
     # Do
-    sp_list <- purrr::map(id, ~osm_boundary_worker(., verbose = verbose))
+    sp_list <- purrr::map(
+      id, ~osm_boundary_worker(., sleep = sleep, verbose = verbose)
+    )
     
     # Check types
     class_sp <- sapply(sp_list, class)
     
     if (length(class_sp) == 1 && class_sp == "NULL") {
-      
       sp <- NULL
-      
     } else {
       
       # Bind list
@@ -84,7 +87,7 @@ osm_boundary_way_worker <- function(id, verbose) {
 }
 
 
-osm_boundary_worker <- function(id, verbose) {
+osm_boundary_worker <- function(id, sleep, verbose) {
   
   # Message for user
   if (verbose) message(threadr::date_message(), "`", id, "`...")
@@ -100,13 +103,8 @@ osm_boundary_worker <- function(id, verbose) {
   text <- tryCatch({
     readr::read_lines(url)
   }, error = function(e) {
-    
-    # If error return null
     message("'id' ", id, " not found...")
-    
-    # Return
     NULL
-    
   })
   
   # If null then return now
@@ -126,6 +124,9 @@ osm_boundary_worker <- function(id, verbose) {
   
   # Add open street map id to data slot
   sp@data$id_osm <- as.integer(id)
+  
+  # Sleep if desired
+  if (!is.na(sleep)) Sys.sleep(sleep)
   
   return(sp)
   

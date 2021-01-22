@@ -12,6 +12,8 @@
 #' @param id The variable in \code{sp_lines} which will be transferred to 
 #' \code{sp_points} to distinguish the line which each point was snapped to. 
 #' 
+#' @param rename Should the \code{id} variable be renamed? 
+#' 
 #' @return Spatial points with altered coordinates; all points will lie on lines
 #' supplied for \code{sp_lines}. 
 #' 
@@ -19,13 +21,23 @@
 #' 
 #' @export
 sp_snap_points_to_lines <- function(sp_points, sp_lines, max_distance = NA,
-                                    id = NA) {
+                                    id = NA, rename = TRUE) {
   
-  maptools::snapPointsToLines(
-    points = sp_points, 
-    lines = sp_lines, 
-    maxDist = max_distance, 
-    idField = id
+  # Message suppression is for projection warning in sp somewhere 
+  sp <- suppressWarnings(
+    maptools::snapPointsToLines(
+      points = sp_points, 
+      lines = sp_lines, 
+      maxDist = max_distance, 
+      idField = id
+    )
   )
+  
+  # Rename the id variable
+  if (!is.na(id[1]) && rename) {
+    names(sp) <- if_else(names(sp) == "nearest_line_id", id, names(sp))
+  }
+  
+  return(sp)
   
 }
