@@ -4,10 +4,16 @@
 \alias{tidy_ra_drill}
 \title{Function to reshape the return from \code{\link{ra_drill}} to be "tidy-data".}
 \usage{
-tidy_ra_drill(df)
+tidy_ra_drill(df, variable_as_date = FALSE, tz = "UTC")
 }
 \arguments{
-\item{df}{Data frame/tibble from \code{\link{ra_drill}}}
+\item{df}{Data frame/tibble from \code{\link{ra_drill}}.}
+
+\item{variable_as_date}{Are the variables/names of the \code{\link{ra_drill}}
+output dates? If so, the dates will be parsed and the variable renamed.}
+
+\item{tz}{If \code{variable_as_date} is \code{TRUE}, what time zone are the 
+dates stored in? This will almost certainly be \code{UTC}.}
 }
 \value{
 Tibble.

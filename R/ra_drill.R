@@ -79,7 +79,13 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, fun = mean,
 
 #' Function to reshape the return from \code{\link{ra_drill}} to be "tidy-data".
 #' 
-#' @param df Data frame/tibble from \code{\link{ra_drill}}
+#' @param df Data frame/tibble from \code{\link{ra_drill}}.
+#' 
+#' @param variable_as_date Are the variables/names of the \code{\link{ra_drill}}
+#' output dates? If so, the dates will be parsed and the variable renamed. 
+#' 
+#' @param tz If \code{variable_as_date} is \code{TRUE}, what time zone are the 
+#' dates stored in? This will almost certainly be \code{UTC}. 
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -88,7 +94,7 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, fun = mean,
 #' @seealso \code{\link{ra_drill}}
 #' 
 #' @export
-tidy_ra_drill <- function(df) {
+tidy_ra_drill <- function(df, variable_as_date = FALSE, tz = "UTC") {
   
   # What variables should be used as keys?
   # Depends on spatial data type
@@ -98,8 +104,16 @@ tidy_ra_drill <- function(df) {
     variable_keys <- "id_sp"
   }
   
-  # Make tidy data
-  df <- tidyr::gather(df, variable, value, -!!variable_keys) 
+  # Make longer data
+  df <- tidyr::pivot_longer(df, -!!variable_keys, names_to = "variable")
+  
+  # If the names are dates, rename variable and parse
+  if (variable_as_date && stringr::str_detect(df$variable[1], "^X")) {
+    df <- df %>% 
+      rename(date = variable) %>% 
+      mutate(date = stringr::str_remove(date, "^X"),
+             date = lubridate::ymd_hms(date, tz = tz))
+  }
   
   return(df)
   
