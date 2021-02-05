@@ -112,7 +112,7 @@ tidy_ra_drill <- function(df, variable_as_date = FALSE, tz = "UTC") {
     df <- df %>% 
       rename(date = variable) %>% 
       mutate(date = stringr::str_remove(date, "^X"),
-             date = lubridate::ymd_hms(date, tz = tz))
+             date = lubridate::ymd_hms(date, tz = tz, truncated = 3))
   }
   
   return(df)
