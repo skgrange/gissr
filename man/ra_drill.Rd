@@ -4,7 +4,7 @@
 \alias{ra_drill}
 \title{Function to `drill' into a raster object and return values.}
 \usage{
-ra_drill(ra, sp, method = "simple", convert = FALSE, fun = mean, na.rm = TRUE)
+ra_drill(ra, sp, method = "simple", convert = FALSE, na.rm = TRUE)
 }
 \arguments{
 \item{ra}{Raster object.}
@@ -16,9 +16,7 @@ interpolation.}
 
 \item{convert}{Should \code{type.convert} be used on the return?}
 
-\item{fun}{Function to summarise the values.}
-
-\item{na.rm}{Should \code{NA}s be omitted when using \code{fun}?}
+\item{na.rm}{Should \code{NA}s be omitted?}
 }
 \value{
 Tibble.

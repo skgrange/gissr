@@ -11,9 +11,7 @@
 #' 
 #' @param convert Should \code{type.convert} be used on the return? 
 #' 
-#' @param fun Function to summarise the values. 
-#' 
-#' @param na.rm Should \code{NA}s be omitted when using \code{fun}?
+#' @param na.rm Should \code{NA}s be omitted? 
 #' 
 #' @author Stuart K. Grange
 #' 
@@ -23,8 +21,7 @@
 #' @return Tibble. 
 #' 
 #' @export
-ra_drill <- function(ra, sp, method = "simple", convert = FALSE, fun = mean, 
-                     na.rm = TRUE) {
+ra_drill <- function(ra, sp, method = "simple", convert = FALSE, na.rm = TRUE) {
   
   # Checks
   stopifnot(is.ra(ra) & is.sp(sp))
@@ -43,7 +40,7 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, fun = mean,
       x = ra,
       y = sp, 
       method = method, 
-      fun = fun, 
+      fun = NULL, 
       na.rm = na.rm, 
       cellnumbers = TRUE,
       df = TRUE
@@ -52,7 +49,7 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, fun = mean,
       rename(id_sp = ID,
              cell_raster = cells)
     
-  } else if (stringr::str_detect(sp_class(sp), "Line")) {
+  } else if (stringr::str_detect(sp_class(sp), "Line|Polygon")) {
     
     df <- raster::extract(
       x = ra,
