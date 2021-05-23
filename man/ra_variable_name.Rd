@@ -2,9 +2,12 @@
 % Please edit documentation in R/ra_variable_name.R
 \name{ra_variable_name}
 \alias{ra_variable_name}
+\alias{ra_level}
 \title{Function to extract the variable name from a raster object.}
 \usage{
 ra_variable_name(ra)
+
+ra_level(ra)
 }
 \arguments{
 \item{ra}{Raster object.}

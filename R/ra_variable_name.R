@@ -42,3 +42,21 @@ format_ra_variable_output <- function(x) {
     stringr::str_trim()
   
 }
+
+
+#' @rdname ra_variable_name
+#' @export
+ra_level <- function(ra) {
+  
+  # Check input
+  stopifnot(is.ra(ra))
+  
+  ra %>% 
+    capture.output %>% 
+    stringr::str_subset("level") %>% 
+    stringr::str_split_fixed(":", 2) %>% 
+    .[, 2] %>% 
+    stringr::str_trim() %>% 
+    as.integer()
+  
+}
