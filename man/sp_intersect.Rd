@@ -2,23 +2,30 @@
 % Please edit documentation in R/sp_intersect.R
 \name{sp_intersect}
 \alias{sp_intersect}
-\title{Function to intersect/clip/crop/filter spatial objects by a spatial polygon.}
+\title{Function to test weather one spatial object intersects with another.}
 \usage{
-sp_intersect(sp, sp_polygon)
+sp_intersect(sp_one, sp_two, features = TRUE, simplify = FALSE, check = FALSE)
 }
 \arguments{
-\item{sp}{Spatial object to be clipped.}
+\item{sp_one}{First spatial object to be tested.}
 
-\item{sp_polygon}{Spatial polygon used as the filter.}
+\item{sp_two}{Second spatial object to be tested.}
+
+\item{features}{Should the calculation be calculated on every feature of 
+\code{sp_one} and \code{sp_two}.}
+
+\item{simplify}{Should the return be simplified to a logical vector?}
+
+\item{check}{Should the intersection function perform some checks?}
 }
 \value{
-Spatial data class, the same as \code{sp}.
+Logical matrix or vector.
 }
 \description{
-Function to intersect/clip/crop/filter spatial objects by a spatial polygon.
+Function to test weather one spatial object intersects with another.
 }
 \seealso{
-\code{\link{sp_filter}}, \code{\link{sp_clip}}
+\code{\link{sp_filter}}, \code{\link{sp_crop}}
 }
 \author{
 Stuart K. Grange
