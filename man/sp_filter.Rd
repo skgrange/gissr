@@ -2,8 +2,8 @@
 % Please edit documentation in R/sp_filter.R
 \name{sp_filter}
 \alias{sp_filter}
-\title{Function to filter a spatial object by another spatial object 
-(usually a spatial polygon).}
+\title{Function to filter a spatial object by another spatial object (usually a 
+spatial polygon).}
 \usage{
 sp_filter(sp, sp_boundary)
 }
@@ -17,7 +17,8 @@ element for \code{sp}.}
 Filtered version of \code{sp}.
 }
 \description{
-Both spatial objects must have identical projection systems.
+Both spatial objects must have identical projection systems and this is 
+tested before filtering.
 }
 \seealso{
 \code{\link{sp_crop}}, \code{\link{sp_intersect}}
