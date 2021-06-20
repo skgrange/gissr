@@ -29,6 +29,8 @@
 #' @param lower Should the names of the data slot be forced to be lower case? 
 #' Note that the default is \code{TRUE}.
 #' 
+#' @param use_iconv Should the input strings attempted to be converted by iconv? 
+#' 
 #' @param verbose Should information about the data be printed when being 
 #' loaded? Default is \code{TRUE}. 
 #' 
@@ -66,7 +68,7 @@
 #' 
 #' @export
 sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE, 
-                    verbose = TRUE) {
+                    use_iconv = FALSE, verbose = TRUE) {
   
   # Download file if a url
   if (grepl("^http:|^https:", file)) {
@@ -81,10 +83,8 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
     file <- file_local
     
   } else {
-    
     # Expand path
     file <- path.expand(file)
-    
   }
   
   # If an rds object, just load and return
@@ -95,12 +95,10 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
     
     # Warning to user
     if (!is.sp(sp) && !is.ra(sp)) {
-      
       warning(
         ".rds file has been loaded but it does not contain spatial data...", 
         call. = FALSE
       )
-      
     }
     
     # Return here
@@ -140,8 +138,9 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
   }
   
   # Switch for GPX files
-  if (!is.null(layer) & grepl(".gpx$", file, ignore.case = TRUE))
+  if (!is.null(layer) & grepl(".gpx$", file, ignore.case = TRUE)) {
     layer <- ifelse(layer %in% c("point", "points"), "waypoints", layer)
+  }
 
   # Switch for geom type
   if (!is.null(geom)) geom <- parse_geom(geom)
@@ -150,17 +149,19 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
   sp <- rgdal::readOGR(
     file, 
     layer, 
-    require_geomType = geom, 
-    verbose = verbose,
-    stringsAsFactors = FALSE
+    require_geomType = geom,
+    use_iconv = use_iconv,
+    stringsAsFactors = FALSE,
+    verbose = verbose
   )
   
   # Message projection string
   if (verbose) cat(sp_projection(sp), "\n")
   
   # Lower case names for data slot, for me rather than anyone else
-  if (lower & grepl("data", class(sp), ignore.case = TRUE))
+  if (lower & grepl("data", class(sp), ignore.case = TRUE)) {
     names(sp@data) <- stringr::str_to_lower(names(sp@data))
+  }
   
   # Drop useless and empty variables in gpx file
   if (grepl("data", sp_class(sp), ignore.case = TRUE) &
@@ -261,10 +262,7 @@ drop_na_columns <- function(df) {
   if (class(df) != "data.frame") {
     
     # Make data frame again
-    df <- data.frame(
-      df, 
-      stringsAsFactors = FALSE
-    )
+    df <- data.frame(df, stringsAsFactors = FALSE)
     
     # Give names
     names(df) <- names(index[index])
