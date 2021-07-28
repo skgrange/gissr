@@ -12,7 +12,7 @@ get_osm_boundary(id, way = FALSE, sleep = 1, verbose = FALSE)
 \item{way}{Is \code{id} a way? If \code{TRUE}, a different method is needed
 which scrapes XML directly from OpenStreetMap for nodes and is a bit slow.}
 
-\item{sleep}{Number of seconds between server querries. This is useful if 
+\item{sleep}{Number of seconds between server queries. This is useful if 
 many large polygons are being requested.}
 
 \item{verbose}{Should the function give messages?}
@@ -21,8 +21,8 @@ many large polygons are being requested.}
 SpatialPolygonsDataFrame with WGS84 projection.
 }
 \description{
-\code{get_osm_boundary} accesses \href{http://polygons.openstreetmap.fr/index.py}{this}
-polygon creator tool.
+\code{get_osm_boundary} accesses 
+\href{http://polygons.openstreetmap.fr/index.py}{this} polygon creator tool.
 }
 \examples{
 

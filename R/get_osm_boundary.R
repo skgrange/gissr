@@ -1,14 +1,14 @@
 #' Function to get OpenStreetMap boundaries as spatial polygons. 
 #' 
-#' \code{get_osm_boundary} accesses \href{http://polygons.openstreetmap.fr/index.py}{this}
-#' polygon creator tool. 
+#' \code{get_osm_boundary} accesses 
+#' \href{http://polygons.openstreetmap.fr/index.py}{this} polygon creator tool. 
 #' 
 #' @param id A vector of OpenStreetMap relations. An integer key.
 #' 
 #' @param way Is \code{id} a way? If \code{TRUE}, a different method is needed
 #' which scrapes XML directly from OpenStreetMap for nodes and is a bit slow. 
 #' 
-#' @param sleep Number of seconds between server querries. This is useful if 
+#' @param sleep Number of seconds between server queries. This is useful if 
 #' many large polygons are being requested. 
 #' 
 #' @param verbose Should the function give messages? 
@@ -101,7 +101,7 @@ osm_boundary_worker <- function(id, sleep, verbose) {
   
   # Get wkt
   text <- tryCatch({
-    readr::read_lines(url)
+    threadr::read_lines(url)
   }, error = function(e) {
     message("'id' ", id, " not found...")
     NULL

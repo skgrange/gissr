@@ -24,6 +24,12 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   
   # Find geom type
   sp_class <- sp_class(sp)
+  
+  # Convert to sp if sf and find the class again
+  if (sp_class == "sf") {
+    sp <- sf::as_Spatial(sp)
+    sp_class <- sp_class(sp)
+  }
 
   # Sort out popups
   # Use name variable even if not declared
@@ -61,8 +67,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
     
   }
   
-  # 
-  # Projection force
+  # Force projection
   if (force) sp <- sp_transform(sp, warn = FALSE)
   
   # Create map
