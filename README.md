@@ -106,6 +106,8 @@ To overcome these points, I have written wrappers for many geographical function
   
   - Transform raster objects to data frames with `ra_fortify`.
   
+  - Bind or merge a number of raster layers together with `ra_bind` 
+  
 ### OpenStreetMap data importers
 
   - A collection of `get_osm_*` functions to import data from OpenStreetMap. 
@@ -114,7 +116,7 @@ To overcome these points, I have written wrappers for many geographical function
 
   - Develop a function which can read *n* features in a spatial data file. This will be helpful when large data files are encountered and system memory is too small to load the entire file at once. 
   
-  - Get the interface between R and SpatiaLite sorted. 
+  - Get the interface between R and SpatiaLite sorted -- this can probably be left to [**sf**](https://github.com/r-spatial/sf) now.
   
   - Concave hull function *i.e.* find minimum area polygon.  
   

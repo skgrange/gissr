@@ -15,7 +15,7 @@
 #' 
 #' @return RasterLayer. 
 #' 
-#' @seealso \code{\link[raster]{merge}}
+#' @seealso \code{\link[raster]{merge}}, \code{\link{ra_align}}
 #' 
 #' @export
 ra_bind <- function(list_ra, tolerance = 0.05, method = "do.call", file = NA) {
@@ -36,12 +36,10 @@ ra_bind <- function(list_ra, tolerance = 0.05, method = "do.call", file = NA) {
     }
     
   } else{
-    
     stop(
       "All items in input need to be of `RasterLayer` data type.", 
       call. = FALSE
     )
-    
   }
   
   return(ra)

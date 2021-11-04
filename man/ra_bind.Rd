@@ -25,7 +25,7 @@ RasterLayer.
 Function to bind multiple raster objects together.
 }
 \seealso{
-\code{\link[raster]{merge}}
+\code{\link[raster]{merge}}, \code{\link{ra_align}}
 }
 \author{
 Stuart K. Grange
