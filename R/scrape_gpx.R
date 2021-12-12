@@ -38,7 +38,7 @@ scrape_gpx_worker <- function(file, transform, creator, verbose) {
   if (verbose) message(threadr::date_message(), "`", file, "`...")
   
   # Load file as text
-  text_gpx <- readr::read_lines(file)
+  text_gpx <- readr::read_lines(file, progress = FALSE)
   
   # Scrape creator from file
   if (creator) {
@@ -93,6 +93,10 @@ scrape_gpx_worker <- function(file, transform, creator, verbose) {
     cadence <- xml_tree %>% 
       XML::xpathSApply(path = "//cad", XML::xmlValue) %>% 
       as.numeric()
+    
+    # Catches if the extended gps values do not contain such values
+    if (length(heart_rate) == 0) heart_rate <- NA_real_
+    if (length(cadence) == 0) cadence <- NA_real_
     
   }
 
