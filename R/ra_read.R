@@ -4,6 +4,8 @@
 #' 
 #' @param file File containing raster data. 
 #' 
+#' @param variable An optional variable to read within \code{file}. 
+#' 
 #' @param in_memory Should the raster object be forced into physical memory? 
 #' 
 #' @return Raster object. 
@@ -11,10 +13,14 @@
 #' @seealso \code{\link[raster]{raster}}
 #' 
 #' @export
-ra_read <- function(file, in_memory = FALSE) {
+ra_read <- function(file, variable = NA, in_memory = FALSE) {
   
-  # Connect to raster object
-  ra <- raster::raster(file)
+  # Connect to raster object and get a variable
+  if (is.na(variable[1])) {
+    ra <- raster::raster(file)
+  } else {
+    ra <- raster::raster(file, varname = variable)
+  }
   
   # Ensure raster object is in memory
   if (in_memory) ra <- ra_load(ra)

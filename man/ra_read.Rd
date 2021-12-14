@@ -4,10 +4,12 @@
 \alias{ra_read}
 \title{Function to read a raster object from file.}
 \usage{
-ra_read(file, in_memory = FALSE)
+ra_read(file, variable = NA, in_memory = FALSE)
 }
 \arguments{
 \item{file}{File containing raster data.}
+
+\item{variable}{An optional variable to read within \code{file}.}
 
 \item{in_memory}{Should the raster object be forced into physical memory?}
 }
