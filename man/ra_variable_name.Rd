@@ -3,11 +3,14 @@
 \name{ra_variable_name}
 \alias{ra_variable_name}
 \alias{ra_level}
+\alias{ra_z_var}
 \title{Function to extract the variable name from a raster object.}
 \usage{
 ra_variable_name(ra)
 
 ra_level(ra)
+
+ra_z_var(ra)
 }
 \arguments{
 \item{ra}{Raster object.}
