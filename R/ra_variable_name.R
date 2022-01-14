@@ -60,3 +60,20 @@ ra_level <- function(ra) {
     as.integer()
   
 }
+
+
+#' @rdname ra_variable_name
+#' @export
+ra_z_var <- function(ra) {
+  
+  # Check input
+  stopifnot(is.ra(ra))
+  
+  ra %>% 
+    capture.output() %>% 
+    stringr::str_subset("zvar") %>% 
+    stringr::str_split_fixed(":", n = 2) %>% 
+    .[, 2] %>% 
+    stringr::str_squish()
+  
+}
