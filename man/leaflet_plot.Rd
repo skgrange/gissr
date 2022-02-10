@@ -18,7 +18,7 @@ leaflet_plot(
 
 \item{popup}{Vector of variables to be used as a pop-up on the map.}
 
-\item{force}{Should the projection be forced to WGS84? Default is \code{TRUE}.}
+\item{force}{Should the projection be forced to WGS84?}
 
 \item{colour}{Colour of geometry.}
 

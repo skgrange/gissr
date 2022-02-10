@@ -4,7 +4,7 @@
 #'
 #' @param popup Vector of variables to be used as a pop-up on the map. 
 #'
-#' @param force Should the projection be forced to WGS84? Default is \code{TRUE}.
+#' @param force Should the projection be forced to WGS84? 
 #' 
 #' @param colour Colour of geometry. 
 #' 
@@ -42,6 +42,12 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       
       # Select variables in data slot
       df_sp <- sp@data[, popup, drop = FALSE]
+      
+      # Catch hms variables if they exist
+      df_sp <- df_sp %>% 
+        mutate(
+          across(tidyselect::vars_select_helpers$where(hms::is_hms), as.character)
+        )
       
       # Catch nas, make a string
       df_sp[is.na(df_sp)] <- ""
