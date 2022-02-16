@@ -9,26 +9,24 @@
 #' @export
 ra_forify <- function(ra) {
   
+  # Check input
+  stopifnot(is.ra(ra))
+  
   # To vector object
   sp <- as(ra, "SpatialPixelsDataFrame")
   
-  # To data frame
-  df <- data.frame(sp)
-  
   # To tibble
-  df <- as_tibble(df)
+  df <- sp %>% 
+    data.frame() %>% 
+    as_tibble()
   
   # Make good names
   if (dim(ra)[3] == 1) {
-    
     # Give names
     names(df) <- c("value", "x", "y")
-    
   } else {
-    
-    # Use variable names
-    df <- tidyr::gather(df, variable, value, -c(x, y))
-    
+    # Use variable names and make longer
+    df <- tidyr::pivot_longer(df, -c(x, y), names_to = "variable")
   }
   
   return(df)
