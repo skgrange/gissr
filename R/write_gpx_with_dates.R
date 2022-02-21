@@ -30,7 +30,7 @@ write_gpx_with_dates <- function(df, file) {
   gpx_complete <- stringr::str_c(gpx_preamble_tags, gpx_body, gpx_trailing_tags)
   
   # Export to disc
-  readr::write_lines(gpx_complete, file)
+  writeLines(gpx_complete, file)
   
   return(invisible(gpx_complete))
   

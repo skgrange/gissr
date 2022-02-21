@@ -7,7 +7,8 @@ if (getRversion() >= "2.15.1") {
     "lat", "lon", "changeset", "uid", "visible", "location.lat", "location.lng",
     ".", "address", "elevation", "latitude", "longitude", "resolution", "x", "y",
     "date_sunrise", "date_sunset", "value", "variable", "daylight", "distance",
-    "speed", "ID", "cells", "time_lag", "time", "id_sp", "cell", "Time", "altitude"
+    "speed", "ID", "cells", "time_lag", "time", "id_sp", "cell", "Time", 
+    "altitude", "distance_sum"
   )
   
   # Squash the note
