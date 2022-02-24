@@ -73,8 +73,9 @@
 sp_distance <- function(sp_1, sp_2, features = FALSE, unit = "m") {
   
   # Check the projection systems
-  if (!identical(sp_projection(sp_1), sp_projection(sp_2)))
-    stop("Projection systems are not identical...", call. = FALSE)
+  if (!identical(sp_projection(sp_1), sp_projection(sp_2))) {
+    stop("Projection systems are not identical.", call. = FALSE) 
+  }
   
   # Do the test
   x <- rgeos::gDistance(sp_1, sp_2, byid = features)
@@ -82,7 +83,6 @@ sp_distance <- function(sp_1, sp_2, features = FALSE, unit = "m") {
   # Transform units
   if (unit == "km") x <- x / 1000
   
-  # Return
-  x
+  return(x)
   
 }

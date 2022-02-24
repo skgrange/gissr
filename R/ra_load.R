@@ -11,13 +11,9 @@ ra_load <- function(ra) {
   stopifnot(is.ra(ra))
   
   if (ra@data@inmemory) {
-    
     message("Raster object already in memory...")
-    
   } else {
-    
     ra <- raster::readAll(ra)
-    
   }
   
   return(ra)

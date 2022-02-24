@@ -24,7 +24,7 @@ ra_mask <- function(ra, sp_polygon, pre_crop = TRUE, inverse = FALSE) {
   
   # Check the projection systems
   if (!identical(sp_projection(ra), sp_projection(sp_polygon))) {
-    stop("Projection systems are not identical...", call. = FALSE)
+    stop("Projection systems are not identical.", call. = FALSE)
   }
   
   if (pre_crop) {

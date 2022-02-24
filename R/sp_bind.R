@@ -71,13 +71,11 @@ sp_bind <- function(...) {
 sp_bind_many <- function(sp_list) {
   
   # Class check
-  if (!is.list(sp_list)) stop("Input must be list...", .call = FALSE)
+  if (!is.list(sp_list)) stop("Input must be list.", .call = FALSE)
   
   # Points can be easily bound with do.call
   if (grepl("point", class(sp_list[[1]]), ignore.case = TRUE)) {
-    
     sp_bind <- sp_list_bind(sp_list)
-    
   } else {
     
     # Reset ids, this will use uuids for uniqueness
@@ -116,9 +114,6 @@ sp_list_bind <- function(sp_list) {
     # Create data frame with zero rows
     names <- stringr::str_c(names, collapse = ",")
     df <- read.csv(textConnection(names), stringsAsFactors = FALSE)
-    
-    # Create new data slots with the same variable names
-    # sp_data_slot <- lapply(sp_list, function(x) plyr::rbind.fill(x@data, df))
     
     # A for loop in R!? 
     for (x in 1:length(sp_list)) {

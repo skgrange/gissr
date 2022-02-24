@@ -1,4 +1,4 @@
-#' Function to `drill' into a raster object and return values. 
+#' Function to "drill" into a raster object and return values. 
 #' 
 #' \code{ra_drill} wraps the \code{\link{extract}} raster function. 
 #' 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ra_drill.R
 \name{ra_drill}
 \alias{ra_drill}
-\title{Function to `drill' into a raster object and return values.}
+\title{Function to "drill" into a raster object and return values.}
 \usage{
 ra_drill(ra, sp, method = "simple", convert = FALSE, na.rm = TRUE)
 }

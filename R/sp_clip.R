@@ -80,7 +80,7 @@ sp_clip <- function(sp, envelope, sp_polygon = NULL, method = "raster") {
       
       # Check the projection systems
       if (!identical(sp_projection(sp), sp_projection(sp_polygon)))
-        stop("Projection systems are not identical...", call. = FALSE)
+        stop("Projection systems are not identical.", call. = FALSE)
       
       # Do, this will drop data slot if it exists
       sp <- rgeos::gIntersection(sp, sp_polygon, byid = TRUE, drop_lower_td = TRUE)

@@ -3,7 +3,7 @@
 #' 
 #' @param df Data frame to be converted into spatial data frame.  
 #' 
-#' @param type Type of geomerty. Type must be one of \code{"points"}, 
+#' @param type Type of geometry. Type must be one of \code{"points"}, 
 #' \code{"lines"}, or \code{"polygons"}. 
 #' 
 #' @param latitude \code{df}'s latitude variable name. 
@@ -17,8 +17,8 @@
 #' be kept in the SpatialPointsDataFrame's data slot? 
 #' 
 #' @param id Variable in \code{df} which codes for spatial object's id. This is
-#' used when a data frame contains many seperate geometries. \code{id} is not 
-#' used for points because each point is a seperate geometry. 
+#' used when a data frame contains many separate geometries. \code{id} is not 
+#' used for points because each point is a separate geometry. 
 #' 
 #' @param warn Should the function raise a warning when observations are 
 #' removed? 
@@ -56,7 +56,7 @@ sp_from_data_frame <- function(df, type = "points", latitude = "latitude",
                                keep = FALSE, id = NA, warn = TRUE) {
   
   #  Check and parse
-  if (length(type) != 1) stop("'type' must have a length of one. ", call. = FALSE)
+  if (length(type) != 1) stop("'type' must have a length of one.", call. = FALSE)
   
   # Make plurals
   type <- stringr::str_trim(type)
@@ -107,7 +107,7 @@ data_frame_to_points <- function(df, latitude, longitude, projection,
     }
     
     # Check if all observations have been lost
-    if (nrow(df) == 0) stop("There are no valid coordinates...", call. = FALSE)
+    if (nrow(df) == 0) stop("There are no valid coordinates.", call. = FALSE)
     
   }
   

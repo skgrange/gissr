@@ -19,7 +19,7 @@ sp_from_data_frame(
 \arguments{
 \item{df}{Data frame to be converted into spatial data frame.}
 
-\item{type}{Type of geomerty. Type must be one of \code{"points"}, 
+\item{type}{Type of geometry. Type must be one of \code{"points"}, 
 \code{"lines"}, or \code{"polygons"}.}
 
 \item{latitude}{\code{df}'s latitude variable name.}
@@ -33,8 +33,8 @@ Default is WGS84.}
 be kept in the SpatialPointsDataFrame's data slot?}
 
 \item{id}{Variable in \code{df} which codes for spatial object's id. This is
-used when a data frame contains many seperate geometries. \code{id} is not 
-used for points because each point is a seperate geometry.}
+used when a data frame contains many separate geometries. \code{id} is not 
+used for points because each point is a separate geometry.}
 
 \item{warn}{Should the function raise a warning when observations are 
 removed?}

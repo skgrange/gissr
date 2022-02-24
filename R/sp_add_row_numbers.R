@@ -12,8 +12,9 @@
 sp_add_row_numbers <- function(sp, name = "id", zero_based = FALSE) {
   
   # Check
-  if (!grepl("data", sp_class(sp), ignore.case = TRUE)) 
-    stop("Spatial object must have a data slot...", call. = FALSE)
+  if (!grepl("data", sp_class(sp), ignore.case = TRUE)) {
+    stop("Spatial object must have a data slot.", call. = FALSE) 
+  }
   
   # Add id to data slot
   sp@data <- threadr::add_row_numbers(

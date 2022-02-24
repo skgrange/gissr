@@ -170,7 +170,7 @@ split_df <- function(xydf, dist) {
           xnew <- seq(xydf$x[i-1] - xremsub, xydf$x[i-1] + (xmod * segs), by = xmod)[-1]
           ynew <- seq(xydf$y[i-1] - yremsub, xydf$y[i-1] + (ymod * segs), by = ymod)[-1]
           if(length(xnew) != length(ynew)){
-            if(abs(length(xnew) - length(ynew)) > 1) stop("Error found in new sequence. Code needs to be reviewed...")
+            if(abs(length(xnew) - length(ynew)) > 1) stop("Error found in new sequence. Code needs to be reviewed.")
             if(length(xnew) < length(ynew)){
               xnew <- c(xnew, xydf$x[i-1] + (xmod * segs))
             } else {
