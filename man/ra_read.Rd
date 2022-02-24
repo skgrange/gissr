@@ -2,9 +2,12 @@
 % Please edit documentation in R/ra_read.R
 \name{ra_read}
 \alias{ra_read}
+\alias{ra_read_brick}
 \title{Function to read a raster object from file.}
 \usage{
 ra_read(file, variable = NA, in_memory = FALSE)
+
+ra_read_brick(file, variable = NA, in_memory = FALSE)
 }
 \arguments{
 \item{file}{File containing raster data.}

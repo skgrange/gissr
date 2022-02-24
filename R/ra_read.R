@@ -28,3 +28,22 @@ ra_read <- function(file, variable = NA, in_memory = FALSE) {
   return(ra)
   
 }
+
+
+#' @rdname ra_read
+#' @export
+ra_read_brick <- function(file, variable = NA, in_memory = FALSE) {
+  
+  # Connect to raster object and get a variable
+  if (is.na(variable[1])) {
+    ra <- raster::brick(file)
+  } else {
+    ra <- raster::brick(file, varname = variable)
+  }
+  
+  # Ensure raster object is in memory
+  if (in_memory) ra <- ra_load(ra)
+  
+  return(ra)
+  
+}
