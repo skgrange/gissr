@@ -7,7 +7,7 @@
 \usage{
 ra_read(file, variable = NA, in_memory = FALSE)
 
-ra_read_brick(file, variable = NA, in_memory = FALSE)
+ra_read_brick(file, variable = NA, level = 1, in_memory = FALSE)
 }
 \arguments{
 \item{file}{File containing raster data.}
@@ -15,6 +15,8 @@ ra_read_brick(file, variable = NA, in_memory = FALSE)
 \item{variable}{An optional variable to read within \code{file}.}
 
 \item{in_memory}{Should the raster object be forced into physical memory?}
+
+\item{level}{What level to load, usually a fourth dimension variable.}
 }
 \value{
 Raster object.
