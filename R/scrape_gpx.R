@@ -53,6 +53,7 @@ scrape_gpx_worker <- function(file, transform, creator, verbose) {
   # Extended file version? 
   # For garmin watches
   gpx_extended <- any(stringr::str_detect(text_gpx[1:10], "TrackPointExtension"))
+  gpx_extended <- if_else(is.na(gpx_extended), FALSE, TRUE)
   
   # Get variables
   coordinates <- XML::xpathSApply(xml_tree, path = "//trkpt", XML::xmlAttrs)
