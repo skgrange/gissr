@@ -12,6 +12,8 @@
 #' 
 #' @param fill_opacity Internal opacity of the geometry.
 #' 
+#' @param hill_shading Should hill shading be displayed on the map? 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @return A leaflet map.
@@ -20,7 +22,7 @@
 #' 
 #' @export
 leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F", 
-                         opacity = 0.5, fill_opacity = 0.2) {
+                         opacity = 0.5, fill_opacity = 0.2, hill_shading = FALSE) {
   
   # Find geom type
   sp_class <- sp_class(sp)
@@ -109,13 +111,26 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       ),
       group = "Outdoors"
     ) %>% 
+    addWMSTiles(
+      "http://ows.mundialis.de/services/service?",
+      layers = "SRTM30-Hillshade",
+      options = WMSTileOptions(transparent = TRUE, opacity = 0.28),
+      attribution = "Elevation data from Shuttle Radar Topography Mission (SRTM) & served by terrestris GmbH & Co. KG",
+      group = "Hill shading"
+    ) %>% 
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(
       baseGroups = c(
         "OpenStreetMap", "Toner", "Toner lite", "Landscape", "Transport dark", 
         "Outdoors", "Images"
-      )
-    )
+      ),
+      overlayGroups = "Hill shading"
+    ) 
+  
+  # Drop hill shading if not desired
+  if (!hill_shading) {
+    map <- hideGroup(map, "Hill shading")
+  }
   
   # Add layers
   if (grepl("points", sp_class, ignore.case = TRUE)) {

@@ -10,7 +10,8 @@ leaflet_plot(
   force = TRUE,
   colour = "#03F",
   opacity = 0.5,
-  fill_opacity = 0.2
+  fill_opacity = 0.2,
+  hill_shading = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ leaflet_plot(
 \item{opacity}{Opacity of the edge of the geometry.}
 
 \item{fill_opacity}{Internal opacity of the geometry.}
+
+\item{hill_shading}{Should hill shading be displayed on the map?}
 }
 \value{
 A leaflet map.

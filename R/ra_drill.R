@@ -84,6 +84,11 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, na.rm = TRUE) {
 #' @param tz If \code{variable_as_date} is \code{TRUE}, what time zone are the 
 #' dates stored in? This will almost certainly be \code{UTC}. 
 #' 
+#' @param drop_cell_raster Should the \code{cell_raster} variable returned by
+#' \code{\link{ra_drill}} be dropped? 
+#' 
+#' @param na.rm Should missing values be removed from the return? 
+#' 
 #' @author Stuart K. Grange
 #' 
 #' @return Tibble. 
@@ -91,10 +96,16 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, na.rm = TRUE) {
 #' @seealso \code{\link{ra_drill}}
 #' 
 #' @export
-tidy_ra_drill <- function(df, variable_as_date = FALSE, tz = "UTC") {
+tidy_ra_drill <- function(df, variable_as_date = FALSE, tz = "UTC", 
+                          drop_cell_raster = FALSE, na.rm = FALSE) {
+  
+  # Drop cell_raster variable if desired
+  if (drop_cell_raster) {
+    df <- select(df, -matches("cell_raster"))
+  }
   
   # What variables should be used as keys?
-  # Depends on spatial data type
+  # Depends on spatial data type and above argument
   if ("cell_raster" %in% names(df)) {
     variable_keys <- c("id_sp", "cell_raster")
   } else {
@@ -103,6 +114,11 @@ tidy_ra_drill <- function(df, variable_as_date = FALSE, tz = "UTC") {
   
   # Make longer data
   df <- tidyr::pivot_longer(df, -!!variable_keys, names_to = "variable")
+  
+  # Remove missing values
+  if (na.rm) {
+    df <- filter(df, !is.na(value))
+  }
   
   # If the names are dates, rename variable and parse
   if (variable_as_date && stringr::str_detect(df$variable[1], "^X")) {

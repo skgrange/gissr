@@ -15,21 +15,17 @@ ra_read_variables <- function(file) {
 ra_read_variables_worker <- function(file) {
   
   # Probe file to get names, this captures the warning messages
-  warning_message <- tryCatch({
-    raster::raster(file)
-  }, warning = function(w) {
-    w
-  })
+  warning_messages <- raster_quiet(file)$warnings
   
-  # Get variables from warning messages
-  variables <- warning_message[[1]] %>% 
+  # Get variables from warning message
+  variables <- warning_messages[1] %>% 
     stringr::str_split_fixed("of: ", 2) %>% 
     .[, 2] %>% 
     stringr::str_split(", ") %>% 
     .[[1]]
   
   # Get levels from warning message if it exists
-  message_levels <- stringr::str_subset(warning_message[[1]], "levels")
+  message_levels <- stringr::str_subset(warning_messages, "levels")
   
   if (length(message_levels) == 0L) {
     levels <- 1L
@@ -45,10 +41,13 @@ ra_read_variables_worker <- function(file) {
   # Make a tibble with all combinations
   df <- tidyr::expand_grid(
     file,
-    level = levels, 
+    level = seq_len(levels), 
     variable = variables
   )
   
   return(df)
   
 }
+
+
+raster_quiet <- purrr::quietly(raster::raster)
