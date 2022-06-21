@@ -1,4 +1,6 @@
 #' Pseudo-function to re-export functions from the \strong{base} packages. 
+#' 
+#' @name base functions
 #'
 #' @importFrom methods as slot 
 #' 
