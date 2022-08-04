@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_gpx_with_dates.R
 \name{write_gpx_with_dates}
 \alias{write_gpx_with_dates}
-\title{Function to export GPX files with a time variable.}
+\title{Function to export GPX files with a \code{time} (date) variable.}
 \usage{
 write_gpx_with_dates(df, file)
 }
@@ -14,10 +14,10 @@ to be of \code{POSIXct} type.}
 \item{file}{File name of GPX export.}
 }
 \value{
-Invisible GPX markup.
+Invisible GPX mark-up.
 }
 \description{
-Function to export GPX files with a time variable.
+Function to export GPX files with a \code{time} (date) variable.
 }
 \author{
 Stuart K. Grange

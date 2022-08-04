@@ -1,4 +1,4 @@
-#' Function to export GPX files with a time variable. 
+#' Function to export GPX files with a \code{time} (date) variable. 
 #' 
 #' @param df Data frame or tibble with at least these three variables: 
 #' \code{latitude}, \code{longitude}, and \code{date}. \code{date} also needs 
@@ -8,7 +8,7 @@
 #' 
 #' @author Stuart K. Grange
 #' 
-#' @return Invisible GPX markup.
+#' @return Invisible GPX mark-up.
 #' 
 #' @export
 write_gpx_with_dates <- function(df, file) {
@@ -16,6 +16,14 @@ write_gpx_with_dates <- function(df, file) {
   # Check input
   stopifnot(c("latitude", "longitude", "date") %in% names(df))
   stopifnot(lubridate::is.POSIXt(df$date))
+  
+  # Drop missing coordinates if they exist and raise a warning
+  if (anyNA(c(df$latitude, df$longitude))) {
+    df <- filter(df, !is.na(latitude), !is.na(longitude))
+    warning(
+      "Missing coordinates were detected and have been removed...", call. = FALSE
+    )
+  }
   
   # Format dates for gpx files
   df <- df %>% 
