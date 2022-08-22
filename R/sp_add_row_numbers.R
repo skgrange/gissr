@@ -17,11 +17,15 @@ sp_add_row_numbers <- function(sp, name = "id", zero_based = FALSE) {
   }
   
   # Add id to data slot
-  sp@data <- threadr::add_row_numbers(
-    sp@data, 
-    name = name, 
-    zero_based = zero_based
-  )
+  sp@data <- tibble::rowid_to_column(sp@data, var = name)
+  
+  if (zero_based) {
+    # Get id
+    id_sequence <- pull(sp@data, !!name)
+    id_sequence <- id_sequence - 1L
+    # Overwrite old sequence
+    sp@data <- mutate(sp@data, {{name}} := !!id_sequence)
+  }
   
   return(sp)
   
