@@ -112,12 +112,16 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       group = "Outdoors"
     ) %>% 
     addWMSTiles(
-      "http://ows.mundialis.de/services/service?",
+      "https://ows.mundialis.de/services/service?",
       layers = "SRTM30-Hillshade",
       options = WMSTileOptions(transparent = TRUE, opacity = 0.28),
       attribution = "Elevation data from Shuttle Radar Topography Mission (SRTM) & served by terrestris GmbH & Co. KG",
       group = "Hill shading"
-    ) %>% 
+    ) %>%
+    # addWMSTiles(
+    #   "http://services.arcgisonline.com/arcgis/rest/services/World_Shaded_Relief/MapServer/WMTS?",
+    #   layers = "World_Shaded_Relief"
+    # ) %>% 
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(
       baseGroups = c(

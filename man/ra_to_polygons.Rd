@@ -2,6 +2,7 @@
 % Please edit documentation in R/ra_to_polygons.R
 \name{ra_to_polygons}
 \alias{ra_to_polygons}
+\alias{ra_to_points}
 \title{Function to transform a raster object to spatial polygons.}
 \usage{
 ra_to_polygons(
@@ -12,6 +13,8 @@ ra_to_polygons(
   dissolve = FALSE,
   data = TRUE
 )
+
+ra_to_points(ra)
 }
 \arguments{
 \item{ra}{Raster object.}

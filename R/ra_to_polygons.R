@@ -42,3 +42,11 @@ ra_to_polygons <- function(ra, n = 4, na.rm = TRUE, digits = 12,
   
 }
 
+
+#' @rdname ra_to_polygons
+#'
+#' @export
+ra_to_points <- function(ra) {
+  stopifnot(is.ra(ra))
+  raster::rasterToPoints(ra, spatial = TRUE)
+}
