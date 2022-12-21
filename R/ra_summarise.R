@@ -28,10 +28,27 @@ ra_summarise <- function(ra, f = mean, na.rm = TRUE, by_layer = TRUE,
     # Calculate the summaries, this is a named vector
     x <- raster::cellStats(ra, stat = f, na.rm = na.rm)
     
-    # Make data frame
-    df <- x %>% 
-      tibble::enframe() %>% 
-      purrr::set_names(c("variable", "value"))
+    # Make tibble
+    if (inherits(x, "matrix")) {
+      
+      # Get names of layers
+      variable <- colnames(x)
+      
+      # Format matrix as a long tibble
+      df <- x %>% 
+        t() %>% 
+        as_tibble(.name_repair = "minimal") %>% 
+        purrr::set_names(1:ncol(.)) %>% 
+        mutate(variable = !!variable) %>% 
+        tidyr::pivot_longer(-variable, names_to = "value_index") %>% 
+        mutate(value_index = as.integer(value_index))
+      
+    } else {
+      # When just a named numeric vector
+      df <- x %>% 
+        tibble::enframe() %>% 
+        purrr::set_names(c("variable", "value"))
+    }
     
     # Switch variable into a date
     if (variable_as_date && stringr::str_detect(df$variable[1], "^X")) {
