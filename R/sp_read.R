@@ -146,13 +146,16 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
   if (!is.null(geom)) geom <- parse_geom(geom)
   
   # Read file with rgdal
-  sp <- rgdal::readOGR(
-    file, 
-    layer, 
-    require_geomType = geom,
-    use_iconv = use_iconv,
-    stringsAsFactors = FALSE,
-    verbose = verbose
+  # Warning suppression is for deprecated function
+  suppressWarnings(
+    sp <- rgdal::readOGR(
+      file, 
+      layer, 
+      require_geomType = geom,
+      use_iconv = use_iconv,
+      stringsAsFactors = FALSE,
+      verbose = verbose
+    )
   )
   
   # Message projection string
@@ -190,7 +193,7 @@ sp_read <- function(file, layer = NULL, geom = NULL, lower = TRUE,
 #' }
 #' 
 #' @export
-sp_list_drivers <- function() rgdal::ogrDrivers()
+sp_list_drivers <- function() suppressWarnings(rgdal::ogrDrivers())
 
 
 #' Function to list layers within a spatial data file. 
@@ -206,7 +209,9 @@ sp_list_drivers <- function() rgdal::ogrDrivers()
 #' }
 #' 
 #' @export
-sp_list_layers <- function(file) rgdal::ogrListLayers(path.expand(file))
+sp_list_layers <- function(file) {
+  suppressWarnings(rgdal::ogrListLayers(path.expand(file)))
+}
 
 
 #' Function to return layer information within a spatial data file. 
@@ -231,7 +236,9 @@ sp_layer_info <- function(file, layer, geom = NULL) {
   # Switch for geom type
   if (!is.null(geom)) geom <- parse_geom(geom)
   
-  info <- rgdal::ogrInfo(file, layer, require_geomType = geom)
+  suppressWarnings(
+    info <- rgdal::ogrInfo(file, layer, require_geomType = geom)
+  )
   
   return(info)
   

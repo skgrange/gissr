@@ -7,9 +7,9 @@
 tidy_ra_drill(
   df,
   variable_as_date = FALSE,
-  tz = "UTC",
   drop_cell_raster = FALSE,
-  na.rm = FALSE
+  na.rm = FALSE,
+  tz = "UTC"
 )
 }
 \arguments{
@@ -18,13 +18,13 @@ tidy_ra_drill(
 \item{variable_as_date}{Are the variables/names of the \code{\link{ra_drill}}
 output dates? If so, the dates will be parsed and the variable renamed.}
 
-\item{tz}{If \code{variable_as_date} is \code{TRUE}, what time zone are the 
-dates stored in? This will almost certainly be \code{UTC}.}
-
 \item{drop_cell_raster}{Should the \code{cell_raster} variable returned by
 \code{\link{ra_drill}} be dropped?}
 
 \item{na.rm}{Should missing values be removed from the return?}
+
+\item{tz}{If \code{variable_as_date} is \code{TRUE}, what time zone are the 
+dates stored in? This will almost certainly be \code{UTC}.}
 }
 \value{
 Tibble.

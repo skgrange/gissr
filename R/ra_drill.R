@@ -23,7 +23,7 @@
 #' @export
 ra_drill <- function(ra, sp, method = "simple", convert = FALSE, na.rm = TRUE) {
   
-  # Checks
+  # Check inputs
   stopifnot(is.ra(ra) & is.sp(sp))
   
   if (!sp_projection(ra) == sp_projection(sp)) {
@@ -96,8 +96,8 @@ ra_drill <- function(ra, sp, method = "simple", convert = FALSE, na.rm = TRUE) {
 #' @seealso \code{\link{ra_drill}}
 #' 
 #' @export
-tidy_ra_drill <- function(df, variable_as_date = FALSE, tz = "UTC", 
-                          drop_cell_raster = FALSE, na.rm = FALSE) {
+tidy_ra_drill <- function(df, variable_as_date = FALSE, drop_cell_raster = FALSE, 
+                          na.rm = FALSE, tz = "UTC") {
   
   # Drop cell_raster variable if desired
   if (drop_cell_raster) {
@@ -118,6 +118,10 @@ tidy_ra_drill <- function(df, variable_as_date = FALSE, tz = "UTC",
   # Remove missing values
   if (na.rm) {
     df <- filter(df, !is.na(value))
+    # If all values are removed, return empty tibble
+    if (nrow(df) == 0L) {
+      return(tibble())
+    }
   }
   
   # If the names are dates, rename variable and parse
