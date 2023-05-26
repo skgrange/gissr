@@ -1,6 +1,5 @@
 # **gissr** <a href='https://github.com/skgrange/gissr'><img src='man/figures/logo.png' align="right" height="131.5" /></a>
 
-[![Build Status](https://travis-ci.org/skgrange/gissr.svg?branch=master)](https://travis-ci.org/skgrange/gissr)
 [![Lifecycle Status](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)
 
 **gissr** is a collection of R functions which make working with spatial data easier.
@@ -8,12 +7,13 @@
 ## Installation
 
 The development version: 
+
 ```
 # Install dependency
-devtools::install_github("skgrange/threadr")
+remotes::install_github("skgrange/threadr")
 
 # Install gissr
-devtools::install_github("skgrange/gissr")
+remotes::install_github("skgrange/gissr")
 ```
 
 ## Background
