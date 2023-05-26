@@ -22,9 +22,12 @@ sp_buffer <- function(sp, features = TRUE, width = 1, end_style = "round") {
   end_style <- stringr::str_to_upper(end_style)
   stopifnot(end_style %in% c("ROUND", "FLAT", "SQUARE"))
   
-  # Warning suppression for when non-metric projections used
+  # Warning suppression for when non-metric projections used and message 
+  # suppression is for rgeos retirement message
   sp <- suppressWarnings(
-    rgeos::gBuffer(sp, byid = features, width = width, capStyle = end_style)
+    suppressMessages(
+      rgeos::gBuffer(sp, byid = features, width = width, capStyle = end_style) 
+    )
   )
   
   return(sp)
