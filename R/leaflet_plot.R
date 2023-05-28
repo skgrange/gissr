@@ -22,7 +22,9 @@
 #' 
 #' @export
 leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F", 
-                         opacity = 0.5, fill_opacity = 0.2, hill_shading = FALSE) {
+                         opacity = 0.5, fill_opacity = 0.2, 
+                         hill_shading = FALSE) {
+  
   
   # Find geom type
   sp_class <- sp_class(sp)
@@ -37,13 +39,18 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   # Use name variable even if not declared
   if (stringr::str_detect(sp_class(sp), "Data")) {
     
-    # Use a default
-    if (is.null(popup) && "name" %in% names(sp@data)) popup <- "name"
+    # Use name as the default
+    if (is.null(popup) && "name" %in% names(sp@data)) {
+      popup <- "name"
+    }
     
     if (!is.null(popup)) {
       
-      # Select variables in data slot
-      df_sp <- sp@data[, popup, drop = FALSE]
+      # Select variables in data slot, will only select variables that exist,
+      # useful when sf objects are passed and they have a geometry name
+      df_sp <- sp %>% 
+        .@data %>% 
+        select(matches(popup))
       
       # Catch hms variables if they exist
       df_sp <- df_sp %>% 
@@ -51,7 +58,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
           across(tidyselect::vars_select_helpers$where(hms::is_hms), as.character)
         )
       
-      # Catch nas, make a string
+      # Catch nas, make an empty string
       df_sp[is.na(df_sp)] <- ""
       
       # Get variable names
@@ -68,7 +75,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       # No names for the vector
       popup_string <- unname(popup_string)
       
-      # Reassign
+      # Reassign to function's argument name
       popup <- popup_string
       
     }
@@ -117,11 +124,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       options = WMSTileOptions(transparent = TRUE, opacity = 0.28),
       attribution = "Elevation data from Shuttle Radar Topography Mission (SRTM) & served by terrestris GmbH & Co. KG",
       group = "Hill shading"
-    ) %>%
-    # addWMSTiles(
-    #   "http://services.arcgisonline.com/arcgis/rest/services/World_Shaded_Relief/MapServer/WMTS?",
-    #   layers = "World_Shaded_Relief"
-    # ) %>% 
+    ) %>% 
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(
       baseGroups = c(
@@ -138,7 +141,6 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   
   # Add layers
   if (grepl("points", sp_class, ignore.case = TRUE)) {
-    
     map <- map %>% 
       addCircleMarkers(
         popup = popup, 
@@ -146,9 +148,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
         opacity = opacity,
         fillOpacity = fill_opacity
       )
-    
   } else if (grepl("lines", sp_class, ignore.case = TRUE)) {
-    
     map <- map %>% 
       addPolylines(
         popup = popup, 
@@ -156,9 +156,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
         opacity = opacity,
         fillOpacity = fill_opacity
       )
-    
   } else if (grepl("polygons", sp_class, ignore.case = TRUE)) {
-    
     map <- map %>% 
       addPolygons(
         popup = popup, 
@@ -166,17 +164,14 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
         opacity = opacity,
         fillOpacity = fill_opacity
       )
-    
   } else if (sp_class == "RasterLayer") {
-    
-    # Just a first step, raster and layer control has some issues
+    # Just a first step
     map <- leaflet() %>% 
       addTiles(
         group = "OpenStreetMap", 
         urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       ) %>% 
       addRasterImage(sp, colors = "viridis", opacity = opacity)
-    
   }
   
   return(map)
