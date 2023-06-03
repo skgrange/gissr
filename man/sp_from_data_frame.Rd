@@ -2,7 +2,7 @@
 % Please edit documentation in R/sp_from_data_frame.R
 \name{sp_from_data_frame}
 \alias{sp_from_data_frame}
-\title{Function to promoting a data frame to a SpatialPointsDataFrame, 
+\title{Function to promote a data frame to a SpatialPointsDataFrame, 
 SpatialLinesDataFrame, or SpatialPolygonsDataFrame.}
 \usage{
 sp_from_data_frame(
@@ -44,7 +44,7 @@ A SpatialPointsDataFrame, SpatialLinesDataFrame, or
 SpatialPolygonsDataFrame.
 }
 \description{
-Function to promoting a data frame to a SpatialPointsDataFrame, 
+Function to promote a data frame to a SpatialPointsDataFrame, 
 SpatialLinesDataFrame, or SpatialPolygonsDataFrame.
 }
 \examples{

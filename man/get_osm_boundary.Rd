@@ -4,7 +4,7 @@
 \alias{get_osm_boundary}
 \title{Function to get OpenStreetMap boundaries as spatial polygons.}
 \usage{
-get_osm_boundary(id, way = FALSE, sleep = 1, verbose = FALSE)
+get_osm_boundary(id, way = FALSE, sleep = 1, sf = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{id}{A vector of OpenStreetMap relations. An integer key.}
@@ -14,6 +14,8 @@ which scrapes XML directly from OpenStreetMap for nodes and is a bit slow.}
 
 \item{sleep}{Number of seconds between server queries. This is useful if 
 many large polygons are being requested.}
+
+\item{sf}{Should the function return a \strong{sf} object?}
 
 \item{verbose}{Should the function give messages?}
 }

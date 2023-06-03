@@ -1,4 +1,4 @@
-#' Function to promoting a data frame to a SpatialPointsDataFrame, 
+#' Function to promote a data frame to a SpatialPointsDataFrame, 
 #' SpatialLinesDataFrame, or SpatialPolygonsDataFrame.
 #' 
 #' @param df Data frame to be converted into spatial data frame.  
