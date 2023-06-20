@@ -17,3 +17,19 @@ if (getRversion() >= "2.15.1") {
   utils::globalVariables(variables)
   
 }
+
+
+# To mute proj4 messages during start up
+.onLoad <- function(lib, pkg) {
+  options("rgdal_show_exportToProj4_warnings"="none")
+}
+
+
+.onAttach <- function(lib, pkg) {
+  options("rgdal_show_exportToProj4_warnings"="none")
+}
+
+
+.onUnload <- function(lib, pkg) {
+  options("rgdal_show_exportToProj4_warnings"="all")
+}
