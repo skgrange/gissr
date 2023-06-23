@@ -17,12 +17,11 @@ sp_reflect <- function(sp, x = FALSE, y = FALSE) {
   projection <- sp_projection(sp)
   
   # Do
-  sp <- maptools::elide(sp, reflect = c(x, y))
+  sp <- sp::elide(sp, reflect = c(x, y))
   
   # Add projection again
   sp <- sp_transform(sp, to = projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }

@@ -13,12 +13,11 @@ sp_flip <- function(sp) {
   projection <- sp_projection(sp)
   
   # Do
-  sp <- maptools::elide(sp, flip = TRUE)
+  sp <- sp::elide(sp, flip = TRUE)
   
   # Add projection again
   sp <- sp_transform(sp, to = projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }

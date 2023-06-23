@@ -21,7 +21,7 @@ sp_move <- function(sp, x, y) {
   projection <- sp_projection(sp)
   
   # Do
-  sp <- maptools::elide(sp, shift = c(x, y))   
+  sp <- sp::elide(sp, shift = c(x, y))   
   
   # Add projection again
   sp <- sp_transform(sp, to = projection, warn = FALSE)

@@ -67,17 +67,20 @@ transform_coordinates <- function(df, latitude = "latitude",
   # Do the projection conversion
   sp <- sp_transform(sp, to)
   
-  # Back to data frame
-  df <- data.frame(sp)
+  # Back to data frame and drop optional variable if exists
+  df <- sp %>% 
+    data.frame() %>% 
+    select(-matches("optional"))
   
-  # Remove optional variable if exists
-  df$optional <- NULL
+  # Rename coordinates that come from row names
+  names(df) <- if_else(names(df) == "coords.x1", "longitude", names(df))
+  names(df) <- if_else(names(df) == "coords.x2", "latitude", names(df))
   
   # Arrange variables in original order
   df <- df %>% 
     select(!!variables) %>% 
     as_tibble()
-  
+    
   return(df)
   
 }

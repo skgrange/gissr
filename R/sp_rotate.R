@@ -16,12 +16,11 @@ sp_rotate <- function(sp, amount) {
   projection <- sp_projection(sp)
   
   # Do
-  sp <- maptools::elide(sp, rotate = amount)
+  sp <- sp::elide(sp, rotate = amount)
   
   # Add projection again
   sp <- sp_transform(sp, to = projection, warn = FALSE)
   
-  # Return
-  sp
+  return(sp)
   
 }
