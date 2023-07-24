@@ -75,7 +75,7 @@ sp_transform <- function(sp, to = NA, warn = TRUE) {
     z_value <- raster::getZ(sp)
     
     # When no projection is present
-    if (is.na(sp@crs)) {
+    if (is.na(raster::crs(sp))) {
       
       if (warn) {
         warning(
