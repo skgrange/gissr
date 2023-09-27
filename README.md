@@ -16,6 +16,10 @@ remotes::install_github("skgrange/threadr")
 remotes::install_github("skgrange/gissr")
 ```
 
+## Deprecation note
+
+As most spatial data and R users will be aware, the **rgdal**, **rgeos**, and **maptools** packages will be returned in late 2023. This is because the developer of the packages is retiring and a new generation of spatial tools have emerged in the form of the **sf**, **stars**, and **terra** packages. Because **gissr** is mostly built upon the older packages, it will most likely be retired in 2023 too. The development of **gissr**'s successor based on the **sf** and  **terra** packages called [**sspatialr**](https://github.com/skgrange/sspatialr) is ongoing. For new projects, it is recommended that **sspatialr** is used rather than **gissr**.
+
 ## Background
 
 R's spatial data analysis abilities are very well developed. Therefore, R can be used as an effective geographical information system (GIS). A key advantage of R in GIS applications is that the user can dip in-and-out of R's general string, numerical, and visualisation tools and apply them to spatial data.
