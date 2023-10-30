@@ -164,7 +164,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
         opacity = opacity,
         fillOpacity = fill_opacity
       )
-  } else if (sp_class == "RasterLayer") {
+  } else if (inherits(sp_class, "RasterLayer")) {
     # Just a first step
     map <- leaflet() %>% 
       addTiles(
@@ -182,6 +182,3 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
 collapse_values_with_name <- function(x, name, sep = ": ") {
   stringr::str_c(name, sep, x)
 }
-
-
-
