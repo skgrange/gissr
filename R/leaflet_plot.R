@@ -34,7 +34,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
     sp <- sf::as_Spatial(sp)
     sp_class <- sp_class(sp)
   }
-
+  
   # Sort out popups
   # Use name variable even if not declared
   if (stringr::str_detect(sp_class(sp), "Data")) {
@@ -92,8 +92,8 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
       group = "OpenStreetMap", 
       urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     ) %>%
-    addProviderTiles("Stamen.Toner", group = "Toner") %>%
-    addProviderTiles("Stamen.TonerLite", group = "Toner lite") %>%
+     addProviderTiles("Stadia.StamenToner", group = "Toner") %>%
+     addProviderTiles("Stadia.StamenTonerLite", group = "Toner lite") %>%
     addTiles(
       urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
       attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
@@ -101,7 +101,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
         variant = "landscape", apikey = "25ef91f0102248f4a181998ec2b7a1ad"
       ),
       group = "Landscape"
-    ) %>% 
+    ) %>%
     addTiles(
       urlTemplate = "https://{s}.tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}",
       attribution = "&copy; <a href='http://www.thunderforest.com/'>Thunderforest</a>,  &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
@@ -128,7 +128,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
     addProviderTiles("Esri.WorldImagery", group = "Images") %>% 
     addLayersControl(
       baseGroups = c(
-        "OpenStreetMap", "Toner", "Toner lite", "Landscape", "Transport dark", 
+        "OpenStreetMap", "Landscape", "Toner", "Toner lite", "Transport dark", 
         "Outdoors", "Images"
       ),
       overlayGroups = "Hill shading"
@@ -164,7 +164,7 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
         opacity = opacity,
         fillOpacity = fill_opacity
       )
-  } else if (sp_class == "RasterLayer") {
+  } else if (inherits(sp_class, "RasterLayer")) {
     # Just a first step
     map <- leaflet() %>% 
       addTiles(
