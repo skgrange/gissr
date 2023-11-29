@@ -22,7 +22,7 @@
 \alias{projection_italy}
 \title{Functions to wrap common projection (PROJ.4) strings.}
 \usage{
-projection_wgs84()
+projection_wgs84(with_ellps = FALSE)
 
 projection_google()
 
@@ -59,6 +59,10 @@ projection_beijing()
 projection_etr89()
 
 projection_italy()
+}
+\arguments{
+\item{with_ellps}{Should the WGS84 string have the \code{ellps} statement 
+included?}
 }
 \value{
 Character vector with length of 1.

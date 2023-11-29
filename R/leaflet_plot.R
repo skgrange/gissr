@@ -83,7 +83,11 @@ leaflet_plot <- function(sp, popup = NULL, force = TRUE, colour = "#03F",
   }
   
   # Force projection
-  if (force) sp <- sp_transform(sp, warn = FALSE)
+  if (force) {
+    sp <- sp_transform(sp, to = projection_wgs84(with_ellps = TRUE), warn = FALSE)
+  }
+  
+  projection_wgs84()
   
   # Create map
   map <- sp %>% 

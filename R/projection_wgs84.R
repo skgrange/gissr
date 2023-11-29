@@ -2,13 +2,23 @@
 #' 
 #' @author Stuart K.Grange
 #' 
+#' @param with_ellps Should the WGS84 string have the \code{ellps} statement 
+#' included? 
+#' 
 #' @return Character vector with length of 1.
 #' 
 #' @seealso \href{http://spatialreference.org/}{spatialreference.org}
 #' 
 #' @export
-projection_wgs84 <- function() {
-  "+proj=longlat +datum=WGS84 +no_defs"
+projection_wgs84 <- function(with_ellps = FALSE) {
+  
+  if (with_ellps) {
+    "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+  } else {
+    # The old default
+    "+proj=longlat +datum=WGS84 +no_defs"
+  }
+  
 }
 
 
