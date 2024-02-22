@@ -1,8 +1,12 @@
 # **gissr** <a href='https://github.com/skgrange/gissr'><img src='man/figures/logo.png' align="right" height="131.5" /></a>
 
-[![Lifecycle Status](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/)
+[![Lifecycle Status](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://www.tidyverse.org/lifecycle/)
 
 **gissr** is a collection of R functions which make working with spatial data easier.
+
+## Deprecation note
+
+As most spatial data and R users will be aware, the **rgdal**, **rgeos**, and **maptools** packages were retired in October 2023. This is because the developer of the packages retired and a new generation of spatial tools has emerged in the form of the **sf**, **stars**, and **terra** packages. Because **gissr** is mostly built upon the older packages (that have now been archived), **gissr** is also now deprecated. The development of **gissr**'s successor based on the **sf** and  **terra** packages called [**sspatialr**](https://github.com/skgrange/sspatialr) is ongoing. For new projects, it is recommended that **sspatialr** is used rather than **gissr**.
 
 ## Installation
 
@@ -15,10 +19,6 @@ remotes::install_github("skgrange/threadr")
 # Install gissr
 remotes::install_github("skgrange/gissr")
 ```
-
-## Deprecation note
-
-As most spatial data and R users will be aware, the **rgdal**, **rgeos**, and **maptools** packages will be returned in late 2023. This is because the developer of the packages is retiring and a new generation of spatial tools have emerged in the form of the **sf**, **stars**, and **terra** packages. Because **gissr** is mostly built upon the older packages, it will most likely be retired in 2023 too. The development of **gissr**'s successor based on the **sf** and  **terra** packages called [**sspatialr**](https://github.com/skgrange/sspatialr) is ongoing. For new projects, it is recommended that **sspatialr** is used rather than **gissr**.
 
 ## Background
 
@@ -122,11 +122,13 @@ To overcome these points, I have written wrappers for many geographical function
   
   - Get the interface between R and SpatiaLite sorted -- this can probably be left to [**sf**](https://github.com/r-spatial/sf) now.
   
-  - Concave hull function *i.e.* find minimum area polygon.  
+  - Concave hull function *i.e.* find minimum area polygon. 
   
   - Add support for WKB (well-known binary). 
 
 ## See also
 
   - [**sf**](https://github.com/r-spatial/sf)
-  
+  - [**terra**](https://github.com/rspatial/terra)
+  - [**sspatialr**](https://github.com/skgrange/sspatialr)
+
