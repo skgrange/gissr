@@ -1,12 +1,12 @@
 # **gissr** <a href='https://github.com/skgrange/gissr'><img src='man/figures/logo.png' align="right" height="131.5" /></a>
 
-[![Lifecycle Status](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://www.tidyverse.org/lifecycle/)
+[![Lifecycle: retired](https://img.shields.io/badge/lifecycle-retired-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#retired)
 
 **gissr** is a collection of R functions which make working with spatial data easier.
 
-## Deprecation note
+## Retired note
 
-As most spatial data and R users will be aware, the **rgdal**, **rgeos**, and **maptools** packages were retired in October 2023. This is because the developer of the packages retired and a new generation of spatial tools has emerged in the form of the **sf**, **stars**, and **terra** packages. Because **gissr** is mostly built upon the older packages (that have now been archived), **gissr** is also now deprecated. The development of **gissr**'s successor based on the **sf** and  **terra** packages called [**sspatialr**](https://github.com/skgrange/sspatialr) is ongoing. For new projects, it is recommended that **sspatialr** is used rather than **gissr**.
+As most spatial data and R users will be aware, the **rgdal**, **rgeos**, and **maptools** packages were retired in October 2023. This is because the developer of the packages retired and a new generation of spatial tools has emerged in the form of the **sf**, **terra**, and **stars** packages. Because **gissr** is mostly built upon the older packages (that have now been archived), **gissr** was retired on June 17, 2024. The development of **gissr**'s successor based on the **sf** and  **terra** packages called [**sspatialr**](https://github.com/skgrange/sspatialr) is ongoing. For new projects, it is recommended that **sspatialr** is used rather than **gissr**.
 
 ## Installation
 
@@ -22,7 +22,7 @@ remotes::install_github("skgrange/gissr")
 
 ## Background
 
-R's spatial data analysis abilities are very well developed. Therefore, R can be used as an effective geographical information system (GIS). A key advantage of R in GIS applications is that the user can dip in-and-out of R's general string, numerical, and visualisation tools and apply them to spatial data.
+R's spatial data analysis abilities are very well developed. Therefore, R can be an effective geographical information system (GIS). A key advantage of R in GIS applications is that the user can dip in and out of R's general string, numerical, and visualisation tools and apply them to spatial data.
 
 However, the challenges I have with using R as a GIS are:
 
@@ -32,7 +32,7 @@ However, the challenges I have with using R as a GIS are:
   
   - the lack of tidy outputs which other areas of the R ecosystem have been so good at developing. 
   
-To overcome these points, I have written wrappers for many geographical functions which generally begin `sp_` to do particular tasks and bundled all the dependencies together as a package. Some of these functions will likely be useful for others. 
+To overcome these points, I have written wrappers for many geographical functions which generally begin `sp_` to do particular tasks and bundle all the dependencies together as a package. Some of these functions will likely be useful for others. 
 
 ## Utility functions
 
@@ -45,7 +45,7 @@ To overcome these points, I have written wrappers for many geographical function
     
   - Transform data frames (tables) to spatial points, lines, or polygons with `sp_from_data_frame`. 
   
-  - Transform data frames with a well known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
+  - Transform data frames with a well-known text (WKT) variable (or just a vector) to a spatial object with `sp_from_wkt`.
   
   - Bind/combine different spatial objects with `sp_bind`. 
   
@@ -53,7 +53,7 @@ To overcome these points, I have written wrappers for many geographical function
   
   - Calculate lengths or areas of spatial objects with `sp_area` and `sp_length`.
   
-  - Clip or crop a spatial object to an rectangular envelope with `sp_clip`. 
+  - Clip or crop a spatial object to a rectangular envelope with `sp_clip`. 
   
     - To filter objects by other polygons, use `[` subsetting (or `sp_filter`). 
     
@@ -131,4 +131,3 @@ To overcome these points, I have written wrappers for many geographical function
   - [**sf**](https://github.com/r-spatial/sf)
   - [**terra**](https://github.com/rspatial/terra)
   - [**sspatialr**](https://github.com/skgrange/sspatialr)
-
